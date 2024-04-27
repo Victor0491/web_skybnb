@@ -19,41 +19,49 @@ export class AppComponent {
   alojamientos= [ 
     {
       nombre: 'Casa en la Playa',
+      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
       precio: 100000,
       region: 'Valparaiso',
     },
     {
       nombre: 'Casa en el cerro',
+      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
       precio: 200000,
       region: 'Valparaiso',
     },
     {
       nombre: 'Casa en la montaña',
+      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
+      precio: 300000,
+      region: 'Valparaiso',
+    },
+    {
+      nombre: 'Casa en la playa',
+      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
       precio: 300000,
       region: 'Valparaiso',
     },
     {
       nombre: 'Casa en la montaña',
+      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
       precio: 300000,
       region: 'Valparaiso',
     },
     {
       nombre: 'Casa en la montaña',
+      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
       precio: 300000,
       region: 'Valparaiso',
     },
     {
       nombre: 'Casa en la montaña',
+      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
       precio: 300000,
       region: 'Valparaiso',
     },
     {
       nombre: 'Casa en la montaña',
-      precio: 300000,
-      region: 'Valparaiso',
-    },
-    {
-      nombre: 'Casa en la montaña',
+      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
       precio: 300000,
       region: 'Valparaiso',
     },
