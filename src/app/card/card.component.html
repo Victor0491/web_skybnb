@@ -1,14 +1,15 @@
-<article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4">
-    <div class="card mx-3 ">
-      <img src="https://images.unsplash.com/photo-1609319172668-8b4f021f3b7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFsb2phbWllbnRvc3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="">
+<article class="col-12 col-sm-6 col-md-4 col-lg-3 my-4">
+    <div class="card mx-3">
+      <img [src]="imageUrl" class="card-img-top" alt="">
       <div class="tarjeta card-body">
-        <h5 class="title card-title">Dirección</h5>
-        <p class="card-text">Referencias</p>
-        <p class="card-text-dos"> Fecha</p>
+        <h5 class="title card-title">{{ title }}</h5>
+        <p class="card-text">{{ references }}</p>
+        <p class="card-text-dos">{{ date }}</p>
         <hr>
         <div class="precios d-flex justify-content-end align-items-end">
-          <p>Precio</p>
+          <p>{{ price }}</p>
         </div>
       </div>
     </div>
   </article>
+  
