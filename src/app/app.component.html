@@ -1,17 +1,22 @@
 <app-navbar></app-navbar>
 
+
+<div class="container">
+<section class="row">
 <app-card></app-card>
+</section>
+<div>
 
 <div class="container">
 <section class="row">
 
-    <article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4">
+    <article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4" *ngFor="let alojamiento of alojamientos">
       <div class="card mx-3 ">
         <img src="https://images.unsplash.com/photo-1609319172668-8b4f021f3b7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFsb2phbWllbnRvc3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="">
         <div class="tarjeta card-body">
-          <h5 class="title card-title">Dirección</h5>
-          <p class="card-text">Referencias</p>
-          <p class="card-text-dos"> Fecha</p>
+          <h5 class="title card-title">{{alojamiento.region}}</h5>
+          <p class="card-text">{{alojamiento.precio}}</p>
+          <p class="card-text-dos"> {{alojamiento.nombre}}</p>
           <hr>
           <div class="precios d-flex justify-content-end align-items-end">
             <p>Precio</p>
@@ -20,111 +25,6 @@
       </div>
     </article>
 
-    <article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4">
-        <div class="card mx-3 ">
-          <img src="https://images.unsplash.com/photo-1609319172668-8b4f021f3b7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFsb2phbWllbnRvc3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="">
-          <div class="tarjeta card-body">
-            <h5 class="title card-title">Dirección</h5>
-            <p class="card-text">Referencias</p>
-            <p class="card-text-dos"> Fecha</p>
-            <hr>
-            <div class="precios d-flex justify-content-end align-items-end">
-              <p>Precio</p>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4">
-        <div class="card mx-3 ">
-          <img src="https://images.unsplash.com/photo-1609319172668-8b4f021f3b7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFsb2phbWllbnRvc3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="">
-          <div class="tarjeta card-body">
-            <h5 class="title card-title">Dirección</h5>
-            <p class="card-text">Referencias</p>
-            <p class="card-text-dos"> Fecha</p>
-            <hr>
-            <div class="precios d-flex justify-content-end align-items-end">
-              <p>Precio</p>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4">
-        <div class="card mx-3 ">
-          <img src="https://images.unsplash.com/photo-1609319172668-8b4f021f3b7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFsb2phbWllbnRvc3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="">
-          <div class="tarjeta card-body">
-            <h5 class="title card-title">Dirección</h5>
-            <p class="card-text">Referencias</p>
-            <p class="card-text-dos"> Fecha</p>
-            <hr>
-            <div class="precios d-flex justify-content-end align-items-end">
-              <p>Precio</p>
-            </div>
-          </div>
-        </div>
-      </article>
-
-
-    <article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4">
-        <div class="card mx-3 ">
-          <img src="https://images.unsplash.com/photo-1609319172668-8b4f021f3b7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFsb2phbWllbnRvc3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="">
-          <div class="tarjeta card-body">
-            <h5 class="title card-title">Dirección</h5>
-            <p class="card-text">Referencias</p>
-            <p class="card-text-dos"> Fecha</p>
-            <hr>
-            <div class="precios d-flex justify-content-end align-items-end">
-              <p>Precio</p>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4">
-        <div class="card mx-3 ">
-          <img src="https://images.unsplash.com/photo-1609319172668-8b4f021f3b7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFsb2phbWllbnRvc3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="">
-          <div class="tarjeta card-body">
-            <h5 class="title card-title">Dirección</h5>
-            <p class="card-text">Referencias</p>
-            <p class="card-text-dos"> Fecha</p>
-            <hr>
-            <div class="precios d-flex justify-content-end align-items-end">
-              <p>Precio</p>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4">
-        <div class="card mx-3 ">
-          <img src="https://images.unsplash.com/photo-1609319172668-8b4f021f3b7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFsb2phbWllbnRvc3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="">
-          <div class="tarjeta card-body">
-            <h5 class="title card-title">Dirección</h5>
-            <p class="card-text">Referencias</p>
-            <p class="card-text-dos"> Fecha</p>
-            <hr>
-            <div class="precios d-flex justify-content-end align-items-end">
-              <p>Precio</p>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4">
-        <div class="card mx-3 ">
-          <img src="https://images.unsplash.com/photo-1609319172668-8b4f021f3b7b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGFsb2phbWllbnRvc3xlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="">
-          <div class="tarjeta card-body">
-            <h5 class="title card-title">Dirección</h5>
-            <p class="card-text">Referencias</p>
-            <p class="card-text-dos"> Fecha</p>
-            <hr>
-            <div class="precios d-flex justify-content-end align-items-end">
-              <p>Precio</p>
-            </div>
-          </div>
-        </div>
-      </article>
   </section>
   <div>
 
