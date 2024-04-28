@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregar Alojamiento</title>
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .left-div {
+        flex: 1.5; /* Ocupa menos espacio que right-div */
+        text-align: center;
+    }
+
+    .left-div p {
+        font-size: 60px; /* Tamaño de fuente más grande */
+        font-weight: bold; /* Texto en negrita */
+    }
+
+    .right-div {
+        flex: 2; /* Ocupa más espacio que left-div */
+        display: flex;
+        flex-direction: column; /* Cambia la dirección de la disposición a columna */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .step {
+        text-align: center;
+        margin-bottom: 20px; /* Margen inferior para separar los pasos */
+        transition: transform 0.3s ease-in-out; /* Transición suave al hacer hover */
+    }
+
+    .step:hover {
+        transform: scale(1.1); /* Escala el elemento al hacer hover */
+    }
+
+    .start-button {
+        margin-top: 20px; /* Margen superior para separar el botón */
+        background-color: #007bff; /* Color de fondo del botón */
+        color: #fff; /* Color del texto del botón */
+        border: none; /* Sin borde */
+        padding: 10px 20px; /* Relleno interno */
+        font-size: 18px; /* Tamaño de fuente */
+        cursor: pointer; /* Cursor al pasar el mouse */
+        align-self: flex-end; /* Alinear el botón a la derecha */
+    }
+
+    .start-button:hover {
+        background-color: #0056b3; /* Color de fondo al pasar el mouse */
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="left-div">
+        <p>Empezar a utilizar Skybnb es muy sencillo</p>
+    </div>
+    <div class="right-div">
+        <div class="step">
+            <div style="display: flex; align-items: center;">
+                <div style="flex: 1;">
+                    <h3 style="margin: 0; text-align: left;">1 Describe tu espacio</h3>
+                    <p style="margin: 0; text-align: left;">Comparte algunos datos básicos, como la ubicación y cuántos huéspedes pueden quedarse en el lugar.</p>
+                </div>
+                <div style="flex: 1;">
+                    <img src="https://a0.muscache.com/4ea/air/v2/pictures/da2e1a40-a92b-449e-8575-d8208cc5d409.jpg" alt="Imagen de ejemplo" style="max-width: 30%; height: auto;">
+                </div>
+            </div>
+        </div>
+                      
+        <div class="step">
+            <div style="display: flex; align-items: center;">
+                <div style="flex: 1;">
+                    <h3 style="margin: 0; text-align: left;">2 Haz que destaque</h3>
+                    <p style="margin: 0; text-align: left;">Agrega al menos cinco fotos, un título y una descripción. Nosotros te ayudaremos.</p>
+                </div>
+                <div style="flex: 1;">
+                    <img src="https://a0.muscache.com/4ea/air/v2/pictures/bfc0bc89-58cb-4525-a26e-7b23b750ee00.jpg" alt="Imagen de ejemplo" style="max-width: 30%; height: auto;">
+                </div>
+            </div>
+        </div>
+        <div class="step">
+            <div style="display: flex; align-items: center;">
+                <div style="flex: 1;">
+                    <h3 style="margin: 0; text-align: left;">3 Terminar y publicar</h3>
+                    <p style="margin: 0; text-align: left;">Elige si prefieres empezar con un huésped que ya lleve tiempo usando la plataforma, establece un precio inicial y publica tu anuncio.</p>
+                </div>
+                <div style="flex: 1;">
+                    <img src="https://a0.muscache.com/4ea/air/v2/pictures/c0634c73-9109-4710-8968-3e927df1191c.jpg" alt="Imagen de ejemplo" style="max-width: 30%; height: auto;">
+                </div>
+            </div>
+        </div>
+        <button class="start-button" (click)="navigateToPaso1()">Comencemos</button><!-- Botón al final de right-div -->
+    </div> <!-- Cierre del div con la clase right-div -->
+</div>
+</body>
+</html>
