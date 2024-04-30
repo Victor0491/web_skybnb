@@ -1,0 +1,32 @@
+<!-- descripcion.component.html -->
+<div class="opciones-container">
+    <button
+      class="opcion"
+      [class.selected]="opcionSeleccionada === 'Casa'"
+      (click)="seleccionarOpcion('Casa')"
+    >
+      Casa
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionSeleccionada === 'Cabaña'"
+      (click)="seleccionarOpcion('Cabaña')"
+    >
+      Cabaña
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionSeleccionada === 'Departamento'"
+      (click)="seleccionarOpcion('Departamento')"
+    >
+      Departamento
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionSeleccionada === 'Domo'"
+      (click)="seleccionarOpcion('Domo')"
+    >
+      Domo
+    </button>
+  </div>
+  
