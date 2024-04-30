@@ -1,8 +1,11 @@
 <div class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
+  <div class="modal-content">
+      <span class="close" style="color: red;">×</span>
       <h2>Este es mi modal</h2>
       <p>Aquí puedes poner cualquier contenido que desees.</p>
-      <button (click)="closeModal()">Cerrar</button>
-    </div>
+      <div class="button-container">
+          <button (click)="redirectToAlojamientos()">Alojamientos</button>
+          <button (click)="closeModal()" style="background-color: red; color: white;">Cerrar</button>
+      </div>
   </div>
+</div>
