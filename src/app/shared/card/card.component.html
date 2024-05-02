@@ -1,15 +1,18 @@
-<article class="col-12 col-sm-6 col-md-4 col-lg-3 my-4">
+<div class="container">
+<section class="row">
+<article class="class=col-12 col-sm-6 col-md-4 col-lg-3 my-4" *ngFor="let alojamiento of alojamientos">
     <div class="card mx-3">
-      <img [src]="imageUrl" class="card-img-top" alt="">
+      <img src= {{alojamiento.imagen}} class="card-img-top" alt="Imagen alojamiento">
       <div class="tarjeta card-body">
-        <h5 class="title card-title">{{ title }}</h5>
-        <p class="card-text">{{ references }}</p>
-        <p class="card-text-dos">{{ date }}</p>
+        <h5 class="title card-title">{{alojamiento.nombre}}</h5>
+        <p class="card-text">{{alojamiento.region}}</p>
+        <p class="card-text-dos">{{alojamiento.descripcion}}</p>
         <hr>
         <div class="precios d-flex justify-content-end align-items-end">
-          <p>{{ price }}</p>
+          <p>${{alojamiento.precio}}</p>
         </div>
       </div>
     </div>
   </article>
-  
+</section>
+<div>
