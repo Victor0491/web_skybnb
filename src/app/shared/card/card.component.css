@@ -13,7 +13,8 @@
 
 /* Estilos para la imagen superior de la tarjeta */
 .card-img-top {
-    height: 20rem;
+    height: 300px;
+    width: 300px;
 }
 
 /* Estilos para títulos */
