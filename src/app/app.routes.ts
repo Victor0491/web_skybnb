@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeAlojamientosComponent } from './home/home-alojamientos/home-alojamientos.component';
-import { LoginComponent } from './auth/login/login.component';
 
 export const routes: Routes = [
 

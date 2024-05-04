@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
 
 @Component({
@@ -12,4 +12,15 @@ import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
 })
 export class AppComponent {
   title = 'web_skybnb';
+
+  constructor(private router: Router) {}
+
+  isLoginPage(): boolean {
+    return this.router.url === '/auth/login';
+  }
+
+  isRegisterPage(): boolean {
+    return this.router.url === '/auth/register';
+  }
+  
 }
