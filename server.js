@@ -34,42 +34,61 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _a = require('mongodb'), MongoClient = _a.MongoClient, ServerApiVersion = _a.ServerApiVersion;
+var mongoose = require('mongoose');
 var uri = "mongodb+srv://matiascalisto:Sca2021-@skybnb.zg9b7ug.mongodb.net/?retryWrites=true&w=majority&appName=Skybnb";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-var client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
+var alojamientoSchema = new mongoose.Schema({
+    uid_alojamiento: String,
+    nombre: String,
+    tipo_alojamiento: String,
+    servicios: [String],
+    dormitorio: Number,
+    baño: Number,
+    cantidad_huespedes: Number,
+    mascotas: Boolean,
+    precios: Number,
+    ubicacion: String,
+    tipo_espacio: String,
+    imagen: String
+});
+var Alojamiento = mongoose.model('Alojamiento', alojamientoSchema);
+module.exports = Alojamiento;
 function run() {
     return __awaiter(this, void 0, void 0, function () {
+        var nuevoAlojamiento, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, , 3, 5]);
-                    // Connect the client to the server	(optional starting in v4.7)
-                    return [4 /*yield*/, client.connect()];
+                    _a.trys.push([0, 2, , 3]);
+                    nuevoAlojamiento = new Alojamiento({
+                        uid_alojamiento: '12345',
+                        nombre: 'Ejemplo de Alojamiento',
+                        tipo_alojamiento: 'Casa',
+                        servicios: ['Wifi', 'TV'],
+                        dormitorio: 3,
+                        baño: 2,
+                        cantidad_huespedes: 6,
+                        mascotas: true,
+                        precios: 100,
+                        ubicacion: 'Ciudad',
+                        tipo_espacio: 'Urbano',
+                        imagen: 'https://www.lavanguardia.com/r/GODO/LV/p6/WebSite/2019/03/20/Recortada/img_lbernaus_20190320-133634_imagenes_lv_terceros_istock-674909778-kU5B-U461144690840pUE-992x558@LaVanguardia-Web.jpg'
+                    });
+                    // Save the new alojamiento document to the database
+                    return [4 /*yield*/, nuevoAlojamiento.save()];
                 case 1:
-                    // Connect the client to the server	(optional starting in v4.7)
+                    // Save the new alojamiento document to the database
                     _a.sent();
-                    // Send a ping to confirm a successful connection
-                    return [4 /*yield*/, client.db("admin").command({ ping: 1 })];
+                    console.log('Alojamiento creado correctamente:', nuevoAlojamiento);
+                    return [3 /*break*/, 3];
                 case 2:
-                    // Send a ping to confirm a successful connection
-                    _a.sent();
-                    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-                    return [3 /*break*/, 5];
-                case 3: 
-                // Ensures that the client will close when you finish/error
-                return [4 /*yield*/, client.close()];
-                case 4:
-                    // Ensures that the client will close when you finish/error
-                    _a.sent();
-                    return [7 /*endfinally*/];
-                case 5: return [2 /*return*/];
+                    error_1 = _a.sent();
+                    console.error('Error al conectar a MongoDB:', error_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
