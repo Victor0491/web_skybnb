@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
 
 @Component({
@@ -16,4 +17,10 @@ export class Paso1Component {
     this.router.navigate(['/descripcion']);
   }
 
+  constructor(private router: Router) {}
+
+  navigateToDescripcion() {
+    console.log('Botón Comencemos clickeado');
+    this.router.navigate(['/Descripcion']);
+  }
 }
