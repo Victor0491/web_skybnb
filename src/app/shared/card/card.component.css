@@ -1,14 +1,8 @@
-/* Estilos para elementos dentro de contenedores fluidos */
-.container-fluid a {
-    font-weight: 500;
-    letter-spacing: 0.05em;
-}
-
 /* Estilos para tarjetas */
 .tarjeta {
     color: #707070;
     font-weight: 300;
-    border-color: #DDDDDD;  
+    border-color: #DDDDDD;
 }
 
 /* Estilos para la imagen superior de la tarjeta */
@@ -18,7 +12,6 @@
 }
 
 /* Estilos para títulos */
-.title {
-    color: #212529;
-    font-weight: 300;
+.titulo {
+    color: black;
 }
