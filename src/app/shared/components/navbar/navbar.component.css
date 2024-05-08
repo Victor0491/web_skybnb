@@ -1,14 +1,35 @@
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 /* Ajustar tamaño del logo */
-.navbar img{
-    width: 50px;
-    }
+.navbar img {
+    width: 70px;
+}
+
+.nav-item {
+    display: inline-block;
+    margin-right: 10px;
+    /* Espacio entre elementos */
+}
 
 /* Cambiar el color de fondo */
 .navbar {
-    background-color: #00add0; /* Color verde */
+    background-color: #00add0;
+    /* Color verde */
 }
 
-/* Cambiar el color del texto */
-.navbar a {
-    color: white; /* Texto blanco */
+/* Estilos de las fuentes */
+.nav-item p,
+.nav-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-item p:hover {
+    color: rgb(0, 0, 0);
+    /* Cambio de color al pasar el cursor */
 }
