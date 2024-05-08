@@ -1,35 +1,51 @@
+/* Estilos para la barra de navegación */
 .navbar-nav {
     list-style: none;
+    /* Elimina los puntos de lista */
     padding: 0;
+    /* Elimina el relleno */
     margin: 0;
+    /* Elimina los márgenes */
 }
 
-/* Ajustar tamaño del logo */
+/* Ajusta el tamaño del logo */
 .navbar img {
     width: 70px;
+    /* Define el ancho del logo */
 }
 
+/* Estilos para los elementos de la barra de navegación */
 .nav-item {
     display: inline-block;
+    /* Muestra los elementos en línea */
     margin-right: 10px;
-    /* Espacio entre elementos */
+    /* Añade un margen derecho entre los elementos */
 }
 
-/* Cambiar el color de fondo */
+/* Cambia el color de fondo de la barra de navegación */
 .navbar {
     background-color: #00add0;
-    /* Color verde */
+    /* Establece el color de fondo */
 }
 
-/* Estilos de las fuentes */
-.nav-item p,
-.nav-item a {
+/* Estilos para el texto de los elementos de la barra de navegación */
+.nav-item p {
     color: white;
+    /* Establece el color del texto */
     text-decoration: none;
+    /* Elimina la decoración del texto */
     font-size: 20px;
+    /* Define el tamaño de la fuente */
 }
 
+/* Cambia el color del texto al pasar el cursor sobre los elementos de la barra de navegación */
 .nav-item p:hover {
     color: rgb(0, 0, 0);
-    /* Cambio de color al pasar el cursor */
+}
+
+/* Estilos para el texto junto al logo en la barra de navegación */
+.navbar-brand {
+    font-size: 30PX; /* Tamaño de la fuente */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Familia de fuentes */
+    font-weight: bold; /* Estilo negrita */
 }
