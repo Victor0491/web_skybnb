@@ -1,6 +1,6 @@
-<app-navbar></app-navbar>
-<app-carrusel></app-carrusel>
-<app-card></app-card>
+
+<app-navbar *ngIf="!isLoginPage() && !isRegisterPage()"></app-navbar>
+
 
 <router-outlet></router-outlet>
 <app-footer></app-footer>
