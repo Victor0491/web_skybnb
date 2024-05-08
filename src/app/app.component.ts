@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
+import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,NavBarComponent],
+  imports: [RouterOutlet,CommonModule,NavBarComponent,NavbarComponent,FooterComponent,CardComponent,CarruselComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -24,3 +24,4 @@ export class AppComponent {
   }
   
 }
+

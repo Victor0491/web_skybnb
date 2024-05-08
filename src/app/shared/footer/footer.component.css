@@ -1,0 +1,11 @@
+/* Cambiar el color del texto */
+.footer-info, i{
+    font-weight: 500;
+    color:black;
+}
+
+/* Ajustar tamaño del logo */
+.footer-image {
+    width: 50px;
+}
+
