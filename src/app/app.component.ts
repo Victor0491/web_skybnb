@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ModalComponent } from './modal/modal.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

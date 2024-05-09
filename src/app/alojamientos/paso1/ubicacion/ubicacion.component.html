@@ -1,1 +1,16 @@
-<div id="map" style="height: 400px;"></div>
+<div class="container">
+  <h2>Ingrese su ubicación</h2>
+  <form (ngSubmit)="guardarUbicacion()">
+    <label for="ubicacion">Ubicación:</label>
+    <input type="text" id="ubicacion" name="ubicacion" required>
+    <button type="submit">Guardar ubicación</button>
+  </form>
+  <div id="map" style="height: 400px;"></div> <!-- Contenedor del mapa -->
+
+  <!-- Utiliza la clase para el contenedor del botón "Datos Básicos" -->
+  <div class="datos-basicos-button-container">
+    <!-- Agrega una clase al botón para los estilos adicionales si es necesario -->
+    <button class="start-button" (click)="navigateToDatosbasicos()">Datos Basicos</button>
+  </div>
+</div>
+

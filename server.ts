@@ -16,7 +16,8 @@ const alojamientoSchema = new mongoose.Schema({
   precios: Number,
   ubicacion: String,
   tipo_espacio: String,
-  imagen: String
+  imagen: [String],
+  actividades: [String]
 });
 
 const Alojamiento = mongoose.model('Alojamiento', alojamientoSchema);
@@ -38,7 +39,9 @@ async function run() {
         precios: 100,
         ubicacion: 'Ciudad',
         tipo_espacio: 'Urbano',
-        imagen: 'https://www.lavanguardia.com/r/GODO/LV/p6/WebSite/2019/03/20/Recortada/img_lbernaus_20190320-133634_imagenes_lv_terceros_istock-674909778-kU5B-U461144690840pUE-992x558@LaVanguardia-Web.jpg'
+        imagen: 'https://www.lavanguardia.com/r/GODO/LV/p6/WebSite/2019/03/20/Recortada/img_lbernaus_20190320-133634_imagenes_lv_terceros_istock-674909778-kU5B-U461144690840pUE-992x558@LaVanguardia-Web.jpg',
+        actividades : ['Futbol', 'treaking','surf'],
+        
     });
 
     // Save the new alojamiento document to the database
