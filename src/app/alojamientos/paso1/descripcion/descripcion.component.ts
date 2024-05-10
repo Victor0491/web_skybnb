@@ -1,23 +1,22 @@
-// descripcion.component.ts
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-descripcion',
-  standalone: true,
   templateUrl: './descripcion.component.html',
   styleUrls: ['./descripcion.component.css']
 })
 export class DescripcionComponent {
+  nuevoAlojamiento: any = {}; // Objeto para almacenar los datos del alojamiento
 
   constructor(private router: Router) {}
-  opcionSeleccionada: string = ''; // Inicializa con un valor vacío
 
   seleccionarOpcion(opcion: string) {
-    this.opcionSeleccionada = opcion;
+    this.nuevoAlojamiento.tipo_alojamiento = opcion; // Guarda el tipo de alojamiento seleccionado
   }
+
   navigateToUbicacion() {
-    // Redirige a la página de alojamientos (por ejemplo, '/alojamientos')
-    this.router.navigate(['/ubicacion']);
-}
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['/ubicacion'], { state: { alojamiento: this.nuevoAlojamiento } });
+  }
 }
