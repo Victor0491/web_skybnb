@@ -1,0 +1,30 @@
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .step {
+        display: flex; /* Utiliza flexbox para el diseño */
+        align-items: center; /* Centra verticalmente el contenido */
+        margin: 60px; /* Ajusta los márgenes según sea necesario */
+    }
+</style>
+
+    <div class="step">
+        <div style="display: flex; align-items: center;">
+            <div style="flex: 1;">
+                <h3>Paso 1</h3>
+                <p>Describe tu espacio</p>
+                <p>En este paso, te preguntaremos qué tipo de propiedad tienes y si los huéspedes reservarán el alojamiento entero o solo una habitación. A continuación, indícanos la ubicación y cuántos huéspedes pueden quedarse.</p>
+            </div>
+            <div style="flex: 1;">
+                <img src="https://estudibasic.es/wp-content/uploads/2016/01/estudibasic-planos-de-casas-en-3d-render.jpg" alt="Imagen grande" style="max-width: 80%; height: auto;">
+            </div>
+            <button class="start-button" (click)="navigateToDescripcion()">Comencemos</button><!-- Botón al final de right-div -->
+        </div>
+        <button class="start-button" (click)="navigateToDescripcion()">Descripcion</button><!-- Botón al final de right-div -->
+    </div>
+
