@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="titulo">
+    <h2>¿Cuál de estas opciones describe mejor tu espacio?</h2>
+  </div>
+  <div class="opciones-container">
+    <button
+      class="opcion"
+      [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Casa'"
+      (click)="seleccionarOpcion('Casa')"
+    >
+      <i class="fas fa-home icono"></i> <!-- Icono de casa -->
+      Casa
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Cabaña'"
+      (click)="seleccionarOpcion('Cabaña')"
+    >
+      <i class="fas fa-cabin icono"></i> <!-- Icono de cabaña -->
+      Cabaña
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Departamento'"
+      (click)="seleccionarOpcion('Departamento')"
+    >
+      <i class="fas fa-building icono"></i> <!-- Icono de departamento -->
+      Departamento
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Domo'"
+      (click)="seleccionarOpcion('Domo')"
+    >
+      <i class="fas fa-dome icono"></i> <!-- Icono de domo -->
+      Domo
+    </button>
+  </div>
+  <button class="start-button" (click)="navigateToUbicacion()">Ubicacion</button>
+</div>
