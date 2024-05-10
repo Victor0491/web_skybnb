@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 import { FooterComponent } from './shared/components/footer/footer.component';
-
+import { AnfitrionComponent } from './anfitrion/anfitrion.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [CommonModule,RouterOutlet,NavbarComponent,FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

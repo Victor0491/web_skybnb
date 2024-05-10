@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-descripcion',
   templateUrl: './descripcion.component.html',
+  standalone: true,
+  imports: [],
   styleUrls: ['./descripcion.component.css']
 })
 export class DescripcionComponent {

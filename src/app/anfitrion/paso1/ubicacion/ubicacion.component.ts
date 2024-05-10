@@ -5,6 +5,8 @@ import mapboxgl from 'mapbox-gl'; // Importa mapbox-gl
 @Component({
   selector: 'app-ubicacion',
   templateUrl: './ubicacion.component.html',
+  imports: [],
+  standalone: true,
   styleUrls: ['./ubicacion.component.css'],
 })
 export class UbicacionComponent implements OnInit {

@@ -5,6 +5,10 @@ import { HomeAlojamientosComponent } from './home/home-alojamientos/home-alojami
 export const routes: Routes = [
 
     {
+        path: 'anfitrion',
+        loadChildren: () => import ('./anfitrion/auth.routes').then(m => m.AUTH_ROUTES),
+    },
+    {
         path: 'auth',
         loadChildren: () => import ('./auth/auth.routes').then(m => m.AUTH_ROUTES),
     },

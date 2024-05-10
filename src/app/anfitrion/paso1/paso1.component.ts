@@ -16,11 +16,4 @@ export class Paso1Component {
     console.log('Botón Comencemos clickeado');
     this.router.navigate(['/descripcion']);
   }
-
-  constructor(private router: Router) {}
-
-  navigateToDescripcion() {
-    console.log('Botón Comencemos clickeado');
-    this.router.navigate(['/Descripcion']);
-  }
 }
