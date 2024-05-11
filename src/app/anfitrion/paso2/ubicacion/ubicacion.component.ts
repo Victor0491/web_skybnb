@@ -48,6 +48,6 @@ export class UbicacionComponent implements OnInit {
 
   navigateToDatosbasicos() {
     // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['/datosbasicos'], {});
+    this.router.navigate(['/anfitrion/datosbasicos'], {});
   }
 }

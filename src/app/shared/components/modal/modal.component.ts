@@ -1,28 +1,24 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Router} from '@angular/router'; // Importa el servicio de enrutamiento
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  styleUrls: ['./modal.component.css'],
+  standalone: true,
+  imports: [],
 })
 export class ModalComponent {
-  showModal: boolean = false;
+  @Output() closeModalClicked = new EventEmitter<void>();
 
-  constructor(private router: Router) {} // Inyecta el servicio de enrutamiento
+  constructor(private router: Router) {}
 
-  openModal() {
-    this.showModal = true;
+  onCloseModal() {
+    this.closeModalClicked.emit();
   }
 
-  closeModal() {
-    this.showModal = false;
-    // Redirige a la página HTML deseada (por ejemplo, '/otra-pagina')
-    this.router.navigate(['/index']);
+  irAlojamientos() {
+    this.router.navigate(['/anfitrion/subetuespacio']);
+    this.closeModalClicked.emit();
   }
-
-  redirectToAlojamientos() {
-    // Redirige a la página de alojamientos (por ejemplo, '/alojamientos')
-    this.router.navigate(['/alojamientos']);
-}
 }
