@@ -1,1 +1,47 @@
-<p>alojamiento-detail works!</p>
+<app-modal-information></app-modal-information>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <img src="https://a0.muscache.com/im/pictures/f8a49f5f-51a5-406f-a93f-83ea84032640.jpg?im_w=1200" class="img-fluid" alt="Imagen del alojamiento grande">
+      <h1>Cabaña El Ocaso con hermosa vista al mar</h1>
+      <!-- Descripción del alojamiento -->
+        <div div class="container">
+
+            <p>La cabaña cuenta con 3 dormitorios con camas de dos plazas y TV de pantalla plana. La cocina está equipada con todo lo necesario para su utilización, contamos con nevera, horno, campana y todos los implementos para cocinar.</p>
+            <p>zona de estar con una hermosa vista. Baño con agua caliente. Terraza, zona con parrilla y estacionamiento privado. Viña del Mar se encuentra a tan solo 25 km de la casa.</p>
+              <a href="#" class="link-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Más información</a>
+               
+        </div>
+    </div>
+    <div class="col-md-4">
+      <!-- Imágenes pequeñas -->
+      <div class="row">
+        <div class="col-sm-12 mb-2">
+          <img src="https://a0.muscache.com/im/pictures/80a0b6ce-9ed7-41c1-b9cd-10e28025f6c3.jpg?im_w=720" class="img-fluid" alt="Imagen del alojamiento pequeña 1">
+        </div>
+        <div class="col-sm-12">
+          <img src="https://a0.muscache.com/im/pictures/271ff9e7-04c9-427e-b4ef-68b8135405b8.jpg?im_w=720" class="img-fluid" alt="Imagen del alojamiento pequeña 2">
+        </div>
+      </div>
+      
+    
+      <div id="formulario-reserva">
+        <form>
+          <div class="form-group">
+            <label for="fecha-checkin">Fecha de llegada</label>
+            <input type="date" class="form-control" id="fecha-checkin">
+          </div>
+          <div class="form-group">
+            <label for="fecha-checkout">Fecha de salida</label>
+            <input type="date" class="form-control" id="fecha-checkout">
+          </div>
+          <button type="submit" class="btn btn-primary">Reservar ahora</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <app-carrusel-info></app-carrusel-info>
+</div>
+
