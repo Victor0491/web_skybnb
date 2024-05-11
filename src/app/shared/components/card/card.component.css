@@ -8,7 +8,7 @@
 /* Estilos para la imagen superior de la tarjeta */
 .card-img-top {
     height: 300px;
-    width: 300px;
+    width: 100%;
 }
 
 /* Estilos para títulos */
