@@ -1,1 +1,9 @@
-<p>imagen works!</p>
+<input type="file" (change)="onFileSelected($event)" multiple accept="image/*">
+<button (click)="uploadImages()">Subir imágenes</button>
+
+<div class="image-container">
+    <img *ngFor="let image of uploadedImages | slice:-3" [src]="getImageUrl(image)" alt="Imagen cargada">
+    <span *ngIf="uploadedImages.length > 3" class="more-images-icon">+{{ uploadedImages.length - 3 }}</span>
+    <button class="start-button right" (click)="navigateToInformacion()">Continuar</button>
+</div>
+

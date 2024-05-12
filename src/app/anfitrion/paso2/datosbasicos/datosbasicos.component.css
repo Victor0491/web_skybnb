@@ -1,0 +1,58 @@
+.container {
+    width: 80%; /* Ancho del contenedor */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    padding: 20px; /* Espaciado interno */
+    border: 2px solid #ccc; /* Borde */
+    border-radius: 10px; /* Bordes redondeados */
+    display: flex;
+    flex-direction: column;
+}
+
+.container h2 {
+    margin-bottom: 20px; /* Espacio inferior para separar el título */
+}
+
+.input-container {
+    margin-bottom: 15px; /* Espacio inferior para separar cada grupo de entrada */
+}
+
+.input-container label {
+    display: inline-block; /* Convertir a bloque para poder aplicar márgenes */
+    width: 150px; /* Ancho del label */
+    margin-right: 10px; /* Espacio derecho para separar el label del input */
+}
+
+.input-control {
+    display: inline-flex; /* Utilizar un contenedor flex para alinear elementos */
+    align-items: center; /* Alinear elementos verticalmente */
+}
+
+.input-control button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 5px; /* Espacio horizontal entre los botones y el input */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.input-control input {
+    width: 50px;
+    text-align: center;
+}
+
+.start-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    align-self: flex-end; /* Alinear el botón a la derecha */
+    margin-top: 20px; /* Margen superior para separar el botón */
+}
+
+.start-button:hover {
+    background-color: #0056b3;
+}

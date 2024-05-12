@@ -8,7 +8,8 @@ import { EntornoComponent } from "./paso1/entorno/entorno.component";
 import { ActividadComponent } from "./paso1/actividad/actividad.component";
 import { Paso2Component } from "./paso2/paso2.component";
 import { Paso3Component } from "./paso3/paso3.component";
-
+import { ImagenComponent } from "./paso3/imagen/imagen.component";
+import { InformacionComponent } from "./paso3/informacion/informacion.component";
 
 export const AUTH_ROUTES: Routes = [
 
@@ -22,5 +23,7 @@ export const AUTH_ROUTES: Routes = [
     { path: 'actividad', component: ActividadComponent},
     { path: 'paso2', component: Paso2Component },
     { path: 'paso3', component: Paso3Component },
+    { path: 'imagen', component: ImagenComponent },
+    { path: 'informacion', component: InformacionComponent },
         // Puedes agregar más rutas aquí si es necesario
 ];
