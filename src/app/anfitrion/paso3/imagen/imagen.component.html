@@ -1,9 +1,20 @@
-<input type="file" (change)="onFileSelected($event)" multiple accept="image/*">
-<button (click)="uploadImages()">Subir imágenes</button>
+
 
 <div class="image-container">
+  <input type="file" (change)="onFileSelected($event)" multiple accept="image/*">
+  
+  <div *ngIf="uploadedImages.length === 0" class="placeholder">
+    <img src="path/to/default-image.jpg" alt="Placeholder image">
+    <p>Suba las imágenes de su alojamiento</p>
+  </div>
+  
+  <div class="uploaded-images">
     <img *ngFor="let image of uploadedImages | slice:-3" [src]="getImageUrl(image)" alt="Imagen cargada">
     <span *ngIf="uploadedImages.length > 3" class="more-images-icon">+{{ uploadedImages.length - 3 }}</span>
-    <button class="start-button right" (click)="navigateToInformacion()">Continuar</button>
+  </div>
+  <div>
+    <button class="start-button" (click)="navigateToInformacion()">Informacion</button>
+  </div>
+  
 </div>
 

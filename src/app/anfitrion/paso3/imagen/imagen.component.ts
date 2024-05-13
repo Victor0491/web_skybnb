@@ -27,17 +27,6 @@ export class ImagenComponent {
     }
   }
 
-
-
-  uploadImages(): void {
-    if (this.uploadedImages.length >= 5) {
-      // Aquí implementarías la lógica para subir las imágenes al servidor
-      console.log('Imágenes seleccionadas:', this.uploadedImages);
-      // Por ejemplo, puedes usar un servicio para manejar la subida de archivos
-    } else {
-      console.error('Debes cargar al menos 5 imágenes.');
-    }
-  }
   getImageUrl(image: File): string {
     return URL.createObjectURL(image);
   }

@@ -1,48 +1,43 @@
 <div class="container">
-    <div class="titulo">
-      <h2>Seleccione 3 actividades que se realicen en su entorno</h2>
-    </div>
-    <div class="opciones-container">
-      <button
-        class="opcion"
-        [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Surf'"
-        (click)="seleccionarOpcion('Surf')"
-      >
-        <i class="fas fa-home icono"></i> <!-- Icono de casa -->
-        Surf
-      </button>
-      <button
-        class="opcion"
-        [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Buceo'"
-        (click)="seleccionarOpcion('Buceo')"
-      >
-        <i class="fas fa-cabin icono"></i> <!-- Icono de cabaña -->
-        Buceo
-      </button>
-      <button
-        class="opcion"
-        [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Ciclismo'"
-        (click)="seleccionarOpcion('Ciclismo')"
-      >
-        <i class="fas fa-building icono"></i> <!-- Icono de departamento -->
-        Ciclismo
-      </button>
-      <button
-        class="opcion"
-        [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Escalada en roca'"
-        (click)="seleccionarOpcion('Escalada en roca')"
-      >
-        <i class="fas fa-building icono"></i> <!-- Icono de departamento -->
-        Escalada en roca
-      </button>
-      <button
+  <div class="titulo">
+    <h2>Seleccione 3 actividades que se realicen en su entorno</h2>
+  </div>
+  <div class="opciones-container">
+    <button
       class="opcion"
-      [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Senderismo'"
+      [class.selected]="opcionesSeleccionadas.includes('Surf')"
+      (click)="seleccionarOpcion('Surf')"
+    >
+      Surf
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionesSeleccionadas.includes('Buceo')"
+      (click)="seleccionarOpcion('Buceo')"
+    >
+      Buceo
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionesSeleccionadas.includes('Ciclismo')"
+      (click)="seleccionarOpcion('Ciclismo')"
+    >
+      Ciclismo
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionesSeleccionadas.includes('Escalada en roca')"
+      (click)="seleccionarOpcion('Escalada en roca')"
+    >
+      Escalada en roca
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionesSeleccionadas.includes('Senderismo')"
       (click)="seleccionarOpcion('Senderismo')"
     >
-      <i class="fas fa-building icono"></i> <!-- Icono de departamento -->
       Senderismo
     </button>
-    </div>
-    <button class="start-button" (click)="navigateToUbicacion()">Paso 2</button>
   </div>
+  <button class="start-button" (click)="navigateToUbicacion()" [disabled]="opcionesSeleccionadas.length !== 3">Paso 2</button>
+</div>
