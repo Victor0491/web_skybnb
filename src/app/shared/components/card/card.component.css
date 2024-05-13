@@ -1,24 +1,28 @@
-.card {
+.card-container {
+    position: relative;
+  }
+  
+  .card {
     color: #707070;
     font-weight: 300;
     border-color: #DDDDDD;
     position: relative;
     /* Importante para que los botones se posicionen correctamente */
-}
-
-/* Estilos para la imagen superior de la tarjeta */
-.card-img-top {
+  }
+  
+  /* Estilos para la imagen superior de la tarjeta */
+  .card-img-top {
     height: 300px;
     width: 100%;
     object-fit: cover;
-}
-
-/* Estilos para títulos */
-.titulo {
+  }
+  
+  /* Estilos para títulos */
+  .titulo {
     color: black;
-}
-
-.carousel-controls {
+  }
+  
+  .carousel-controls {
     background-color: rgba(255, 255, 255, 0.7);
     padding: 5px 10px;
     border: none;
@@ -26,25 +30,22 @@
     margin-right: 5px;
     cursor: pointer;
   }
-
-.carousel-control-prev,
-.carousel-control-next {
+  
+  .carousel-control-prev,
+  .carousel-control-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
-}
-
-.carousel-control-prev {
+  }
+  
+  .carousel-control-prev {
     left: 10px;
     /* Ajusta la posición a la izquierda */
-}
-
-.carousel-control-next {
+  }
+  
+  .carousel-control-next {
     right: 10px;
     /* Ajusta la posición a la derecha */
-}
-
-.card-container {
-    position: relative;
-}
+  }
+  
