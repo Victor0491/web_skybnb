@@ -5,6 +5,8 @@
     height: 300px;
     border: 1px solid #ccc;
     margin: 0 auto;
+    margin-top: 1.5rem; /* mt-4: margen superior */
+    margin-bottom: 1.5rem; /* mb-4: margen inferior */
 }
 
 .datos-basicos-button-container {
@@ -25,3 +27,15 @@
 .start-button:hover {
     background-color: #0056b3; /* Color de fondo al pasar el mouse */
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin-top: 1.5rem; /* mt-4: margen superior */
+    margin-bottom: 1.5rem; /* mb-4: margen inferior */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }

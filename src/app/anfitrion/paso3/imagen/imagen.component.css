@@ -4,6 +4,10 @@
   align-items: center; /* Centra horizontalmente */
   gap: 10px;
   position: relative; /* Asegura que el posicionamiento relativo funcione para los elementos hijos */
+  margin-top: 1.5rem; /* mt-4: margen superior */
+  margin-bottom: 1.5rem; /* mb-4: margen inferior */
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 .image-container img {
