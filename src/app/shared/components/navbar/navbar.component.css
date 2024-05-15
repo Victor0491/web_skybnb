@@ -36,6 +36,7 @@
     /* Elimina la decoración del texto */
     font-size: 20px;
     /* Define el tamaño de la fuente */
+    cursor: pointer;
 }
 
 /* Cambia el color del texto al pasar el cursor sobre los elementos de la barra de navegación */
