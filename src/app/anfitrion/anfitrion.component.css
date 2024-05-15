@@ -57,6 +57,8 @@
     font-size: 18px; /* Tamaño de fuente */
     cursor: pointer; /* Cursor al pasar el mouse */
     align-self: flex-end; /* Alinear el botón a la derecha */
+    border-radius: 5px; /* Borde redondeado para los botones */
+    width: 150px; /* Ancho fijo para los botones */
 }
 
 .start-button:hover {

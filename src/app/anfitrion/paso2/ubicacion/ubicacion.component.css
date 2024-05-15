@@ -1,5 +1,3 @@
-
-
 #map {
     width: 400px;
     height: 300px;
@@ -22,6 +20,8 @@
     padding: 10px 20px; /* Relleno interno */
     font-size: 18px; /* Tamaño de fuente */
     cursor: pointer; /* Cursor al pasar el mouse */
+    border-radius: 5px; /* Borde redondeado para los botones */
+    width: 150px; /* Ancho fijo para los botones */
 }
 
 .start-button:hover {
