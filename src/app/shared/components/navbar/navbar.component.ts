@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter  } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,5 +10,10 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  @Output() modoAnfitrionClicked = new EventEmitter<void>();
+
+  onModoAnfitrionClicked() {
+    this.modoAnfitrionClicked.emit();
+  }
 
 }

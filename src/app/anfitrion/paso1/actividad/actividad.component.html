@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="titulo">
+    <h2>Seleccione 3 actividades que se realicen en su entorno</h2>
+  </div>
+  <div class="opciones-container">
+    <button
+      class="opcion"
+      [class.selected]="opcionesSeleccionadas.includes('Surf')"
+      (click)="seleccionarOpcion('Surf')"
+    >
+      Surf
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionesSeleccionadas.includes('Buceo')"
+      (click)="seleccionarOpcion('Buceo')"
+    >
+      Buceo
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionesSeleccionadas.includes('Ciclismo')"
+      (click)="seleccionarOpcion('Ciclismo')"
+    >
+      Ciclismo
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionesSeleccionadas.includes('Escalada en roca')"
+      (click)="seleccionarOpcion('Escalada en roca')"
+    >
+      Escalada en roca
+    </button>
+    <button
+      class="opcion"
+      [class.selected]="opcionesSeleccionadas.includes('Senderismo')"
+      (click)="seleccionarOpcion('Senderismo')"
+    >
+      Senderismo
+    </button>
+  </div>
+  <button class="start-button" (click)="navigateToUbicacion()" [disabled]="opcionesSeleccionadas.length !== 3">Paso 2</button>
+</div>
