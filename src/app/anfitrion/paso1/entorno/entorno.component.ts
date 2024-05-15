@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-descripcion',
-  templateUrl: './descripcion.component.html',
+  selector: 'app-entorno',
   standalone: true,
   imports: [],
-  styleUrls: ['./descripcion.component.css']
+  templateUrl: './entorno.component.html',
+  styleUrl: './entorno.component.css'
 })
-export class DescripcionComponent {
+export class EntornoComponent {
   nuevoAlojamiento: any = {}; // Objeto para almacenar los datos del alojamiento
 
   constructor(private router: Router) {}
@@ -17,8 +17,9 @@ export class DescripcionComponent {
     this.nuevoAlojamiento.tipo_alojamiento = opcion; // Guarda el tipo de alojamiento seleccionado
   }
 
-  navigateToUbicacion() {
+  navigateToPaso2() {
     // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['anfitrion/entorno'], { state: { alojamiento: this.nuevoAlojamiento } });
+    this.router.navigate(['anfitrion/actividad'], { state: { alojamiento: this.nuevoAlojamiento } });
   }
+
 }

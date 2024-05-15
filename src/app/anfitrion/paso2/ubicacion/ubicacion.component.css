@@ -1,0 +1,41 @@
+
+
+#map {
+    width: 400px;
+    height: 300px;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    margin-top: 1.5rem; /* mt-4: margen superior */
+    margin-bottom: 1.5rem; /* mb-4: margen inferior */
+}
+
+.datos-basicos-button-container {
+    display: flex; /* Utiliza el modelo de caja flexible */
+    justify-content: flex-end; /* Alinea el contenido al final del contenedor */
+    margin-top: 20px; /* Margen superior para separar el botón */
+}
+
+.start-button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Relleno interno */
+    font-size: 18px; /* Tamaño de fuente */
+    cursor: pointer; /* Cursor al pasar el mouse */
+}
+
+.start-button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin-top: 1.5rem; /* mt-4: margen superior */
+    margin-bottom: 1.5rem; /* mb-4: margen inferior */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }

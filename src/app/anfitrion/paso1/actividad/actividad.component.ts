@@ -1,0 +1,34 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-actividad',
+  standalone: true,
+  imports: [],
+  templateUrl: './actividad.component.html',
+  styleUrl: './actividad.component.css'
+})
+export class ActividadComponent {
+  nuevoAlojamiento: any = {}; // Objeto para almacenar los datos del alojamiento
+  opcionesSeleccionadas: string[] = [];
+
+  constructor(private router: Router) {}
+
+  seleccionarOpcion(opcion: string): void {
+    if (this.opcionesSeleccionadas.includes(opcion)) {
+      this.opcionesSeleccionadas = this.opcionesSeleccionadas.filter(item => item !== opcion);
+    } else {
+      if (this.opcionesSeleccionadas.length < 3) {
+        this.opcionesSeleccionadas.push(opcion);
+      } else {
+        // Aquí puedes mostrar un mensaje al usuario indicando que solo se pueden seleccionar tres opciones.
+      }
+    }
+  }
+
+  navigateToUbicacion(): void {
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['anfitrion/paso2'], { state: { alojamiento: this.nuevoAlojamiento } });
+  }
+}
+
