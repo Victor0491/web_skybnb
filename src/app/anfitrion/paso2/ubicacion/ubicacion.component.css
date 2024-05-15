@@ -11,6 +11,7 @@
     display: flex; /* Utiliza el modelo de caja flexible */
     justify-content: flex-end; /* Alinea el contenido al final del contenedor */
     margin-top: 20px; /* Margen superior para separar el botón */
+    margin-left: auto;
 }
 
 .start-button {
