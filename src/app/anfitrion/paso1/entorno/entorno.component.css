@@ -4,11 +4,12 @@
     align-items: center;
     height: 100vh;
     flex-direction: column;
-    margin-top: 1.5rem; /* mt-4: margen superior */
-    margin-bottom: 1.5rem; /* mb-4: margen inferior */
+    margin-top: 4rem; /* 4 unidades de espacio arriba */
+    margin-bottom: 4rem; /* 4 unidades de espacio abajo */
     border: 1px solid #ccc;
     border-radius: 8px;
-  }
+}
+  
   
   .titulo {
     margin-bottom: 20px; /* / Ajusta el margen inferior del título / */

@@ -1,53 +1,71 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import mapboxgl from 'mapbox-gl'; // Importa mapbox-gl
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import * as L from 'leaflet';
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-ubicacion',
   templateUrl: './ubicacion.component.html',
-  imports: [],
-  standalone: true,
   styleUrls: ['./ubicacion.component.css'],
+  standalone: true,
+  imports: [CommonModule,ReactiveFormsModule],
 })
 export class UbicacionComponent implements OnInit {
-  map: mapboxgl.Map; // Variable para almacenar el mapa
-  @ViewChild('ubicacionInput', { static: true }) ubicacionInput!: ElementRef<HTMLInputElement>; // Inicializa la propiedad ubicacionInput
+  map!: L.Map;
+  marker!: L.Marker;
+  locationForm!: FormGroup;
 
-  constructor(private router: Router) {
-    this.map = {} as mapboxgl.Map; // Inicializa la propiedad map en el constructor
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.initMap();
-  }
 
-  async guardarUbicacion(): Promise<void> {
-    const ubicacion = this.ubicacionInput.nativeElement.value;
-    if (ubicacion) {
-      // Resto del código para guardar la ubicación...
-      console.log('Ubicación guardada:', ubicacion);
-      // Luego de guardar la ubicación, puedes redirigir al usuario a la siguiente página
-      // this.router.navigate(['/datosbasicos']);
-    } else {
-      console.error('La ubicación no puede estar vacía');
-    }
+    this.locationForm = this.formBuilder.group({
+      address: ['']
+    });
   }
 
   initMap(): void {
-    mapboxgl.accessToken = 'pk.eyJ1IjoibWF0aWFzY2FsaXN0byIsImEiOiJjbHZ4NG1ycnYwNmY0MmtzNDh5cjZyd3FrIn0.cQq48QNu_te4hmvF4ASxmQ'; // Reemplaza TU_ACCESS_TOKEN con tu token de acceso a Mapbox
-    this.map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11', // Reemplaza con el estilo de mapa que desees
-      center: [-70.6475, -33.4372], // Longitud y latitud del centro del mapa (Santiago, Chile)
-      zoom: 12
-    });
+    this.map = L.map('map').setView([0, 0], 13);
 
-    // Agrega el marcador
-    new mapboxgl.Marker().setLngLat([-70.6475, -33.4372]).addTo(this.map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
   }
 
-  navigateToDatosbasicos() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['/anfitrion/datosbasicos'], {});
+  onSubmit(): void {
+    const address = this.locationForm.value.address;
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          const lat = parseFloat(data[0].lat);
+          const lon = parseFloat(data[0].lon);
+
+          if (this.marker) {
+            this.map.removeLayer(this.marker);
+          }
+          this.map.setView([lat, lon], 15);
+          this.marker = L.marker([lat, lon]).addTo(this.map);
+        } else {
+          alert('Dirección no encontrada');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error al buscar la dirección.');
+      });
+  }
+
+  clearMap(): void {
+    if (this.map) {
+      this.map.remove();
+    }
+    if (this.marker) {
+      this.marker.remove();
+    }
   }
 }

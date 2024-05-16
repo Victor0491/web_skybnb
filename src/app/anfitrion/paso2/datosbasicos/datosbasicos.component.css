@@ -6,6 +6,8 @@
     border-radius: 10px; /* Bordes redondeados */
     display: flex;
     flex-direction: column;
+    margin-top: 4rem; /* 4 unidades de espacio arriba */
+    margin-bottom: 4rem; /* 4 unidades de espacio abajo */
 }
 
 .container h2 {
