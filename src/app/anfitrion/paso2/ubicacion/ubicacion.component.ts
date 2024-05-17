@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-ubicacion',
   templateUrl: './ubicacion.component.html',
   styleUrls: ['./ubicacion.component.css'],
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
 })
-export class UbicacionComponent implements OnInit {
+export class UbicacionComponent implements OnInit, AfterViewInit {
   map!: L.Map;
   marker!: L.Marker;
   locationForm!: FormGroup;
@@ -20,20 +19,25 @@ export class UbicacionComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.initMap();
-
     this.locationForm = this.formBuilder.group({
       address: ['']
     });
   }
 
-  initMap(): void {
+  ngAfterViewInit(): void {
+    this.initMap();
+  }
+
+  private initMap(): void {
     this.map = L.map('map').setView([0, 0], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
+
+    // Forzar redimensión del mapa después de la inicialización
+    this.map.invalidateSize();
   }
 
   onSubmit(): void {
