@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ubicacion',
@@ -16,7 +17,7 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
   marker!: L.Marker;
   locationForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,private router: Router) {}
 
   ngOnInit(): void {
     this.locationForm = this.formBuilder.group({
@@ -72,4 +73,11 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
       this.marker.remove();
     }
   }
+
+  navigateToDatosbasicos() {
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['/anfitrion/datosbasicos'], {});
+  }
 }
+
+

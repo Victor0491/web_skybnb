@@ -28,13 +28,16 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "node_modules/leaflet/dist/leaflet.css" 
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/@splidejs/splide/dist/css/splide.min.css"
+
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/leaflet/dist/leaflet.js"  
+              "node_modules/leaflet/dist/leaflet.js",
+              "node_modules/@splidejs/splide/dist/js/splide.min.js"
             ]
           },
           "configurations": {
