@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Output, EventEmitter  } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthSesionService } from '../../../core/service/sesion/auth-sesion.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,8 +15,29 @@ import { RouterLink } from '@angular/router';
 export class NavbarComponent {
   @Output() modoAnfitrionClicked = new EventEmitter<void>();
 
+  correo: string | null = null;
+
+  ngOnInit() {
+    this.correo = this.authService.obtenerCorreo();
+  }
+
+  constructor(
+    private authService: AuthSesionService,
+    private router: Router
+  ) {}
+
+
   onModoAnfitrionClicked() {
     this.modoAnfitrionClicked.emit();
   }
 
+  autenticado(): boolean {
+    return this.authService.isLoggin();
+  }
+
+  deslogear(){
+    this.authService.logout();
+    this.router.navigateByUrl('')
+  }
+  
 }

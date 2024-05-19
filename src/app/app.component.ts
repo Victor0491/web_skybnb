@@ -7,12 +7,13 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { AnfitrionComponent } from './anfitrion/anfitrion.component';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule,RouterOutlet,NavbarComponent,FooterComponent,ModalComponent],
+  imports: [CommonModule,RouterOutlet,NavbarComponent,FooterComponent,ModalComponent, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
