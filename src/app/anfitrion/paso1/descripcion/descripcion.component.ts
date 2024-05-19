@@ -21,4 +21,8 @@ export class DescripcionComponent {
     // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
     this.router.navigate(['anfitrion/entorno'], { state: { alojamiento: this.nuevoAlojamiento } });
   }
+  navigateToPaso1() {
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['anfitrion/paso1'], { state: { alojamiento: this.nuevoAlojamiento } });
+  }
 }

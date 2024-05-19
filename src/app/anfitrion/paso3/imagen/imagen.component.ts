@@ -12,6 +12,7 @@ import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
 })
 export class ImagenComponent {
   constructor(private router: Router) {}
+
   selectedFiles: FileList | null = null;
   uploadedImages: File[] = [];
 
@@ -31,8 +32,14 @@ export class ImagenComponent {
   getImageUrl(image: File): string {
     return URL.createObjectURL(image);
   }
+
   navigateToInformacion() {
     console.log('Botón Comencemos clickeado');
     this.router.navigate(['/anfitrion/informacion']);
+  }
+
+  navigateToPaso3() {
+    console.log('Botón Comencemos clickeado');
+    this.router.navigate(['/anfitrion/paso3']);
   }
 }

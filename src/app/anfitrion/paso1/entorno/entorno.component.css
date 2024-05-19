@@ -1,62 +1,67 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    margin-top: 4rem; /* 4 unidades de espacio arriba */
-    margin-bottom: 4rem; /* 4 unidades de espacio abajo */
-    border: 1px solid #ccc;
-    border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  flex-direction: column;
+  margin-top: 10px; 
+  margin-bottom: 10px; 
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  position: relative; /* Necesario para posicionar los botones absolutamente dentro de este contenedor */
 }
-  
-  
+
   .titulo {
-    margin-bottom: 20px; /* / Ajusta el margen inferior del título / */
+    margin-bottom: 20px; /*Ajusta el margen inferior del título */
   }
-  
+
   .opciones-container {
     display: flex;
-    flex-direction: column; /*  Alinea los botones en columna  */
-    gap: 10px; /* Espacio entre los botones */
+    flex-direction: column; /*Alinea los botones en columna */
+    gap: 10px; /*Espacio entre los botones*/
   }
-  
+
   .opcion {
     padding: 10px;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
     cursor: pointer;
-    display: flex;  /* Alinea el texto y el icono horizontalmente */ 
-    justify-content: space-between; /* Espacia el contenido de los botones */
-    align-items: center; /* / Centra verticalmente el contenido / */
+    display: flex;  /*Alinea el texto y el icono horizontalmente*/ 
+    justify-content: space-between; /*Espacia el contenido de los botones*/
+    align-items: center; /*Centra verticalmente el contenido*/
   }
-  
+
   .opcion.selected {
     background-color: #007bff;
     color: #fff;
     border: 2px solid #007bff;
   }
-  
+
   .icono {
-    margin-right: 10px; /* / Espacio entre el texto y el icono / */
+    margin-right: 10px; /*Espacio entre el texto y el icono */
   }
-  
-  
-  .start-button {
-    margin-top: 40px; /* / Ajusta el margen superior para separar el botón / */
-    margin-bottom: 20px; /* / Agrega un margen inferior para separar del resto de elementos / */
-    background-color: #007bff; /* / Color de fondo del botón / */
-    color: #fff; /* / Color del texto del botón / */
-    border: none; /* / Sin borde / */
-    padding: 10px 20px; /* / Relleno interno / */
-    font-size: 18px; /* / Tamaño de fuente / */
-    cursor: pointer; /* / Cursor al pasar el mouse / */
-    align-self: flex-end !important; /* / Alinear el botón a la derecha / */
-    border-radius: 5px; /* Borde redondeado para los botones */
-    width: 150px; /* Ancho fijo para los botones */
-  }
-  
-  .start-button:hover {
-    background-color: #0056b3; /* / Color de fondo al pasar el mouse */
-  }
-  
+
+  .start-button-avanzar, .start-button-volver {
+    background-color: #007bff; /* Color de fondo del botón*/
+    color: #fff; /*Color del texto del botón*/
+    border: none; /*Sin borde*/
+    padding: 10px 20px; /*Relleno interno*/
+    font-size: 18px; /*Tamaño de fuente*/
+    cursor: pointer; /*Cursor al pasar el mouse*/
+    border-radius: 5px; /*Borde redondeado para los botones*/
+    width: 150px; /*Ancho fijo para los botones*/
+}
+
+.start-button-avanzar:hover, .start-button-volver:hover {
+  background-color: #0056b3; /*Color de fondo al pasar el mouse*/
+}
+
+  .button-container {
+    position: absolute;
+    bottom: 20px; /*Espacio desde el borde inferior*/
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between; /*Espacia los botones*/
+    padding: 0 20px; /*Espacio lateral para los botones */
+}

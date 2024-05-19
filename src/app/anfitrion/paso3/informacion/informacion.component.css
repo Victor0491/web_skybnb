@@ -1,5 +1,5 @@
 .container {
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -27,31 +27,42 @@
   }
   
   .btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
+    margin-top: 20px; /* Margen superior para separar el botón */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Relleno interno */
+    font-size: 14px; /* Tamaño de fuente */
+    cursor: pointer; /* Cursor al pasar el mouse */
+    align-self: flex-start; /* Alinear el botón a la izquierda */
+    border-radius: 5px; /* Borde redondeado para los botones */
+    width: 200px; /* Ancho fijo para los botones */
   }
   
   .btn:hover {
     background-color: #0056b3;
   }
 
-  .start-button {
+.start-button-volver {
     margin-top: 20px; /* Margen superior para separar el botón */
     background-color: #007bff; /* Color de fondo del botón */
     color: #fff; /* Color del texto del botón */
     border: none; /* Sin borde */
     padding: 10px 20px; /* Relleno interno */
-    font-size: 18px; /* Tamaño de fuente */
+    font-size: 14px; /* Tamaño de fuente */
     cursor: pointer; /* Cursor al pasar el mouse */
-    align-self: flex-end; /* Alinear el botón a la derecha */
+    align-self: flex-start; /* Alinear el botón a la izquierda */
+    border-radius: 5px; /* Borde redondeado para los botones */
+    width: 200px; /* Ancho fijo para los botones */
 }
 
 .start-button:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+    background-color: #0056b3;
 }
 
+.button-container {
+    display: flex; /* Utiliza el modelo de caja flexible */
+    justify-content: flex-end; /* Alinea el contenido al final del contenedor */
+    justify-content: space-between; /* Espacio entre los botones */
+    margin-top: 20px; /* Margen superior para separar el botón */
+}

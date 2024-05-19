@@ -14,5 +14,9 @@ export class Paso3Component {
     console.log('Botón Comencemos clickeado');
     this.router.navigate(['/anfitrion/imagen']);
   }
+  navigateToDatosbasicos() {
+    console.log('Botón Comencemos clickeado');
+    this.router.navigate(['/anfitrion/datosbasicos']);
+  }
 
 }

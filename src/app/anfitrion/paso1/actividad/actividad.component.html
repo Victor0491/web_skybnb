@@ -39,5 +39,8 @@
       Senderismo
     </button>
   </div>
-  <button class="start-button" (click)="navigateToUbicacion()" [disabled]="opcionesSeleccionadas.length === 0 || opcionesSeleccionadas.length > 3">Paso 2</button>
+  <div class="button-container">
+    <button class="start-button-volver" (click)="navigateToEntorno()" >Volver</button>
+  <button class="start-button-avanzar" (click)="navigateToUbicacion()" [disabled]="opcionesSeleccionadas.length === 0 || opcionesSeleccionadas.length > 3">Paso 2</button>
+  </div>
 </div>

@@ -17,9 +17,13 @@ export class EntornoComponent {
     this.nuevoAlojamiento.tipo_alojamiento = opcion; // Guarda el tipo de alojamiento seleccionado
   }
 
-  navigateToPaso2() {
+  navigateToActividad() {
     // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
     this.router.navigate(['anfitrion/actividad'], { state: { alojamiento: this.nuevoAlojamiento } });
+  }
+  navigateToDescripcion() {
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['anfitrion/descripcion'], { state: { alojamiento: this.nuevoAlojamiento } });
   }
 
 }
