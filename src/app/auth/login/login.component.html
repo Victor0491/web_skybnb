@@ -13,23 +13,26 @@
                         <form>
                             <div class="mb-4">
                                 <label for="username" class="form-label text-form">Correo electrónico</label>
-                                <input type="text" id="username" name="username" class="form-control" [(ngModel)]="user.correo">
+                                <input type="text" id="username" name="username" class="form-control"
+                                    [(ngModel)]="user.correo">
                             </div>
 
                             <div class="mb-4">
                                 <label for="password" class="form-label text-form">Contraseña</label>
                                 <div class="input-group">
-                                    <input type="password" id="password" name="password" class="form-control" [(ngModel)]="user.password">
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        [(ngModel)]="user.password">
                                 </div>
                             </div>
 
                             <div class="mb-4">
-                                <button type="submit" class="btn btn-primary w-100" (click)="login()">Iniciar sesión</button>
+                                <button type="submit" class="btn btn-primary w-100" (click)="login()">Iniciar
+                                    sesión</button>
                             </div>
                         </form>
                         <div class="error">
                             @if(show_error){
-                                <p >{{mensaje_error}}</p>
+                            <p>{{mensaje_error}}</p>
                             }
                         </div>
                         <div class="text-center">

@@ -30,10 +30,10 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
   }
 
   private initMap(): void {
-    this.map = L.map('map').setView([0, 0], 13);
+    this.map = L.map('map').setView([-33.4372, -70.6506], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
+      maxZoom: 18,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
@@ -72,11 +72,17 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
     if (this.marker) {
       this.marker.remove();
     }
+    this.initMap(); // Vuelve a inicializar el mapa en la coordenada predefinida 
   }
 
   navigateToDatosbasicos() {
     // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
     this.router.navigate(['/anfitrion/datosbasicos'], {});
+  }
+
+  navigateToPaso2() {
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['/anfitrion/paso2'], {});
   }
 }
 

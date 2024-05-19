@@ -9,8 +9,7 @@ body {
     align-items: center; /* Centra verticalmente el contenido */
     margin: 60px; /* Ajusta los márgenes según sea necesario */
 }
-
-.start-button {
+.start-button-avanzar{
     margin-top: 20px; /* Margen superior para separar el botón */
     background-color: #007bff; /* Color de fondo del botón */
     color: #fff; /* Color del texto del botón */
@@ -27,3 +26,25 @@ body {
     background-color: #0056b3; /* Color de fondo al pasar el mouse */
 }
 
+.button-container {
+    display: flex; /* Utiliza el modelo de caja flexible */
+    justify-content: flex-end; /* Alinea el contenido al final del contenedor */
+    justify-content: space-between; /* Espacio entre los botones */
+    margin-top: 20px; /* Margen superior para separar el botón */
+    margin-bottom: 20px; /* 4 unidades de espacio abajo */
+    padding: 0 20px; /* Añade un relleno izquierdo y derecho */
+}
+
+.start-button-volver {
+    margin-top: 20px; /* Margen superior para separar el botón */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Relleno interno */
+    font-size: 18px; /* Tamaño de fuente */
+    cursor: pointer; /* Cursor al pasar el mouse */
+    align-self: flex-start; /* Alinear el botón a la izquierda */
+    border-radius: 5px; /* Borde redondeado para los botones */
+    width: 150px; /* Ancho fijo para los botones */
+    
+}

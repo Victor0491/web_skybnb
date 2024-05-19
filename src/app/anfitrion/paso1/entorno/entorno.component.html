@@ -1,32 +1,26 @@
 <div class="container">
-    <div class="titulo">
-      <h2>¿Cuál de estas opciones describe mejor tu entorno?</h2>
-    </div>
-    <div class="opciones-container">
-      <button
-        class="opcion"
-        [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Bosque'"
-        (click)="seleccionarOpcion('Bosque')"
-      >
-      <i class="fa-solid fa-tree"></i> <!-- Icono de bosque -->
-        Bosque
-      </button>
-      <button
-        class="opcion"
-        [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Playa'"
-        (click)="seleccionarOpcion('Playa')"
-      >
-      <i class="fa-solid fa-umbrella-beach"></i> <!-- Icono de playa -->
-        Playa
-      </button>
-      <button
-        class="opcion"
-        [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Ciudad'"
-        (click)="seleccionarOpcion('Ciudad')"
-      >
-      <i class="fa-solid fa-city"></i> <!-- Icono de ciudad -->
-        Ciudad
-      </button>
-    </div>
-    <button class="start-button" (click)="navigateToPaso2()">Continuar</button>
+  <div class="titulo">
+    <h2>¿Cuál de estas opciones describe mejor tu entorno?</h2>
   </div>
+  <div class="opciones-container">
+    <button class="opcion" [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Bosque'"
+      (click)="seleccionarOpcion('Bosque')">
+      <i class="fa-solid fa-tree"></i> <!-- Icono de bosque -->
+      Bosque
+    </button>
+    <button class="opcion" [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Playa'"
+      (click)="seleccionarOpcion('Playa')">
+      <i class="fa-solid fa-umbrella-beach"></i> <!-- Icono de playa -->
+      Playa
+    </button>
+    <button class="opcion" [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Ciudad'"
+      (click)="seleccionarOpcion('Ciudad')">
+      <i class="fa-solid fa-city"></i> <!-- Icono de ciudad -->
+      Ciudad
+    </button>
+  </div>
+  <div class="button-container">
+    <button class="start-button-volver" (click)="navigateToDescripcion()">Volver</button>
+    <button class="start-button-avanzar" (click)="navigateToActividad()">Continuar</button>
+  </div>
+</div>

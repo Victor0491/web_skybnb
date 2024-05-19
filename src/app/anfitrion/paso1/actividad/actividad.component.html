@@ -1,43 +1,33 @@
 <div class="container">
   <div class="titulo">
-    <h2>Seleccione 3 actividades que se realicen en su entorno</h2>
+    <h2>Seleccione máximo 3 actividades que se realicen en su entorno</h2>
   </div>
   <div class="opciones-container">
-    <button
-      class="opcion"
-      [class.selected]="opcionesSeleccionadas.includes('Surf')"
-      (click)="seleccionarOpcion('Surf')"
-    >
+    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Surf')"
+      (click)="seleccionarOpcion('Surf')">
       Surf
     </button>
-    <button
-      class="opcion"
-      [class.selected]="opcionesSeleccionadas.includes('Buceo')"
-      (click)="seleccionarOpcion('Buceo')"
-    >
+    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Buceo')"
+      (click)="seleccionarOpcion('Buceo')">
       Buceo
     </button>
-    <button
-      class="opcion"
-      [class.selected]="opcionesSeleccionadas.includes('Ciclismo')"
-      (click)="seleccionarOpcion('Ciclismo')"
-    >
-      Ciclismo
-    </button>
-    <button
-      class="opcion"
-      [class.selected]="opcionesSeleccionadas.includes('Escalada en roca')"
-      (click)="seleccionarOpcion('Escalada en roca')"
-    >
+    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Escalada en roca')"
+      (click)="seleccionarOpcion('Escalada en roca')">
       Escalada en roca
     </button>
-    <button
-      class="opcion"
-      [class.selected]="opcionesSeleccionadas.includes('Senderismo')"
-      (click)="seleccionarOpcion('Senderismo')"
-    >
+    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Senderismo')"
+      (click)="seleccionarOpcion('Senderismo')">
       Senderismo
     </button>
+    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Caminata al aire libre')"
+      (click)="seleccionarOpcion('Caminata al aire libre')">
+      Caminata al aire libre
+    </button>
+
   </div>
-  <button class="start-button" (click)="navigateToUbicacion()" [disabled]="opcionesSeleccionadas.length === 0 || opcionesSeleccionadas.length > 3">Paso 2</button>
+  <div class="button-container">
+    <button class="start-button-volver" (click)="navigateToEntorno()">Volver</button>
+    <button class="start-button-avanzar" (click)="navigateToUbicacion()"
+      [disabled]="opcionesSeleccionadas.length > 3">Paso 2</button>
+  </div>
 </div>

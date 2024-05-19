@@ -1,20 +1,34 @@
-
-
-<div class="image-container">
+<div class="container">
+  <div class="titulo">
+    <h2>¿Cuál de estas opciones describe mejor tu entorno?</h2>
+  </div>
   <input type="file" (change)="onFileSelected($event)" multiple accept="image/*">
-  
+
   <div *ngIf="uploadedImages.length === 0" class="placeholder">
     <img src="path/to/default-image.jpg" alt="Placeholder image">
-    <p>Suba las imágenes de su alojamiento</p>
   </div>
-  
-  <div class="uploaded-images">
-    <img *ngFor="let image of uploadedImages | slice:-3" [src]="getImageUrl(image)" alt="Imagen cargada">
-    <span *ngIf="uploadedImages.length > 3" class="more-images-icon">+{{ uploadedImages.length - 3 }}</span>
-  </div>
-  <div>
-    <button class="start-button" (click)="navigateToInformacion()">Continuar</button>
-  </div>
-  
-</div>
 
+  <!-- Carrusel de Bootstrap -->
+  <div *ngIf="uploadedImages.length > 0">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let image of uploadedImages; let i = index" [class.active]="i === 0">
+          <img [src]="getImageUrl(image)" class="d-block w-100" alt="Image">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button class="start-button-volver" (click)="navigateToPaso3()">Volver</button>
+    <button class="start-button-avanzar" (click)="navigateToInformacion()">Continuar</button>
+  </div>
+</div>

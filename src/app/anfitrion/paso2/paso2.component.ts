@@ -15,4 +15,8 @@ export class Paso2Component {
     console.log('Botón Comencemos clickeado');
     this.router.navigate(['/anfitrion/ubicacion']);
   }
+  navigateToActividad() {
+    console.log('Botón Comencemos clickeado');
+    this.router.navigate(['/anfitrion/actividad']);
+  }
 }

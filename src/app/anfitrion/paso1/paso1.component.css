@@ -10,7 +10,7 @@ body {
     margin: 60px; /* Ajusta los márgenes según sea necesario */
 }
 
-.start-button {
+.start-button-avanzar {
     margin-top: 20px; /* Margen superior para separar el botón */
     background-color: #007bff; /* Color de fondo del botón */
     color: #fff; /* Color del texto del botón */
@@ -27,3 +27,10 @@ body {
     background-color: #0056b3; /* Color de fondo al pasar el mouse */
 }
 
+.button-container {
+    display: flex; /* Utiliza el modelo de caja flexible */
+    justify-content: flex-end; /* Alinea el contenido al final del contenedor */
+    margin-top: 20px; /* Margen superior para separar el botón */
+    margin-bottom: 20px; /* 4 unidades de espacio abajo */
+    padding: 0 20px; /* Añade un relleno izquierdo y derecho */
+}
