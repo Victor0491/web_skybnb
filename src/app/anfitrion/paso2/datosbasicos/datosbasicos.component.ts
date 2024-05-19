@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({   
@@ -21,7 +22,7 @@ export class DatosbasicosComponent {
   cantidadHuespedesValue: string = '0';
   mascotasValue: string = 'false';
 
-  constructor() {
+  constructor(private router: Router) {
     // Asigna el valor inicial de las propiedades a las variables de valor para el enlace bidireccional
     this.dormitoriosValue = this.dormitorios.toString();
     this.baniosValue = this.banios.toString();
@@ -78,6 +79,23 @@ export class DatosbasicosComponent {
     console.log('Baños:', this.banios);
     console.log('Cantidad de huéspedes:', this.cantidadHuespedes);
     console.log('Mascotas:', this.mascotas);
+  }
+
+  nuevoAlojamiento: any = {}; // Objeto para almacenar los datos del alojamiento
+
+
+
+  seleccionarOpcion(opcion: string) {
+    this.nuevoAlojamiento.tipo_alojamiento = opcion; // Guarda el tipo de alojamiento seleccionado
+  }
+
+  navigateToPaso3() {
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['anfitrion/paso3'], { state: { alojamiento: this.nuevoAlojamiento } });
+  }
+  navigateToUbicacion() {
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['anfitrion/ubicacion'], { state: { alojamiento: this.nuevoAlojamiento } });
   }
 }
 

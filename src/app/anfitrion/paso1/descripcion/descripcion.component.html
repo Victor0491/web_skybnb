@@ -3,38 +3,24 @@
     <h2>¿Cuál de estas opciones describe mejor tu espacio?</h2>
   </div>
   <div class="opciones-container">
-    <button
-      class="opcion"
-      [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Casa'"
-      (click)="seleccionarOpcion('Casa')"
-    >
-      <i class="fas fa-home icono"></i> <!-- Icono de casa -->
+    <button class="opcion" [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Casa'"
+      (click)="seleccionarOpcion('Casa')">
+      <i class="fas fa-home"></i> <!-- Icono de casa -->
       Casa
     </button>
-    <button
-      class="opcion"
-      [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Cabaña'"
-      (click)="seleccionarOpcion('Cabaña')"
-    >
-      <i class="fas fa-cabin icono"></i> <!-- Icono de cabaña -->
+    <button class="opcion" [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Cabaña'"
+      (click)="seleccionarOpcion('Cabaña')">
+      <i class="fa-solid fa-house-chimney"></i><!-- Icono de cabaña -->
       Cabaña
     </button>
-    <button
-      class="opcion"
-      [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Departamento'"
-      (click)="seleccionarOpcion('Departamento')"
-    >
+    <button class="opcion" [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Departamento'"
+      (click)="seleccionarOpcion('Departamento')">
       <i class="fas fa-building icono"></i> <!-- Icono de departamento -->
       Departamento
     </button>
-    <button
-      class="opcion"
-      [class.selected]="nuevoAlojamiento.tipo_alojamiento === 'Domo'"
-      (click)="seleccionarOpcion('Domo')"
-    >
-      <i class="fas fa-dome icono"></i> <!-- Icono de domo -->
-      Domo
-    </button>
   </div>
-  <button class="start-button" (click)="navigateToUbicacion()">Ubicacion</button>
+  <div class="button-container">
+    <button class="start-button-volver" (click)="navigateToPaso1()">Volver</button>
+    <button class="start-button-avanzar" (click)="navigateToUbicacion()">Continuar</button>
+  </div>
 </div>

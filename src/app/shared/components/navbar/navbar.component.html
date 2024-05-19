@@ -10,12 +10,21 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
       <ul class="navbar-nav">
+        @if (!autenticado()){
         <li class="nav-item ">
           <p [routerLink]="['auth/register']">Registrate</p>
         </li>
         <li class="nav-item ">
           <p [routerLink]="['auth/login']">Login</p>
         </li>
+        } @else {
+        <li class="nav-item">
+          <p [routerLink]="[]">Bienvenido, {{ correo }}</p>
+        </li>
+        <li class="nav-item ">
+          <p (click)="deslogear()">Cerrar Sesión</p>
+        </li>
+        }
         <li class="nav-item">
           <p [routerLink]="[]">vacío</p>
         </li>
@@ -23,7 +32,7 @@
           <p [routerLink]="[]">vacío</p>
         </li>
         <li class="nav-item">
-          <p [routerLink]="['anfitrion/subetuespacio']">Modo Anfitrión</p>
+          <p (click)="onModoAnfitrionClicked()">Modo Anfitrión</p>
         </li>
       </ul>
     </div>

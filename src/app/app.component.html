@@ -1,7 +1,8 @@
+<app-navbar *ngIf="!isLoginPage() && !isRegisterPage()" (modoAnfitrionClicked)="openModal()"></app-navbar>
 
-<app-navbar *ngIf="!isLoginPage() && !isRegisterPage()"></app-navbar>
-
-
+<div *ngIf="modalVisible">
+  <app-modal (closeModalClicked)="closeModal()"></app-modal>
+</div>
 <router-outlet></router-outlet>
 
 <app-footer></app-footer>

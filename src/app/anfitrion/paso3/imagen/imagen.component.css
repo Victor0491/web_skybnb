@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  position: relative;
+}
+
+.titulo {
+  margin-bottom: 20px;
+}
+
+.container img {
+  max-width: 100px;
+  height: 150px;
+}
+
+.more-images-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.start-button-avanzar,
+.start-button-volver {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 150px;
+}
+
+.start-button-avanzar:hover,
+.start-button-volver:hover {
+  background-color: #0056b3;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+/* Color de las flechas del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #007bff; /* Azul Bootstrap por defecto */
+}
+
+
