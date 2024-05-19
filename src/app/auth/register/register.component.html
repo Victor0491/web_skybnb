@@ -12,24 +12,21 @@
                         </div>
                         <form>
                             <div class="mb-4">
-                                <label for="email" class="form-label">Correo electrónico</label>
-                                <input type="email" id="email" name="email" class="form-control"
-                                    [(ngModel)]="user.correo">
+                                <label for="email" class="form-label text-form">Correo electrónico</label>
+                                <input type="email" id="email" name="email" class="form-control" [(ngModel)]="user.correo">
                             </div>
 
                             <div class="mb-4">
-                                <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" id="password" name="password" class="form-control"
-                                    [(ngModel)]="user.password">
+                                <label for="password" class="form-label text-form">Contraseña</label>
+                                <input type="password" id="password" name="password" class="form-control"[(ngModel)]="user.password">
                             </div>
 
                             <div class="mb-4">
-                                <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
-                                <input type="password" id="confirmPassword" name="confirmPassword"
-                                    [(ngModel)]="confirm_password" class="form-control">
+                                <label for="confirmPassword" class="form-label text-form">Confirmar contraseña</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirm_password" class="form-control">
                             </div>
-                            <div>
-                                <label class="error">
+                            <div class="error">
+                                <label >
                                     {{mensaje_error}}
                                 </label>
                             </div>
