@@ -55,3 +55,11 @@ input[type="date"],
 .btn:hover {
   background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
 }
+
+
+app-carrusel-info, app-mapa {
+  width: 50%; /* Ajusta el ancho según tus necesidades */
+  /* Añadir algo de estilo para visualización */
+  border: 1px solid white;
+  padding: 10px;
+}
