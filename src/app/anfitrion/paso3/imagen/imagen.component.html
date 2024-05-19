@@ -3,11 +3,11 @@
     <h2>¿Cuál de estas opciones describe mejor tu entorno?</h2>
   </div>
   <input type="file" (change)="onFileSelected($event)" multiple accept="image/*">
-  
+
   <div *ngIf="uploadedImages.length === 0" class="placeholder">
     <img src="path/to/default-image.jpg" alt="Placeholder image">
   </div>
-  
+
   <!-- Carrusel de Bootstrap -->
   <div *ngIf="uploadedImages.length > 0">
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
