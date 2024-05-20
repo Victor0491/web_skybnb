@@ -1,11 +1,14 @@
 /* Estilo para el contenedor del carrusel */
 #carrusel-info {
-    float: lef; /* Alinear a la izquierda */
-    margin-right: 20px; /* Espacio entre el carrusel y el texto de la habitación */
-    width: 70%; /* Ancho del carrusel */
-}
-
-/* Estilo para el contenedor del texto de la habitación */
-#descripcion-habitacion {
-    float: l; /* Alinear a la izquierda */
-}
+    width: 400px;
+    height: 400px;
+    overflow: hidden; /* Para ocultar el espacio en negro que se rellena */
+  }
+  
+  /* Estilo para las imágenes del carrusel */
+  .carousel-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover; /* Para que las imágenes se ajusten al tamaño del contenedor */
+  }
+  
