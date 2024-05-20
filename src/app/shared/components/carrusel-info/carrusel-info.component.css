@@ -8,7 +8,7 @@
   /* Estilo para las imágenes del carrusel */
   .carousel-item img {
     width: 100%;
-    height: 100%;
+    height: 300px;
     object-fit: cover; /* Para que las imágenes se ajusten al tamaño del contenedor */
   }
   
