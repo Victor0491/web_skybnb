@@ -1,13 +1,14 @@
 /* Estilo para el contenedor del carrusel */
 #carrusel-info {
-    float: left; /* Alinear a la izquierda */
-    margin-right: 20px; /* Espacio entre el carrusel y el texto de la habitación */
-    width: 70%; /* Ancho del carrusel ajustado */
-}
-
-/* Estilo para el contenedor del texto de la habitación */
-#descripcion-habitacion {
-    float: left; /* Alinear a la izquierda */
-    width: 20%; /* Ancho del texto de la habitación */
-    margin-right: 20px; /* Espacio entre el texto de la habitación y el mapa */
-}
+    width: 400px;
+    height: 400px;
+    overflow: hidden; /* Para ocultar el espacio en negro que se rellena */
+  }
+  
+  /* Estilo para las imágenes del carrusel */
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Para que las imágenes se ajusten al tamaño del contenedor */
+  }
+  
