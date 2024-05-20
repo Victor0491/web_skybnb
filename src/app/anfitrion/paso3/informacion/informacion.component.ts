@@ -16,7 +16,6 @@ export class InformacionComponent implements OnInit {
     if (this.alojamientoGuardadoExitoso) {
       setTimeout(() => {
         this.alojamientoGuardadoExitoso = false;
-        this.router.navigate(['']); // Redirige a la página de inicio
       }, 30000); // 30 segundos
     }
   }
@@ -33,6 +32,8 @@ export class InformacionComponent implements OnInit {
     // Simulación de guardar alojamiento (puedes implementar la lógica real aquí)
     this.alojamientoGuardadoExitoso = true;
     this.numeroAlojamientoGuardado++; // Incrementa el número de alojamiento guardado
+    this.router.navigate(['']); // Redirige a la página de inicio
+    
   }
 
   confirmarGuardar() {
