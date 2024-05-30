@@ -12,19 +12,20 @@
 
   <div class="user-profile-content">
     <div class="user-profile-card">
-      <h2>Mis Datos</h2>
-      <h3>{{ user.name }} {{ user.lastName }}</h3>
+      <h2>Datos de {{ user.username }}</h2>
+      <p>Nombre Completo: {{ user.name }} {{ user.lastName }}</p>
       <p>Email: {{ user.email }}</p>
+      <p>Teléfono: {{ user.phone }}</p>
     </div>
 
     <div class="user-profile-card">
       <h2>Mis Alojamientos</h2>
       <ul>
         <li *ngFor="let accommodation of accommodations">
-          <h3>{{ accommodation.title }}</h3>
-          <p>{{ accommodation.description }}</p>
-          <p>Location: {{ accommodation.location }}</p>
-          <p>Price per night: {{ accommodation.pricePerNight }}</p>
+          <h3>{{ accommodation.nombre }}</h3>
+          <p>Descripción: {{ accommodation.descripcion }}</p>
+          <p>Región: {{ accommodation.region }}</p>
+          <p>Precio:  {{ accommodation.precio }}</p>
         </li>
       </ul>
     </div>
@@ -33,7 +34,9 @@
       <h2>Mis Reservas</h2>
       <ul>
         <li *ngFor="let reservation of reservations">
-          <h3>{{ reservation.title }}</h3>
+          <h3>{{ reservation.nombre }}</h3>
+          <p>Descripción: {{ reservation.descripcion }}</p>
+          <p>Región: {{ reservation.region }}</p>
           <p>Start Date: {{ reservation.startDate }}</p>
           <p>End Date: {{ reservation.endDate }}</p>
         </li>
