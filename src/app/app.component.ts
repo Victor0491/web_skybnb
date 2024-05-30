@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
-
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { AnfitrionComponent } from './anfitrion/anfitrion.component';
 import { FormsModule } from '@angular/forms';

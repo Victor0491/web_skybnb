@@ -1,0 +1,53 @@
+.user-profile {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .user-profile-menu {
+    width: 15%;
+    padding: 10px;
+    background-color: #00add0;
+  }
+  
+  .user-profile-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .user-profile-menu li {
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+  .user-profile-menu a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .user-profile-content {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .user-profile-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .user-profile-picture {
+    display: flex; /* Hacer que el contenedor sea un flexbox */
+    justify-content: center; /* Centrar la imagen horizontalmente */
+    align-items: center; /* Centrar la imagen verticalmente */
+    width: 200px; /* Establecer el ancho */
+    height: 200px; /* Establecer la altura */
+    border-radius: 20%; /* Hacer que las esquinas sean redondeadas (50% es un círculo completo) */
+    overflow: hidden; /* Ocultar cualquier contenido que desborde el contenedor */
+}
+
+.user-profile-picture img {
+    width: 100%; /* Hacer que la imagen llene el contenedor */
+    height: 100%; /* Hacer que la imagen llene el contenedor */
+    object-fit: cover; /* Conservar la relación de aspecto mientras se llena el contenedor */
+}
