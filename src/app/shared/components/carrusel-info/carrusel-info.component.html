@@ -1,42 +1,64 @@
-<div class="container" style="max-width: 500px; float: left;">
-  <h1>¿Dónde vas a dormir?</h1>
-  <div class="row">
-    <div id="carrusel-info" class="carousel slide col-md-8" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="10000">
-          <img src="https://a0.muscache.com/im/pictures/71911216-1c87-46c4-b355-b563f2003055.jpg?im_w=480" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Habitación 1</h5>
-            <p>Disfruta de una estancia tranquila con vistas espectaculares.</p>
-          </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="2000">
-          <img src="https://a0.muscache.com/im/pictures/c5777bcd-2fa6-4111-a37a-483a70de9d77.jpg?im_w=1200" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Habitación 2</h5>
-            <p>A pocos pasos de las principales atracciones de la ciudad.</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="https://a0.muscache.com/im/pictures/fdb1b99d-a7d4-4fbb-8372-bd64ae73d3b5.jpg?im_w=1200" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Habitación 3</h5>
-            <p>Relájate en esta villa exclusiva con todas las comodidades.</p>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-info" data-bs-slide="prev">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
-        </svg>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carrusel-info" data-bs-slide="next">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
-        </svg>
-        <span class="visually-hidden">Siguiente</span>
-      </button>
+<div class="carousel-container">
+  <div id="image-carousel" class="splide" aria-label="Beautiful Images">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/f8a49f5f-51a5-406f-a93f-83ea84032640.jpg?im_w=1200" alt="Imagen del alojamiento grande">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/9ecbfcc2-39c3-47e4-aa54-ee5e430978a4.jpg?im_w=1440" alt="Second image">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/80a0b6ce-9ed7-41c1-b9cd-10e28025f6c3.jpg?im_w=720" alt="Third image">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzQyMjg4Mjk%3D/original/c2e9cdf1-d1e7-46b5-bf04-19e5d64a47cb.jpeg?im_w=1200" alt="Fourth image">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/e947a4e2-293f-4ee0-bcfe-949fe00223df.jpg?im_w=720" alt="Fifth image">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/2a8cb250-72c6-437e-a002-e534c21b9c29.jpg?im_w=1200" alt="Sixth image">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/71911216-1c87-46c4-b355-b563f2003055.jpg?im_w=1200" alt="Seven image">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/f10b8c0b-9ab5-4a92-8afa-5558d2a01145.jpg?im_w=1200" alt="Eight image">
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Thumbnails -->
+  <div id="thumbnail-carousel" class="splide splide--thumbnail">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/f8a49f5f-51a5-406f-a93f-83ea84032640.jpg?im_w=1200" alt="Thumbnail 1">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/9ecbfcc2-39c3-47e4-aa54-ee5e430978a4.jpg?im_w=1440" alt="Thumbnail 2">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/80a0b6ce-9ed7-41c1-b9cd-10e28025f6c3.jpg?im_w=720" alt="Thumbnail 3">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzQyMjg4Mjk%3D/original/c2e9cdf1-d1e7-46b5-bf04-19e5d64a47cb.jpeg?im_w=1200" alt="Thumbnail 4">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/e947a4e2-293f-4ee0-bcfe-949fe00223df.jpg?im_w=720" alt="Thumbnail 5">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/2a8cb250-72c6-437e-a002-e534c21b9c29.jpg?im_w=1200" alt="Thumbnail 6">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/71911216-1c87-46c4-b355-b563f2003055.jpg?im_w=1200" alt="Thumbnail 7">
+        </li>
+        <li class="splide__slide">
+          <img src="https://a0.muscache.com/im/pictures/f10b8c0b-9ab5-4a92-8afa-5558d2a01145.jpg?im_w=1200" alt="Thumbnail 8">
+        </li>
+      </ul>
     </div>
   </div>
 </div>
