@@ -23,16 +23,16 @@ export class PreferenciasComponent implements OnInit {
     { nombre: 'Departamento', imagen: 'https://http2.mlstatic.com/D_NQ_NP_766438-MLC75223256781_032024-O.webp' }
   ];
   ubicaciones: { nombre: string, imagen: string }[] = [
-    { nombre: 'Bosque', imagen: 'ruta/a/imagen/bosque.jpg' },
-    { nombre: 'Playa', imagen: 'ruta/a/imagen/playa.jpg' },
-    { nombre: 'Ciudad', imagen: 'ruta/a/imagen/ciudad.jpg' }
+    { nombre: 'Bosque', imagen: 'https://media.traveler.es/photos/62372c7f9999d61fe36db039/16:9/w_2560%2Cc_limit/india.jpg' },
+    { nombre: 'Playa', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvh9hichZBrJWNSFFOKcWwQro8k6OBwm0H8Q&s' },
+    { nombre: 'Ciudad', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOclOve8ohd-x3yTFEZLyeJ2h6P7EOxZ2qmg&s' }
   ];
   actividades: { nombre: string, imagen: string }[] = [
-    { nombre: 'Surf', imagen: 'ruta/a/imagen/surf.jpg' },
-    { nombre: 'Buceo', imagen: 'ruta/a/imagen/buceo.jpg' },
-    { nombre: 'Escalada en roca', imagen: 'ruta/a/imagen/escalada.jpg' },
-    { nombre: 'Senderismo', imagen: 'ruta/a/imagen/senderismo.jpg' },
-    { nombre: 'Caminata al aire libre', imagen: 'ruta/a/imagen/caminata.jpg' }
+    { nombre: 'Surf', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQt0BnL44w1stL-X2MFG0SjvWJJIUIaSJo0Q&s' },
+    { nombre: 'Buceo', imagen: 'https://s3-us-west-2.amazonaws.com/wp-divingyucatan/wp-content/uploads/2020/04/15110254/tipos-trajes-buceo.jpg' },
+    { nombre: 'Escalada en roca', imagen: 'https://www.culturarecreacionydeporte.gov.co/sites/default/files/styles/870_x_540/public/2023-06/climbing-g42cb58814_640.jpg?itok=19O-jOqD' },
+    { nombre: 'Senderismo', imagen: 'https://www.webconsultas.com/sites/default/files/styles/wc_adaptive_image__medium/public/media/2020/07/15/senderismo_p.jpg' },
+    { nombre: 'Caminata al aire libre', imagen: 'https://www.bupasalud.com/sites/default/files/styles/640_x_400/public/articulos/2020-04/fotos/caminata-salud.jpg?itok=ny1gDa_0' }
   ];
   seccionActual = 'tipoAlojamiento';
   historialSecciones: string[] = [];
