@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit {
     email: 'john.doe@email.com',
     phone: ''
   };
+
   accommodations: any[] = [
     {
       nombre: 'Casa en la Playa',
@@ -32,6 +33,7 @@ export class UserProfileComponent implements OnInit {
       region: 'De los Rios',
     }
   ];
+
   reservations: any[] = [
     {
       nombre: 'Cabaña en el bosque Huilo Huilo',
@@ -49,8 +51,22 @@ export class UserProfileComponent implements OnInit {
     }
   ];
 
+  activeAccordion: string = '';
+
   constructor() { }
 
   ngOnInit() { }
-}
 
+  toggleAccordion(section: string) {
+    if (this.activeAccordion === section) {
+      // Si se hace clic en el mismo título que está actualmente abierto,
+      // cierra el acordeón
+      this.activeAccordion = '';
+    } else {
+      // Si se hace clic en un título diferente al actualmente abierto,
+      // abre el nuevo y cierra los otros abiertos
+      this.activeAccordion = section;
+    }
+  }
+  
+}
