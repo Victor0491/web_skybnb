@@ -2,36 +2,33 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeAlojamientosComponent } from './home/home-alojamientos/home-alojamientos.component';
 import { AlojamientoDetailComponent } from './alojamientos/alojamiento-detail/alojamiento-detail.component';
-import { UserProfileComponent} from './user-profile/user-profile.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PreferenciasComponent } from './preferencias/preferencias.component';
 
 export const routes: Routes = [
+  {
+    path: 'anfitrion',
+    loadChildren: () => import('./anfitrion/auth.routes').then(m => m.AUTH_ROUTES),
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.routes').then(m => m.AUTH_ROUTES),
+  },
+  {
+    path: 'rooms',
+    loadChildren: () => import('./alojamientos/auth.routes').then(m => m.AUTH_ROUTES),
+  },
+  {
+    path: '',
+    component: HomeAlojamientosComponent,
+  },
+  { path: 'user-profile', component: UserProfileComponent },
+  { path: 'preferencias', component: PreferenciasComponent },
+];
 
-    {
-        path: 'anfitrion',
-        loadChildren: () => import ('./anfitrion/auth.routes').then(m => m.AUTH_ROUTES),
-    },
-    {
-        path: 'auth',
-        loadChildren: () => import ('./auth/auth.routes').then(m => m.AUTH_ROUTES),
-    },
-    {
-        path: 'rooms',
-        loadChildren: () => import ('./alojamientos/auth.routes').then(m => m.AUTH_ROUTES),
-    },
-    {
-        path: '',
-        component: HomeAlojamientosComponent,
-    },
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
 
-
-
-    { path: 'user-profile', component: UserProfileComponent },
-    
-  ];
-  
-  @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-  })
-  export class AppRoutingModule { }
-  
