@@ -1,14 +1,51 @@
-/* Estilo para el contenedor del carrusel */
-#carrusel-info {
-    width: 400px;
-    height: 400px;
-    overflow: hidden; /* Para ocultar el espacio en negro que se rellena */
+.carousel-container {
+  max-width: 1200px; /* Adjust as needed */
+  margin: auto;
+}
+
+.splide__track {
+  padding: 0;
+  margin: 0;
+}
+
+.splide__list {
+  padding: 0;
+  margin: 0;
+}
+
+.splide__slide {
+  padding: 0;
+  margin: 0;
+}
+
+#image-carousel {
+  height: 600px; /* Adjust height as needed */
+}
+
+#image-carousel .splide__slide img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+#thumbnail-carousel {
+  margin-top: 10px; /* Adjust spacing as needed */
+}
+
+#thumbnail-carousel .splide__slide img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.splide--thumbnail .splide__slide {
+  width: 150px; /* Increase width for larger thumbnails */
+  height: 100px; /* Increase height for larger thumbnails */
+}
+
+@media (max-width: 600px) {
+  .splide--thumbnail .splide__slide {
+    width: 100px; /* Smaller thumbnails for mobile view */
+    height: 66px;
   }
-  
-  /* Estilo para las imágenes del carrusel */
-  .carousel-item img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover; /* Para que las imágenes se ajusten al tamaño del contenedor */
-  }
-  
+}
