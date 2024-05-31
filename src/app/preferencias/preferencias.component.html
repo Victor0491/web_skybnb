@@ -6,11 +6,13 @@
   <div class="opciones-container" *ngIf="seccionActual === 'tipoAlojamiento'">
     <h3>Tipo de alojamiento</h3>
     <div class="opcion-container">
-      <button *ngFor="let tipo of tiposAlojamiento" class="opcion" 
+      <button *ngFor="let tipo of tiposAlojamiento; let i = index" class="opcion" 
         [class.selected]="preferenciasForm.get('tipoAlojamiento')?.value === tipo.nombre"
         (click)="seleccionarTipo(tipo.nombre)">
-        <img [src]="tipo.imagen" alt="{{ tipo.nombre }}">
-        {{ tipo.nombre }}
+        <div class="opcion-content" [class.intercalado]="i >= 3 && i % 2 === 1">
+          <img [src]="tipo.imagen" alt="{{ tipo.nombre }}">
+          <div>{{ tipo.nombre }}</div>
+        </div>
       </button>
     </div>
   </div>
@@ -18,11 +20,13 @@
   <div class="opciones-container" *ngIf="seccionActual === 'ubicacion'">
     <h3>Ubicación</h3>
     <div class="opcion-container">
-      <button *ngFor="let ubicacion of ubicaciones" class="opcion" 
+      <button *ngFor="let ubicacion of ubicaciones; let i = index" class="opcion" 
         [class.selected]="preferenciasForm.get('ubicacion')?.value === ubicacion.nombre"
         (click)="seleccionarUbicacion(ubicacion.nombre)">
-        <img [src]="ubicacion.imagen" alt="{{ ubicacion.nombre }}">
-        {{ ubicacion.nombre }}
+        <div class="opcion-content" [class.intercalado]="i >= 3 && i % 2 === 1">
+          <img [src]="ubicacion.imagen" alt="{{ ubicacion.nombre }}">
+          <div>{{ ubicacion.nombre }}</div>
+        </div>
       </button>
     </div>
   </div>
@@ -30,11 +34,13 @@
   <div class="opciones-container" *ngIf="seccionActual === 'actividad'">
     <h3>Actividades</h3>
     <div class="opcion-container">
-      <button *ngFor="let actividad of actividades" class="opcion" 
+      <button *ngFor="let actividad of actividades; let i = index" class="opcion" 
         [class.selected]="preferenciasForm.get('actividad')?.value.includes(actividad.nombre)"
         (click)="seleccionarActividad(actividad.nombre)">
-        <img [src]="actividad.imagen" alt="{{ actividad.nombre }}">
-        {{ actividad.nombre }}
+        <div class="opcion-content" [class.intercalado]="i >= 3 && i % 2 === 1">
+          <img [src]="actividad.imagen" alt="{{ actividad.nombre }}">
+          <div>{{ actividad.nombre }}</div>
+        </div>
       </button>
     </div>
   </div>
