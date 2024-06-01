@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HomeAlojamientosComponent } from './home/home-alojamientos/home-alojamientos.component';
 import { AlojamientoDetailComponent } from './alojamientos/alojamiento-detail/alojamiento-detail.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { PreferenciasComponent } from './preferencias/preferencias.component';
+
 
 export const routes: Routes = [
   {
@@ -23,7 +23,6 @@ export const routes: Routes = [
     component: HomeAlojamientosComponent,
   },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: 'preferencias', component: PreferenciasComponent },
 ];
 
 @NgModule({

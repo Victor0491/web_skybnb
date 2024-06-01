@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preferencias',
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./preferencias.component.css']
 })
 export class PreferenciasComponent implements OnInit {
+  @Output() closeModalClicked = new EventEmitter<void>();
   preferenciasForm: FormGroup;
   tiposAlojamiento: { nombre: string, imagen: string }[] = [
     { nombre: 'Cabaña', imagen: 'https://www.shutterstock.com/image-photo/wooden-cottage-forest-near-biogradsko-600nw-1963746835.jpg' },
@@ -37,7 +39,7 @@ export class PreferenciasComponent implements OnInit {
   seccionActual = 'tipoAlojamiento';
   historialSecciones: string[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.preferenciasForm = this.fb.group({
       tipoAlojamiento: ['', Validators.required],
       ubicacion: ['', Validators.required],
@@ -91,5 +93,13 @@ export class PreferenciasComponent implements OnInit {
     } else {
       console.log('Formulario no válido');
     }
+  }
+  onCloseModal() {
+    this.closeModalClicked.emit();
+  }
+
+  irAlojamientos() {
+    this.router.navigate(['/anfitrion/subetuespacio']);
+    this.closeModalClicked.emit();
   }
 }

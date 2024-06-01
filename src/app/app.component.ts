@@ -7,12 +7,14 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { AnfitrionComponent } from './anfitrion/anfitrion.component';
 import { FormsModule } from '@angular/forms';
+import { PreferenciasComponent } from './preferencias/preferencias.component';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule,RouterOutlet,NavbarComponent,FooterComponent,ModalComponent, FormsModule],
+  imports: [CommonModule,RouterOutlet,NavbarComponent,FooterComponent,ModalComponent, FormsModule,PreferenciasComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -31,12 +33,22 @@ export class AppComponent {
   
   modalVisible: boolean = false;
 
+  preferenciasVisible: boolean = true;
+
   openModal() {
     this.modalVisible = true;
   }
   
   closeModal() {
     this.modalVisible = false;
+  }
+
+  openPreferencias() {
+    this.preferenciasVisible = true;
+  }
+
+  closePreferencias() {
+    this.preferenciasVisible = false;
   }
 }
 
