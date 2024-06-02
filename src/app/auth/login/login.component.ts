@@ -51,7 +51,7 @@ export class LoginComponent {
         this.router.navigateByUrl('')
       } else {
         this.show_error = true;
-        this.mensaje_error = 'Error al iniciar sesión';
+        this.mensaje_error = 'Error al iniciar sesión, contraseña incorrecta o error de credenciales';
       }
     }
   }
