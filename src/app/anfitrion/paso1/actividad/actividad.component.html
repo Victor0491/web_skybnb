@@ -2,32 +2,21 @@
   <div class="titulo">
     <h2>Seleccione máximo 3 actividades que se realicen en su entorno</h2>
   </div>
-  <div class="opciones-container">
-    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Surf')"
-      (click)="seleccionarOpcion('Surf')">
-      Surf
-    </button>
-    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Buceo')"
-      (click)="seleccionarOpcion('Buceo')">
-      Buceo
-    </button>
-    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Escalada en roca')"
-      (click)="seleccionarOpcion('Escalada en roca')">
-      Escalada en roca
-    </button>
-    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Senderismo')"
-      (click)="seleccionarOpcion('Senderismo')">
-      Senderismo
-    </button>
-    <button class="opcion" [class.selected]="opcionesSeleccionadas.includes('Caminata al aire libre')"
-      (click)="seleccionarOpcion('Caminata al aire libre')">
-      Caminata al aire libre
-    </button>
-
+  <div class="opciones-container" *ngIf="seccionActual === 'actividad'">
+    <div class="opcion-container">
+      <button *ngFor="let actividad of actividades; let i = index" class="opcion" 
+        [class.selected]="preferenciasForm.get('actividad')?.value.includes(actividad.nombre)"
+        [class.intercalado]="i >= 3 && i % 2 === 1"
+        (click)="navigateToUbicacion(actividad.nombre)">
+        <div class="opcion-content">
+          <img [src]="actividad.imagen" alt="{{ actividad.nombre }}">
+          <div>{{ actividad.nombre }}</div>
+        </div>
+      </button>
+    </div>
   </div>
   <div class="button-container">
     <button class="start-button-volver" (click)="navigateToEntorno()">Volver</button>
-    <button class="start-button-avanzar" (click)="navigateToUbicacion()"
-      [disabled]="opcionesSeleccionadas.length > 3">Paso 2</button>
+    <button class="start-button-avanzar" (click)="navigateToPaso2()" [disabled]="preferenciasForm.get('actividad')?.value.length === 0">Paso 2</button>
   </div>
 </div>
