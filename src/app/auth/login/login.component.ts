@@ -18,8 +18,10 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   user: User = {
-    correo: '',
+    email: '',
     password: '',
+    username: '',
+    roles : [1]
   }
 
   show_error = false;
@@ -32,7 +34,7 @@ export class LoginComponent {
 
 
   validarForm() {
-    if (!this.user.correo || !this.user.password) {
+    if (!this.user.email || !this.user.password) {
       this.show_error = true;
       this.mensaje_error = 'Por favor complete los campos'
       return false;

@@ -11,6 +11,8 @@ import { PreferenciasComponent } from './preferencias/preferencias.component';
 
 
 
+
+
 @Component({
   selector: 'app-root',
   standalone: true,

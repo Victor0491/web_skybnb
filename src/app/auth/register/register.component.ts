@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthSesionService } from '../../core/service/sesion/auth-sesion.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -17,8 +18,10 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
 
   user: User = {
-    correo: '',
+    email: '',
     password: '',
+    username : '',
+    roles : [1]
   }
 
   show_error = false;
@@ -45,7 +48,7 @@ export class RegisterComponent {
 
 
   validarForm(): boolean {
-    if (!this.user.correo || !this.user.password || !this.confirm_password) {
+    if (!this.user.email || !this.user.password || !this.confirm_password) {
       this.show_error = true;
       this.mensaje_error = 'Por favor complete los campos';
       return false;
@@ -53,19 +56,33 @@ export class RegisterComponent {
     return true;
   }
 
-  register() {
-    this.show_error = false;
-    this.mensaje_error = '';
+  // register() {
+  //   this.show_error = false;
+  //   this.mensaje_error = '';
 
-    if(this.validarForm()){
-      if (this.confirmarPassword()) {
-        if (this.authService.register(this.user)) {
-          console.log('Usuario Registrado');
-          this.router.navigateByUrl('auth/login')
-        } else {
-          this.show_error = true;
-        }
+  //   if(this.validarForm()){
+  //     if (this.confirmarPassword()) {
+  //       if (this.authService.register(this.user)) {
+  //         console.log('Usuario Registrado');
+  //         this.router.navigateByUrl('auth/login')
+  //       } else {
+  //         this.show_error = true;
+  //       }
+  //     }
+  //   }
+  // }
+
+  onRegister() {
+    this.authService.register(this.user).subscribe(
+      response => {
+        console.log('User registered successfully', response);
+        // Maneja la respuesta exitosa aquí
+      },
+      error => {
+        console.error('Error registering user', error);
+        // Maneja el error aquí
       }
-    }
+    );
   }
+
 }
