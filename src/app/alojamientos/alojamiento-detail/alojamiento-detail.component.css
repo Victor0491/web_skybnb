@@ -99,3 +99,26 @@ input[type="date"],
   height: auto;
 }
 
+/* Contenedor flex para alinear los componentes horizontalmente */
+.container-flex {
+  display: flex;
+  align-items: stretch; /* Asegura que los componentes tengan la misma altura */
+  gap: 20px; /* Espacio entre el mapa y la reserva */
+  padding: 20px;
+  border-radius: 15px; /* Bordes redondeados */
+
+}
+
+.mapa-container, .reserva-container {
+  flex: 1; /* Ambos componentes ocupan el mismo espacio */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Alinea el contenido verticalmente en el centro */
+}
+
+
+
+
+
+
+
