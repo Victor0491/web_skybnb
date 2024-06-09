@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Usuario, Rol, TipoAlojamiento,Actividades,Ubicacion, PerfilUsuario, Servicios, Alojamiento
+from .models import Usuario, Rol, TipoAlojamiento,Actividades,Ubicacion, PerfilUsuario, Servicios, Alojamiento,Reserva
+
 
 class ServiciosSerializers(serializers.ModelSerializer):
     class Meta:
@@ -19,7 +20,7 @@ class ActividadSerializers(serializers.ModelSerializer):
 class TipoAlojamientoSerializers(serializers.ModelSerializer):
     class Meta:
         model = TipoAlojamiento
-        fields = '__all__'
+        fields = ['id','nombre','image']
 
 class RolesSerializers(serializers.ModelSerializer):
     class Meta:
@@ -31,7 +32,7 @@ class UsuarioSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Usuario
-        fields = ['email', 'password','username','roles']
+        fields = ['email', 'password','roles']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -39,6 +40,8 @@ class UsuarioSerializers(serializers.ModelSerializer):
     def create(self, validated_data):
         roles_data = validated_data.pop('roles', [])
         usuario = Usuario.objects.create(**validated_data)
+        if 'password' in validated_data:
+            usuario.set_password(validated_data['password'])    
         usuario.roles.clear()
         for rol in roles_data:
             usuario.roles.add(rol)
@@ -58,6 +61,7 @@ class UsuarioSerializers(serializers.ModelSerializer):
        
         return instance
 
+
 class PerfilUsuarioSerializers(serializers.ModelSerializer):
     usuario = serializers.PrimaryKeyRelatedField(queryset=Usuario.objects.all())
     actividades = serializers.PrimaryKeyRelatedField(queryset=Actividades.objects.all(), many=True)
@@ -66,7 +70,7 @@ class PerfilUsuarioSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = PerfilUsuario
-        fields = ['nombreCompleto', 'fecha_nacimiento', 'usuario', 'telefono','actividades','ubicacion','tipoalojamiento']
+        fields = ['nombreCompleto','fecha_nacimiento', 'usuario', 'telefono','actividades','ubicacion','tipoalojamiento']
 
     def create(self, validated_data):
         usuario_data = validated_data.pop('usuario')
@@ -88,20 +92,8 @@ class PerfilUsuarioSerializers(serializers.ModelSerializer):
         return perfilusuario
 
 
-class GetPerfilUsuarioSerializers(serializers.ModelSerializer):
-    usuario = serializers.PrimaryKeyRelatedField(queryset=Usuario.objects.all())
-    actividades = ActividadSerializers(many=True)
-    ubicacion = UbicacionSerializers(many=True)
-    tipoalojamiento = TipoAlojamientoSerializers(many=True)
-    
-
-    class Meta:
-        model = PerfilUsuario
-        fields = ['nombreCompleto', 'fecha_nacimiento', 'usuario', 'telefono', 'actividades', 'ubicacion', 'tipoalojamiento']
-
-
 class AlojamientoSerializers(serializers.ModelSerializer):
-    usuario = serializers.PrimaryKeyRelatedField(queryset=Usuario.objects.all())
+    usuario = serializers.PrimaryKeyRelatedField(queryset=PerfilUsuario.objects.all())
     tipoalojamiento = serializers.PrimaryKeyRelatedField(queryset=TipoAlojamiento.objects.all())
     actividades = serializers.PrimaryKeyRelatedField(queryset=Actividades.objects.all(), many=True)
     servicios = serializers.PrimaryKeyRelatedField(queryset=Servicios.objects.all(), many=True)
@@ -132,15 +124,59 @@ class AlojamientoSerializers(serializers.ModelSerializer):
         return alojamiento
     
 class GetAlojamientoSerializers(serializers.ModelSerializer):
-    usuario = serializers.PrimaryKeyRelatedField(queryset=Usuario.objects.all())
-    ubicacion = serializers.PrimaryKeyRelatedField(queryset=Ubicacion.objects.all())
-    actividades = ActividadSerializers(many=True)
-    servicios = ServiciosSerializers(many=True)
-    tipoalojamiento = serializers.PrimaryKeyRelatedField(queryset=TipoAlojamiento.objects.all())
+    tipoalojamiento = TipoAlojamientoSerializers()
 
     
     class Meta:
         model = Alojamiento
-        fields = ['nombre','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios']
+        fields = ['nombre','precio','estado_destacado','tipoalojamiento']
 
+
+class GetDetailsAlojamientoSerializers(serializers.ModelSerializer):
+    usuario = PerfilUsuarioSerializers(read_only='True')
+    ubicacion = UbicacionSerializers(read_only='True')
+    actividades = ActividadSerializers(many=True)
+    servicios = ServiciosSerializers(many=True)
+    tipoalojamiento = TipoAlojamientoSerializers(read_only='True')
+ 
+    class Meta:
+        model = Alojamiento
+        fields = ['nombre','direccion','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios']
+
+
+class ReservaSerializers(serializers.ModelSerializer):
+    usuario = serializers.PrimaryKeyRelatedField(queryset=PerfilUsuario.objects.all())
+    alojamiento = serializers.PrimaryKeyRelatedField(queryset=Alojamiento.objects.all())
+
+    class Meta:
+        model = Reserva
+        fields = ['usuario','alojamiento','fecha_inicio','fecha_fin','total']
+
+    def create(self, validated_data):
+        usuario_data = validated_data.pop('usuario')
+        alojamiento_data = validated_data.pop('alojamiento')
+        reserva = Reserva.objects.create(**validated_data)
+        reserva.usuario = usuario_data
+        reserva.alojamiento = alojamiento_data
+        reserva.save()
+        return reserva
     
+class ReservaListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Reserva
+        fields = ['id', 'usuario', 'alojamiento', 'fecha_inicio', 'fecha_fin', 'total']
+    
+class GetPerfilUsuarioSerializers(serializers.ModelSerializer):
+
+    cuenta = UsuarioSerializers(source='usuario')
+    actividades = ActividadSerializers(many=True)
+    ubicacion = UbicacionSerializers(many=True)
+    tipoalojamiento = TipoAlojamientoSerializers(many=True)
+    alojamientos = AlojamientoSerializers(many=True)
+    reservas = ReservaListSerializers(many=True)
+    
+
+    class Meta:
+        model = PerfilUsuario
+        fields = ['nombreCompleto','fecha_nacimiento','cuenta', 'telefono','actividades', 'ubicacion', 'tipoalojamiento','alojamientos','reservas']
+
