@@ -1,8 +1,13 @@
-<app-navbar *ngIf="!isLoginPage() && !isRegisterPage()" (modoAnfitrionClicked)="openModal()"></app-navbar>
+<app-navbar *ngIf="!isLoginPage() && !isRegisterPage()" (modoAnfitrionClicked)="openModal()" (preferenciasClicked)="openPreferencias()"></app-navbar>
 
 <div *ngIf="modalVisible">
   <app-modal (closeModalClicked)="closeModal()"></app-modal>
 </div>
+
+<div *ngIf="preferenciasVisible">
+  <app-preferencias (closeModalClicked)="closePreferencias()"></app-preferencias>
+</div>
+
 <router-outlet></router-outlet>
 
 <app-footer></app-footer>

@@ -2,59 +2,98 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
   flex-direction: column;
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
   position: relative;
+  padding: 20px;
 }
 
-.titulo {
-  margin-bottom: 20px;
+.form-group {
+  margin-bottom: 15px;
 }
 
-.container img {
-  max-width: 100px;
-  height: 150px;
+.placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* Ajusta según tus necesidades */
+  width: 50%; /* Ocupa todo el ancho del contenedor */
+  border: 2px dashed #ccc; /* Añade un borde para mejorar la visibilidad */
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
 }
 
-.more-images-icon {
-  font-size: 24px;
-  cursor: pointer;
+.placeholder img {
+  width: 20px; /* La imagen ocupará todo el ancho posible */
+  height: 200px; /* La imagen ocupará toda la altura posible */
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.start-button-avanzar,
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mensaje-exito {
+  margin-top: 20px;
+  color: green;
+  font-weight: bold;
+  text-align: center;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #007bff; /* Color de las flechas */
+}
+
+/* Personaliza el color de las flechas del carrusel */
+.carousel-control-prev-icon.custom-prev-icon {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23007bff' viewBox='0 0 16 16'%3E%3Cpath d='M11.354 1.646a.5.5 0 0 0-.708 0L4.5 7.793 10.646 13.94a.5.5 0 0 0 .708-.708l-5.5-5.5a.5.5 0 0 0 0-.708l5.5-5.5a.5.5 0 0 0 0-.708z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon.custom-next-icon {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23007bff' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 1.646a.5.5 0 0 1 .708 0L11.5 7.793 5.354 13.94a.5.5 0 1 1-.708-.708l5.5-5.5a.5.5 0 0 1 0-.708l-5.5-5.5a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+}
+.start-button-avanzar {
+  margin-top: 20px; /* Margen superior para separar el botón */
+  background-color: #007bff; /* Color de fondo del botón */
+  color: #fff; /* Color del texto del botón */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Relleno interno */
+  font-size: 14px; /* Tamaño de fuente */
+  cursor: pointer; /* Cursor al pasar el mouse */
+  align-self: flex-end; /* Alinear el botón a la izquierda */
+  border-radius: 5px; /* Borde redondeado para los botones */
+  width: 200px; /* Ancho fijo para los botones */
+}
 .start-button-volver {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 5px;
-  width: 150px;
+  margin-top: 20px; /* Margen superior para separar el botón */
+  background-color: #007bff; /* Color de fondo del botón */
+  color: #fff; /* Color del texto del botón */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Relleno interno */
+  font-size: 14px; /* Tamaño de fuente */
+  cursor: pointer; /* Cursor al pasar el mouse */
+  align-self: flex-start; /* Alinear el botón a la izquierda */
+  border-radius: 5px; /* Borde redondeado para los botones */
+  width: 200px; /* Ancho fijo para los botones */
 }
 
-.start-button-avanzar:hover,
-.start-button-volver:hover {
+.start-button:hover {
   background-color: #0056b3;
 }
 
 .button-container {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
+  display: flex; /* Utiliza el modelo de caja flexible */
+  justify-content: flex-end; /* Alinea el contenido al final del contenedor */
+  justify-content: space-between; /* Espacio entre los botones */
+  margin-top: 20px; /* Margen superior para separar el botón */
 }
-/* Color de las flechas del carrusel */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: #007bff; /* Azul Bootstrap por defecto */
-}
-
 

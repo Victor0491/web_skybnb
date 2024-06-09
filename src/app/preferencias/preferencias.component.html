@@ -1,0 +1,61 @@
+<div class="modal">
+  <div class="modal-content">
+    <button class="close-button" (click)="onCloseModal()">X</button>
+<div class="container">
+  <div class="titulo">
+    <h2>Seleccione sus preferencias</h2>
+  </div>
+
+  <div class="opciones-container" *ngIf="seccionActual === 'tipoAlojamiento'">
+    <h3>Tipo de alojamiento</h3>
+    <div class="opcion-container">
+      <button *ngFor="let tipo of tiposAlojamiento; let i = index" class="opcion" 
+        [class.selected]="preferenciasForm.get('tipoAlojamiento')?.value === tipo.nombre"
+        [class.intercalado]="i >= 3 && i % 2 === 1"
+        (click)="seleccionarTipo(tipo.nombre)">
+        <div class="opcion-content">
+          <img [src]="tipo.imagen" alt="{{ tipo.nombre }}">
+          <div>{{ tipo.nombre }}</div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="opciones-container" *ngIf="seccionActual === 'ubicacion'">
+    <h3>Ubicación</h3>
+    <div class="opcion-container">
+      <button *ngFor="let ubicacion of ubicaciones; let i = index" class="opcion" 
+        [class.selected]="preferenciasForm.get('ubicacion')?.value === ubicacion.nombre"
+        [class.intercalado]="i >= 3 && i % 2 === 1"
+        (click)="seleccionarUbicacion(ubicacion.nombre)">
+        <div class="opcion-content">
+          <img [src]="ubicacion.imagen" alt="{{ ubicacion.nombre }}">
+          <div>{{ ubicacion.nombre }}</div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="opciones-container" *ngIf="seccionActual === 'actividad'">
+    <h3>Actividades</h3>
+    <div class="opcion-container">
+      <button *ngFor="let actividad of actividades; let i = index" class="opcion" 
+        [class.selected]="preferenciasForm.get('actividad')?.value.includes(actividad.nombre)"
+        [class.intercalado]="i >= 3 && i % 2 === 1"
+        (click)="seleccionarActividad(actividad.nombre)">
+        <div class="opcion-content">
+          <img [src]="actividad.imagen" alt="{{ actividad.nombre }}">
+          <div>{{ actividad.nombre }}</div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button *ngIf="historialSecciones.length > 0 && seccionActual !== 'tipoAlojamiento'" (click)="volver()">Volver</button>
+    <button *ngIf="seccionActual !== 'actividad'" (click)="continuar()">Continuar</button>
+    <button *ngIf="seccionActual === 'actividad'" (click)="submit()">Personalizar</button>
+  </div>
+</div>
+</div>
+</div>

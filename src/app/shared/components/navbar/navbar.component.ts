@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   @Output() modoAnfitrionClicked = new EventEmitter<void>();
+  @Output() preferenciasClicked = new EventEmitter<void>();
 
   correo: string | null = null;
 
@@ -29,6 +30,10 @@ export class NavbarComponent {
 
   onModoAnfitrionClicked() {
     this.modoAnfitrionClicked.emit();
+  }
+
+  onPreferenciasClicked() {
+    this.preferenciasClicked.emit();
   }
 
   autenticado(): boolean {

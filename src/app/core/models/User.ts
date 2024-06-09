@@ -1,5 +1,7 @@
 
 export interface User{
-    correo : string;
+    email : string;
     password : string;
+    username : string;
+    roles: number[]
 }
