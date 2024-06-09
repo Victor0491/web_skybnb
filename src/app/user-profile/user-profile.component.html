@@ -16,20 +16,6 @@
     </div>
 
     <div class="user-profile-card">
-      <h2 class="accordion-header" (click)="toggleAccordion('alojamientos')">Mis Alojamientos</h2>
-      <div [ngClass]="{'show': activeAccordion === 'alojamientos'}" class="accordion-content">
-        <ul>
-          <li *ngFor="let accommodation of accommodations">
-            <h3>{{ accommodation.nombre }}</h3>
-            <p>Descripción: {{ accommodation.descripcion }}</p>
-            <p>Región: {{ accommodation.region }}</p>
-            <p>Precio: {{ accommodation.precio }}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="user-profile-card">
       <h2 class="accordion-header" (click)="toggleAccordion('reservas')">Mis Reservas</h2>
       <div [ngClass]="{'show': activeAccordion === 'reservas'}" class="accordion-content">
         <ul>
@@ -39,6 +25,20 @@
             <p>Región: {{ reservation.region }}</p>
             <p>Start Date: {{ reservation.startDate }}</p>
             <p>End Date: {{ reservation.endDate }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="user-profile-card">
+      <h2 class="accordion-header" (click)="toggleAccordion('alojamientos')">Mis Alojamientos</h2>
+      <div [ngClass]="{'show': activeAccordion === 'alojamientos'}" class="accordion-content">
+        <ul>
+          <li *ngFor="let accommodation of accommodations">
+            <h3>{{ accommodation.nombre }}</h3>
+            <p>Descripción: {{ accommodation.descripcion }}</p>
+            <p>Región: {{ accommodation.region }}</p>
+            <p>Precio: {{ accommodation.precio }}</p>
           </li>
         </ul>
       </div>
