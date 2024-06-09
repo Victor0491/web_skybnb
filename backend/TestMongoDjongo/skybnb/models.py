@@ -1,5 +1,7 @@
 from djongo import models
 from django.contrib.auth.models import AbstractUser
+from .managers import UsuarioManager
+
 
 # Create your models here.
 
@@ -11,18 +13,21 @@ class Servicios(models.Model):
 
 class Actividades(models.Model):
     nombre = models.CharField(max_length=100)
+    image = models.CharField(max_length=250)
 
     def __str__(self):
         return self.nombre
 
 class Ubicacion(models.Model):
     nombre = models.CharField(max_length=100)
+    image = models.CharField(max_length=250)
 
     def __str__(self):
         return self.nombre
 
 class TipoAlojamiento(models.Model):
     nombre = models.CharField(max_length=100)
+    image = models.CharField(max_length=250)
 
     def __str__(self):
         return self.nombre
@@ -34,14 +39,21 @@ class Rol(models.Model):
         return self.nombre
     
 class Usuario(AbstractUser):
+    username = None
     email = models.EmailField(unique=True)
     roles = models.ArrayReferenceField(
         to='Rol',
         on_delete=models.CASCADE
     )
 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = UsuarioManager()
+
     def __str__(self):
         return self.email
+
 
 class PerfilUsuario(models.Model):
     nombreCompleto = models.CharField(max_length=255)
@@ -62,17 +74,18 @@ class PerfilUsuario(models.Model):
     )
 
     def __str__(self):
-        return self.usuario.nombreCompleto
+        return self.nombreCompleto
 
 class Alojamiento(models.Model):
     nombre = models.CharField(max_length=255)
+    direccion = models.CharField(max_length=255)
     dormitorios = models.IntegerField()
     banos = models.IntegerField()
     huespedes = models.IntegerField()
     mascotas = models.BooleanField()
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     precio = models.IntegerField()
     estado_destacado = models.BooleanField()
+    usuario = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE,  related_name='alojamientos' )
     tipoalojamiento = models.OneToOneField(TipoAlojamiento, on_delete=models.CASCADE, related_name='tipo')
     ubicacion = models.OneToOneField(Ubicacion, on_delete=models.CASCADE, related_name='ubicacion')
     actividades = models.ArrayReferenceField(
@@ -84,6 +97,15 @@ class Alojamiento(models.Model):
         on_delete=models.CASCADE
     )
 
-
-    def str(self):
+    def __str__(self):
         return self.nombre
+    
+class Reserva(models.Model):
+    usuario = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE, related_name='reservas')
+    alojamiento = models.ForeignKey(Alojamiento, on_delete=models.CASCADE)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    total = models.IntegerField()
+
+    def __str__(self):
+        return f'Reserva de {self.usuario} en {self.alojamiento.nombre}'

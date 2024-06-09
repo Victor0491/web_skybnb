@@ -83,7 +83,11 @@ DATABASES = {
             'NAME': 'Skybnb',
             'ENFORCE_SCHEMA': False,
             'CLIENT': {
+<<<<<<< HEAD
                 'host': 'mongodb+srv://matiascalisto:Sca2021-@skybnb.inajkhe.mongodb.net/?retryWrites=true&w=majority&appName=Skybnb'
+=======
+                'host': 'mongodb+srv://victorluna:1234victor@skybnb.inajkhe.mongodb.net/?retryWrites=true&w=majority&appName=skybnb'
+>>>>>>> 0fa0a5f0ba9155a17fd10738e29febf4cb375b5a
             }  
         }
 }
@@ -130,6 +134,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 AUTH_USER_MODEL = 'skybnb.Usuario'
 
@@ -152,3 +159,7 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
