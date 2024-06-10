@@ -20,7 +20,6 @@ export class RegisterComponent {
   user: User = {
     email: '',
     password: '',
-    username : '',
     roles : [1]
   }
 
@@ -56,21 +55,6 @@ export class RegisterComponent {
     return true;
   }
 
-  // register() {
-  //   this.show_error = false;
-  //   this.mensaje_error = '';
-
-  //   if(this.validarForm()){
-  //     if (this.confirmarPassword()) {
-  //       if (this.authService.register(this.user)) {
-  //         console.log('Usuario Registrado');
-  //         this.router.navigateByUrl('auth/login')
-  //       } else {
-  //         this.show_error = true;
-  //       }
-  //     }
-  //   }
-  // }
 
   onRegister() {
     this.authService.register(this.user).subscribe(
@@ -84,5 +68,4 @@ export class RegisterComponent {
       }
     );
   }
-
 }

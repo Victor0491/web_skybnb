@@ -13,6 +13,8 @@ export class AuthSesionService {
 
   apiRegistro = 'http://127.0.0.1:8000/api/skybnb/register'
 
+  apiLogin = 'http://127.0.0.1:8000/api/skybnb/login/'
+
 
   register(user: User): Observable<User> {
     return this.http.post<User>(this.apiRegistro, user)
@@ -21,6 +23,14 @@ export class AuthSesionService {
     );
   }
 
+  login(user: User): Observable<User> {
+    return this.http.post<User>(this.apiLogin, user)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred.
@@ -34,16 +44,6 @@ export class AuthSesionService {
       'Something bad happened; please try again later.');
   }
 
-
-  login(user: User): boolean {
-    const users = this.getUsers();
-    const authenticatedUser = users.find(u => u.email === user.email && u.password === user.password);
-    if (authenticatedUser) {
-      localStorage.setItem('currentUser', authenticatedUser.email);
-      return true;
-    }
-    return false;
-  }
 
   private getUsers(): User[] {
     return JSON.parse(localStorage.getItem('users') || '[]');
