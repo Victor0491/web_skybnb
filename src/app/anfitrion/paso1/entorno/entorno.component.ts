@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TipoUbicacionService ,TipoUbicacion} from '../../../core/service/sesion/alojamiento/tipo-ubicacion.service';
 
 @Component({
   selector: 'app-entorno',
@@ -16,19 +17,31 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './entorno.component.html',
   styleUrl: './entorno.component.css'
 })
-export class EntornoComponent {
+export class EntornoComponent implements OnInit {
   preferenciasForm: FormGroup;
-  ubicaciones: { nombre: string, imagen: string }[] = [
-    { nombre: 'Bosque', imagen: 'https://media.traveler.es/photos/62372c7f9999d61fe36db039/16:9/w_2560%2Cc_limit/india.jpg' },
-    { nombre: 'Playa', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvh9hichZBrJWNSFFOKcWwQro8k6OBwm0H8Q&s' },
-    { nombre: 'Ciudad', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOclOve8ohd-x3yTFEZLyeJ2h6P7EOxZ2qmg&s' }
-  ];
+  ubicaciones: TipoUbicacion[] = []; // Aquí usamos el tipo TipoUbicacion
   seccionActual = 'ubicacion';
   historialSecciones: string[] = [];
-  constructor(private fb: FormBuilder, private router: Router) {
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private tipoUbicacionService: TipoUbicacionService // Inyecta el servicio
+  ) {
     this.preferenciasForm = this.fb.group({
       ubicacion: ['', Validators.required],
     });
+  }
+
+  ngOnInit(): void {
+    this.tipoUbicacionService.getUbicaciones().subscribe(
+      ubicaciones => {
+        this.ubicaciones = ubicaciones;
+      },
+      error => {
+        console.error('Error al obtener ubicaciones', error);
+      }
+    );
   }
 
   seleccionarUbicacion(ubicacion: string): void {
@@ -36,12 +49,10 @@ export class EntornoComponent {
   }
 
   navigateToActividad() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['anfitrion/actividad'], );
-  }
-  navigateToDescripcion() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['anfitrion/descripcion'], );
+    this.router.navigate(['anfitrion/actividad']);
   }
 
+  navigateToDescripcion() {
+    this.router.navigate(['anfitrion/descripcion']);
+  }
 }

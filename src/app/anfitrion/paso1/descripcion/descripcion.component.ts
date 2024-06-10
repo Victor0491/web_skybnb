@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TipoAlojamientoService,TipoAlojamiento } from '../../../core/service/sesion/alojamiento/tipo-alojamiento.service';
 
 @Component({
   selector: 'app-descripcion',
@@ -14,20 +15,31 @@ import { ReactiveFormsModule } from '@angular/forms';
             ReactiveFormsModule,],
   styleUrls: ['./descripcion.component.css']
 })
-export class DescripcionComponent {
+export class DescripcionComponent implements OnInit {
   preferenciasForm: FormGroup;
-  tiposAlojamiento: { nombre: string, imagen: string }[] = [
-    { nombre: 'Cabaña', imagen: 'https://www.shutterstock.com/image-photo/wooden-cottage-forest-near-biogradsko-600nw-1963746835.jpg' },
-    { nombre: 'Casa', imagen: 'https://st2.depositphotos.com/1041088/11595/i/450/depositphotos_115954550-stock-photo-home-exterior-with-garage-and.jpg' },
-    { nombre: 'Departamento', imagen: 'https://http2.mlstatic.com/D_NQ_NP_766438-MLC75223256781_032024-O.webp' }
-  ];
-
+  tiposAlojamiento: TipoAlojamiento[] = [];
   seccionActual = 'tipoAlojamiento';
   historialSecciones: string[] = [];
-  constructor(private fb: FormBuilder, private router: Router) {
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private tipoAlojamientoService: TipoAlojamientoService
+  ) {
     this.preferenciasForm = this.fb.group({
       tipoAlojamiento: ['', Validators.required],
     });
+  }
+
+  ngOnInit(): void {
+    this.getTiposAlojamiento();
+  }
+
+  getTiposAlojamiento(): void {
+    this.tipoAlojamientoService.getTiposAlojamiento()
+      .subscribe(tipos => {
+        this.tiposAlojamiento = tipos;
+      });
   }
 
   seleccionarTipo(tipo: string): void {
@@ -38,6 +50,7 @@ export class DescripcionComponent {
     // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
     this.router.navigate(['anfitrion/entorno']);
   }
+
   navigateToPaso1() {
     // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
     this.router.navigate(['anfitrion/paso1']);
