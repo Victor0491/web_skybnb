@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from django.contrib.auth import authenticate, login
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -28,9 +29,15 @@ class LoginAPIView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
         user = authenticate(request, email=email, password=password)
-        if user is not None:
+        if user:
             login(request, user)
-            return Response({'message': 'Login successful', 'user_id': user.id}, status=status.HTTP_200_OK)
+            refresh = RefreshToken.for_user(user)
+            refresh['roles'] = [role.id for role in user.roles.all()]
+
+            return Response({
+                'message': 'User registered successfully',
+                'access': str(refresh.access_token),
+            }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid email or password'}, status=status.HTTP_400_BAD_REQUEST)
 
