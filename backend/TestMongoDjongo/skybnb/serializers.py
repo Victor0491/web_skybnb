@@ -102,7 +102,7 @@ class AlojamientoSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Alojamiento
-        fields = ['nombre','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios']
+        fields = ['nombre','direccion','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios']
     
     def create(self, validated_data):
         usuario_data = validated_data.pop('usuario')

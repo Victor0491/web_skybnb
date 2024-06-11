@@ -60,6 +60,7 @@ export class RegisterComponent {
     this.authService.register(this.user).subscribe(
       response => {
         console.log('User registered successfully', response);
+        this.router.navigateByUrl('')
         // Maneja la respuesta exitosa aquí
       },
       error => {

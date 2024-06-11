@@ -49,6 +49,7 @@ export class LoginComponent {
     this.authService.login(this.user).subscribe(
       response => {
         console.log('Inicio se sesion exitoso', response);
+        this.router.navigateByUrl('')
         // Maneja la respuesta exitosa aquí
       },
       error => {

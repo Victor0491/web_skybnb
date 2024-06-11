@@ -36,7 +36,7 @@ class LoginAPIView(APIView):
 
             return Response({
                 'message': 'User registered successfully',
-                'access': str(refresh.access_token),
+                'accessToken': str(refresh.access_token),
             }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid email or password'}, status=status.HTTP_400_BAD_REQUEST)
