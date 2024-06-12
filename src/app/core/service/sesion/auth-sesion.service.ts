@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/User';
+import { LoginResponse } from '../../models/LoginResponse';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable,throwError  } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { jwtDecode } from "jwt-decode";
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +18,8 @@ export class AuthSesionService {
 
   apiLogin = 'http://127.0.0.1:8000/api/skybnb/login/'
 
+  IdUsuario : string = '';
+  RolesUsuario =[] ;
 
   register(user: User): Observable<User> {
     return this.http.post<User>(this.apiRegistro, user)
@@ -23,9 +28,12 @@ export class AuthSesionService {
     );
   }
 
-  login(user: User): Observable<User> {
-    return this.http.post<User>(this.apiLogin, user)
-    .pipe(
+  login(user: User): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(this.apiLogin, user).pipe(
+      tap((response: LoginResponse) => {
+        // Guarda el token en localStorage
+        localStorage.setItem('token', response.accessToken);
+      }),
       catchError(this.handleError)
     );
   }
@@ -45,21 +53,25 @@ export class AuthSesionService {
   }
 
 
-  private getUsers(): User[] {
-    return JSON.parse(localStorage.getItem('users') || '[]');
+  obtenerInfoToken(){
+    const info = localStorage.getItem('token')
+    if (info){
+      const decodeInfo: any = jwtDecode(info);
+      console.log(decodeInfo);
+
+      this.IdUsuario = decodeInfo.user_id;
+      // Imprime la información en la consola o úsala como necesites
+    }
   }
 
   isLoggin(): boolean{
-    const token = localStorage.getItem('currentUser')
+    const token = localStorage.getItem('token')
     return !!token;
   }
 
-  obtenerCorreo(): string | null {
-    return localStorage.getItem('currentUser');
-  }
 
   logout(){
-    return localStorage.removeItem('currentUser')
+    return localStorage.removeItem('token')
   }
 
 }
