@@ -19,5 +19,7 @@ export class HomeAlojamientosComponent {
   ) { }
 
   ngOnInit(){
+    console.log(this.authService.obtenerInfoToken())
+    console.log(this.authService.ObtenerInfoRoles())
   }
 }

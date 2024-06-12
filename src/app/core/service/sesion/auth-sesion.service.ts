@@ -18,8 +18,6 @@ export class AuthSesionService {
 
   apiLogin = 'http://127.0.0.1:8000/api/skybnb/login/'
 
-  IdUsuario : string = '';
-  RolesUsuario =[] ;
 
   register(user: User): Observable<User> {
     return this.http.post<User>(this.apiRegistro, user)
@@ -57,10 +55,18 @@ export class AuthSesionService {
     const info = localStorage.getItem('token')
     if (info){
       const decodeInfo: any = jwtDecode(info);
-      console.log(decodeInfo);
 
-      this.IdUsuario = decodeInfo.user_id;
-      // Imprime la información en la consola o úsala como necesites
+      const IdUsuario = decodeInfo.user_id;
+      return IdUsuario
+    }
+  }
+
+  ObtenerInfoRoles(){
+    const info = localStorage.getItem('token')
+    if (info){
+      const decodeInfo: any = jwtDecode(info);
+      const rolesUsuario = decodeInfo.roles;
+      return rolesUsuario
     }
   }
 
