@@ -134,9 +134,4 @@ export class CardComponent {
     },
 
   ]
-  /*@Output() goToDetailsEvent = new EventEmitter<void>();
-
-  goToDetails() {
-    this.goToDetailsEvent.emit();
-  }*/
 }
