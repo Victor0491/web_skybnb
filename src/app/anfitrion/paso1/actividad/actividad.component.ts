@@ -4,6 +4,8 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Alojamiento } from '../../../core/models/Alojamiento';
+import { FormsModule } from '@angular/forms';
 import { TipoActividad, TipoActividadService } from '../../../core/service/sesion/alojamiento/tipo-actividades.service';
 
 @Component({
@@ -13,19 +15,23 @@ import { TipoActividad, TipoActividadService } from '../../../core/service/sesio
     RouterLink,
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   templateUrl: './actividad.component.html',
   styleUrls: ['./actividad.component.css']
 })
 export class ActividadComponent implements OnInit {
+  alojamiento: Partial<Alojamiento> = {
+    actividades: [],
+  };
   preferenciasForm: FormGroup;
-  actividades: TipoActividad[] = []; // Utiliza el tipo TipoActividad
+  actividades: TipoActividad[] = [];
   seccionActual = 'actividad';
   
   constructor(
     private fb: FormBuilder, 
     private router: Router,
-    private tipoActividadService: TipoActividadService // Inyecta el servicio
+    private tipoActividadService: TipoActividadService
   ) {
     this.preferenciasForm = this.fb.group({
       actividad: [[], [Validators.required, Validators.minLength(1), Validators.maxLength(3)]]
@@ -44,7 +50,7 @@ export class ActividadComponent implements OnInit {
     console.log(this.preferenciasForm.value)
   }
   
-  navigateToUbicacion(actividadId: number): void { // Usando el ID de la actividad
+  navigateToUbicacion(actividadId: number): void {
     const actividadesControl = this.preferenciasForm.get('actividad');
     if (actividadesControl && actividadesControl.value) {
       const actividades = actividadesControl.value;
@@ -52,6 +58,7 @@ export class ActividadComponent implements OnInit {
         actividadesControl.setValue(actividades.filter((a: number) => a !== actividadId));
       } else if (actividades.length < 3) {
         actividadesControl.setValue([...actividades, actividadId]);
+        this.alojamiento.actividades = actividadesControl.value; // Agrega esta línea
       } else {
         alert('Solo puedes seleccionar hasta 3 actividades.');
       }

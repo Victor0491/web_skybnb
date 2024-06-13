@@ -4,6 +4,8 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Alojamiento } from '../../../core/models/Alojamiento';
+import { FormsModule } from '@angular/forms';
 import { TipoAlojamientoService,TipoAlojamiento } from '../../../core/service/sesion/alojamiento/tipo-alojamiento.service';
 
 @Component({
@@ -12,10 +14,14 @@ import { TipoAlojamientoService,TipoAlojamiento } from '../../../core/service/se
   standalone: true,
   imports: [RouterLink,
             CommonModule,
-            ReactiveFormsModule,],
+            ReactiveFormsModule,
+            FormsModule,],
   styleUrls: ['./descripcion.component.css']
 })
 export class DescripcionComponent implements OnInit {
+  alojamiento: Partial<Alojamiento> = {
+    tipoalojamiento: null,
+  };
   preferenciasForm: FormGroup;
   tiposAlojamiento: TipoAlojamiento[] = [];
   seccionActual = 'tipoAlojamiento';
@@ -42,8 +48,9 @@ export class DescripcionComponent implements OnInit {
       });
   }
 
-  seleccionarTipo(tipo: string): void {
-    this.preferenciasForm.get('tipoAlojamiento')?.setValue(tipo);
+  seleccionarTipo(id: any): void { // Cambiado de string a any
+    this.alojamiento.tipoalojamiento = id;
+    console.log(this.alojamiento.tipoalojamiento);
   }
 
   navigateToUbicacion() {

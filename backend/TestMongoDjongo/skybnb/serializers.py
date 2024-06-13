@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers 
 from .models import Usuario, Rol, TipoAlojamiento,Actividades,Ubicacion, PerfilUsuario, Servicios, Alojamiento,Reserva
 
 
@@ -99,10 +99,9 @@ class AlojamientoSerializers(serializers.ModelSerializer):
     servicios = serializers.PrimaryKeyRelatedField(queryset=Servicios.objects.all(), many=True)
     ubicacion = serializers.PrimaryKeyRelatedField(queryset=Ubicacion.objects.all())
     
-
     class Meta:
         model = Alojamiento
-        fields = ['nombre','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios']
+        fields = ['nombre','direccion','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios']
     
     def create(self, validated_data):
         usuario_data = validated_data.pop('usuario')

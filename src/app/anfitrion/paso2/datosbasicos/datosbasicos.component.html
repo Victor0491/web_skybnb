@@ -5,7 +5,7 @@
     <label for="dormitorios">Dormitorios:</label>
     <div class="input-control">
       <button (click)="decrementarDormitorios()">-</button>
-      <input type="text" id="dormitorios" [(ngModel)]="dormitoriosValue" readonly>
+      <input type="text" id="dormitorios" [(ngModel)]="nuevoAlojamiento.dormitorios" readonly>
       <button (click)="incrementarDormitorios()">+</button>
     </div>
   </div>
@@ -14,7 +14,7 @@
     <label for="banios">Baños:</label>
     <div class="input-control">
       <button (click)="decrementarBanios()">-</button>
-      <input type="text" id="banios" [(ngModel)]="baniosValue" readonly>
+      <input type="text" id="banios" [(ngModel)]="nuevoAlojamiento.banos" readonly>
       <button (click)="incrementarBanios()">+</button>
     </div>
   </div>
@@ -23,19 +23,30 @@
     <label for="cantidadHuespedes">Cantidad de huéspedes:</label>
     <div class="input-control">
       <button (click)="decrementarCantidadHuespedes()">-</button>
-      <input type="text" id="cantidadHuespedes" [(ngModel)]="cantidadHuespedesValue" readonly>
+      <input type="text" id="cantidadHuespedes" [(ngModel)]="nuevoAlojamiento.huespedes" readonly>
       <button (click)="incrementarCantidadHuespedes()">+</button>
     </div>
   </div>
 
   <div class="input-container">
     <label for="mascotas">Mascotas:</label>
-    <select id="mascotas" [(ngModel)]="mascotasValue">
+    <select id="mascotas" [(ngModel)]="nuevoAlojamiento.mascotas">
       <option value="true">Sí</option>
       <option value="false">No</option>
     </select>
   </div>
+
+  <!-- Mostrando los servicios obtenidos desde la API -->
+  <div class="input-container" *ngFor="let servicio of servicios">
+    <label>{{ servicio.nombre }}:</label>
+    <select [(ngModel)]="servicioSeleccionado[servicio.id]">
+      <option value="true">Sí</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+
   <div class="button-container">
     <button class="start-button-volver" (click)="navigateToUbicacion()">Volver</button>
     <button class="start-button-avanzar" (click)="navigateToPaso3()">Paso 3</button>
   </div>
+</div>
