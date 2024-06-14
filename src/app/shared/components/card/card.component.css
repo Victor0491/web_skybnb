@@ -3,6 +3,7 @@
   }
   
   .card {
+    border: none;
     color: #707070;
     font-weight: 300;
     border-color: #DDDDDD;

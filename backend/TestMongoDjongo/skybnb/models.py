@@ -56,10 +56,10 @@ class Usuario(AbstractUser):
 
 
 class PerfilUsuario(models.Model):
-    nombreCompleto = models.CharField(max_length=255)
+    nombreCompleto = models.CharField(max_length=255,blank=True, null=True)
     fecha_nacimiento = models.DateField(blank=True, null=True)
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='perfil')
-    telefono = models.CharField(max_length=20)
+    telefono = models.CharField(max_length=20,blank=True, null=True)
     actividades = models.ArrayReferenceField(
         to='Actividades',
         on_delete=models.CASCADE
@@ -79,6 +79,7 @@ class PerfilUsuario(models.Model):
 class Alojamiento(models.Model):
     nombre = models.CharField(max_length=255)
     direccion = models.CharField(max_length=255)
+    descripcion = models.TextField()
     dormitorios = models.IntegerField()
     banos = models.IntegerField()
     huespedes = models.IntegerField()
@@ -109,3 +110,6 @@ class Reserva(models.Model):
 
     def __str__(self):
         return f'Reserva de {self.usuario} en {self.alojamiento.nombre}'
+
+class Comentario(models.Model):
+    pass
