@@ -7,7 +7,7 @@
       <button *ngFor="let actividad of actividades; let i = index" class="opcion"
         [class.selected]="alojamiento.actividades?.includes(actividad.id)"
         [class.intercalado]="i >= 3 && i % 2 === 1"
-        (click)="navigateToUbicacion(actividad.id)">
+        (click)="seleccionarActividad(actividad.id)">
         <input [(ngModel)]="alojamiento.actividades" type="hidden" *ngIf="alojamiento.actividades">
         <div class="opcion-content">
           <img [src]="actividad.image" alt="{{ actividad.nombre }}">

@@ -3,35 +3,34 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AlojamientoService } from '../../../core/service/sesion/alojamiento/alojamiento.service';
 import { Alojamiento } from '../../../core/models/Alojamiento';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-informacion',
   standalone: true,
   templateUrl: './informacion.component.html',
   styleUrls: ['./informacion.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule,FormsModule]
 })
 export class InformacionComponent implements OnInit {
-  //alojamiento: Partial<Alojamiento> = {}; // Cambia esto para recibir el alojamiento desde el estado o algún servicio compartido
   alojamientoGuardadoExitoso: boolean = false;
   numeroAlojamientoGuardado: number = 0;
 
-
-  alojamiento: Alojamiento={
-    nombre: '',
+  alojamiento: Alojamiento = {
+    nombre: '', // Inicialmente vacío
     direccion: '',
     dormitorios: 0,
     banos: 0,
     huespedes: 0,
     mascotas: false,
-    usuario: 1,
-    precio: 0,
-    estado_destacado: false,
+    usuario: 1, // Inicializado en 1
+    precio: 0, // Inicialmente 0
+    estado_destacado: false, // Inicialmente false
     tipoalojamiento: 1,
     ubicacion: 1,
-    actividades: [2,3],
-    servicios: [1,2],
-  }
+    actividades: [], // Inicialmente vacío
+    servicios: [], // Inicialmente vacío
+  };
 
   constructor(
     private router: Router,
@@ -39,10 +38,14 @@ export class InformacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Obtener los datos del estado o un servicio compartido
     const state = history.state;
     if (state && state.alojamiento) {
       this.alojamiento = state.alojamiento;
+    } else {
+      const alojamientoSesion = sessionStorage.getItem('alojamiento');
+      if (alojamientoSesion) {
+        this.alojamiento = JSON.parse(alojamientoSesion);
+      }
     }
 
     if (this.alojamientoGuardadoExitoso) {
@@ -50,25 +53,14 @@ export class InformacionComponent implements OnInit {
         this.alojamientoGuardadoExitoso = false;
       }, 30000); // 30 segundos
     }
-
-    // Establecer el usuario como 1 y estado_destacado como false
-    
   }
 
   navigateToImagen() {
-    console.log('Botón Comencemos clickeado');
     this.router.navigate(['/anfitrion/imagen']);
   }
 
   guardarAlojamiento() {
-    this.alojamiento.nombre = 'La casa'
-    this.alojamiento.direccion ='Olimpo 1136,renca'
-    this.alojamiento.banos = 1
-    this.alojamiento.dormitorios =1
-    this.alojamiento.huespedes = 1
-    this.alojamiento.precio = 20000
-    console.log(this.alojamiento)
-    this.alojamientoService.createAlojamiento(this.alojamiento as Alojamiento).subscribe(
+    this.alojamientoService.createAlojamiento(this.alojamiento).subscribe(
       response => {
         console.log('Alojamiento guardado:', response);
         this.alojamientoGuardadoExitoso = true;

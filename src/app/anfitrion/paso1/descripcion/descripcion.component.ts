@@ -48,11 +48,11 @@ export class DescripcionComponent implements OnInit {
       });
   }
 
-  seleccionarTipo(id: any): void { // Cambiado de string a any
+  seleccionarTipo(id: any): void {
     this.alojamiento.tipoalojamiento = id;
-    console.log(this.alojamiento.tipoalojamiento);
+    sessionStorage.setItem('tipoAlojamientoId', id); // Guardar en sessionStorage
+    console.log('ID del tipo de alojamiento guardada en sessionStorage:', id);
   }
-
   navigateToUbicacion() {
     // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
     this.router.navigate(['anfitrion/entorno']);

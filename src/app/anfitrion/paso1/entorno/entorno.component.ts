@@ -1,24 +1,20 @@
-import { Component,OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Alojamiento } from '../../../core/models/Alojamiento';
-import { FormsModule } from '@angular/forms';
 import { TipoUbicacionService ,TipoUbicacion} from '../../../core/service/sesion/alojamiento/tipo-ubicacion.service';
 
 @Component({
   selector: 'app-entorno',
   standalone: true,
   imports: [
-    RouterLink,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule,
   ],
   templateUrl: './entorno.component.html',
-  styleUrl: './entorno.component.css'
+  styleUrls: ['./entorno.component.css']
 })
 export class EntornoComponent implements OnInit {
   alojamiento: Partial<Alojamiento> = {
@@ -50,8 +46,10 @@ export class EntornoComponent implements OnInit {
       });
   }
 
-  seleccionarUbicacion(id: any): void { // Cambiado de string a any
+  seleccionarUbicacion(id: any): void {
     this.alojamiento.ubicacion = id;
+    sessionStorage.setItem('ubicacionId', id); // Guardar en sessionStorage
+    console.log('ID de la ubicación guardada en sessionStorage:', id);
   }
 
   navigateToActividad() {

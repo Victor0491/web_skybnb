@@ -1,6 +1,5 @@
-import { Component,OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +11,6 @@ import { TipoActividad, TipoActividadService } from '../../../core/service/sesio
   selector: 'app-actividad',
   standalone: true,
   imports: [
-    RouterLink,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
@@ -50,7 +48,7 @@ export class ActividadComponent implements OnInit {
     console.log(this.preferenciasForm.value)
   }
   
-  navigateToUbicacion(actividadId: number): void {
+  seleccionarActividad(actividadId: number): void {
     const actividadesControl = this.preferenciasForm.get('actividad');
     if (actividadesControl && actividadesControl.value) {
       const actividades = actividadesControl.value;
@@ -58,7 +56,8 @@ export class ActividadComponent implements OnInit {
         actividadesControl.setValue(actividades.filter((a: number) => a !== actividadId));
       } else if (actividades.length < 3) {
         actividadesControl.setValue([...actividades, actividadId]);
-        this.alojamiento.actividades = actividadesControl.value; // Agrega esta línea
+        this.alojamiento.actividades = actividadesControl.value; // Guardar en sesión
+        sessionStorage.setItem('actividadesSeleccionadas', JSON.stringify(actividadesControl.value));
       } else {
         alert('Solo puedes seleccionar hasta 3 actividades.');
       }

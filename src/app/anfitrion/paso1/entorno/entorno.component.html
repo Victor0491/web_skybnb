@@ -8,7 +8,6 @@
         [class.selected]="alojamiento.ubicacion === ubicacion.id"
         [class.intercalado]="i >= 3 && i % 2 === 1"
         (click)="seleccionarUbicacion(ubicacion.id)">
-        <input [(ngModel)]="alojamiento.ubicacion" type="hidden">
         <div class="opcion-content">
           <img [src]="ubicacion.image" alt="{{ ubicacion.nombre }}">
           <div>{{ ubicacion.nombre }}</div>
@@ -21,3 +20,4 @@
     <button class="start-button-avanzar" (click)="navigateToActividad()">Continuar</button>
   </div>
 </div>
+
