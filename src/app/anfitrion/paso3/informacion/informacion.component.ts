@@ -12,9 +12,26 @@ import { Alojamiento } from '../../../core/models/Alojamiento';
   imports: [CommonModule]
 })
 export class InformacionComponent implements OnInit {
-  alojamiento: Partial<Alojamiento> = {}; // Cambia esto para recibir el alojamiento desde el estado o algún servicio compartido
+  //alojamiento: Partial<Alojamiento> = {}; // Cambia esto para recibir el alojamiento desde el estado o algún servicio compartido
   alojamientoGuardadoExitoso: boolean = false;
   numeroAlojamientoGuardado: number = 0;
+
+
+  alojamiento: Alojamiento={
+    nombre: '',
+    direccion: '',
+    dormitorios: 0,
+    banos: 0,
+    huespedes: 0,
+    mascotas: false,
+    usuario: 1,
+    precio: 0,
+    estado_destacado: false,
+    tipoalojamiento: 1,
+    ubicacion: 1,
+    actividades: [2,3],
+    servicios: [1,2],
+  }
 
   constructor(
     private router: Router,
@@ -35,8 +52,7 @@ export class InformacionComponent implements OnInit {
     }
 
     // Establecer el usuario como 1 y estado_destacado como false
-    this.alojamiento.usuario = 1;
-    this.alojamiento.estado_destacado = false;
+    
   }
 
   navigateToImagen() {
@@ -45,6 +61,13 @@ export class InformacionComponent implements OnInit {
   }
 
   guardarAlojamiento() {
+    this.alojamiento.nombre = 'La casa'
+    this.alojamiento.direccion ='Olimpo 1136,renca'
+    this.alojamiento.banos = 1
+    this.alojamiento.dormitorios =1
+    this.alojamiento.huespedes = 1
+    this.alojamiento.precio = 20000
+    console.log(this.alojamiento)
     this.alojamientoService.createAlojamiento(this.alojamiento as Alojamiento).subscribe(
       response => {
         console.log('Alojamiento guardado:', response);
