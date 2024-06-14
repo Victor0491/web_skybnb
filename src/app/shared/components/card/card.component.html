@@ -13,7 +13,9 @@
               <div *ngFor="let imagen of alojamiento.imagenes; let i = index" class="carousel-item"
                 [ngClass]="{'active': i === 0}">
                 <a [routerLink]="['/rooms', j]">
-                  <img [src]="imagen" class="card-img-top" alt="Imagen {{i + 1}}">
+                  <div class="card-img-container">
+                    <img [src]="imagen" class="card-img-top" alt="Imagen {{i + 1}}">
+                  </div>
                 </a>
               </div>
             </div>
