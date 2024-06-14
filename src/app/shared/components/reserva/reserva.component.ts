@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-reserva',
@@ -53,9 +55,20 @@ export class ReservaComponent implements OnInit {
 
   reserveHere() {
     if (this.daysCount !== null && this.rentalValue !== null) {
-      alert(`Has reservado ${this.daysCount} días por un total de ${this.rentalValue.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}`);
+      Swal.fire({
+        title: 'Reserva Confirmada',
+        text: `Has reservado ${this.daysCount} días por un total de ${this.rentalValue.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
     } else {
-      alert('Por favor, selecciona las fechas correctamente.');
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, selecciona las fechas correctamente.',
+        icon: 'error',
+        confirmButtonText: 'Volver a intentar'
+      });
     }
   }
+  
 }
