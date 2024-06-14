@@ -22,12 +22,6 @@
     /* Añade un margen derecho entre los elementos */
 }
 
-/* Cambia el color de fondo de la barra de navegación */
-.navbar {
-    background-color: #00add0;
-    /* Establece el color de fondo */
-}
-
 /* Estilos para el texto de los elementos de la barra de navegación */
 .nav-item p {
     color: white;
@@ -46,7 +40,13 @@
 
 /* Estilos para el texto junto al logo en la barra de navegación */
 .navbar-brand {
-    font-size: 30PX; /* Tamaño de la fuente */
+    font-size: 30px; /* Tamaño de la fuente */
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; /* Familia de fuentes */
     font-weight: bold; /* Estilo negrita */
+}
+
+/* Cambia el color de fondo de la barra de navegación */
+.navbar {
+    background-color: #00add0;
+    /* Establece el color de fondo */
 }
