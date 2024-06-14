@@ -53,15 +53,14 @@ input[type="date"],
 }
 
 .btn:hover {
-  background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+  background-color: #0f1480; /* Azul más oscuro al pasar el cursor */
+  color: black;
 }
 
 
 .card-custom {
   height: auto; /* Ajusta la altura para adaptarse al contenido */
-  width: calc(50% - 20px); /* Ajusta el ancho de las tarjetas para que ocupen el 50% del contenedor menos el margen */
-  margin: 10px; /* Añade margen alrededor de las tarjetas */
-  display: inline-block; /* Muestra las tarjetas en línea */
+ display: inline-block; /* Muestra las tarjetas en línea */
   vertical-align: top; /* Alinea las tarjetas en la parte superior */
 }
 
@@ -83,6 +82,7 @@ input[type="date"],
 
   padding: 20px; /* Añade relleno alrededor del contenedor */
 }
+
 
 
 
