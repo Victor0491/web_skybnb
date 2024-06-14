@@ -1,22 +1,21 @@
-import { Component,OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-actividad',
   standalone: true,
-  imports: [
-    RouterLink,
-    CommonModule,
-    ReactiveFormsModule,
-  ],
   templateUrl: './actividad.component.html',
-  styleUrls: ['./actividad.component.css']
+  styleUrls: ['./actividad.component.css'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ]
 })
-export class ActividadComponent {
+export class ActividadComponent implements OnInit {
   preferenciasForm: FormGroup;
   actividades: { nombre: string, imagen: string }[] = [
     { nombre: 'Surf', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQt0BnL44w1stL-X2MFG0SjvWJJIUIaSJo0Q&s' },
@@ -27,33 +26,76 @@ export class ActividadComponent {
     { nombre: 'Prefiero Omitir', imagen: 'https://media.istockphoto.com/id/540861476/es/foto/relajaci%C3%B3n-total.jpg?s=612x612&w=0&k=20&c=GEoRJR5eCnHUoV62GH52mNnSO_LnzDzG_AMpPLjpNbE=' }
   ];
   seccionActual = 'actividad';
-  
+
   constructor(private fb: FormBuilder, private router: Router) {
     this.preferenciasForm = this.fb.group({
-      actividad: [[], [Validators.required, Validators.minLength(1), Validators.maxLength(3)]]
+      actividad: [[], [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
     });
   }
-  
+
+  ngOnInit(): void {}
+
   navigateToUbicacion(actividad: string): void {
     const actividadesControl = this.preferenciasForm.get('actividad');
     if (actividadesControl && actividadesControl.value) {
-      const actividades = actividadesControl.value;
-      if (actividades.includes(actividad)) {
-        actividadesControl.setValue(actividades.filter((a: string) => a !== actividad));
-      } else if (actividades.length < 3) {
-        actividadesControl.setValue([...actividades, actividad]);
+      let actividades = actividadesControl.value;
+
+      if (actividad === 'Prefiero Omitir') {
+        actividadesControl.setValue(['Prefiero Omitir']);
       } else {
-        // Manejar el caso donde ya se han seleccionado 3 actividades
-        alert('Solo puedes seleccionar hasta 3 actividades.');
+        if (actividades.includes('Prefiero Omitir')) {
+          Swal.fire({
+            title: 'Opción excluyente',
+            text: 'No puedes seleccionar otras actividades si has elegido "Prefiero Omitir".',
+            icon: 'warning',
+            confirmButtonText: 'Entendido',
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              confirmButton: 'swal2-confirm'
+            }
+          });
+          return;
+        }
+
+        if (actividades.includes(actividad)) {
+          actividades = actividades.filter((a: string) => a !== actividad);
+        } else if (actividades.length < 3) {
+          actividades.push(actividad);
+        } else {
+          Swal.fire({
+            title: 'Límite alcanzado',
+            text: 'Solo puedes seleccionar hasta 3 actividades.',
+            icon: 'warning',
+            confirmButtonText: 'Entendido',
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              confirmButton: 'swal2-confirm'
+            }
+          });
+        }
+        actividadesControl.setValue(actividades);
       }
     }
   }
 
-  navigateToPaso2(): void {
-    if (this.preferenciasForm.get('actividad')?.value.length <= 3) {
+  continuar(): void {
+    const actividadesSeleccionadas = this.preferenciasForm.get('actividad')?.value;
+    if (actividadesSeleccionadas.includes('Prefiero Omitir') || actividadesSeleccionadas.length === 3) {
       this.router.navigate(['anfitrion/paso2']);
     } else {
-      alert('Solo puedes seleccionar hasta 3 actividades.');
+      Swal.fire({
+        title: 'Atención',
+        text: 'Por favor selecciona tres actividades o "Prefiero Omitir" antes de continuar.',
+        icon: 'warning',
+        confirmButtonText: 'Entendido',
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          confirmButton: 'swal2-confirm'
+        }
+      });
     }
   }
 
