@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-preferencias',
@@ -83,9 +85,20 @@ export class PreferenciasComponent implements OnInit {
     } else if (this.seccionActual === 'actividad' && this.preferenciasForm.get('actividad')?.valid) {
       this.submit();
     } else {
-      alert('Por favor completa la sección actual antes de continuar.');
+      Swal.fire({
+        title: 'Atención',
+        text: 'Por favor completa la sección actual antes de continuar.',
+        icon: 'warning',
+        confirmButtonText: 'Entendido',
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          confirmButton: 'swal2-confirm'
+        }
+      });
     }
   }
+  
 
   volver(): void {
     const ultimaSeccion = this.historialSecciones.pop();
