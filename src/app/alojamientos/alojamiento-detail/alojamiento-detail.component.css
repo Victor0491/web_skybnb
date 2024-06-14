@@ -60,9 +60,7 @@ input[type="date"],
 
 .card-custom {
   height: auto; /* Ajusta la altura para adaptarse al contenido */
-  width: calc(50% - 20px); /* Ajusta el ancho de las tarjetas para que ocupen el 50% del contenedor menos el margen */
-  margin: 10px; /* Añade margen alrededor de las tarjetas */
-  display: inline-block; /* Muestra las tarjetas en línea */
+ display: inline-block; /* Muestra las tarjetas en línea */
   vertical-align: top; /* Alinea las tarjetas en la parte superior */
 }
 
@@ -81,17 +79,13 @@ input[type="date"],
 .card-container {
   display: flex;
   flex-wrap: wrap; /* Permite que las tarjetas se envuelvan a la siguiente línea si es necesario */
-  justify-content: center; /* Centra las tarjetas en el contenedor */
   padding: 20px; /* Añade relleno alrededor del contenedor */
 }
 
-.carousel-inner .row {
-  justify-content: center; /* Centra las tarjetas dentro del carrusel */
-}
+
 
 .carousel-inner .card {
   margin: 10px;
-  flex: 0 0 calc(50% - 20px); /* Ajusta el ancho de las tarjetas para que ocupen el 50% del contenedor menos el margen */
 }
 
 /* Ajusta el tamaño de las imágenes para que se adapten al contenedor */
