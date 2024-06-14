@@ -13,7 +13,7 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item" *ngFor="let image of uploadedImages; let i = index" [class.active]="i === 0">
-          <img [src]="getImageUrl(image)" class="d-block w-100" alt="Image">
+          <img [src]="image.base64" class="d-block w-100" alt="Image">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
