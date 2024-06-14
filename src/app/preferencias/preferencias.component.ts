@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-preferencias',
   standalone: true,
@@ -70,7 +69,17 @@ export class PreferenciasComponent implements OnInit {
         actividadesControl.setValue([...actividades, actividad]);
       } else {
         // Manejar el caso donde ya se han seleccionado 3 actividades
-        alert('Solo puedes seleccionar hasta 3 actividades.');
+        Swal.fire({
+          title: 'Límite alcanzado',
+          text: 'Solo puedes seleccionar hasta 3 actividades.',
+          icon: 'warning',
+          confirmButtonText: 'Entendido',
+          customClass: {
+            popup: 'swal2-popup',
+            title: 'swal2-title',
+            confirmButton: 'swal2-confirm'
+          }
+        });
       }
     }
   }
@@ -98,7 +107,6 @@ export class PreferenciasComponent implements OnInit {
       });
     }
   }
-  
 
   volver(): void {
     const ultimaSeccion = this.historialSecciones.pop();
@@ -111,12 +119,26 @@ export class PreferenciasComponent implements OnInit {
     if (this.preferenciasForm.valid) {
       console.log(this.preferenciasForm.value);
       // Aquí puedes llamar a tu servicio para enviar las preferencias del usuario
+      Swal.fire({
+        title: '¡Éxito!',
+        text: 'Preferencias guardadas correctamente.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          confirmButton: 'swal2-confirm'
+        }
+      }).then(() => {
+        // Opcional: Puedes realizar alguna acción adicional después de cerrar el mensaje, como redirigir al usuario
+        this.onCloseModal(); // Por ejemplo, cerrar el modal
+      });
     } else {
       console.log('Formulario no válido');
     }
   }
 
-  onCloseModal() {
+  onCloseModal(): void {
     this.closeModalClicked.emit();
   }
 }
