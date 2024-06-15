@@ -10,11 +10,10 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   templateUrl: './informacion.component.html',
   styleUrls: ['./informacion.component.css'],
-  imports: [CommonModule,FormsModule]
+  imports: [CommonModule, FormsModule]
 })
 export class InformacionComponent implements OnInit {
   alojamientoGuardadoExitoso: boolean = false;
-  numeroAlojamientoGuardado: number = 0;
 
   alojamiento: Alojamiento = {
     nombre: '', // Inicialmente vacío
@@ -38,14 +37,41 @@ export class InformacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const state = history.state;
-    if (state && state.alojamiento) {
-      this.alojamiento = state.alojamiento;
-    } else {
-      const alojamientoSesion = sessionStorage.getItem('alojamiento');
-      if (alojamientoSesion) {
-        this.alojamiento = JSON.parse(alojamientoSesion);
-      }
+    // Recuperar datos del sessionStorage
+    const tipoAlojamientoId = sessionStorage.getItem('tipoAlojamientoId');
+    const ubicacionId = sessionStorage.getItem('ubicacionId');
+    const direccionAlojamiento = sessionStorage.getItem('direccionAlojamiento');
+    const actividadesSeleccionadas = sessionStorage.getItem('actividadesSeleccionadas');
+    const serviciosSeleccionados = sessionStorage.getItem('serviciosSeleccionados');
+    const datosBasicos = sessionStorage.getItem('datosBasicos');
+
+    // Asignar datos recuperados al objeto alojamiento
+    if (tipoAlojamientoId) {
+      this.alojamiento.tipoalojamiento = Number(tipoAlojamientoId);
+    }
+
+    if (ubicacionId) {
+      this.alojamiento.ubicacion = Number(ubicacionId);
+    }
+
+    if (direccionAlojamiento) {
+      this.alojamiento.direccion = direccionAlojamiento;
+    }
+
+    if (actividadesSeleccionadas) {
+      this.alojamiento.actividades = JSON.parse(actividadesSeleccionadas).map((actividad: any) => actividad.id);
+    }
+
+    if (serviciosSeleccionados) {
+      this.alojamiento.servicios = JSON.parse(serviciosSeleccionados).map((servicio: any) => servicio.id);
+    }
+
+    if (datosBasicos) {
+      const parsedDatosBasicos = JSON.parse(datosBasicos);
+      this.alojamiento.dormitorios = parsedDatosBasicos.dormitorios;
+      this.alojamiento.banos = parsedDatosBasicos.banos;
+      this.alojamiento.huespedes = parsedDatosBasicos.huespedes;
+      this.alojamiento.mascotas = parsedDatosBasicos.mascotas;
     }
 
     if (this.alojamientoGuardadoExitoso) {
@@ -53,6 +79,8 @@ export class InformacionComponent implements OnInit {
         this.alojamientoGuardadoExitoso = false;
       }, 30000); // 30 segundos
     }
+
+    console.log(this.alojamiento);
   }
 
   navigateToImagen() {
@@ -60,11 +88,23 @@ export class InformacionComponent implements OnInit {
   }
 
   guardarAlojamiento() {
-    this.alojamientoService.createAlojamiento(this.alojamiento).subscribe(
+    console.log('Datos a enviar:', this.alojamiento); // Asegúrate de que los datos están correctos
+
+    // Extraer solo los IDs de actividades y servicios, filtrando elementos válidos
+    const alojamientoConIds = {
+      ...this.alojamiento,
+      actividades: this.alojamiento.actividades
+        .filter((actividad: any) => actividad && actividad.id !== undefined)
+        .map((actividad: any) => actividad.id || actividad),
+      servicios: this.alojamiento.servicios
+        .filter((servicio: any) => servicio && servicio.id !== undefined)
+        .map((servicio: any) => servicio.id || servicio)
+    };
+
+    this.alojamientoService.createAlojamiento(alojamientoConIds).subscribe(
       response => {
         console.log('Alojamiento guardado:', response);
         this.alojamientoGuardadoExitoso = true;
-        this.numeroAlojamientoGuardado++;
         this.router.navigate(['']); // Redirige a la página de inicio
       },
       error => {
