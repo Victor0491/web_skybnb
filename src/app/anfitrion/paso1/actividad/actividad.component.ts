@@ -39,10 +39,16 @@ export class ActividadComponent implements OnInit {
     const actividadesControl = this.preferenciasForm.get('actividad');
     if (actividadesControl && actividadesControl.value) {
       let actividades = actividadesControl.value;
-
+  
       if (actividad === 'Prefiero Omitir') {
-        actividadesControl.setValue(['Prefiero Omitir']);
+        // Si se selecciona "Prefiero Omitir", deselecciona las demás actividades
+        if (actividades.includes('Prefiero Omitir')) {
+          actividades = actividades.filter((a: string) => a !== 'Prefiero Omitir');
+        } else {
+          actividades = ['Prefiero Omitir'];
+        }
       } else {
+        // Si ya se ha seleccionado "Prefiero Omitir", no se permite seleccionar otras actividades
         if (actividades.includes('Prefiero Omitir')) {
           Swal.fire({
             title: 'Opción excluyente',
@@ -57,7 +63,7 @@ export class ActividadComponent implements OnInit {
           });
           return;
         }
-
+  
         if (actividades.includes(actividad)) {
           actividades = actividades.filter((a: string) => a !== actividad);
         } else if (actividades.length < 3) {
@@ -75,11 +81,12 @@ export class ActividadComponent implements OnInit {
             }
           });
         }
-        actividadesControl.setValue(actividades);
       }
+  
+      actividadesControl.setValue(actividades);
     }
   }
-
+  
   continuar(): void {
     const actividadesSeleccionadas = this.preferenciasForm.get('actividad')?.value;
     if (actividadesSeleccionadas.includes('Prefiero Omitir') || actividadesSeleccionadas.length === 3) {
@@ -98,8 +105,9 @@ export class ActividadComponent implements OnInit {
       });
     }
   }
-
+  
   navigateToEntorno(): void {
     this.router.navigate(['anfitrion/entorno']);
   }
+  
 }
