@@ -59,9 +59,9 @@ export class InformacionComponent implements OnInit {
     }
 
     if (actividadesSeleccionadas) {
-      this.alojamiento.actividades = JSON.parse(actividadesSeleccionadas).map((actividad: any) => actividad.id);
+      this.alojamiento.actividades = JSON.parse(actividadesSeleccionadas).map(Number);
     }
-
+    
     if (serviciosSeleccionados) {
       this.alojamiento.servicios = JSON.parse(serviciosSeleccionados).map((servicio: any) => servicio.id);
     }
@@ -89,19 +89,7 @@ export class InformacionComponent implements OnInit {
 
   guardarAlojamiento() {
     console.log('Datos a enviar:', this.alojamiento); // Asegúrate de que los datos están correctos
-
-    // Extraer solo los IDs de actividades y servicios, filtrando elementos válidos
-    const alojamientoConIds = {
-      ...this.alojamiento,
-      actividades: this.alojamiento.actividades
-        .filter((actividad: any) => actividad && actividad.id !== undefined)
-        .map((actividad: any) => actividad.id || actividad),
-      servicios: this.alojamiento.servicios
-        .filter((servicio: any) => servicio && servicio.id !== undefined)
-        .map((servicio: any) => servicio.id || servicio)
-    };
-
-    this.alojamientoService.createAlojamiento(alojamientoConIds).subscribe(
+    this.alojamientoService.createAlojamiento(this.alojamiento).subscribe(
       response => {
         console.log('Alojamiento guardado:', response);
         this.alojamientoGuardadoExitoso = true;
