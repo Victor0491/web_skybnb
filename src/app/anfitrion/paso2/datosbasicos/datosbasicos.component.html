@@ -4,38 +4,48 @@
   <div class="input-container">
     <label for="dormitorios">Dormitorios:</label>
     <div class="input-control">
-      <button (click)="decrementarDormitorios()">-</button>
-      <input type="text" id="dormitorios" [(ngModel)]="dormitoriosValue" readonly>
-      <button (click)="incrementarDormitorios()">+</button>
+      <button (click)="nuevoAlojamiento.dormitorios = nuevoAlojamiento.dormitorios > 0 ? nuevoAlojamiento.dormitorios - 1 : 0">-</button>
+      <input type="text" id="dormitorios" [(ngModel)]="nuevoAlojamiento.dormitorios" readonly>
+      <button (click)="nuevoAlojamiento.dormitorios = nuevoAlojamiento.dormitorios + 1">+</button>
     </div>
   </div>
 
   <div class="input-container">
     <label for="banios">Baños:</label>
     <div class="input-control">
-      <button (click)="decrementarBanios()">-</button>
-      <input type="text" id="banios" [(ngModel)]="baniosValue" readonly>
-      <button (click)="incrementarBanios()">+</button>
+      <button (click)="nuevoAlojamiento.banos = nuevoAlojamiento.banos > 0 ? nuevoAlojamiento.banos - 1 : 0">-</button>
+      <input type="text" id="banios" [(ngModel)]="nuevoAlojamiento.banos" readonly>
+      <button (click)="nuevoAlojamiento.banos = nuevoAlojamiento.banos + 1">+</button>
     </div>
   </div>
 
   <div class="input-container">
     <label for="cantidadHuespedes">Cantidad de huéspedes:</label>
     <div class="input-control">
-      <button (click)="decrementarCantidadHuespedes()">-</button>
-      <input type="text" id="cantidadHuespedes" [(ngModel)]="cantidadHuespedesValue" readonly>
-      <button (click)="incrementarCantidadHuespedes()">+</button>
+      <button (click)="nuevoAlojamiento.huespedes = nuevoAlojamiento.huespedes > 0 ? nuevoAlojamiento.huespedes - 1 : 0">-</button>
+      <input type="text" id="cantidadHuespedes" [(ngModel)]="nuevoAlojamiento.huespedes" readonly>
+      <button (click)="nuevoAlojamiento.huespedes = nuevoAlojamiento.huespedes + 1">+</button>
     </div>
   </div>
 
   <div class="input-container">
     <label for="mascotas">Mascotas:</label>
-    <select id="mascotas" [(ngModel)]="mascotasValue">
-      <option value="true">Sí</option>
-      <option value="false">No</option>
+    <select id="mascotas" [(ngModel)]="nuevoAlojamiento.mascotas">
+      <option [ngValue]="true">Sí</option>
+      <option [ngValue]="false">No</option>
     </select>
   </div>
+
+  <!-- Mostrando los servicios obtenidos desde la API -->
+  <div class="input-container" *ngFor="let servicio of servicios">
+    <label>{{ servicio.nombre }}:</label>
+    <button class="btn-toggle" [class.selected]="isServicioSeleccionado(servicio)" (click)="toggleServicio(servicio)">
+      {{ isServicioSeleccionado(servicio) ? 'Seleccionado' : 'Seleccionar' }}
+    </button>
+  </div>
+
   <div class="button-container">
     <button class="start-button-volver" (click)="navigateToUbicacion()">Volver</button>
     <button class="start-button-avanzar" (click)="navigateToPaso3()">Paso 3</button>
   </div>
+</div>

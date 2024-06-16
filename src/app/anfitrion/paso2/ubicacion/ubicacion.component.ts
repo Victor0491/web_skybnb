@@ -4,6 +4,7 @@ import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Alojamiento } from '../../../core/models/Alojamiento';
 
 @Component({
   selector: 'app-ubicacion',
@@ -16,8 +17,9 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
   map!: L.Map;
   marker!: L.Marker;
   locationForm!: FormGroup;
+  alojamiento: Partial<Alojamiento> = {}; // Declara la variable alojamiento aquí
 
-  constructor(private formBuilder: FormBuilder,private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.locationForm = this.formBuilder.group({
@@ -55,6 +57,10 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
           }
           this.map.setView([lat, lon], 15);
           this.marker = L.marker([lat, lon]).addTo(this.map);
+
+          // Guardar la dirección en sessionStorage
+          this.alojamiento.direccion = address;
+          sessionStorage.setItem('direccionAlojamiento', address);
         } else {
           alert('Dirección no encontrada');
         }
@@ -76,14 +82,12 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
   }
 
   navigateToDatosbasicos() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['/anfitrion/datosbasicos'], {});
+    // Redirige a la página de datos básicos y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['/anfitrion/datosbasicos'], { state: { alojamiento: this.alojamiento } });
   }
 
   navigateToPaso2() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['/anfitrion/paso2'], {});
+    // Redirige a la página de paso 2 y pasa el objeto nuevoAlojamiento
+    this.router.navigate(['/anfitrion/paso2'], { state: { alojamiento: this.alojamiento } });
   }
 }
-
-

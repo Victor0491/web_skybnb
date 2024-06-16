@@ -3,7 +3,7 @@
   <form (ngSubmit)="guardarAlojamiento()">
     <div class="form-group">
       <label for="titulo">Título</label>
-      <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Ingresa el título" required>
+      <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Ingresa el título" required [(ngModel)]="alojamiento.nombre">
     </div>
     <div class="form-group">
       <label for="descripcion">Descripción</label>
@@ -11,7 +11,7 @@
     </div>
     <div class="form-group">
       <label for="precio">Precio</label>
-      <input type="number" id="precio" name="precio" class="form-control" placeholder="Ingresa el precio" required>
+      <input type="number" id="precio" name="precio" class="form-control" placeholder="Ingresa el precio" required [(ngModel)]="alojamiento.precio">
     </div>
     <div class="button-container">
       <button class="start-button-volver" (click)="navigateToImagen()">Volver</button>
@@ -19,6 +19,6 @@
     </div>
   </form>
   <div *ngIf="alojamientoGuardadoExitoso" class="mensaje-exito">
-    Alojamiento número {{ numeroAlojamientoGuardado }} guardado con éxito.
+     guardado con éxito.
   </div>
 </div>
