@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Asegúrate de importar Validators
 import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'; // Importa SweetAlert2
 
 @Component({
   selector: 'app-ubicacion',
@@ -17,11 +18,11 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
   marker!: L.Marker;
   locationForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.locationForm = this.formBuilder.group({
-      address: ['']
+      address: ['', Validators.required] // Asegúrate de que el campo es requerido
     });
   }
 
@@ -43,26 +44,45 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
 
   onSubmit(): void {
     const address = this.locationForm.value.address;
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.length > 0) {
-          const lat = parseFloat(data[0].lat);
-          const lon = parseFloat(data[0].lon);
+    if (address) {
+      fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.length > 0) {
+            const lat = parseFloat(data[0].lat);
+            const lon = parseFloat(data[0].lon);
 
-          if (this.marker) {
-            this.map.removeLayer(this.marker);
+            if (this.marker) {
+              this.map.removeLayer(this.marker);
+            }
+            this.map.setView([lat, lon], 15);
+            this.marker = L.marker([lat, lon]).addTo(this.map);
+          } else {
+            Swal.fire({
+              title: 'Error',
+              text: 'Dirección no encontrada. Por favor ingresa una dirección válida.',
+              icon: 'error',
+              confirmButtonText: 'Entendido'
+            });
           }
-          this.map.setView([lat, lon], 15);
-          this.marker = L.marker([lat, lon]).addTo(this.map);
-        } else {
-          alert('Dirección no encontrada');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un error al buscar la dirección.');
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error al buscar la dirección.',
+            icon: 'error',
+            confirmButtonText: 'Entendido'
+          });
+        });
+    } else {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor ingresa una dirección antes de buscar.',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
       });
+    }
   }
 
   clearMap(): void {
@@ -76,14 +96,24 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
   }
 
   navigateToDatosbasicos() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['/anfitrion/datosbasicos'], {});
+    if (this.locationForm.valid && this.marker) {
+      this.router.navigate(['/anfitrion/datosbasicos'], {});
+    } else {
+      Swal.fire({
+        title: 'Atención',
+        text: 'Por favor ingresa una dirección válida y busca su ubicación en el mapa antes de continuar.',
+        icon: 'warning',
+        confirmButtonText: 'Entendido',
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          confirmButton: 'swal2-confirm'
+        }
+      });
+    }
   }
 
   navigateToPaso2() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
     this.router.navigate(['/anfitrion/paso2'], {});
   }
 }
-
-

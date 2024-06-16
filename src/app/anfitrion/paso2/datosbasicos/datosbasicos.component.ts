@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
-
-@Component({   
-  selector: 'app-datosbasicos',   
-  standalone: true,   
-  imports: [CommonModule,FormsModule],   
-  templateUrl: './datosbasicos.component.html',   
-  styleUrl: './datosbasicos.component.css' })
-
+@Component({
+  selector: 'app-datosbasicos',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './datosbasicos.component.html',
+  styleUrls: ['./datosbasicos.component.css']
+})
 export class DatosbasicosComponent {
   dormitorios: number = 0;
   banios: number = 0;
@@ -23,7 +23,6 @@ export class DatosbasicosComponent {
   mascotasValue: string = 'false';
 
   constructor(private router: Router) {
-    // Asigna el valor inicial de las propiedades a las variables de valor para el enlace bidireccional
     this.dormitoriosValue = this.dormitorios.toString();
     this.baniosValue = this.banios.toString();
     this.cantidadHuespedesValue = this.cantidadHuespedes.toString();
@@ -66,10 +65,7 @@ export class DatosbasicosComponent {
     }
   }
 
-  // Define las otras funciones de incremento y decremento aquí
-
   guardarDatosBasicos(): void {
-    // Actualiza el valor de las propiedades con los valores de las variables de valor
     this.dormitorios = parseInt(this.dormitoriosValue, 10);
     this.banios = parseInt(this.baniosValue, 10);
     this.cantidadHuespedes = parseInt(this.cantidadHuespedesValue, 10);
@@ -81,21 +77,55 @@ export class DatosbasicosComponent {
     console.log('Mascotas:', this.mascotas);
   }
 
-  nuevoAlojamiento: any = {}; // Objeto para almacenar los datos del alojamiento
-
-
+  nuevoAlojamiento: any = {};
 
   seleccionarOpcion(opcion: string) {
-    this.nuevoAlojamiento.tipo_alojamiento = opcion; // Guarda el tipo de alojamiento seleccionado
+    this.nuevoAlojamiento.tipo_alojamiento = opcion;
   }
 
-  navigateToPaso3() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['anfitrion/paso3'], { state: { alojamiento: this.nuevoAlojamiento } });
+  validateInputs(): boolean {
+    if (this.dormitorios <= 0) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Debes tener al menos 1 dormitorio.',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+      });
+      return false;
+    }
+
+
+
+    if (this.cantidadHuespedes <= 0) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Debes permitir al menos 1 huésped.',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+      });
+      return false;
+    }
+
+    if (this.mascotasValue === '') {
+      Swal.fire({
+        title: 'Error',
+        text: 'Debes seleccionar si permites mascotas o no.',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+      });
+      return false;
+    }
+
+    return true;
   }
-  navigateToUbicacion() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+
+  navigateToPaso3(): void {
+    if (this.validateInputs()) {
+      this.router.navigate(['anfitrion/paso3'], { state: { alojamiento: this.nuevoAlojamiento } });
+    }
+  }
+
+  navigateToUbicacion(): void {
     this.router.navigate(['anfitrion/ubicacion'], { state: { alojamiento: this.nuevoAlojamiento } });
   }
 }
-

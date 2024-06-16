@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importa CommonModule
-import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2'; // Importa SweetAlert2
 
 @Component({
   selector: 'app-imagen',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './imagen.component.html',
-  styleUrls: ['./imagen.component.css'] // Corregido: styleUrl -> styleUrls
+  styleUrls: ['./imagen.component.css']
 })
 export class ImagenComponent {
   constructor(private router: Router) {}
@@ -38,17 +39,25 @@ export class ImagenComponent {
     };
   }
 
-  getImageUrl(image: File): string {
-    return URL.createObjectURL(image);
+  navigateToInformacion(): void {
+    if (this.uploadedImages.length > 0) {
+      this.router.navigate(['/anfitrion/informacion']);
+    } else {
+      Swal.fire({
+        title: 'Atención',
+        text: 'Por favor sube al menos una imagen antes de continuar.',
+        icon: 'warning',
+        confirmButtonText: 'Entendido',
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          confirmButton: 'swal2-confirm'
+        }
+      });
+    }
   }
 
-  navigateToInformacion() {
-    console.log('Botón Comencemos clickeado');
-    this.router.navigate(['/anfitrion/informacion']);
-  }
-
-  navigateToPaso3() {
-    console.log('Botón Comencemos clickeado');
+  navigateToPaso3(): void {
     this.router.navigate(['/anfitrion/paso3']);
   }
 }
