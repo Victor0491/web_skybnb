@@ -8,7 +8,7 @@ from rest_framework import status
 
 from .models import Usuario, Rol ,TipoAlojamiento,PerfilUsuario,Actividades,Ubicacion,Servicios,Alojamiento,Reserva
 from .serializers import UsuarioSerializers,RolesSerializers,TipoAlojamientoSerializers, PerfilUsuarioSerializers
-from .serializers import UbicacionSerializers,ActividadSerializers,ServiciosSerializers,AlojamientoSerializers
+from .serializers import UbicacionSerializers,ActividadSerializers,ServiciosSerializers,AlojamientoSerializers,ImagenAlojamientoSerializer
 from .serializers import GetPerfilUsuarioSerializers, GetAlojamientoSerializers, GetDetailsAlojamientoSerializers,ReservaSerializers,ReservaListSerializers
 
 
@@ -124,6 +124,10 @@ class GetDetailsAlojamiento(generics.RetrieveAPIView):
     queryset = Alojamiento.objects.all()
     serializer_class = GetDetailsAlojamientoSerializers
 
+
+class AlojamientoViewSet(generics.CreateAPIView):
+    queryset = Alojamiento.objects.all()
+    serializer_class = ImagenAlojamientoSerializer
 #----------------------------------------------------------------------------
 
 class ReservaCreateView(generics.CreateAPIView):
