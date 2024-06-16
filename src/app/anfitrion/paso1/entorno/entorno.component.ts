@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Alojamiento } from '../../../core/models/Alojamiento';
-import { TipoUbicacionService ,TipoUbicacion} from '../../../core/service/sesion/alojamiento/tipo-ubicacion.service';
+import { TipoUbicacionService} from '../../../core/service/alojamiento/tipo-ubicacion.service';
+import { TipoUbicacion } from '../../../core/models/TipoUbicacion';
+import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
 @Component({
   selector: 'app-entorno',
@@ -17,22 +19,21 @@ import { TipoUbicacionService ,TipoUbicacion} from '../../../core/service/sesion
   styleUrls: ['./entorno.component.css']
 })
 export class EntornoComponent implements OnInit {
-  alojamiento: Partial<Alojamiento> = {
-    ubicacion: null,
-  };
-  preferenciasForm: FormGroup;
+
   ubicaciones: TipoUbicacion[] = [];
   seccionActual = 'ubicacion';
-  historialSecciones: string[] = [];
+
+  formData = {
+    ubicacion : 0
+  };
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
-    private tipoUbicacionService: TipoUbicacionService
+    private tipoUbicacionService: TipoUbicacionService,
+    private formalojamiento : FormAlojamientoService
   ) {
-    this.preferenciasForm = this.fb.group({
-      ubicacion: ['', Validators.required],
-    });
+    const savedData = this.formalojamiento.getFormData();
+    this.formData.ubicacion = savedData.ubicacion;
   }
 
   ngOnInit(): void {
@@ -47,9 +48,9 @@ export class EntornoComponent implements OnInit {
   }
 
   seleccionarUbicacion(id: any): void {
-    this.alojamiento.ubicacion = id;
-    sessionStorage.setItem('ubicacionId', id); // Guardar en sessionStorage
+    this.formData.ubicacion = id;
     console.log('ID de la ubicación guardada en sessionStorage:', id);
+    this.formalojamiento.setFormData(this.formData);
   }
 
   navigateToActividad() {

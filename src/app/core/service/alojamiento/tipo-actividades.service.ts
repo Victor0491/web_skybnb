@@ -2,12 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface TipoActividad {
-  id: number;
-  nombre: string;
-  image: string;
-}
+import { TipoActividad } from '../../models/TipoActividad';
 
 @Injectable({
   providedIn: 'root'

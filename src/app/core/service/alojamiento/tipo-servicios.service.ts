@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Servicio } from '../../models/Servicios';
 
-export interface Servicio {
-    id: number;
-    nombre: string;
-  }
-  
   @Injectable({
     providedIn: 'root'
   })

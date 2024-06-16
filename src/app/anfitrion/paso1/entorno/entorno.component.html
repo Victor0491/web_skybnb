@@ -5,7 +5,7 @@
   <div class="opciones-container" *ngIf="seccionActual === 'ubicacion'">
     <div class="opcion-container">
       <button *ngFor="let ubicacion of ubicaciones; let i = index" class="opcion"
-        [class.selected]="alojamiento.ubicacion === ubicacion.id"
+      [class.selected]="formData.ubicacion === ubicacion.id"
         [class.intercalado]="i >= 3 && i % 2 === 1"
         (click)="seleccionarUbicacion(ubicacion.id)">
         <div class="opcion-content">
@@ -17,7 +17,7 @@
   </div>
   <div class="button-container">
     <button class="start-button-volver" (click)="navigateToDescripcion()">Volver</button>
-    <button class="start-button-avanzar" (click)="continuar()">Continuar</button>
+    <button class="start-button-avanzar" (click)="navigateToActividad()">Continuar</button>
   </div>
 </div>
 

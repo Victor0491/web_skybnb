@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Alojamiento } from '../../../core/models/Alojamiento';
 import { FormsModule } from '@angular/forms';
-import { TipoActividad, TipoActividadService } from '../../../core/service/sesion/alojamiento/tipo-actividades.service';
+import { TipoActividadService } from '../../../core/service/alojamiento/tipo-actividades.service';
+import { TipoActividad } from '../../../core/models/TipoActividad';
+import Swal from 'sweetalert2';
+
+import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
 @Component({
   selector: 'app-actividad',
@@ -17,57 +20,52 @@ import { TipoActividad, TipoActividadService } from '../../../core/service/sesio
     ReactiveFormsModule,
     FormsModule,
   ],
-  templateUrl: './actividad.component.html',
-  styleUrls: ['./actividad.component.css']
 })
 export class ActividadComponent implements OnInit {
-  alojamiento: Partial<Alojamiento> = {
-    actividades: [],
-  };
-  preferenciasForm: FormGroup;
   actividades: TipoActividad[] = [];
   seccionActual = 'actividad';
-  
+
+  formData: { actividades: number[] } = { actividades: [] };
+
   constructor(
-    private fb: FormBuilder, 
     private router: Router,
-    private tipoActividadService: TipoActividadService
+    private tipoActividadService: TipoActividadService,
+    private formalojamiento: FormAlojamientoService
   ) {
-    this.preferenciasForm = this.fb.group({
-      actividad: [[], [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
-    });
+    const savedData = this.formalojamiento.getFormData();
+    this.formData.actividades = savedData.actividades || [];
   }
-  
+
   ngOnInit(): void {
     this.tipoActividadService.getActividad().subscribe(
       actividades => {
-        this.actividades = actividades;
+        this.actividades = actividades || [];
       },
       error => {
         console.error('Error al obtener actividades', error);
       }
     );
-    console.log(this.preferenciasForm.value)
   }
-  
+
   seleccionarActividad(actividadId: number): void {
-    const actividadesControl = this.preferenciasForm.get('actividad');
-    if (actividadesControl && actividadesControl.value) {
-      const actividades = actividadesControl.value;
-      if (actividades.includes(actividadId)) {
-        actividadesControl.setValue(actividades.filter((a: number) => a !== actividadId));
-      } else if (actividades.length < 3) {
-        actividadesControl.setValue([...actividades, actividadId]);
-        this.alojamiento.actividades = actividadesControl.value; // Guardar en sesión
-        sessionStorage.setItem('actividadesSeleccionadas', JSON.stringify(actividadesControl.value));
-      } else {
-        alert('Solo puedes seleccionar hasta 3 actividades.');
-      }
+    if (this.formData.actividades.includes(actividadId)) {
+      this.formData.actividades = this.formData.actividades.filter(id => id !== actividadId);
+    } else if (this.formData.actividades.length < 3) {
+      this.formData.actividades.push(actividadId);
+    } else {
+      Swal.fire({
+        title: 'Atención',
+        text: 'Solo puedes seleccionar hasta 3 actividades.',
+        icon: 'warning',
+        confirmButtonText: 'Entendido'
+      });
+      return;
     }
+    this.formalojamiento.setFormData({ actividades: this.formData.actividades });
   }
 
   navigateToPaso2(): void {
-    if (this.preferenciasForm.get('actividad')?.value.length <= 3) {
+    if (this.formData.actividades.length <= 3) {
       this.router.navigate(['anfitrion/paso2']);
     } else {
       Swal.fire({

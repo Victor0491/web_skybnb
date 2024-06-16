@@ -1,15 +1,16 @@
   export interface Alojamiento {
     nombre: string;
     direccion: string;
-    dormitorios: Number;
+    imagenes : any[];
+    dormitorios: number;
     banos: number;
     huespedes: number;
     mascotas: boolean;
     usuario: any;
     precio: number;
     estado_destacado: boolean;
-    tipoalojamiento: any; 
-    ubicacion: any;
-    actividades: any[];
-    servicios: any[];
+    tipoalojamiento: number; 
+    ubicacion: number;
+    actividades: number[];
+    servicios: number[];
   }

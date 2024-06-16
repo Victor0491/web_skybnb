@@ -51,7 +51,7 @@ export class AuthSesionService {
   }
 
 
-  obtenerInfoToken(){
+  obtenerInfoUsuario(){
     const info = localStorage.getItem('token')
     if (info){
       const decodeInfo: any = jwtDecode(info);

@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface TipoAlojamiento {
-    id: number;
-    nombre: string;
-    image: string; // Cambiamos la propiedad a 'image'
-  }
+import { TipoAlojamiento } from '../../models/TipoAlojamiento';
 
 @Injectable({
   providedIn: 'root'

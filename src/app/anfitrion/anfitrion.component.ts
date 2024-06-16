@@ -21,7 +21,6 @@ export class AnfitrionComponent implements OnInit  {
   }
 
 
-
   navigateToPaso1() {
     console.log('Botón Comencemos clickeado');
     this.router.navigate(['/paso1']);
