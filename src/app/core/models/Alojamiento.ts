@@ -6,7 +6,7 @@
     banos: number;
     huespedes: number;
     mascotas: boolean;
-    usuario: any;
+    usuario: number;
     precio: number;
     estado_destacado: boolean;
     tipoalojamiento: number; 

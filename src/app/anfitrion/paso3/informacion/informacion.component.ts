@@ -54,5 +54,8 @@ export class InformacionComponent implements OnInit {
   guardarAlojamiento() {
     this.formalojamiento.setFormData(this.formData);
     console.log(this.DatosAlojamiento)
+    this.alojamientoService.createAlojamiento(this.DatosAlojamiento).subscribe(response => {
+      console.log('Alojamiento creado exitosamente:', response);
+  })
   }
 }
