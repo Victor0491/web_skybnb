@@ -10,6 +10,6 @@
     estado_destacado: boolean;
     tipoalojamiento: any; 
     ubicacion: any;
-    actividades: any[];
-    servicios: any[];
+    actividades: number[];
+    servicios: number[];
   }
