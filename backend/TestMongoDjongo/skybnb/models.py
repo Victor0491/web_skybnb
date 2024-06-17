@@ -76,20 +76,6 @@ class PerfilUsuario(models.Model):
     def __str__(self):
         return self.nombreCompleto
 
-class imagenAlojamiento(models.Model):
-    alojamiento = models.OneToOneField('Alojamiento', on_delete=models.CASCADE, related_name='imagenes')
-    image1 = models.TextField()
-    image2 = models.TextField()
-    image3 = models.TextField()
-    image4 = models.TextField()
-    image5 = models.TextField()
-    image6 = models.TextField()
-    image7 = models.TextField()
-    image8 = models.TextField()
-    image9 = models.TextField()
-    image10 = models.TextField()
-    image11 = models.TextField()
-    image12 = models.TextField()
 
 class Alojamiento(models.Model):
     nombre = models.CharField(max_length=255)
@@ -116,6 +102,14 @@ class Alojamiento(models.Model):
     def __str__(self):
         return self.nombre
     
+class imagenAlojamiento(models.Model):
+    alojamiento = models.ForeignKey(Alojamiento, on_delete=models.CASCADE, related_name='imagenes')
+    imagen = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Imagen de {self.alojamiento.nombre}"
+
+
 class Reserva(models.Model):
     usuario = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE, related_name='usuarios')
     alojamiento = models.ForeignKey(Alojamiento, on_delete=models.CASCADE)

@@ -9,6 +9,7 @@ export class FormAlojamientoService {
   private formData: any = this.loadFormData() || {
     nombre: "",
     direccion: "",
+    imagenes: [],
     dormitorios: 0,
     banos: 0,
     huespedes: 0,
@@ -35,6 +36,7 @@ export class FormAlojamientoService {
     this.formData = {
       nombre: "",
       direccion: "",
+      imagenes: [],
       dormitorios: 0,
       banos: 0,
       huespedes: 0,

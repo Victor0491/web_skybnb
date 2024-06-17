@@ -5,7 +5,7 @@ from .models import Usuario, Rol, TipoAlojamiento,Actividades,Ubicacion, PerfilU
 class ImagenAlojamientoSerializer(serializers.ModelSerializer):
     class Meta:
         model = imagenAlojamiento
-        fields = ['image1', 'image2', 'image3', 'image4', 'image5','image6','image7','image8','image9','image10','image11','image12']
+        fields = ['id', 'imagen']
 
 class ServiciosSerializers(serializers.ModelSerializer):
     class Meta:
@@ -103,7 +103,7 @@ class AlojamientoSerializers(serializers.ModelSerializer):
     actividades = serializers.PrimaryKeyRelatedField(queryset=Actividades.objects.all(), many=True)
     servicios = serializers.PrimaryKeyRelatedField(queryset=Servicios.objects.all(), many=True)
     ubicacion = serializers.PrimaryKeyRelatedField(queryset=Ubicacion.objects.all())
-    imagenes = ImagenAlojamientoSerializer()
+    imagenes = ImagenAlojamientoSerializer(many=True, required=False)
     
 
     class Meta:
@@ -111,7 +111,7 @@ class AlojamientoSerializers(serializers.ModelSerializer):
         fields = ['nombre','direccion','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios', 'imagenes']
     
     def create(self, validated_data):
-        imagenes_data = validated_data.pop('imagenes')
+        imagenes_data = validated_data.pop('imagenes', [])
         usuario_data = validated_data.pop('usuario')
         ubicacion_data = validated_data.pop('ubicacion')
         tipoalojamiento_data = validated_data.pop('tipoalojamiento')
@@ -127,13 +127,15 @@ class AlojamientoSerializers(serializers.ModelSerializer):
             alojamiento.actividades.add(actividad)
         for servicio in servicios_data:
             alojamiento.servicios.add(servicio)
-        imagenAlojamiento.objects.create(alojamiento=alojamiento, **imagenes_data)
+        alojamiento = Alojamiento.objects.create(**validated_data)
+        for imagen_data in imagenes_data:
+            imagenAlojamiento.objects.create(alojamiento=alojamiento, **imagen_data)
         alojamiento.save()
         return alojamiento
     
 class GetAlojamientoSerializers(serializers.ModelSerializer):
     tipoalojamiento = TipoAlojamientoSerializers()
-    imagenes = ImagenAlojamientoSerializer()
+    imagenes = ImagenAlojamientoSerializer(many=True, required=False)
 
     
     class Meta:

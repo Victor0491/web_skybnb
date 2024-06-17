@@ -50,7 +50,6 @@ export class InformacionComponent implements OnInit {
     this.router.navigate(['/anfitrion/imagen']);
   }
 
-
   guardarAlojamiento() {
     this.formalojamiento.setFormData(this.formData);
     console.log(this.DatosAlojamiento)

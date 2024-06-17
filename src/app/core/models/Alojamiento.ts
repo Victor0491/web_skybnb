@@ -1,7 +1,7 @@
   export interface Alojamiento {
     nombre: string;
     direccion: string;
-    imagenes : any[];
+    imagenes : string[];
     dormitorios: number;
     banos: number;
     huespedes: number;
