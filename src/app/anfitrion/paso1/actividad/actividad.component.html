@@ -5,10 +5,9 @@
   <div class="opciones-container" *ngIf="seccionActual === 'actividad'">
     <div class="opcion-container">
       <button *ngFor="let actividad of actividades; let i = index" class="opcion"
-        [class.selected]="alojamiento.actividades?.includes(actividad.id)"
+        [class.selected]="formData.actividades.includes(actividad.id)"
         [class.intercalado]="i >= 3 && i % 2 === 1"
         (click)="seleccionarActividad(actividad.id)">
-        <input [(ngModel)]="alojamiento.actividades" type="hidden" *ngIf="alojamiento.actividades">
         <div class="opcion-content">
           <img [src]="actividad.image" alt="{{ actividad.nombre }}">
           <div>{{ actividad.nombre }}</div>
@@ -18,6 +17,6 @@
   </div>
   <div class="button-container">
     <button class="start-button-volver" (click)="navigateToEntorno()">Volver</button>
-    <button class="start-button-avanzar" (click)="navigateToPaso2()" [disabled]="preferenciasForm.get('actividad')?.value.length === 0">Paso 2</button>
+    <button class="start-button-avanzar" (click)="navigateToPaso2()" [disabled]="formData.actividades.length === 0">Paso 2</button>
   </div>
 </div>

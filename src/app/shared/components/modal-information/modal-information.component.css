@@ -1,0 +1,91 @@
+/* Estilos personalizados para el modal */
+
+.custom-modal-header {
+  background-color: #00add0; /* Color de fondo azul oscuro */
+  color: white; /* Texto en blanco */
+  padding: 15px; /* Espaciado interior */
+  border-top-left-radius: 5px; /* Bordes redondeados */
+  border-top-right-radius: 5px;
+  font-size: 1.8rem; /* Tamaño de fuente más grande */
+}
+
+.custom-modal-body {
+  font-size: 1.2rem; /* Tamaño de fuente más grande para el contenido */
+  line-height: 1.6; /* Altura de línea para mejor legibilidad */
+  padding: 20px; /* Espaciado interior */
+  color: #333; /* Color del texto */
+}
+
+.custom-modal-body p {
+  margin-bottom: 15px; /* Espaciado inferior entre párrafos */
+}
+
+.custom-modal-footer {
+  background-color: #f1f1f1; /* Color de fondo del pie */
+  border-top: 1px solid #ddd; /* Borde superior */
+  padding: 15px; /* Espaciado interior */
+  display: flex;
+  justify-content: flex-end; /* Alinear botones a la derecha */
+  border-bottom-left-radius: 5px; /* Bordes redondeados */
+  border-bottom-right-radius: 5px;
+  font-size: 1.2rem; /* Tamaño de fuente más grande para los botones */
+}
+
+.custom-modal-footer .btn {
+  margin-left: 10px; /* Margen entre botones */
+  background-color: #00add0; /* Azul para el botón */
+  border: none; /* Sin borde */
+  color: white; /* Texto en blanco */
+  padding: 10px 20px; /* Aumentar padding */
+  font-size: 1rem; /* Tamaño de fuente */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.custom-modal-footer .btn-secondary {
+  background-color: #777; /* Color de fondo para el botón secundario */
+}
+
+.custom-modal-footer .btn:hover {
+  background-color: #003366; /* Fondo más oscuro al pasar el ratón */
+}
+
+.custom-modal-footer .btn-secondary:hover {
+  background-color: #555; /* Fondo más oscuro al pasar el ratón para el botón secundario */
+}
+
+/* Botón de cerrar */
+.btn-close {
+  background: transparent; /* Fondo transparente */
+  border: none; /* Sin borde */
+  font-size: 1.2rem; /* Tamaño de la fuente */
+  color: white; /* Color del icono */
+}
+
+.btn-close:hover {
+  color: #ff0000; /* Rojo al pasar el ratón */
+}
+
+/* Ajuste para modal más compacto */
+.modal-dialog {
+  max-width: 700px; /* Ajustar el ancho máximo del modal */
+  width: 100%; /* Ajustar el ancho para que ocupe todo el espacio disponible */
+  margin: 1.75rem auto; /* Espacio superior e inferior */
+}
+
+.modal-content {
+  max-height: 80vh; /* Altura máxima del modal en relación a la ventana */
+  overflow: hidden; /* Ocultar desbordamiento */
+}
+
+/* Centrar el modal verticalmente */
+.modal.fade .modal-dialog {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 1rem); /* Altura mínima para centrar */
+}
+
+@media (min-width: 992px) {
+  .modal-lg {
+    max-width: 800px; /* Ancho mayor para modal grande */
+  }
+}

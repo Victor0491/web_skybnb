@@ -23,6 +23,7 @@ export const routes: Routes = [
     component: HomeAlojamientosComponent,
   },
   { path: 'user-profile', component: UserProfileComponent },
+  { path: 'alojamiento-detail/:id', component: AlojamientoDetailComponent },
 ];
 
 @NgModule({

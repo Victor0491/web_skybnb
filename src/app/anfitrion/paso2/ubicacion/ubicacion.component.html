@@ -1,9 +1,9 @@
 <div class="container">
   <h1>Ingrese la ubicacion del alojamiento</h1>
-  <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="address">Dirección:</label>
-      <input type="text" class="form-control" id="address" formControlName="address" [(ngModel)]="alojamiento.direccion" placeholder="Ingrese la dirección">
+      <input type="text" class="form-control" id="address" [(ngModel)]="formData.direccion" name="address" placeholder="Ingrese la dirección">
     </div>
     <button type="submit" class="btn btn-primary">Buscar</button>
     <button type="button" class="btn btn-danger ml-2" (click)="clearMap()">Limpiar Mapa</button>

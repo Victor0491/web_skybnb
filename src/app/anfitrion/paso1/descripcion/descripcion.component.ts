@@ -1,41 +1,45 @@
-import { Component,OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Alojamiento } from '../../../core/models/Alojamiento';
 import { FormsModule } from '@angular/forms';
-import { TipoAlojamientoService,TipoAlojamiento } from '../../../core/service/sesion/alojamiento/tipo-alojamiento.service';
+import { TipoAlojamientoService } from '../../../core/service/alojamiento/tipo-alojamiento.service';
+import { TipoAlojamiento } from '../../../core/models/TipoAlojamiento';
+import { RouterLink } from '@angular/router';
+import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
 @Component({
   selector: 'app-descripcion',
   templateUrl: './descripcion.component.html',
+  styleUrls: ['./descripcion.component.css'],
   standalone: true,
   imports: [RouterLink,
             CommonModule,
             ReactiveFormsModule,
             FormsModule,],
-  styleUrls: ['./descripcion.component.css']
 })
 export class DescripcionComponent implements OnInit {
-  alojamiento: Partial<Alojamiento> = {
-    tipoalojamiento: null,
+  
+
+  formData = {
+    tipoalojamiento : 0
   };
-  preferenciasForm: FormGroup;
+
+  
   tiposAlojamiento: TipoAlojamiento[] = [];
   seccionActual = 'tipoAlojamiento';
-  historialSecciones: string[] = [];
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
-    private tipoAlojamientoService: TipoAlojamientoService
+    private tipoAlojamientoService: TipoAlojamientoService,
+    private formalojamiento : FormAlojamientoService
   ) {
-    this.preferenciasForm = this.fb.group({
-      tipoAlojamiento: ['', Validators.required],
-    });
+    const savedData = this.formalojamiento.getFormData();
+    this.formData.tipoalojamiento = savedData.tipoalojamiento;
   }
+
 
   ngOnInit(): void {
     this.getTiposAlojamiento();
@@ -49,12 +53,15 @@ export class DescripcionComponent implements OnInit {
   }
 
   seleccionarTipo(id: any): void {
-    this.alojamiento.tipoalojamiento = id;
-    sessionStorage.setItem('tipoAlojamientoId', id); // Guardar en sessionStorage
+    this.formData.tipoalojamiento = id;
     console.log('ID del tipo de alojamiento guardada en sessionStorage:', id);
+    this.formalojamiento.setFormData(this.formData);
   }
-  navigateToUbicacion() {
+
+
+  navigateToUbicacion():void {
     // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.formalojamiento.setFormData(this.formData);
     this.router.navigate(['anfitrion/entorno']);
   }
 

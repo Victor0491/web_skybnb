@@ -2,19 +2,18 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
 
-
 @Component({
   selector: 'app-imagen',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './imagen.component.html',
-  styleUrl: './imagen.component.css'
+  styleUrls: ['./imagen.component.css'] // Corregido: styleUrl -> styleUrls
 })
 export class ImagenComponent {
   constructor(private router: Router) {}
 
   selectedFiles: FileList | null = null;
-  uploadedImages: File[] = [];
+  uploadedImages: { file: File, base64: string }[] = [];
 
   onFileSelected(event: any): void {
     this.selectedFiles = event.target.files;
@@ -23,10 +22,20 @@ export class ImagenComponent {
         const file = this.selectedFiles[i];
         // Verificar que sean imágenes antes de agregarlas a la lista
         if (file.type.startsWith('image/')) {
-          this.uploadedImages.push(file);
+          this.uploadedImages.push({ file: file, base64: '' });
+          this.convertToBase64(file, i);
         }
       }
     }
+  }
+
+  convertToBase64(file: File, index: number): void {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (): void => {
+      this.uploadedImages[index].base64 = reader.result as string;
+      console.log(reader.result); // Aquí puedes ver la imagen en base64
+    };
   }
 
   getImageUrl(image: File): string {

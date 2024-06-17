@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-reserva',
@@ -12,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class ReservaComponent implements OnInit {
   rentalValue: number | null = null;
   daysCount: number | null = null;
+  readonly pricePerNight = 100000; // Define el precio por noche aquí
 
   ngOnInit() {
     this.setMinDate();
@@ -19,8 +22,8 @@ export class ReservaComponent implements OnInit {
 
   setMinDate() {
     const today = new Date().toISOString().split('T')[0];
-    const startDateInput = (<HTMLInputElement>document.getElementById('startDate'));
-    const endDateInput = (<HTMLInputElement>document.getElementById('endDate'));
+    const startDateInput = <HTMLInputElement>document.getElementById('startDate');
+    const endDateInput = <HTMLInputElement>document.getElementById('endDate');
     
     startDateInput.min = today;
     endDateInput.min = today;
@@ -29,22 +32,43 @@ export class ReservaComponent implements OnInit {
   calculateRent() {
     const startDateInput = (<HTMLInputElement>document.getElementById('startDate')).value;
     const endDateInput = (<HTMLInputElement>document.getElementById('endDate')).value;
-    const personsInput = (<HTMLInputElement>document.getElementById('persons')).value;
 
-    if (startDateInput && endDateInput && personsInput) {
+    if (startDateInput && endDateInput) {
       const startDate = new Date(startDateInput);
       const endDate = new Date(endDateInput);
-      const days = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24);
-      const persons = parseInt(personsInput);
+      const timeDifference = endDate.getTime() - startDate.getTime();
+      const days = timeDifference / (1000 * 3600 * 24);
 
       if (days > 0) {
-        // Se asume que el valor diario es de 10,000 pesos por persona
-        this.rentalValue = days * persons * 10000;
+        this.rentalValue = days * this.pricePerNight; // Calcula el valor del arriendo
         this.daysCount = days;
       } else {
         alert('La fecha de fin debe ser posterior a la fecha de inicio.');
+        this.rentalValue = null;
         this.daysCount = null;
       }
+    } else {
+      this.rentalValue = null;
+      this.daysCount = null;
     }
   }
+
+  reserveHere() {
+    if (this.daysCount !== null && this.rentalValue !== null) {
+      Swal.fire({
+        title: 'Reserva Confirmada',
+        text: `Has reservado ${this.daysCount} días por un total de ${this.rentalValue.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+    } else {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, selecciona las fechas correctamente.',
+        icon: 'error',
+        confirmButtonText: 'Volver a intentar'
+      });
+    }
+  }
+  
 }

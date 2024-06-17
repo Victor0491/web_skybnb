@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Alojamiento } from '../../../core/models/Alojamiento';
-import { ServicioService, Servicio } from '../../../core/service/sesion/alojamiento/tipo-servicios.service';
+import { ServicioService } from '../../../core/service/alojamiento/tipo-servicios.service';
+import { Servicio } from '../../../core/models/Servicios';
+import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
 
 @Component({
@@ -14,46 +16,44 @@ import { ServicioService, Servicio } from '../../../core/service/sesion/alojamie
   styleUrl: './datosbasicos.component.css'
 })
 export class DatosbasicosComponent {
-  nuevoAlojamiento: any = {
+  servicios: Servicio[] = [];
+  formData = {
     dormitorios: 0,
     banos: 0,
     huespedes: 0,
-    mascotas: false
-  }; // Objeto para almacenar los datos del alojamiento
+    mascotas: false,
+    servicios: [] as number[]
+  };
 
-  servicios: Servicio[] = []; // Array para almacenar los servicios
-  serviciosSeleccionados: Servicio[] = []; // Array para almacenar los servicios seleccionados
-
-  constructor(private router: Router, private servicioService: ServicioService) { // Inyecta ServicioService
-    // Llama a getServicios() y suscríbete al Observable
+  constructor(
+    private router: Router,
+    private servicioService: ServicioService,
+    private formAlojamientoService: FormAlojamientoService
+  ) {
     this.servicioService.getServicios().subscribe(servicios => {
-      this.servicios = servicios; // Asigna los servicios obtenidos a la propiedad servicios
+      this.servicios = servicios;
     });
-  }
+
+    const savedData = this.formAlojamientoService.getFormData();
+    this.formData.dormitorios = savedData.dormitorios
+    this.formData.banos = savedData.banos
+    this.formData.huespedes = savedData.huespedes
+    this.formData.mascotas = savedData.mascotas
+    this.formData.servicios = savedData.servicios || [];
+    }
+
+
+    toggleServicio(id: number): void {
+      const index = this.formData.servicios.indexOf(id);
+      if (index === -1) {
+        this.formData.servicios.push(id);
+      } else {
+        this.formData.servicios.splice(index, 1);
+      }
+    }
 
   guardarDatosBasicos(): void {
-    console.log('Dormitorios:', this.nuevoAlojamiento.dormitorios);
-    console.log('Baños:', this.nuevoAlojamiento.banos);
-    console.log('Cantidad de huéspedes:', this.nuevoAlojamiento.huespedes);
-    console.log('Mascotas:', this.nuevoAlojamiento.mascotas);
-    console.log('Servicios seleccionados:', this.serviciosSeleccionados);
-
-    // Guardar los datos básicos y los servicios seleccionados en sessionStorage
-    sessionStorage.setItem('datosBasicos', JSON.stringify(this.nuevoAlojamiento));
-    sessionStorage.setItem('serviciosSeleccionados', JSON.stringify(this.serviciosSeleccionados));
-  }
-
-  toggleServicio(servicio: Servicio): void {
-    const index = this.serviciosSeleccionados.findIndex(s => s.id === servicio.id);
-    if (index === -1) {
-      this.serviciosSeleccionados.push(servicio);
-    } else {
-      this.serviciosSeleccionados.splice(index, 1);
-    }
-  }
-
-  isServicioSeleccionado(servicio: Servicio): boolean {
-    return this.serviciosSeleccionados.some(s => s.id === servicio.id);
+    this.formAlojamientoService.setFormData(this.formData);
   }
 
   navigateToPaso3() {
@@ -65,5 +65,5 @@ export class DatosbasicosComponent {
     this.guardarDatosBasicos();
     this.router.navigate(['anfitrion/ubicacion']);
   }
-}
 
+}
