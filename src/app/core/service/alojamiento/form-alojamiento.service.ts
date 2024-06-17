@@ -19,7 +19,8 @@ export class FormAlojamientoService {
     tipoalojamiento: 0,
     ubicacion: 0,
     actividades: [],
-    servicios: []
+    servicios: [],
+    imagenes: [] 
   };
 
   setFormData(data: any): void {
