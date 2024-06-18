@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Alojamiento } from '../../models/Alojamiento';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +10,8 @@ export class FormAlojamientoService {
   private formDataKey = 'formAlojamientoData';
 
   private formData: any = this.loadFormData() || {
-    nombre: "",
-    direccion: "",
+    nombre: '',
+    direccion: '',
     imagenes: [],
     dormitorios: 0,
     banos: 0,
@@ -23,6 +26,8 @@ export class FormAlojamientoService {
     servicios: []
   };
 
+  constructor(private http: HttpClient) {}
+
   setFormData(data: any): void {
     this.formData = { ...this.formData, ...data };
     this.saveFormData();
@@ -34,8 +39,8 @@ export class FormAlojamientoService {
 
   clearFormData(): void {
     this.formData = {
-      nombre: "",
-      direccion: "",
+      nombre: '',
+      direccion: '',
       imagenes: [],
       dormitorios: 0,
       banos: 0,
@@ -48,7 +53,6 @@ export class FormAlojamientoService {
       ubicacion: 0,
       actividades: [],
       servicios: []
-
     };
     this.saveFormData();
   }
@@ -61,5 +65,8 @@ export class FormAlojamientoService {
     const data = localStorage.getItem(this.formDataKey);
     return data ? JSON.parse(data) : null;
   }
-}
 
+  createAlojamiento(alojamiento: Alojamiento): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/api/skybnb/create-alojamiento', alojamiento);
+  }
+}

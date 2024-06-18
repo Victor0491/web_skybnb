@@ -5,6 +5,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import ValidationError
+
 
 from .models import Usuario, Rol ,TipoAlojamiento,PerfilUsuario,Actividades,Ubicacion,Servicios,Alojamiento,Reserva
 from .serializers import UsuarioSerializers,RolesSerializers,TipoAlojamientoSerializers, PerfilUsuarioSerializers
@@ -104,6 +106,12 @@ class PerfilUsuarioCreateView(generics.CreateAPIView):
     queryset = PerfilUsuario.objects.all()
     serializer_class = PerfilUsuarioSerializers
 
+    def perform_create(self, serializer):
+        usuario_id = serializer.validated_data.get('usuario_id')
+        if usuario_id is None:
+            raise ValidationError("El usuario_id no puede ser nulo.")
+        serializer.save()
+
 #GET ID
 class PerfilUsuarioDetail(generics.RetrieveAPIView):
     queryset = PerfilUsuario.objects.all()
@@ -124,10 +132,6 @@ class GetDetailsAlojamiento(generics.RetrieveAPIView):
     queryset = Alojamiento.objects.all()
     serializer_class = GetDetailsAlojamientoSerializers
 
-
-class AlojamientoViewSet(generics.CreateAPIView):
-    queryset = Alojamiento.objects.all()
-    serializer_class = ImagenAlojamientoSerializer
 #----------------------------------------------------------------------------
 
 class ReservaCreateView(generics.CreateAPIView):
