@@ -20,8 +20,7 @@ export class FormAlojamientoService {
     tipoalojamiento: 0,
     ubicacion: 0,
     actividades: [],
-    servicios: [],
-    imagenes: [] 
+    servicios: []
   };
 
   setFormData(data: any): void {
@@ -48,8 +47,7 @@ export class FormAlojamientoService {
       tipoalojamiento: 0,
       ubicacion: 0,
       actividades: [],
-      servicios: [],
-      imagenes: [] 
+      servicios: []
     };
     this.saveFormData();
   }
