@@ -39,11 +39,11 @@ export class InformacionComponent implements OnInit {
     this.formData.descripcion = savedData.descripcion
     this.formData.precio = savedData.precio
     this.formData.usuario = this.authsesion.obtenerInfoUsuario();
-    this.DatosAlojamiento = this.formalojamiento.getFormData();
+
   }
 
   ngOnInit() {
-
+    console.log(this.DatosAlojamiento);
   }
 
   navigateToImagen() {
@@ -52,9 +52,18 @@ export class InformacionComponent implements OnInit {
 
   guardarAlojamiento() {
     this.formalojamiento.setFormData(this.formData);
-    console.log(this.DatosAlojamiento)
-    this.alojamientoService.createAlojamiento(this.DatosAlojamiento).subscribe(response => {
-      console.log('Alojamiento creado exitosamente:', response);
-  })
+    this.DatosAlojamiento = this.formalojamiento.getFormData();
+    console.log(this.DatosAlojamiento);
+    this.alojamientoService.createAlojamiento(this.DatosAlojamiento)
+    .subscribe(
+        response => {
+            console.log('Alojamiento creado exitosamente:', response);
+            this.formalojamiento.clearFormData();
+        },
+        error => {
+            console.error('Error al crear alojamiento:', error);
+            // Aquí puedes agregar más lógica para manejar el error, como mostrar un mensaje al usuario
+        }
+    );
   }
 }

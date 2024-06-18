@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
 import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
+
+interface ImagesData {
+  [key: string]: string; // Esto permite cualquier clave de tipo string con valor de tipo string
+}
+
 @Component({
   selector: 'app-imagen',
   standalone: true,
@@ -14,6 +19,7 @@ export class ImagenComponent {
   formData = {
     imagenes: [] as string[]
   };
+
 
   selectedFiles: FileList | null = null;
   uploadedImages: { file: File, base64: string }[] = [];
@@ -30,20 +36,29 @@ export class ImagenComponent {
       for (let i = 0; i < this.selectedFiles.length; i++) {
         const file = this.selectedFiles[i];
         if (file.type.startsWith('image/')) {
-          this.convertToBase64(file);
+          this.uploadedImages.push({ file: file, base64: '' });
+          this.convertToBase64(file, i);
         }
       }
     }
   }
 
-  convertToBase64(file: File): void {
+  convertToBase64(file: File, index: number): void {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (): void => {
-      const base64String = reader.result as string;
-      this.uploadedImages.push({ file: file, base64: base64String });
-      this.formData.imagenes.push(base64String);
-      this.formalojamiento.setFormData(this.formData);
+      this.uploadedImages[index].base64 = reader.result as string;
+      console.log(reader.result); // Aquí puedes ver la imagen en base64
+
+      // Crea un objeto con claves específicas para cada imagen
+      const imagesData: ImagesData = this.uploadedImages.reduce((acc, image, idx) => {
+        const key = `image${idx + 1}`; // Esto creará claves como 'image1', 'image2', etc.
+        acc[key] = image.base64;
+        return acc;
+      }, {} as ImagesData); // Usa la interfaz ImagesData para el objeto acumulador
+
+      // Actualiza formData con el objeto de imágenes
+      this.formalojamiento.setFormData({ imagenes: imagesData });
     };
   }
 
@@ -52,13 +67,11 @@ export class ImagenComponent {
   }
 
   navigateToInformacion() {
-    this.formalojamiento.setFormData(this.formData);
     console.log('Botón Comencemos clickeado');
     this.router.navigate(['/anfitrion/informacion']);
   }
 
   navigateToPaso3() {
-    this.formalojamiento.setFormData(this.formData);
     console.log('Botón Comencemos clickeado');
     this.router.navigate(['/anfitrion/paso3']);
   }
