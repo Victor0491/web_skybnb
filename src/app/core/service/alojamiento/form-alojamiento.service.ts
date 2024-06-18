@@ -48,6 +48,7 @@ export class FormAlojamientoService {
       ubicacion: 0,
       actividades: [],
       servicios: []
+
     };
     this.saveFormData();
   }
