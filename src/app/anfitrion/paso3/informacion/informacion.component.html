@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Ingresa los detalles del alojamiento</h2>
-  <form (ngSubmit)="guardarAlojamiento()">
+  <form>
     <div class="form-group">
       <label for="titulo">Título</label>
       <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Ingresa el título" required [(ngModel)]="formData.nombre">
@@ -15,7 +15,7 @@
     </div>
     <div class="button-container">
       <button class="start-button-volver" (click)="navigateToImagen()">Volver</button>
-      <button type="submit" class="btn btn-primary">Guardar Alojamiento</button>
+      <button class="btn btn-primary"   (click)="guardarAlojamiento()">Guardar Alojamiento</button>
     </div>
   </form>
 </div>

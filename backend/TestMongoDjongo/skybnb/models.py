@@ -78,18 +78,22 @@ class PerfilUsuario(models.Model):
 
 class imagenAlojamiento(models.Model):
     alojamiento = models.OneToOneField('Alojamiento', on_delete=models.CASCADE, related_name='imagenes')
-    image1 = models.TextField()
-    image2 = models.TextField()
-    image3 = models.TextField()
-    image4 = models.TextField()
-    image5 = models.TextField()
-    image6 = models.TextField()
-    image7 = models.TextField()
-    image8 = models.TextField()
-    image9 = models.TextField()
-    image10 = models.TextField()
-    image11 = models.TextField()
-    image12 = models.TextField()
+    image1 = models.TextField(blank=True, null=True)
+    image2 = models.TextField(blank=True, null=True)
+    image3 = models.TextField(blank=True, null=True)
+    image4 = models.TextField(blank=True, null=True)
+    image5 = models.TextField(blank=True, null=True)
+    image6 = models.TextField(blank=True, null=True)
+    image7 = models.TextField(blank=True, null=True)
+    image8 = models.TextField(blank=True, null=True)
+    image9 = models.TextField(blank=True, null=True)
+    image10 = models.TextField(blank=True, null=True)
+    image11 = models.TextField(blank=True, null=True)
+    image12 = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Imagen de {self.alojamiento.nombre}"
+
 
 class Alojamiento(models.Model):
     nombre = models.CharField(max_length=255)
@@ -102,8 +106,8 @@ class Alojamiento(models.Model):
     precio = models.IntegerField()
     estado_destacado = models.BooleanField()
     usuario = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE,  related_name='alojamientos' )
-    tipoalojamiento = models.OneToOneField(TipoAlojamiento, on_delete=models.CASCADE, related_name='tipo')
-    ubicacion = models.OneToOneField(Ubicacion, on_delete=models.CASCADE, related_name='ubicacion')
+    tipoalojamiento = models.ForeignKey(TipoAlojamiento, on_delete=models.CASCADE, related_name='tipo')
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, related_name='ubicacion')
     actividades = models.ArrayReferenceField(
         to='Actividades',
         on_delete=models.CASCADE
@@ -116,6 +120,7 @@ class Alojamiento(models.Model):
     def __str__(self):
         return self.nombre
     
+
 class Reserva(models.Model):
     usuario = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE, related_name='usuarios')
     alojamiento = models.ForeignKey(Alojamiento, on_delete=models.CASCADE)

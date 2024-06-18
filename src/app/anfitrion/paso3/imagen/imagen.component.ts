@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service'; // Asegúrate de importar tu servicio
+import { CommonModule } from '@angular/common'; // Importa CommonModule
+import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
+import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
-// Define una interfaz para las imágenes
+
 interface ImagesData {
   [key: string]: string; // Esto permite cualquier clave de tipo string con valor de tipo string
 }
@@ -13,16 +13,22 @@ interface ImagesData {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './imagen.component.html',
-  styleUrls: ['./imagen.component.css']
+  styleUrls: ['./imagen.component.css'] // Corregido: styleUrl -> styleUrls
 })
 export class ImagenComponent {
+  formData = {
+    imagenes: [] as string[]
+  };
+
+
   selectedFiles: FileList | null = null;
   uploadedImages: { file: File, base64: string }[] = [];
 
-  constructor(
-    private router: Router,
-    private formAlojamientoService: FormAlojamientoService // Inyecta el servicio aquí
-  ) {}
+  constructor(private router: Router, private formalojamiento: FormAlojamientoService) {
+    const savedData = this.formalojamiento.getFormData();
+    this.formData.imagenes = savedData.imagenes || [];
+    this.uploadedImages = this.formData.imagenes.map(base64 => ({ file: null as any, base64 }));
+  }
 
   onFileSelected(event: any): void {
     this.selectedFiles = event.target.files;
@@ -52,7 +58,7 @@ export class ImagenComponent {
       }, {} as ImagesData); // Usa la interfaz ImagesData para el objeto acumulador
 
       // Actualiza formData con el objeto de imágenes
-      this.formAlojamientoService.setFormData({ imagenes: imagesData });
+      this.formalojamiento.setFormData({ imagenes: imagesData });
     };
   }
 
@@ -60,12 +66,12 @@ export class ImagenComponent {
     return URL.createObjectURL(image);
   }
 
-  navigateToInformacion(): void {
+  navigateToInformacion() {
     console.log('Botón Comencemos clickeado');
     this.router.navigate(['/anfitrion/informacion']);
   }
 
-  navigateToPaso3(): void {
+  navigateToPaso3() {
     console.log('Botón Comencemos clickeado');
     this.router.navigate(['/anfitrion/paso3']);
   }
