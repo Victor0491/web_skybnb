@@ -1,0 +1,26 @@
+<div class="modal">
+    <div class="modal-content">
+      <h2>Perfil del Usuario</h2>
+      <form (ngSubmit)="guardarPerfil()">
+        <label for="nombreCompleto">Nombre Completo:</label>
+        <input type="text" id="nombreCompleto" [(ngModel)]="nombreCompleto" name="nombreCompleto" required>
+  
+        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" [(ngModel)]="fecha_nacimiento" name="fecha_nacimiento" required>
+  
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" [(ngModel)]="telefono" name="telefono" required>
+  
+        <label for="actividades">Actividades:</label>
+        <input type="text" id="actividades" [(ngModel)]="actividades" name="actividades" required>
+  
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" [(ngModel)]="ubicacion" name="ubicacion" required>
+  
+        <label for="tipoalojamiento">Tipo de Alojamiento:</label>
+        <input type="text" id="tipoalojamiento" [(ngModel)]="tipoalojamiento" name="tipoalojamiento" required>
+  
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+  </div>
