@@ -84,16 +84,8 @@ DATABASES = {
             'NAME': 'Skybnb',
             'ENFORCE_SCHEMA': False,
             'CLIENT': {
-<<<<<<< HEAD
-
-                'host': 'mongodb+srv://matiascalisto:Sca2021-@skybnb.g3rbwz5.mongodb.net/?retryWrites=true&w=majority&appName=Skybnb'
-
-        
-                  }  
-=======
                 'host': 'mongodb+srv://jofuentess:1rMBfSe3Bl5GCBuy@skybnb.4oue9vr.mongodb.net/?retryWrites=true&w=majority&appName=Skybnb'
             }  
->>>>>>> 7c50df9e35c33003fb8120dfa34360783e1a7124
         }
 }
 
