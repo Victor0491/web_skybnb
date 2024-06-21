@@ -1,43 +1,65 @@
 <div class="container">
   <h2>Ingrese los datos básicos</h2>
 
+  <!-- Dormitorios -->
   <div class="input-container">
     <label for="dormitorios">Dormitorios:</label>
     <div class="input-control">
-      <button (click)="decrementarDormitorios()">-</button>
-      <input type="text" id="dormitorios" [(ngModel)]="dormitoriosValue" readonly>
-      <button (click)="incrementarDormitorios()">+</button>
+      <button (click)="formData.dormitorios = formData.dormitorios > 0 ? formData.dormitorios - 1 : 0">-</button>
+      <input type="text" id="dormitorios" [(ngModel)]="formData.dormitorios" readonly>
+      <button (click)="formData.dormitorios = formData.dormitorios + 1">+</button>
     </div>
   </div>
 
+  <!-- Baños -->
   <div class="input-container">
-    <label for="banios">Baños:</label>
+    <label for="banos">Baños:</label>
     <div class="input-control">
-      <button (click)="decrementarBanios()">-</button>
-      <input type="text" id="banios" [(ngModel)]="baniosValue" readonly>
-      <button (click)="incrementarBanios()">+</button>
+      <button (click)="formData.banos = formData.banos > 0 ? formData.banos - 1 : 0">-</button>
+      <input type="text" id="banos" [(ngModel)]="formData.banos" readonly>
+      <button (click)="formData.banos = formData.banos + 1">+</button>
     </div>
   </div>
 
+  <!-- Huéspedes -->
   <div class="input-container">
     <label for="cantidadHuespedes">Cantidad de huéspedes:</label>
     <div class="input-control">
-      <button (click)="decrementarCantidadHuespedes()">-</button>
-      <input type="text" id="cantidadHuespedes" [(ngModel)]="cantidadHuespedesValue" readonly>
-      <button (click)="incrementarCantidadHuespedes()">+</button>
+      <button (click)="formData.huespedes = formData.huespedes > 0 ? formData.huespedes - 1 : 0">-</button>
+      <input type="text" id="cantidadHuespedes" [(ngModel)]="formData.huespedes" readonly>
+      <button (click)="formData.huespedes = formData.huespedes + 1">+</button>
     </div>
   </div>
 
+  <!-- Mascotas -->
   <div class="input-container">
     <label for="mascotas">Mascotas:</label>
-    <select id="mascotas" [(ngModel)]="mascotasValue">
-      <option value="true">Sí</option>
-      <option value="false">No</option>
+    <select id="mascotas" [(ngModel)]="formData.mascotas">
+      <option [ngValue]="true">Sí</option>
+      <option [ngValue]="false">No</option>
     </select>
   </div>
 
+<<<<<<< HEAD
+=======
+
+  <div class="form-check" *ngFor="let servicio of servicios">
+    <input class="form-check-input" type="checkbox" [id]="'servicio-' + servicio.id" 
+      [checked]="formData.servicios.includes(servicio.id)" 
+      (change)="toggleServicio(servicio.id)">
+    <label class="form-check-label" [for]="'servicio-' + servicio.id">
+      {{ servicio.nombre }}:
+    </label>
+  </div>
+
+  <!-- Botones -->
+>>>>>>> 7c50df9e35c33003fb8120dfa34360783e1a7124
   <div class="button-container">
     <button class="start-button-volver" (click)="navigateToUbicacion()">Volver</button>
     <button class="start-button-avanzar" (click)="navigateToPaso3()">Paso 3</button>
   </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> 7c50df9e35c33003fb8120dfa34360783e1a7124

@@ -3,62 +3,70 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import Swal from 'sweetalert2';
+import { Alojamiento } from '../../../core/models/Alojamiento';
+import { FormsModule } from '@angular/forms';
+import { TipoAlojamientoService } from '../../../core/service/alojamiento/tipo-alojamiento.service';
+import { TipoAlojamiento } from '../../../core/models/TipoAlojamiento';
+import { RouterLink } from '@angular/router';
+import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
 @Component({
   selector: 'app-descripcion',
   templateUrl: './descripcion.component.html',
+  styleUrls: ['./descripcion.component.css'],
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule // Importa RouterModule para RouterLink
-  ],
-  styleUrls: ['./descripcion.component.css']
+  imports: [RouterLink,
+            CommonModule,
+            ReactiveFormsModule,
+            FormsModule,],
 })
 export class DescripcionComponent implements OnInit {
-  preferenciasForm: FormGroup;
-  tiposAlojamiento: { nombre: string, imagen: string }[] = [
-    { nombre: 'Cabaña', imagen: 'https://www.shutterstock.com/image-photo/wooden-cottage-forest-near-biogradsko-600nw-1963746835.jpg' },
-    { nombre: 'Casa', imagen: 'https://st2.depositphotos.com/1041088/11595/i/450/depositphotos_115954550-stock-photo-home-exterior-with-garage-and.jpg' },
-    { nombre: 'Departamento', imagen: 'https://http2.mlstatic.com/D_NQ_NP_766438-MLC75223256781_032024-O.webp' }
-  ];
+  
 
+  formData = {
+    tipoalojamiento : 0
+  };
+
+  
+  tiposAlojamiento: TipoAlojamiento[] = [];
   seccionActual = 'tipoAlojamiento';
-  historialSecciones: string[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.preferenciasForm = this.fb.group({
-      tipoAlojamiento: ['', Validators.required],
-    });
+  constructor(
+    private router: Router,
+    private tipoAlojamientoService: TipoAlojamientoService,
+    private formalojamiento : FormAlojamientoService
+  ) {
+    const savedData = this.formalojamiento.getFormData();
+    this.formData.tipoalojamiento = savedData.tipoalojamiento;
   }
 
-  ngOnInit(): void {}
 
-  seleccionarTipo(tipo: string): void {
-    this.preferenciasForm.get('tipoAlojamiento')?.setValue(tipo);
+  ngOnInit(): void {
+    this.getTiposAlojamiento();
   }
 
-  navigateToUbicacion(): void {
-    if (this.preferenciasForm.get('tipoAlojamiento')?.valid) {
-      this.router.navigate(['anfitrion/entorno']);
-    } else {
-      Swal.fire({
-        title: 'Atención',
-        text: 'Por favor selecciona un tipo de alojamiento antes de continuar.',
-        icon: 'warning',
-        confirmButtonText: 'Entendido',
-        customClass: {
-          popup: 'swal2-popup',
-          title: 'swal2-title',
-          confirmButton: 'swal2-confirm'
-        }
+  getTiposAlojamiento(): void {
+    this.tipoAlojamientoService.getTiposAlojamiento()
+      .subscribe(tipos => {
+        this.tiposAlojamiento = tipos;
       });
-    }
   }
 
-  navigateToPaso1(): void {
+  seleccionarTipo(id: any): void {
+    this.formData.tipoalojamiento = id;
+    console.log('ID del tipo de alojamiento guardada en sessionStorage:', id);
+    this.formalojamiento.setFormData(this.formData);
+  }
+
+
+  navigateToUbicacion():void {
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
+    this.formalojamiento.setFormData(this.formData);
+    this.router.navigate(['anfitrion/entorno']);
+  }
+
+  navigateToPaso1() {
+    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
     this.router.navigate(['anfitrion/paso1']);
   }
 }

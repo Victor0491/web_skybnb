@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavBarAuthComponent } from '../../shared/components/nav-bar-auth/nav-bar-auth.component';
 import { RouterModule } from '@angular/router';
 import { User } from '../../core/models/User';
+import { UserProfile } from '../../core/models/User';
 import { FormsModule } from '@angular/forms';
 import { AuthSesionService } from '../../core/service/sesion/auth-sesion.service';
 import { Router } from '@angular/router';
@@ -20,8 +21,18 @@ export class RegisterComponent {
   user: User = {
     email: '',
     password: '',
-    username : '',
     roles : [1]
+  }
+
+  userProfile: UserProfile = {
+
+      nombreCompleto: "",
+      fecha_nacimiento: null,
+      usuario: null,
+      telefono: "",
+      actividades: [],
+      ubicacion: [],
+      tipoalojamiento: []
   }
 
   show_error = false;
@@ -33,7 +44,6 @@ export class RegisterComponent {
     private router: Router
 
   ) { }
-
 
 
   confirmarPassword(): boolean {
@@ -56,26 +66,12 @@ export class RegisterComponent {
     return true;
   }
 
-  // register() {
-  //   this.show_error = false;
-  //   this.mensaje_error = '';
-
-  //   if(this.validarForm()){
-  //     if (this.confirmarPassword()) {
-  //       if (this.authService.register(this.user)) {
-  //         console.log('Usuario Registrado');
-  //         this.router.navigateByUrl('auth/login')
-  //       } else {
-  //         this.show_error = true;
-  //       }
-  //     }
-  //   }
-  // }
 
   onRegister() {
     this.authService.register(this.user).subscribe(
       response => {
         console.log('User registered successfully', response);
+        this.router.navigateByUrl('')
         // Maneja la respuesta exitosa aquí
       },
       error => {
@@ -84,5 +80,4 @@ export class RegisterComponent {
       }
     );
   }
-
 }

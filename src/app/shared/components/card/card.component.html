@@ -3,7 +3,7 @@
     <article class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 col-xxl-2 my-4" *ngFor="let alojamiento of alojamientos; let j = index">
       <div class="card-container mx-3">
         <div class="card">
-          <div [id]="'card' + j" class="carousel slide" data-bs-ride="carousel">
+          <div [id]="'card' + j" class="carousel slide">
             <div class="carousel-indicators">
               <button *ngFor="let imagen of alojamiento.imagenes; let i = index" type="button"
                 [attr.data-bs-target]="'#card' + j" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
