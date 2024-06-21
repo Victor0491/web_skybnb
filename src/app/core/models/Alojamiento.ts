@@ -14,3 +14,7 @@
     actividades: number[];
     servicios: number[];
   }
+
+  export interface ListAlojamiento{
+    
+  }

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavBarAuthComponent } from '../../shared/components/nav-bar-auth/nav-bar-auth.component';
 import { RouterModule } from '@angular/router';
 import { User } from '../../core/models/User';
+import { UserProfile } from '../../core/models/User';
 import { FormsModule } from '@angular/forms';
 import { AuthSesionService } from '../../core/service/sesion/auth-sesion.service';
 import { Router } from '@angular/router';
@@ -23,6 +24,17 @@ export class RegisterComponent {
     roles : [1]
   }
 
+  userProfile: UserProfile = {
+
+      nombreCompleto: "",
+      fecha_nacimiento: null,
+      usuario: null,
+      telefono: "",
+      actividades: [],
+      ubicacion: [],
+      tipoalojamiento: []
+  }
+
   show_error = false;
   mensaje_error: string = '';
   confirm_password: string = '';
@@ -32,7 +44,6 @@ export class RegisterComponent {
     private router: Router
 
   ) { }
-
 
 
   confirmarPassword(): boolean {
