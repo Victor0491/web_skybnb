@@ -81,7 +81,7 @@ export class ActividadComponent implements OnInit {
       });
     }
   }
-
+  
   navigateToEntorno(): void {
     this.router.navigate(['anfitrion/entorno']);
   }

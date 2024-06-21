@@ -26,6 +26,7 @@
   <hr>
   <h1>Cabaña El Ocaso con hermosa vista al mar</h1>
 
+
   <!-- Descripción del alojamiento -->
   <div class="container" *ngIf="detailsalojamiento">
     <p>La cabaña cuenta con 3 dormitorios con camas de dos plazas y TV de pantalla plana. La cocina está equipada con
@@ -37,14 +38,12 @@
       <p>Precio: ${{ detailsalojamiento.precio }}</p>
     </div>
 
+
     <!-- Mensaje alternativo si el precio no está disponible -->
     <div *ngIf="!detailsalojamiento || detailsalojamiento.precio === undefined">
       <p>El precio no está disponible.</p>
     </div>
-    <a href="#" class="link-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Más información</a>
   </div>
-  <!-- Mostrar el precio solo si el alojamiento existe y tiene un precio -->
-
 
   <hr>
   <div>
