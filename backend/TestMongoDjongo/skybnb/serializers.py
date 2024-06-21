@@ -147,7 +147,7 @@ class GetAlojamientoSerializers(serializers.ModelSerializer):
     
     class Meta:
         model = Alojamiento
-        fields = ['nombre','precio','estado_destacado','tipoalojamiento','imagenes']
+        fields = ['id','nombre','descripcion','precio','estado_destacado','tipoalojamiento','imagenes']
 
 
 class GetDetailsAlojamientoSerializers(serializers.ModelSerializer):
@@ -156,10 +156,11 @@ class GetDetailsAlojamientoSerializers(serializers.ModelSerializer):
     actividades = ActividadSerializers(many=True)
     servicios = ServiciosSerializers(many=True)
     tipoalojamiento = TipoAlojamientoSerializers(read_only='True')
+    imagenes = ImagenAlojamientoSerializer(required=False)
  
     class Meta:
         model = Alojamiento
-        fields = ['nombre','direccion','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios']
+        fields = ['id','nombre','direccion','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios','imagenes']
 
 
 class ReservaSerializers(serializers.ModelSerializer):

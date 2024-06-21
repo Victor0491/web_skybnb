@@ -27,6 +27,5 @@ urlpatterns = [
    path('list-tipo-alojamiento', views.TipoAlojamientoList.as_view(), name='list-tipo-alojamiento'),
    path('list-alojamiento', views.GetAlojamiento.as_view(), name='list-alojamiento'),
    path('list-alojamiento-details/<int:pk>/', views.GetDetailsAlojamiento.as_view(), name='list-alojamiento'),
-
-
+   
 ]
