@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
 import { FilterComponent } from './shared/components/filter/filter.component';  // Importa el componente de filtro
 
+
 @Component({
   selector: 'app-root',
   standalone: true,

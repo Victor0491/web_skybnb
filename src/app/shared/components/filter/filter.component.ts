@@ -12,8 +12,5 @@ export class FilterComponent {
   filters = {
     type: '',
     environment: '',
-    activity1: '',
-    activity2: '',
-    activity3: ''
   };
 }

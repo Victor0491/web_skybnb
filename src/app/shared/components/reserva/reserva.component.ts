@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -12,12 +12,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./reserva.component.css']
 })
 export class ReservaComponent implements OnInit {
+
+  @Input() alojamientoId!: number;
+
   rentalValue: number | null = null;
   daysCount: number | null = null;
   readonly pricePerNight = 100000; // Define el precio por noche aquí
 
+
   ngOnInit() {
     this.setMinDate();
+    console.log('Alojamiento ID recibido:', this.alojamientoId);
   }
 
   setMinDate() {

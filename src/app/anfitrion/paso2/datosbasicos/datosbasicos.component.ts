@@ -2,18 +2,27 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+<<<<<<< HEAD
+import Swal from 'sweetalert2';
+
+=======
 import { Alojamiento } from '../../../core/models/Alojamiento';
 import { ServicioService } from '../../../core/service/alojamiento/tipo-servicios.service';
 import { Servicio } from '../../../core/models/Servicios';
 import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
 
+>>>>>>> 7c50df9e35c33003fb8120dfa34360783e1a7124
 @Component({
   selector: 'app-datosbasicos',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './datosbasicos.component.html',
+<<<<<<< HEAD
+  styleUrls: ['./datosbasicos.component.css']
+=======
   styleUrl: './datosbasicos.component.css'
+>>>>>>> 7c50df9e35c33003fb8120dfa34360783e1a7124
 })
 export class DatosbasicosComponent {
   servicios: Servicio[] = [];

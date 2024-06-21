@@ -1,68 +1,73 @@
 .container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    margin-top: 4rem; /* 4 unidades de espacio arriba */
-    margin-bottom: 4rem; /* 4 unidades de espacio abajo */
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-  }
-  
-  .input, .textarea {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .btn {
-    margin-top: 20px; /* Margen superior para separar el botón */
-    background-color: #007bff; /* Color de fondo del botón */
-    color: #fff; /* Color del texto del botón */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Relleno interno */
-    font-size: 14px; /* Tamaño de fuente */
-    cursor: pointer; /* Cursor al pasar el mouse */
-    align-self: flex-start; /* Alinear el botón a la izquierda */
-    border-radius: 5px; /* Borde redondeado para los botones */
-    width: 200px; /* Ancho fijo para los botones */
-  }
-  
-  .btn:hover {
-    background-color: #0056b3;
-  }
-
-.start-button-volver {
-    margin-top: 20px; /* Margen superior para separar el botón */
-    background-color: #007bff; /* Color de fondo del botón */
-    color: #fff; /* Color del texto del botón */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Relleno interno */
-    font-size: 14px; /* Tamaño de fuente */
-    cursor: pointer; /* Cursor al pasar el mouse */
-    align-self: flex-start; /* Alinear el botón a la izquierda */
-    border-radius: 5px; /* Borde redondeado para los botones */
-    width: 200px; /* Ancho fijo para los botones */
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
-.start-button:hover {
-    background-color: #0056b3;
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn {
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: flex-start;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.start-button-volver {
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: flex-start;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.start-button-volver:hover {
+  background-color: #0056b3;
 }
 
 .button-container {
-    display: flex; /* Utiliza el modelo de caja flexible */
-    justify-content: flex-end; /* Alinea el contenido al final del contenedor */
-    justify-content: space-between; /* Espacio entre los botones */
-    margin-top: 20px; /* Margen superior para separar el botón */
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }

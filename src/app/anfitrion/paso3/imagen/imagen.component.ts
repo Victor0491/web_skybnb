@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2'; // Importa SweetAlert2
+=======
 import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
 import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
@@ -7,13 +12,14 @@ import { FormAlojamientoService } from '../../../core/service/alojamiento/form-a
 interface ImagesData {
   [key: string]: string; // Esto permite cualquier clave de tipo string con valor de tipo string
 }
+>>>>>>> 7c50df9e35c33003fb8120dfa34360783e1a7124
 
 @Component({
   selector: 'app-imagen',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './imagen.component.html',
-  styleUrls: ['./imagen.component.css'] // Corregido: styleUrl -> styleUrls
+  styleUrls: ['./imagen.component.css']
 })
 export class ImagenComponent {
   formData = {
@@ -62,17 +68,25 @@ export class ImagenComponent {
     };
   }
 
-  getImageUrl(image: File): string {
-    return URL.createObjectURL(image);
+  navigateToInformacion(): void {
+    if (this.uploadedImages.length > 0) {
+      this.router.navigate(['/anfitrion/informacion']);
+    } else {
+      Swal.fire({
+        title: 'Atención',
+        text: 'Por favor sube al menos una imagen antes de continuar.',
+        icon: 'warning',
+        confirmButtonText: 'Entendido',
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          confirmButton: 'swal2-confirm'
+        }
+      });
+    }
   }
 
-  navigateToInformacion() {
-    console.log('Botón Comencemos clickeado');
-    this.router.navigate(['/anfitrion/informacion']);
-  }
-
-  navigateToPaso3() {
-    console.log('Botón Comencemos clickeado');
+  navigateToPaso3(): void {
     this.router.navigate(['/anfitrion/paso3']);
   }
 }
