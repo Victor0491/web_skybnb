@@ -13,11 +13,11 @@ export class PerfilUsuarioService {
   
   constructor(private http: HttpClient) {}
 
-  obtenerPerfil(usuarioId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/perfil/${usuarioId}`);
+  obtenerPerfil(usuarioEmail: string): Observable<any> { // Acepta string
+    return this.http.get<any>(`${this.apiUrl}/perfil/${usuarioEmail}`);
   }
 
   guardarPerfil(datosPerfil: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/perfil`, datosPerfil);
+    return this.http.post<any>(`${this.apiUrl}/create-perfil-usuario`, datosPerfil);
   }
 }
