@@ -36,65 +36,6 @@ export class ActividadComponent implements OnInit {
     this.formData.actividades = savedData.actividades || [];
   }
 
-<<<<<<< HEAD
-  ngOnInit(): void {}
-
-  navigateToUbicacion(actividad: string): void {
-    const actividadesControl = this.preferenciasForm.get('actividad');
-    if (actividadesControl && actividadesControl.value) {
-      let actividades = actividadesControl.value;
-  
-      if (actividad === 'Prefiero Omitir') {
-        // Si se selecciona "Prefiero Omitir", deselecciona las demás actividades
-        if (actividades.includes('Prefiero Omitir')) {
-          actividades = actividades.filter((a: string) => a !== 'Prefiero Omitir');
-        } else {
-          actividades = ['Prefiero Omitir'];
-        }
-      } else {
-        // Si ya se ha seleccionado "Prefiero Omitir", no se permite seleccionar otras actividades
-        if (actividades.includes('Prefiero Omitir')) {
-          Swal.fire({
-            title: 'Opción excluyente',
-            text: 'No puedes seleccionar otras actividades si has elegido "Prefiero Omitir".',
-            icon: 'warning',
-            confirmButtonText: 'Entendido',
-            customClass: {
-              popup: 'swal2-popup',
-              title: 'swal2-title',
-              confirmButton: 'swal2-confirm'
-            }
-          });
-          return;
-        }
-  
-        if (actividades.includes(actividad)) {
-          actividades = actividades.filter((a: string) => a !== actividad);
-        } else if (actividades.length < 3) {
-          actividades.push(actividad);
-        } else {
-          Swal.fire({
-            title: 'Límite alcanzado',
-            text: 'Solo puedes seleccionar hasta 3 actividades.',
-            icon: 'warning',
-            confirmButtonText: 'Entendido',
-            customClass: {
-              popup: 'swal2-popup',
-              title: 'swal2-title',
-              confirmButton: 'swal2-confirm'
-            }
-          });
-        }
-      }
-  
-      actividadesControl.setValue(actividades);
-    }
-  }
-  
-  continuar(): void {
-    const actividadesSeleccionadas = this.preferenciasForm.get('actividad')?.value;
-    if (actividadesSeleccionadas.includes('Prefiero Omitir') || actividadesSeleccionadas.length === 3) {
-=======
   ngOnInit(): void {
     this.tipoActividadService.getActividad().subscribe(
       actividades => {
@@ -125,7 +66,6 @@ export class ActividadComponent implements OnInit {
 
   navigateToPaso2(): void {
     if (this.formData.actividades.length <= 3) {
->>>>>>> 7c50df9e35c33003fb8120dfa34360783e1a7124
       this.router.navigate(['anfitrion/paso2']);
     } else {
       Swal.fire({
@@ -145,9 +85,4 @@ export class ActividadComponent implements OnInit {
   navigateToEntorno(): void {
     this.router.navigate(['anfitrion/entorno']);
   }
-<<<<<<< HEAD
-  
 }
-=======
-}
->>>>>>> 7c50df9e35c33003fb8120dfa34360783e1a7124
