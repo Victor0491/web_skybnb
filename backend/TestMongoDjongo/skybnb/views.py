@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from rest_framework import generics
 from django.contrib.auth import authenticate, login
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
 from .models import Usuario, Rol ,TipoAlojamiento,PerfilUsuario,Actividades,Ubicacion,Servicios,Alojamiento,Reserva
 from .serializers import UsuarioSerializers,RolesSerializers,TipoAlojamientoSerializers, PerfilUsuarioSerializers
-from .serializers import UbicacionSerializers,ActividadSerializers,ServiciosSerializers,AlojamientoSerializers
+from .serializers import UbicacionSerializers,ActividadSerializers,ServiciosSerializers,AlojamientoSerializers,ImagenAlojamientoSerializer
 from .serializers import GetPerfilUsuarioSerializers, GetAlojamientoSerializers, GetDetailsAlojamientoSerializers,ReservaSerializers,ReservaListSerializers
 
 
@@ -28,9 +29,15 @@ class LoginAPIView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
         user = authenticate(request, email=email, password=password)
-        if user is not None:
+        if user:
             login(request, user)
-            return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
+            refresh = RefreshToken.for_user(user)
+            refresh['roles'] = [role.id for role in user.roles.all()]
+
+            return Response({
+                'message': 'User registered successfully',
+                'accessToken': str(refresh.access_token),
+            }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid email or password'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -117,6 +124,10 @@ class GetDetailsAlojamiento(generics.RetrieveAPIView):
     queryset = Alojamiento.objects.all()
     serializer_class = GetDetailsAlojamientoSerializers
 
+
+class AlojamientoViewSet(generics.CreateAPIView):
+    queryset = Alojamiento.objects.all()
+    serializer_class = ImagenAlojamientoSerializer
 #----------------------------------------------------------------------------
 
 class ReservaCreateView(generics.CreateAPIView):

@@ -5,11 +5,11 @@
   <div class="opciones-container" *ngIf="seccionActual === 'tipoAlojamiento'">
     <div class="opcion-container">
       <button *ngFor="let tipo of tiposAlojamiento; let i = index" class="opcion"
-        [class.selected]="preferenciasForm.get('tipoAlojamiento')?.value === tipo.nombre"
+        [class.selected]="formData.tipoalojamiento === tipo.id"
         [class.intercalado]="i >= 3 && i % 2 === 1"
-        (click)="seleccionarTipo(tipo.nombre)">
+        (click)="seleccionarTipo(tipo.id)">
         <div class="opcion-content">
-          <img [src]="tipo.imagen" alt="{{ tipo.nombre }}">
+          <img [src]="tipo.image" alt="{{ tipo.nombre }}">
           <div>{{ tipo.nombre }}</div>
         </div>
       </button>

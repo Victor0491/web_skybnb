@@ -18,7 +18,7 @@ export class NavbarComponent {
   correo: string | null = null;
 
   ngOnInit() {
-    this.correo = this.authService.obtenerCorreo();
+    
   }
 
   constructor(

@@ -2,100 +2,68 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Alojamiento } from '../../../core/models/Alojamiento';
+import { ServicioService } from '../../../core/service/alojamiento/tipo-servicios.service';
+import { Servicio } from '../../../core/models/Servicios';
+import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
 
-@Component({   
-  selector: 'app-datosbasicos',   
-  standalone: true,   
-  imports: [CommonModule,FormsModule],   
-  templateUrl: './datosbasicos.component.html',   
-  styleUrl: './datosbasicos.component.css' })
-
+@Component({
+  selector: 'app-datosbasicos',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './datosbasicos.component.html',
+  styleUrl: './datosbasicos.component.css'
+})
 export class DatosbasicosComponent {
-  dormitorios: number = 0;
-  banios: number = 0;
-  cantidadHuespedes: number = 0;
-  mascotas: boolean = false;
+  servicios: Servicio[] = [];
+  formData = {
+    dormitorios: 0,
+    banos: 0,
+    huespedes: 0,
+    mascotas: false,
+    servicios: [] as number[]
+  };
 
-  dormitoriosValue: string = '0';
-  baniosValue: string = '0';
-  cantidadHuespedesValue: string = '0';
-  mascotasValue: string = 'false';
+  constructor(
+    private router: Router,
+    private servicioService: ServicioService,
+    private formAlojamientoService: FormAlojamientoService
+  ) {
+    this.servicioService.getServicios().subscribe(servicios => {
+      this.servicios = servicios;
+    });
 
-  constructor(private router: Router) {
-    // Asigna el valor inicial de las propiedades a las variables de valor para el enlace bidireccional
-    this.dormitoriosValue = this.dormitorios.toString();
-    this.baniosValue = this.banios.toString();
-    this.cantidadHuespedesValue = this.cantidadHuespedes.toString();
-    this.mascotasValue = this.mascotas.toString();
-  }
-
-  incrementarDormitorios(): void {
-    this.dormitorios++;
-    this.dormitoriosValue = this.dormitorios.toString();
-  }
-
-  decrementarDormitorios(): void {
-    if (this.dormitorios > 0) {
-      this.dormitorios--;
-      this.dormitoriosValue = this.dormitorios.toString();
+    const savedData = this.formAlojamientoService.getFormData();
+    this.formData.dormitorios = savedData.dormitorios
+    this.formData.banos = savedData.banos
+    this.formData.huespedes = savedData.huespedes
+    this.formData.mascotas = savedData.mascotas
+    this.formData.servicios = savedData.servicios || [];
     }
-  }
 
-  incrementarBanios(): void {
-    this.banios++;
-    this.baniosValue = this.banios.toString();
-  }
 
-  decrementarBanios(): void {
-    if (this.banios > 0) {
-      this.banios--;
-      this.baniosValue = this.banios.toString();
+    toggleServicio(id: number): void {
+      const index = this.formData.servicios.indexOf(id);
+      if (index === -1) {
+        this.formData.servicios.push(id);
+      } else {
+        this.formData.servicios.splice(index, 1);
+      }
     }
-  }
-
-  incrementarCantidadHuespedes(): void {
-    this.cantidadHuespedes++;
-    this.cantidadHuespedesValue = this.cantidadHuespedes.toString();
-  }
-
-  decrementarCantidadHuespedes(): void {
-    if (this.cantidadHuespedes > 0) {
-      this.cantidadHuespedes--;
-      this.cantidadHuespedesValue = this.cantidadHuespedes.toString();
-    }
-  }
-
-  // Define las otras funciones de incremento y decremento aquí
 
   guardarDatosBasicos(): void {
-    // Actualiza el valor de las propiedades con los valores de las variables de valor
-    this.dormitorios = parseInt(this.dormitoriosValue, 10);
-    this.banios = parseInt(this.baniosValue, 10);
-    this.cantidadHuespedes = parseInt(this.cantidadHuespedesValue, 10);
-    this.mascotas = (this.mascotasValue === 'true');
-
-    console.log('Dormitorios:', this.dormitorios);
-    console.log('Baños:', this.banios);
-    console.log('Cantidad de huéspedes:', this.cantidadHuespedes);
-    console.log('Mascotas:', this.mascotas);
-  }
-
-  nuevoAlojamiento: any = {}; // Objeto para almacenar los datos del alojamiento
-
-
-
-  seleccionarOpcion(opcion: string) {
-    this.nuevoAlojamiento.tipo_alojamiento = opcion; // Guarda el tipo de alojamiento seleccionado
+    this.formAlojamientoService.setFormData(this.formData);
   }
 
   navigateToPaso3() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['anfitrion/paso3'], { state: { alojamiento: this.nuevoAlojamiento } });
+    this.guardarDatosBasicos();
+    this.router.navigate(['anfitrion/paso3']);
   }
-  navigateToUbicacion() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['anfitrion/ubicacion'], { state: { alojamiento: this.nuevoAlojamiento } });
-  }
-}
 
+  navigateToUbicacion() {
+    this.guardarDatosBasicos();
+    this.router.navigate(['anfitrion/ubicacion']);
+  }
+
+}

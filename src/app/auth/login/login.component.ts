@@ -20,7 +20,6 @@ export class LoginComponent {
   user: User = {
     email: '',
     password: '',
-    username: '',
     roles : [1]
   }
 
@@ -47,15 +46,17 @@ export class LoginComponent {
     this.show_error = false;
     this.mensaje_error = '';
 
-    if (this.validarForm()) {
-      if (this.authService.login(this.user)) {
-        console.log('Login successful!');
+    this.authService.login(this.user).subscribe(
+      response => {
+        console.log('Inicio se sesion exitoso', response);
         this.router.navigateByUrl('')
-      } else {
-        this.show_error = true;
-        this.mensaje_error = 'Error al iniciar sesión';
+        // Maneja la respuesta exitosa aquí
+      },
+      error => {
+        console.error('Error al ingresar a la pagina', error);
+        // Maneja el error aquí
       }
-    }
+    );
   }
 }
 
