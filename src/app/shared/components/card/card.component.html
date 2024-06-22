@@ -5,14 +5,14 @@
         <div class="card">
           <div [id]="'card' + j" class="carousel slide">
             <div class="carousel-indicators">
-              <button *ngFor="let imagen of alojamiento.imagenes; let i = index" type="button"
+              <button *ngFor="let imagen of alojamiento.imagenes | objectToArray; let i = index" type="button"
                 [attr.data-bs-target]="'#card' + j" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
                 [attr.aria-label]="'Slide ' + (i + 1)"></button>
             </div>
             <div class="carousel-inner">
-              <div *ngFor="let imagen of alojamiento.imagenes; let i = index" class="carousel-item"
+              <div *ngFor="let imagen of alojamiento.imagenes | objectToArray; let i = index" class="carousel-item"
                 [ngClass]="{'active': i === 0}">
-                <a [routerLink]="['/rooms', j]">
+                <a [routerLink]="['/rooms', alojamiento.id]">
                   <div class="card-img-container">
                     <img [src]="imagen" class="card-img-top" alt="Imagen {{i + 1}}">
                   </div>

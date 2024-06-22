@@ -12,8 +12,15 @@ export class MapaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const map = L.map('map').setView([-36.947, -69.763], 7);
+    // Coordenadas para centrar el mapa
+    const lat = -36.947;  // Cambia esto a la latitud deseada
+    const lng = -69.763;  // Cambia esto a la longitud deseada
+    const zoomLevel = 15; // Ajusta el nivel de zoom para una vista más cercana
+
+    // Crear el mapa y centrarlo en las coordenadas especificadas
+    const map = L.map('map').setView([lat, lng], zoomLevel);
+
+    // Agregar la capa de mapa de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
   }
-
 }

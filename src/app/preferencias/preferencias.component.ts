@@ -62,27 +62,59 @@ export class PreferenciasComponent implements OnInit {
   seleccionarActividad(actividad: string): void {
     const actividadesControl = this.preferenciasForm.get('actividad');
     if (actividadesControl && actividadesControl.value) {
-      const actividades = actividadesControl.value;
-      if (actividades.includes(actividad)) {
-        actividadesControl.setValue(actividades.filter((a: string) => a !== actividad));
-      } else if (actividades.length < 3) {
-        actividadesControl.setValue([...actividades, actividad]);
+      let actividades = actividadesControl.value;
+      console.log()
+      if (actividad === 'Prefiero Omitir') {
+        // Si se selecciona o deselecciona "Prefiero Omitir"
+        if (actividades.includes('Prefiero Omitir')) {
+          // Deseleccionar "Prefiero Omitir"
+          actividades = actividades.filter((a: string) => a !== 'Prefiero Omitir');
+        } else {
+          // Seleccionar "Prefiero Omitir" y desmarcar todas las demás
+          actividades = ['Prefiero Omitir'];
+        }
       } else {
-        // Manejar el caso donde ya se han seleccionado 3 actividades
-        Swal.fire({
-          title: 'Límite alcanzado',
-          text: 'Solo puedes seleccionar hasta 3 actividades.',
-          icon: 'warning',
-          confirmButtonText: 'Entendido',
-          customClass: {
-            popup: 'swal2-popup',
-            title: 'swal2-title',
-            confirmButton: 'swal2-confirm'
-          }
-        });
+        // Si "Prefiero Omitir" ya está seleccionado, no se permite seleccionar otras actividades
+        if (actividades.includes('Prefiero Omitir')) {
+          Swal.fire({
+            title: 'Opción excluyente',
+            text: 'No puedes seleccionar otras actividades si has elegido "Prefiero Omitir".',
+            icon: 'warning',
+            confirmButtonText: 'Entendido',
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              confirmButton: 'swal2-confirm'
+            }
+          });
+          return;
+        }
+  
+        if (actividades.includes(actividad)) {
+          // Deseleccionar la actividad si ya está seleccionada
+          actividades = actividades.filter((a: string) => a !== actividad);
+        } else if (actividades.length < 3) {
+          // Seleccionar la actividad si el límite no ha sido alcanzado
+          actividades.push(actividad);
+        } else {
+          Swal.fire({
+            title: 'Límite alcanzado',
+            text: 'Solo puedes seleccionar hasta 3 actividades.',
+            icon: 'warning',
+            confirmButtonText: 'Entendido',
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              confirmButton: 'swal2-confirm'
+            }
+          });
+        }
       }
+  
+      actividadesControl.setValue(actividades);
     }
   }
+  
 
   continuar(): void {
     if (this.seccionActual === 'tipoAlojamiento' && this.preferenciasForm.get('tipoAlojamiento')?.valid) {

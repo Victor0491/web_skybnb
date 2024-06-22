@@ -1,23 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Reserva } from '../../../core/models/reserva';
+import { AuthSesionService } from '../../../core/service/sesion/auth-sesion.service';
+import { ReservaService } from '../../../core/service/reserva/reserva.service';
+import { response } from 'express';
 
 
 @Component({
   selector: 'app-reserva',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './reserva.component.html',
+  templateUrl:'./reserva.component.html',
   styleUrls: ['./reserva.component.css']
 })
 export class ReservaComponent implements OnInit {
+
+  @Input() alojamientoId!: number;
+
+  reserva : Reserva = {
+    alojamiento : 0,
+    usuario :  0,
+    fecha_inicio: null,
+    fecha_termino : null
+  }
+
   rentalValue: number | null = null;
   daysCount: number | null = null;
   readonly pricePerNight = 100000; // Define el precio por noche aquí
 
+  constructor(
+    private authsesion : AuthSesionService,
+    private reservaservice : ReservaService
+  ) { }
+
+
   ngOnInit() {
     this.setMinDate();
+    console.log('Alojamiento ID recibido:', this.alojamientoId);
   }
 
   setMinDate() {
@@ -71,4 +92,14 @@ export class ReservaComponent implements OnInit {
     }
   }
   
+  enviarReserva(){
+    this.reserva.alojamiento = this.alojamientoId;
+    if (this.authsesion.obtenerInfoUsuario() !== null){
+        this.reserva.usuario = this.authsesion.obtenerInfoUsuario();
+    }
+    this.reservaservice.createReserva(this.reserva).subscribe(response => {
+      console.log(response)
+      console.log(this.reserva);
+    })
+  }
 }

@@ -1,32 +1,45 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import Swal from 'sweetalert2'; // Importa SweetAlert2
+import { Alojamiento } from '../../../core/models/Alojamiento';
+import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
+
 
 @Component({
   selector: 'app-ubicacion',
   templateUrl: './ubicacion.component.html',
   styleUrls: ['./ubicacion.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
 })
 export class UbicacionComponent implements OnInit, AfterViewInit {
   map!: L.Map;
   marker!: L.Marker;
-  locationForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private router: Router) {}
+  formData = {
+    direccion: ''
+  };
 
-  ngOnInit(): void {
-    this.locationForm = this.formBuilder.group({
-      address: ['']
-    });
+  constructor(
+    private router: Router,
+    private formalojamiento: FormAlojamientoService
+  ) {
+    const savedData = this.formalojamiento.getFormData();
+    this.formData.direccion = savedData.direccion || '';
   }
+
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     this.initMap();
+    if (this.formData.direccion) {
+      this.searchAddress(this.formData.direccion);
+    }
   }
 
   private initMap(): void {
@@ -36,13 +49,9 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
       maxZoom: 18,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-
-    // Forzar redimensión del mapa después de la inicialización
-    this.map.invalidateSize();
   }
 
-  onSubmit(): void {
-    const address = this.locationForm.value.address;
+  private searchAddress(address: string): void {
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
       .then(response => response.json())
       .then(data => {
@@ -54,36 +63,51 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
             this.map.removeLayer(this.marker);
           }
           this.map.setView([lat, lon], 15);
-          this.marker = L.marker([lat, lon]).addTo(this.map);
+          this.marker = L.marker([lat, lon]).addTo(this.map).bindPopup(address).openPopup();
         } else {
-          alert('Dirección no encontrada');
+          Swal.fire({
+            title: 'Error',
+            text: 'Dirección no encontrada. Por favor ingresa una dirección válida.',
+            icon: 'error',
+            confirmButtonText: 'Entendido'
+          });
         }
       })
       .catch(error => {
         console.error('Error:', error);
-        alert('Hubo un error al buscar la dirección.');
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un error al buscar la dirección.',
+          icon: 'error',
+          confirmButtonText: 'Entendido'
+        });
       });
+  }
+
+  onSubmit(): void {
+    const address = this.formData.direccion;
+    this.searchAddress(address);
+
+    // Guardar la dirección en formData y actualizar el servicio
+    this.formalojamiento.setFormData({ direccion: address });
   }
 
   clearMap(): void {
     if (this.map) {
       this.map.remove();
+      this.formData.direccion = '';
     }
     if (this.marker) {
       this.marker.remove();
     }
-    this.initMap(); // Vuelve a inicializar el mapa en la coordenada predefinida 
+    this.initMap();
   }
 
-  navigateToDatosbasicos() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['/anfitrion/datosbasicos'], {});
+  navigateToDatosbasicos(): void {
+    this.router.navigate(['/anfitrion/datosbasicos']);
   }
 
-  navigateToPaso2() {
-    // Redirige a la página de ubicación y pasa el objeto nuevoAlojamiento
-    this.router.navigate(['/anfitrion/paso2'], {});
+  navigateToPaso2(): void {
+    this.router.navigate(['/anfitrion/paso2']);
   }
 }
-
-

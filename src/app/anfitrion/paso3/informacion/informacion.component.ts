@@ -1,44 +1,69 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Importa CommonModule
+import { CommonModule } from '@angular/common';
+import { AlojamientoService } from '../../../core/service/alojamiento/alojamiento.service';
+import { Alojamiento } from '../../../core/models/Alojamiento';
+import { FormsModule } from '@angular/forms';
+import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
+import { AuthSesionService } from '../../../core/service/sesion/auth-sesion.service';
+
 
 @Component({
   selector: 'app-informacion',
   standalone: true,
   templateUrl: './informacion.component.html',
   styleUrls: ['./informacion.component.css'],
-  imports: [CommonModule] 
+  imports: [CommonModule, FormsModule]
 })
 export class InformacionComponent implements OnInit {
-  constructor(private router: Router) {}
+
+  DatosAlojamiento: any;
+
+  formData = {
+    nombre: '',
+    descripcion: '',
+    precio: 0,
+    usuario: 0
+  };
+
+  constructor(
+    private router: Router,
+    private alojamientoService: AlojamientoService,
+    private formalojamiento: FormAlojamientoService,
+    private authsesion : AuthSesionService
+
+
+  ) {
+    const savedData = this.formalojamiento.getFormData();
+    this.formData.nombre = savedData.nombre
+    this.formData.descripcion = savedData.descripcion
+    this.formData.precio = savedData.precio
+    this.formData.usuario = this.authsesion.obtenerInfoUsuario();
+
+  }
 
   ngOnInit() {
-    if (this.alojamientoGuardadoExitoso) {
-      setTimeout(() => {
-        this.alojamientoGuardadoExitoso = false;
-      }, 30000); // 30 segundos
-    }
+    console.log(this.DatosAlojamiento);
   }
 
   navigateToImagen() {
-    console.log('Botón Comencemos clickeado');
     this.router.navigate(['/anfitrion/imagen']);
   }
 
-  alojamientoGuardadoExitoso: boolean = false;
-  numeroAlojamientoGuardado: number = 0;
-
   guardarAlojamiento() {
-    // Simulación de guardar alojamiento (puedes implementar la lógica real aquí)
-    this.alojamientoGuardadoExitoso = true;
-    this.numeroAlojamientoGuardado++; // Incrementa el número de alojamiento guardado
-    this.router.navigate(['']); // Redirige a la página de inicio
-    
-  }
-
-  confirmarGuardar() {
-    if (confirm('¿Estás seguro de que deseas guardar este alojamiento?')) {
-      this.guardarAlojamiento();
-    }
+    this.formalojamiento.setFormData(this.formData);
+    this.DatosAlojamiento = this.formalojamiento.getFormData();
+    console.log(this.DatosAlojamiento);
+    this.alojamientoService.createAlojamiento(this.DatosAlojamiento)
+    .subscribe(
+        response => {
+            console.log('Alojamiento creado exitosamente:', response);
+            this.formalojamiento.clearFormData();
+        },
+        error => {
+            console.error('Error al crear alojamiento:', error);
+            // Aquí puedes agregar más lógica para manejar el error, como mostrar un mensaje al usuario
+        }
+    );
   }
 }

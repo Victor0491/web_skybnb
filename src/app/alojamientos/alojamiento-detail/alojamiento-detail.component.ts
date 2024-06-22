@@ -6,6 +6,7 @@ import { ModalInformationComponent } from '../../shared/components/modal-informa
 import { CarruselInfoComponent } from '../../shared/components/carrusel-info/carrusel-info.component';
 import { MapaComponent } from '../../shared/components/mapa/mapa.component';
 import { ReservaComponent } from '../../shared/components/reserva/reserva.component';
+import { AlojamientoService } from '../../core/service/alojamiento/alojamiento.service';
 
 @Component({
   selector: 'app-alojamiento-detail',
@@ -17,59 +18,22 @@ import { ReservaComponent } from '../../shared/components/reserva/reserva.compon
     MapaComponent,
     ReservaComponent
   ],
-  templateUrl: './alojamiento-detail.component.html',
+  templateUrl:'./alojamiento-detail.component.html',
   styleUrls: ['./alojamiento-detail.component.css']
 })
 export class AlojamientoDetailComponent implements OnInit {
-  alojamiento: any;
-  alojamientos = [
-    {
-      id: 0,
-      nombre: 'Casa en la Playa',
-      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
-      precio: 100000,
-      region: 'Valparaíso',
-    },
-    {
-      id: 1,
-      nombre: 'Casa en la Playa',
-      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
-      precio: 100000,
-      region: 'Valparaíso',
-    },
-    {
-      id: 2,
-      nombre: 'Casa en la Playa',
-      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
-      precio: 100000,
-      region: 'Valparaíso',
-    },
-    {
-      id: 3,
-      nombre: 'Casa en la Playa',
-      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
-      precio: 100000,
-      region: 'Valparaíso',
-    },
-    {
-      id: 4,
-      nombre: 'Casa en la Playa',
-      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
-      precio: 100000,
-      region: 'Valparaíso',
-    },
-    // Otros alojamientos...
-  ];
+  detailsalojamiento: any 
 
-  constructor(private route: ActivatedRoute) {}
+
+  constructor(private route: ActivatedRoute,private alojamientoService: AlojamientoService) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log('ID from route:', id); // Verifica el ID
-    this.alojamiento = this.alojamientos.find(aloj => aloj.id === +id!);
-
-    // Log para verificar el alojamiento encontrado
-    console.log('Alojamiento encontrado:', this.alojamiento);
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    this.alojamientoService.getAlojamientoDetails(id).subscribe(data => {
+      this.detailsalojamiento = data;
+      console.log(this.detailsalojamiento);
+    });
+    
   }
 
   compartir() {
