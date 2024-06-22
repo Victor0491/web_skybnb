@@ -12,7 +12,7 @@ import { response } from 'express';
   selector: 'app-reserva',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './reserva.component.html',
+  templateUrl:'./reserva.component.html',
   styleUrls: ['./reserva.component.css']
 })
 export class ReservaComponent implements OnInit {

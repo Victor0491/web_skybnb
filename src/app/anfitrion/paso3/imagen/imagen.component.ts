@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-<<<<<<< HEAD
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2'; // Importa SweetAlert2
-=======
 import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
 import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
@@ -12,7 +8,6 @@ import { FormAlojamientoService } from '../../../core/service/alojamiento/form-a
 interface ImagesData {
   [key: string]: string; // Esto permite cualquier clave de tipo string con valor de tipo string
 }
->>>>>>> 7c50df9e35c33003fb8120dfa34360783e1a7124
 
 @Component({
   selector: 'app-imagen',
