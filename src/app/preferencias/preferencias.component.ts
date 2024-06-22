@@ -63,7 +63,7 @@ export class PreferenciasComponent implements OnInit {
     const actividadesControl = this.preferenciasForm.get('actividad');
     if (actividadesControl && actividadesControl.value) {
       let actividades = actividadesControl.value;
-  
+      console.log()
       if (actividad === 'Prefiero Omitir') {
         // Si se selecciona o deselecciona "Prefiero Omitir"
         if (actividades.includes('Prefiero Omitir')) {
