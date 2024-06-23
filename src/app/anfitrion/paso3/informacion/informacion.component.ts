@@ -19,6 +19,7 @@ export class InformacionComponent implements OnInit {
 
   DatosAlojamiento: any;
 
+  
   formData = {
     nombre: '',
     descripcion: '',
@@ -58,6 +59,10 @@ export class InformacionComponent implements OnInit {
     .subscribe(
         response => {
             console.log('Alojamiento creado exitosamente:', response);
+            const alojamientoId = response.id;
+            console.log('ID del alojamiento:', alojamientoId);
+            this.formalojamiento.clearFormData();
+            this.router.navigateByUrl('/rooms/' + alojamientoId);
             this.formalojamiento.clearFormData();
         },
         error => {

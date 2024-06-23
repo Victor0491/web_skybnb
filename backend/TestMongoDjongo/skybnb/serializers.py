@@ -51,6 +51,9 @@ class UsuarioSerializers(serializers.ModelSerializer):
         for rol in roles_data:
             usuario.roles.add(rol)
         usuario.save()
+
+        PerfilUsuario.objects.create(usuario=usuario)
+        
         return usuario
 
     def update(self, instance, validated_data):
@@ -95,6 +98,32 @@ class PerfilUsuarioSerializers(serializers.ModelSerializer):
             perfilusuario.tipoalojamiento.add(tipoalojamiento)
         perfilusuario.save()
         return perfilusuario
+
+    def update(self, instance, validated_data):
+        usuario_data = validated_data.pop('usuario')
+        actividades_data = validated_data.pop('actividades', [])
+        ubicacion_data = validated_data.pop('ubicacion', [])
+        tipoalojamiento_data = validated_data.pop('tipoalojamiento', [])
+
+        instance = super().update(instance, validated_data)
+
+        instance.usuario = usuario_data
+
+        instance.actividades.clear()
+        for actividad in actividades_data:
+            instance.actividades.add(actividad)
+
+        instance.ubicacion.clear()
+        for ubicacion in ubicacion_data:
+            instance.ubicacion.add(ubicacion)
+
+        instance.tipoalojamiento.clear()
+        for tipoalojamiento in tipoalojamiento_data:
+            instance.tipoalojamiento.add(tipoalojamiento)
+
+        instance.save()
+
+        return instance
 
 
 class AlojamientoSerializers(serializers.ModelSerializer):
@@ -181,6 +210,8 @@ class ReservaSerializers(serializers.ModelSerializer):
         return reserva
     
 class ReservaListSerializers(serializers.ModelSerializer):
+    alojamiento = GetAlojamientoSerializers()
+
     class Meta:
         model = Reserva
         fields = ['id', 'usuario', 'alojamiento', 'fecha_inicio', 'fecha_fin', 'total']

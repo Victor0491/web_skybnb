@@ -1,4 +1,4 @@
-<div class="user-profile">
+<div class="user-profile" *ngIf="user_profile">
   <div class="user-profile-menu">
     <div class="user-profile-picture">
       <img
@@ -9,38 +9,42 @@
 
   <div class="user-profile-content">
     <div class="user-profile-card">
-      <h2>Datos de {{ user.username }}</h2>
-      <p>Nombre Completo: {{ user.name }} {{ user.lastName }}</p>
-      <p>Email: {{ user.email }}</p>
-      <p>Teléfono: {{ user.phone }}</p>
+      <h2>Datos</h2>
+      <p>Nombre Completo: {{ user_profile?.nombreCompleto }}</p>
+      <p>Email: {{ user_profile?.cuenta.email }}</p>
+      <p>Teléfono: {{ user_profile?.telefono }}</p>
     </div>
 
     <div class="user-profile-card">
-      <h2 class="accordion-header" (click)="toggleAccordion('reservas')">Mis Reservas</h2>
+      <h2 class="accordion-header" (click)="toggleAccordion('reservas')">Mis Alojamientos</h2>
       <div [ngClass]="{'show': activeAccordion === 'reservas'}" class="accordion-content">
         <ul>
-          <li *ngFor="let reservation of reservations">
-            <h3>{{ reservation.nombre }}</h3>
-            <p>Descripción: {{ reservation.descripcion }}</p>
-            <p>Región: {{ reservation.region }}</p>
-            <p>Start Date: {{ reservation.startDate }}</p>
-            <p>End Date: {{ reservation.endDate }}</p>
+          <li *ngFor="let alojamiento of user_profile?.alojamientos">
+            <h3>{{ alojamiento.nombre }}</h3>
+            <p>Dirección: {{ alojamiento.direccion }}</p>
+            <p>Cantidad dormitorios: {{ alojamiento.dormitorios }}</p>
           </li>
         </ul>
       </div>
     </div>
 
     <div class="user-profile-card">
-      <h2 class="accordion-header" (click)="toggleAccordion('alojamientos')">Mis Alojamientos</h2>
+      <h2 class="accordion-header" (click)="toggleAccordion('alojamientos')">Mis Reservas</h2>
       <div [ngClass]="{'show': activeAccordion === 'alojamientos'}" class="accordion-content">
-        <ul>
-          <li *ngFor="let accommodation of accommodations">
-            <h3>{{ accommodation.nombre }}</h3>
-            <p>Descripción: {{ accommodation.descripcion }}</p>
-            <p>Región: {{ accommodation.region }}</p>
-            <p>Precio: {{ accommodation.precio }}</p>
-          </li>
-        </ul>
+        <div class="row" *ngFor="let reserva of user_profile?.reservas">
+          <div class="col-6">
+            <ul>
+              <li>
+                <h3>{{ reserva.alojamiento.nombre }}</h3>
+                <p>Fecha inicio: {{reserva.fecha_inicio}}</p>
+                <p>Fecha temrino: {{reserva.fecha_fin}}</p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <img src="{{reserva.alojamiento.imagenes.image1}}" alt="Descripción de la imagen 1" style="width: 200px;">
+          </div>
+        </div>
       </div>
     </div>
   </div>
