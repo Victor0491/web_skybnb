@@ -142,6 +142,15 @@ class AlojamientoCreateView(generics.CreateAPIView):
     serializer_class = AlojamientoSerializers
     permission_classes = [AllowAny]
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        # Obtener el ID del alojamiento creado
+        alojamiento_id = serializer.instance.id
+        return Response({'id': alojamiento_id}, status=status.HTTP_201_CREATED, headers=headers)
+
 class GetAlojamiento(generics.ListAPIView):
     queryset = Alojamiento.objects.all()
     serializer_class = GetAlojamientoSerializers

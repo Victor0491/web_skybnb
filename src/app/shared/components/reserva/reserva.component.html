@@ -7,7 +7,7 @@
       </div>
       <div class="col-md-6 form-group">
         <label for="endDate">Fecha de Fin</label>
-        <input type="date" id="endDate" class="form-control" name="endDate" [(ngModel)]="reserva.fecha_termino" ngModel required (change)="calculateRent()">
+        <input type="date" id="endDate" class="form-control" name="endDate" [(ngModel)]="reserva.fecha_fin" ngModel required (change)="calculateRent()">
       </div>
     </div>
     
@@ -16,5 +16,5 @@
     <p>Cantidad de días: {{ daysCount }}</p>
     <p>El precio es de: {{ rentalValue | currency:'CLP':'symbol':'1.0-0' }}</p>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="reserveHere()">Reserva aquí</button>
+  <button type="submit" class="btn btn-primary" (click)="enviarReserva()">Reserva aquí</button>
 </div>

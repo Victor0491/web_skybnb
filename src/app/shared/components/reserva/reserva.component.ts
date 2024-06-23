@@ -23,7 +23,8 @@ export class ReservaComponent implements OnInit {
     alojamiento : 0,
     usuario :  0,
     fecha_inicio: null,
-    fecha_termino : null
+    fecha_fin : null,
+    total: 0
   }
 
   rentalValue: number | null = null;
@@ -39,6 +40,7 @@ export class ReservaComponent implements OnInit {
   ngOnInit() {
     this.setMinDate();
     console.log('Alojamiento ID recibido:', this.alojamientoId);
+    console.log(this.reserva.fecha_inicio);
   }
 
   setMinDate() {
@@ -94,6 +96,7 @@ export class ReservaComponent implements OnInit {
   
   enviarReserva(){
     this.reserva.alojamiento = this.alojamientoId;
+    this.reserva.total = this.rentalValue;
     if (this.authsesion.obtenerInfoUsuario() !== null){
         this.reserva.usuario = this.authsesion.obtenerInfoUsuario();
     }

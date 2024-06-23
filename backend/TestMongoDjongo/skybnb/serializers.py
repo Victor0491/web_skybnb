@@ -210,6 +210,8 @@ class ReservaSerializers(serializers.ModelSerializer):
         return reserva
     
 class ReservaListSerializers(serializers.ModelSerializer):
+    alojamiento = GetAlojamientoSerializers()
+
     class Meta:
         model = Reserva
         fields = ['id', 'usuario', 'alojamiento', 'fecha_inicio', 'fecha_fin', 'total']

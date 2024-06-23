@@ -8,6 +8,11 @@
   <app-preferencias (closeModalClicked)="closePreferencias()"></app-preferencias>
 </div>
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userProfileModal">
+  Launch demo modal
+</button>
+
+<app-modal-profile></app-modal-profile>
 <router-outlet></router-outlet>
 
 <app-footer></app-footer>
