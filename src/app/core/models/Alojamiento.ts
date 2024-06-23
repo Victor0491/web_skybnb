@@ -6,6 +6,7 @@
 
 
   export interface Alojamiento {
+    id: number;
     nombre: string;
     direccion: string;
     imagenes : string[];

@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ProfileService } from '../core/service/profile/profile.service';
+import { AuthSesionService } from '../core/service/sesion/auth-sesion.service';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -11,51 +14,20 @@ import { RouterLink } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
 
-  user: any = {
-    username: 'Mihawk',
-    name: 'John Doe',
-    lastName: 'Smith',
-    email: 'john.doe@email.com',
-    phone: ''
-  };
 
-  accommodations: any[] = [
-    {
-      nombre: 'Casa en la Playa',
-      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
-      precio: 60000,
-      region: 'Valparaiso',
-    },
-    {
-      nombre: 'Cabaña en el bosque Huilo Huilo',
-      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
-      precio: 100000,
-      region: 'De los Rios',
-    }
-  ];
-
-  reservations: any[] = [
-    {
-      nombre: 'Cabaña en el bosque Huilo Huilo',
-      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
-      region: 'De los Rios',
-      startDate: '2024-06-01',
-      endDate: '2024-06-05'
-    },
-    {
-      nombre: 'Cabaña en el bosque Huilo Huilo',
-      descripcion: 'Casa cercana a tus lugares favoritos con hermosa vista al paisaje natural de tu preferencia',
-      region: 'De los Rios',
-      startDate: '2023-07-20',
-      endDate: '2023-07-27'
-    }
-  ];
+  user_profile : any;
 
   activeAccordion: string = '';
 
-  constructor() { }
+  constructor(
+    private profileService: ProfileService,
+    private authsesion : AuthSesionService
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getProfile();
+    console.log('hola')
+   }
 
   toggleAccordion(section: string) {
     if (this.activeAccordion === section) {
@@ -68,5 +40,12 @@ export class UserProfileComponent implements OnInit {
       this.activeAccordion = section;
     }
   }
-  
+
+  getProfile(){
+    const id_user = this.authsesion.obtenerInfoUsuario()
+    this.profileService.getProfileUser(id_user).subscribe(data => {
+    this.user_profile = data;
+    console.log(this.user_profile);
+    });
+  }
 }

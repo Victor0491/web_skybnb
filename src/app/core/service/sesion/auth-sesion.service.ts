@@ -50,6 +50,10 @@ export class AuthSesionService {
       'Something bad happened; please try again later.');
   }
 
+  obtenerToken(){
+    const token = localStorage.getItem('token')
+    return token
+  }
 
   obtenerInfoUsuario(){
     const info = localStorage.getItem('token')

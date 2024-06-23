@@ -19,6 +19,7 @@ urlpatterns = [
 
    path('perfilusuario/<int:usuario_id>/', views.PerfilUsuarioDetail.as_view(), name='detail-user'),
    path('reserva/usuario/<int:usuario_id>/',views.ReservaListUser.as_view(), name='detail-reserva-user'),
+   path('perfilusuario/update-profile/', views.PerfilUsuarioUpdateAPIView.as_view(), name='update-profile'),
 
 
    path('list-servicios', views.ServiciosList.as_view(), name='list-servicios'),

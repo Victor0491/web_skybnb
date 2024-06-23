@@ -122,7 +122,7 @@ class Alojamiento(models.Model):
     
 
 class Reserva(models.Model):
-    usuario = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE, related_name='usuarios')
+    usuario = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE, related_name='reservas')
     alojamiento = models.ForeignKey(Alojamiento, on_delete=models.CASCADE)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
@@ -134,4 +134,3 @@ class Reserva(models.Model):
 class Comentario(models.Model):
     reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE, related_name='reservas')
     descripcion = models.TextField()
-    
