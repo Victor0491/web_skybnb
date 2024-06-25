@@ -4,12 +4,14 @@ import { RouterLink } from '@angular/router';
 import { ListAlojamiento } from '../../../core/models/Alojamiento';
 import { AlojamientoService } from '../../../core/service/alojamiento/alojamiento.service';
 import { ObjectToArrayPipe } from '../../../core/pipe/object-to-array.pipe';
+import { TruncatePipe } from '../../../core/pipe/truncate.pipe';
+import { SeparadorMilesPipe } from '../../../core/pipe/separador-miles.pipe';
 
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule,RouterLink,ObjectToArrayPipe],
+  imports: [CommonModule,RouterLink,ObjectToArrayPipe,TruncatePipe,SeparadorMilesPipe],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })

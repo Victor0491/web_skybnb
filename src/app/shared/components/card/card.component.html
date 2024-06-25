@@ -29,10 +29,10 @@
             </a>
           </div>
           <div class="tarjeta card-body">
-            <h5 class="titulo card-title">{{ alojamiento.nombre }}</h5>
-            <p class="card-text">{{ alojamiento.descripcion }}</p>
+            <h5 class="titulo card-title">{{ alojamiento.nombre | truncate:25 }}</h5>
+            <p class="card-text">{{ alojamiento.descripcion | truncate:60 }}</p>
             <hr>
-            <p class="card-text">Precio: ${{ alojamiento.precio}}</p>
+            <p class="card-text"><span class="precio">${{ alojamiento.precio | separadorMiles}}</span> CLP por noche</p>
           </div>
         </div>
       </div>
