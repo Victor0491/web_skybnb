@@ -7,14 +7,13 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
-import { FilterComponent } from './shared/components/filter/filter.component';  // Importa el componente de filtro
 import { ModalProfileComponent } from './shared/components/modal-profile/modal-profile.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, FilterComponent,ModalProfileComponent],  // Añade el componente de filtro aquí
+  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, ModalProfileComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

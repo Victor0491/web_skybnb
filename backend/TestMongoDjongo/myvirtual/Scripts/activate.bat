@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\jrgmf\OneDrive\Escritorio\TestMongoDjongo\myvirtual
+set VIRTUAL_ENV=C:\Users\victo\OneDrive\Documents\skybnb\web_skybnb\backend\TestMongoDjongo\myvirtual
 
 if not defined PROMPT set PROMPT=$P$G
 
