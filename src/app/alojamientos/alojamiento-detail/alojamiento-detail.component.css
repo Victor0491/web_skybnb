@@ -117,3 +117,23 @@ input[type="date"],
     width: 100%;
   }
 }
+
+.basic-service-item {
+  margin-bottom: 10px; /* Ajusta el margen inferior a tu preferencia */
+}
+
+.service-item {
+  margin-bottom: 0px; /* Ajusta el margen inferior a tu preferencia */
+  padding: 0; /* Eliminar cualquier padding adicional */
+  line-height: 1.2; /* Ajusta la altura de línea para reducir el espacio vertical */
+  white-space: nowrap; /* Prevenir que el texto se divida en varias líneas */
+}
+
+.service-item svg {
+  margin-right: 5px; /* Ajusta el margen derecho del icono */
+  vertical-align: middle; /* Alinea verticalmente el icono con el texto */
+}
+
+.service-item span {
+  vertical-align: middle; /* Alinea verticalmente el texto */
+}
