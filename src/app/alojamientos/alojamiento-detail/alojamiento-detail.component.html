@@ -36,7 +36,7 @@
     <hr>
     <h5>Servicios Adicionales</h5>
     <p *ngFor="let servicio of alojamiento.servicios | objectToArray">
-      <svg [innerHTML]="servicio.icono"></svg> {{ servicio.descripcion }}
+      <svg [innerHTML]="servicio.icono"></svg> {{ servicio.nombre }}
     </p>
   </div>
 
