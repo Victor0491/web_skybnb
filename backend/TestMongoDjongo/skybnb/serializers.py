@@ -189,7 +189,7 @@ class GetDetailsAlojamientoSerializers(serializers.ModelSerializer):
  
     class Meta:
         model = Alojamiento
-        fields = ['id','nombre','direccion','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios','imagenes']
+        fields = ['id','nombre','descripcion','direccion','dormitorios','banos','huespedes','mascotas','usuario','precio','estado_destacado','tipoalojamiento','ubicacion','actividades','servicios','imagenes']
 
 
 class ReservaSerializers(serializers.ModelSerializer):

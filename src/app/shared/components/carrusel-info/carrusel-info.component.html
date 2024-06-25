@@ -1,65 +1,22 @@
-<div class="carousel-container">
-  
-  <div id="image-carousel" class="splide" aria-label="Beautiful Images">
-    <div class="splide__track">
-      <ul class="splide__list">
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/f8a49f5f-51a5-406f-a93f-83ea84032640.jpg?im_w=1200" alt="Imagen del alojamiento grande">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/9ecbfcc2-39c3-47e4-aa54-ee5e430978a4.jpg?im_w=1440" alt="Second image">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/80a0b6ce-9ed7-41c1-b9cd-10e28025f6c3.jpg?im_w=720" alt="Third image">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzQyMjg4Mjk%3D/original/c2e9cdf1-d1e7-46b5-bf04-19e5d64a47cb.jpeg?im_w=1200" alt="Fourth image">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/e947a4e2-293f-4ee0-bcfe-949fe00223df.jpg?im_w=720" alt="Fifth image">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/2a8cb250-72c6-437e-a002-e534c21b9c29.jpg?im_w=1200" alt="Sixth image">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/71911216-1c87-46c4-b355-b563f2003055.jpg?im_w=1200" alt="Seven image">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/f10b8c0b-9ab5-4a92-8afa-5558d2a01145.jpg?im_w=1200" alt="Eight image">
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Thumbnails -->
-  <div id="thumbnail-carousel" class="splide splide--thumbnail">
-    <div class="splide__track">
-      <ul class="splide__list">
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/f8a49f5f-51a5-406f-a93f-83ea84032640.jpg?im_w=1200" alt="Thumbnail 1">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/9ecbfcc2-39c3-47e4-aa54-ee5e430978a4.jpg?im_w=1440" alt="Thumbnail 2">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/80a0b6ce-9ed7-41c1-b9cd-10e28025f6c3.jpg?im_w=720" alt="Thumbnail 3">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MzQyMjg4Mjk%3D/original/c2e9cdf1-d1e7-46b5-bf04-19e5d64a47cb.jpeg?im_w=1200" alt="Thumbnail 4">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/e947a4e2-293f-4ee0-bcfe-949fe00223df.jpg?im_w=720" alt="Thumbnail 5">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/2a8cb250-72c6-437e-a002-e534c21b9c29.jpg?im_w=1200" alt="Thumbnail 6">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/71911216-1c87-46c4-b355-b563f2003055.jpg?im_w=1200" alt="Thumbnail 7">
-        </li>
-        <li class="splide__slide">
-          <img src="https://a0.muscache.com/im/pictures/f10b8c0b-9ab5-4a92-8afa-5558d2a01145.jpg?im_w=1200" alt="Thumbnail 8">
-        </li>
-      </ul>
-    </div>
+<div id="image-carousel" class="splide">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" *ngFor="let imagen of imagenes">
+        <img [src]="imagen" alt="Image" />
+      </li>
+    </ul>
   </div>
 </div>
+
+<div id="thumbnail-carousel" class="splide">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" *ngFor="let imagen of imagenes; let i = index" (click)="changeMainImage(i)">
+        <img [src]="imagen" alt="Thumbnail" />
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+

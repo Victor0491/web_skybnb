@@ -18,6 +18,7 @@ import { response } from 'express';
 export class ReservaComponent implements OnInit {
 
   @Input() alojamientoId!: number;
+  @Input() alojamientoPrecio!: number;
 
   reserva : Reserva = {
     alojamiento : 0,
@@ -29,7 +30,7 @@ export class ReservaComponent implements OnInit {
 
   rentalValue: number | null = null;
   daysCount: number | null = null;
-  readonly pricePerNight = 100000; // Define el precio por noche aquí
+  pricePerNight:number | null = null; // Define el precio por noche aquí
 
   constructor(
     private authsesion : AuthSesionService,
@@ -40,6 +41,7 @@ export class ReservaComponent implements OnInit {
   ngOnInit() {
     this.setMinDate();
     console.log('Alojamiento ID recibido:', this.alojamientoId);
+    console.log('Alojamiento ID recibido:', this.alojamientoPrecio);
     console.log(this.reserva.fecha_inicio);
   }
 
@@ -63,8 +65,12 @@ export class ReservaComponent implements OnInit {
       const days = timeDifference / (1000 * 3600 * 24);
 
       if (days > 0) {
+        this.pricePerNight = this.alojamientoPrecio
         this.rentalValue = days * this.pricePerNight; // Calcula el valor del arriendo
         this.daysCount = days;
+        console.log(this.rentalValue)
+        console.log(this.daysCount)
+        console.log(this.pricePerNight)
       } else {
         alert('La fecha de fin debe ser posterior a la fecha de inicio.');
         this.rentalValue = null;

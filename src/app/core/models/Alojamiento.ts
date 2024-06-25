@@ -50,6 +50,7 @@
   export interface AlojamientoDetails {
     nombre: string;
     direccion: string;
+    descripcion: string;
     dormitorios: number;
     banos: number;
     huespedes: number;
@@ -61,4 +62,5 @@
     ubicacion: TipoUbicacion;
     actividades: TipoActividad[];
     servicios: Servicio[];
+
   }
