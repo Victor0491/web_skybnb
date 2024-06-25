@@ -33,9 +33,11 @@
     <p *ngIf="alojamiento.huespedes!== undefined">Cantidad huespedes: {{ alojamiento.huespedes }}</p>
     <p *ngIf="alojamiento.banos!== undefined">Cantidad Baños: {{ alojamiento.banos }}</p>
     <p *ngIf="alojamiento.dormitorios!== undefined">Cantidad dormitorios: {{ alojamiento.dormitorios }}</p>
-    <p *ngIf="alojamiento.mascotas!== undefined">Pets Friendly {{ alojamiento.mascotas }}</p>
     <hr>
     <h5>Servicios Adicionales</h5>
+    <div *ngIf="alojamiento.mascotas !== undefined">
+      <p *ngIf="alojamiento.mascotas">Aceptamos a tu mascota!</p>
+    </div>
     <p *ngFor="let servicio of alojamiento.servicios | objectToArray">
       <svg [innerHTML]="servicio.icono"></svg> {{ servicio.descripcion }}
     </p>
