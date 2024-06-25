@@ -1,7 +1,7 @@
 .buttons-and-images {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* Alinear a la izquierda */
   margin-bottom: 20px;
 }
 
@@ -123,17 +123,24 @@ input[type="date"],
 }
 
 .service-item {
-  margin-bottom: 0px; /* Ajusta el margen inferior a tu preferencia */
+  margin: 0; /* Eliminar cualquier margen adicional */
   padding: 0; /* Eliminar cualquier padding adicional */
   line-height: 1.2; /* Ajusta la altura de línea para reducir el espacio vertical */
-  white-space: nowrap; /* Prevenir que el texto se divida en varias líneas */
+  display: flex; /* Asegura que el SVG y el texto estén alineados en línea */
+  align-items: center; /* Alinea los elementos verticalmente */
+  text-align: left; /* Alinear texto a la izquierda */
 }
 
 .service-item svg {
   margin-right: 5px; /* Ajusta el margen derecho del icono */
   vertical-align: middle; /* Alinea verticalmente el icono con el texto */
+  display: inline-block; /* Asegura que el SVG se comporte como un elemento en línea */
+  height: 1em; /* Ajusta la altura del SVG para que coincida con el tamaño del texto */
 }
 
 .service-item span {
   vertical-align: middle; /* Alinea verticalmente el texto */
+  margin: 0; /* Eliminar cualquier margen adicional */
+  padding: 0; /* Eliminar cualquier padding adicional */
 }
+
