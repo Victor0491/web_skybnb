@@ -75,7 +75,7 @@ export class RegisterComponent {
         // Maneja la respuesta exitosa aquí
       },
       error => {
-        console.error('Error registering user', error);
+        console.error('Error registering user',JSON.parse(error));
         // Maneja el error aquí
       }
     );

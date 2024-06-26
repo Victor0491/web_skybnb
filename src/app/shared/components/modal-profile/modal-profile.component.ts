@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
   styleUrl: './modal-profile.component.css'
 })
 export class ModalProfileComponent {
-
 }
