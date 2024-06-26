@@ -31,10 +31,15 @@ export class MapaComponent implements OnInit, OnChanges {
 
   private updateMap(direccion: string): void {
     this.geocodeAddress(direccion).subscribe((coordinates: { lat: number; lon: number }) => {
+      console.log('Coordenadas obtenidas:', coordinates); // Verificar las coordenadas
       this.map.setView([coordinates.lat, coordinates.lon], 15);
-      L.marker([coordinates.lat, coordinates.lon]).addTo(this.map)
-        .bindPopup(direccion)
-        .openPopup();
+      // Añadir un círculo semitransparente en lugar de un marcador
+      L.circle([coordinates.lat, coordinates.lon], {
+        color: '#00add0', // Color del borde del círculo
+        fillColor: '#00add0', // Color de relleno del círculo
+        fillOpacity: 0.5, // Opacidad del relleno
+        radius: 500 // Radio en metros, ajusta según tus necesidades
+      }).addTo(this.map);
     });
   }
 
@@ -44,7 +49,7 @@ export class MapaComponent implements OnInit, OnChanges {
     return this.http.get<any[]>(url).pipe(
       map(results => {
         if (results.length > 0) {
-          return { lat: results[0].lat, lon: results[0].lon };
+          return { lat: parseFloat(results[0].lat), lon: parseFloat(results[0].lon) };
         } else {
           throw new Error('No se encontraron resultados de geocodificación');
         }
@@ -52,3 +57,5 @@ export class MapaComponent implements OnInit, OnChanges {
     );
   }
 }
+
+
