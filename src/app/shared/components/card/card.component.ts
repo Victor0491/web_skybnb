@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ListAlojamiento } from '../../../core/models/Alojamiento';
@@ -18,9 +18,10 @@ import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.comp
 export class CardComponent implements OnInit {
 
   isLoading = true; // Agregado para el estado de carga
+  isLoaded = false; // Agregado para el control de la animación
   alojamientos: any[] = [];
 
-  constructor(private alojamientoService: AlojamientoService) { }
+  constructor(private alojamientoService: AlojamientoService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.CargarAlojamiento();
@@ -29,7 +30,11 @@ export class CardComponent implements OnInit {
   CargarAlojamiento() {
     this.alojamientoService.getAlojamientos().subscribe(data => {
       this.alojamientos = data;
-      this.isLoading = false; // Cambia el estado de carga una vez que los datos se han cargado
+      this.isLoading = false;
+      setTimeout(() => {
+        this.isLoaded = true; // Cambia el estado de animación una vez que los datos se han cargado
+        this.cd.detectChanges(); // Detectar cambios manualmente
+      }, 0);
       console.log(this.alojamientos);
     });
   }

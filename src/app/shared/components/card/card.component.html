@@ -23,7 +23,7 @@
                   [ngClass]="{'active': i === 0}">
                   <a [routerLink]="['/rooms', alojamiento.id]">
                     <div class="card-img-container">
-                      <img [src]="imagen" class="card-img-top" alt="Imagen {{i + 1}}">
+                      <img [src]="imagen" class="card-img-top delay-{{j % 6}}" [ngClass]="{'show': isLoaded}" alt="Imagen {{i + 1}}">
                     </div>
                   </a>
                 </div>
