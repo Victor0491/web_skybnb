@@ -7,6 +7,7 @@ import { MapaComponent } from '../../shared/components/mapa/mapa.component';
 import { ReservaComponent } from '../../shared/components/reserva/reserva.component';
 import { AlojamientoService } from '../../core/service/alojamiento/alojamiento.service';
 import { ObjectToArrayPipe } from '../../core/pipe/object-to-array.pipe'; 
+import { SeparadorMilesPipe } from '../../core/pipe/separador-miles.pipe';
 
 @Component({
   selector: 'app-alojamiento-detail',
@@ -17,7 +18,8 @@ import { ObjectToArrayPipe } from '../../core/pipe/object-to-array.pipe';
     CarruselInfoComponent,
     MapaComponent,
     ReservaComponent,
-    ObjectToArrayPipe
+    ObjectToArrayPipe,
+    SeparadorMilesPipe
   ],
   templateUrl: './alojamiento-detail.component.html',
   styleUrls: ['./alojamiento-detail.component.css']
