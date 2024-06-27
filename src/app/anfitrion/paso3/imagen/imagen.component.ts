@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
 import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 
-
 interface ImagesData {
   [key: string]: string; // Esto permite cualquier clave de tipo string con valor de tipo string
 }
@@ -20,7 +19,6 @@ export class ImagenComponent {
   formData = {
     imagenes: [] as string[]
   };
-
 
   selectedFiles: FileList | null = null;
   uploadedImages: { file: File, base64: string }[] = [];
@@ -49,7 +47,6 @@ export class ImagenComponent {
     reader.readAsDataURL(file);
     reader.onload = (): void => {
       this.uploadedImages[index].base64 = reader.result as string;
-      console.log(reader.result); // Aquí puedes ver la imagen en base64
 
       // Crea un objeto con claves específicas para cada imagen
       const imagesData: ImagesData = this.uploadedImages.reduce((acc, image, idx) => {

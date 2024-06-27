@@ -14,9 +14,12 @@
         </div>
       </button>
     </div>
+    <div *ngIf="showError" class="error-message">
+      Por favor, selecciona una opción para continuar.
+    </div>
   </div>
   <div class="button-container">
     <button class="start-button-volver" (click)="navigateToPaso1()">Volver</button>
-    <button class="start-button-avanzar" (click)="navigateToUbicacion()">Continuar</button>
+    <button class="start-button-avanzar" (click)="validateAndNavigate()">Continuar</button>
   </div>
 </div>

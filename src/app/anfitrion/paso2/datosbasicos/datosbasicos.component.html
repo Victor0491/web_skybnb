@@ -33,23 +33,35 @@
 
   <!-- Mascotas -->
   <div class="input-container">
-    <label for="mascotas">Mascotas:</label>
-    <select id="mascotas" [(ngModel)]="formData.mascotas">
-      <option [ngValue]="true">Sí</option>
-      <option [ngValue]="false">No</option>
-    </select>
+    <label>Mascotas:</label>
+    <div style="display: flex; gap: 10px;">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mascotas" id="mascotasSi" [value]="true" [(ngModel)]="formData.mascotas">
+        <label class="form-check-label" for="mascotasSi">
+          Sí
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mascotas" id="mascotasNo" [value]="false" [(ngModel)]="formData.mascotas">
+        <label class="form-check-label" for="mascotasNo">
+          No
+        </label>
+      </div>
+    </div>
   </div>
-
-
-  <div class="form-check" *ngFor="let servicio of servicios">
-    <input class="form-check-input" type="checkbox" [id]="'servicio-' + servicio.id" 
-      [checked]="formData.servicios.includes(servicio.id)" 
-      (change)="toggleServicio(servicio.id)">
-    <label class="form-check-label" [for]="'servicio-' + servicio.id">
-      {{ servicio.nombre }}:
-    </label>
+  <hr>
+  
+  <h3>Servicios</h3>
+  <div class="services-container">
+    <div class="form-check" *ngFor="let servicio of servicios">
+      <input class="form-check-input" type="checkbox" [id]="'servicio-' + servicio.id" 
+        [checked]="formData.servicios.includes(servicio.id)" 
+        (change)="toggleServicio(servicio.id)">
+      <label class="form-check-label" [for]="'servicio-' + servicio.id">
+        {{ servicio.nombre }}
+      </label>
+    </div>
   </div>
-
   <!-- Botones -->
   <div class="button-container">
     <button class="start-button-volver" (click)="navigateToUbicacion()">Volver</button>
