@@ -1,0 +1,40 @@
+<div class="container">
+  <section class="row">
+    <article class="col-12 col-sm-6 col-md-4 col-lg-3 my-4" *ngFor="let alojamiento of alojamientos; let j = index">
+      <div class="card-container mx-3">
+        <div class="card">
+          <div [id]="'card' + j" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button *ngFor="let imagen of alojamiento.imagenes; let i = index" type="button"
+                [attr.data-bs-target]="'#card' + j" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
+                [attr.aria-label]="'Slide ' + (i + 1)"></button>
+            </div>
+            <div class="carousel-inner">
+              <div *ngFor="let imagen of alojamiento.imagenes; let i = index" class="carousel-item"
+                [ngClass]="{'active': i === 0}">
+                <a [routerLink]="['/rooms', j]">
+                  <img [src]="imagen" class="card-img-top" alt="Imagen {{i + 1}}">
+                </a>
+              </div>
+            </div>
+            <a class="carousel-control-prev" [attr.href]="'#card' + j" role="button" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </a>
+            <a class="carousel-control-next" [attr.href]="'#card' + j" role="button" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Siguiente</span>
+            </a>
+          </div>
+          <div class="tarjeta card-body">
+            <h5 class="titulo card-title">{{ alojamiento.nombre }}</h5>
+            <p class="card-text">Región: {{ alojamiento.region }}</p>
+            <p class="card-text">{{ alojamiento.descripcion }}</p>
+            <hr>
+            <p class="card-text">Precio: ${{ alojamiento.precio}}</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>

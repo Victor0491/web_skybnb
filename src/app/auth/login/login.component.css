@@ -1,0 +1,10 @@
+.full-container {
+    width: 100%;
+    height: 100vh; /* 100% del alto de la ventana */
+    background-image: url('/web_skybnb/src/assets/img/paisaje.jpg');
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
