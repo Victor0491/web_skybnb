@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="titulo">
+    <h2>Seleccione máximo 3 actividades que se realicen en su entorno</h2>
+  </div>
+  <div class="opciones-container" *ngIf="seccionActual === 'actividad'">
+    <div class="opcion-container">
+      <button *ngFor="let actividad of actividades; let i = index" class="opcion"
+        [class.selected]="formData.actividades.includes(actividad.id)"
+        [class.intercalado]="i >= 3 && i % 2 === 1"
+        (click)="seleccionarActividad(actividad.id)">
+        <div class="opcion-content">
+          <img [src]="actividad.image" alt="{{ actividad.nombre }}">
+          <div>{{ actividad.nombre }}</div>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="button-container">
+    <button class="start-button-volver" (click)="navigateToEntorno()">Volver</button>
+    <button class="start-button-avanzar" (click)="navigateToPaso2()" [disabled]="formData.actividades.length === 0">Paso 2</button>
+  </div>
+</div>

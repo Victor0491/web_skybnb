@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CarruselComponent } from '../../shared/components/carrusel/carrusel.component';
 import { CardComponent } from '../../shared/components/card/card.component';
+import { AuthSesionService } from '../../core/service/sesion/auth-sesion.service';
 
 @Component({
   selector: 'app-home-alojamientos',
@@ -11,4 +12,14 @@ import { CardComponent } from '../../shared/components/card/card.component';
 })
 export class HomeAlojamientosComponent {
 
+
+
+  constructor(
+    private authService: AuthSesionService,
+  ) { }
+
+  ngOnInit(){
+    console.log(this.authService.obtenerInfoUsuario())
+    console.log(this.authService.ObtenerInfoRoles())
+  }
 }

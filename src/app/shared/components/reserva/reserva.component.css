@@ -1,0 +1,114 @@
+/* Contenedor principal */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f1f3f4;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid #007bff;
+  }
+  
+  /* Estilo para los labels */
+  form .form-group label {
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  
+  /* Estilo para los inputs */
+  form .form-group input {
+    padding: 15px;
+    font-size: 1.1rem;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+  
+  form .form-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+  }
+  
+  /* Estilo para el botón */
+  button.btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.3rem;
+    background-color: #007bff;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  /* Estilo para el mensaje de alerta */
+  .alert {
+    font-size: 1.2rem;
+    text-align: center;
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  /* Ajustes adicionales */
+  .mt-3 {
+    margin-top: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  
+  .col-md-6 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  @media (min-width: 768px) {
+    .col-md-6 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  
+  .form-group input[type="date"] {
+    padding-left: 15px;
+  }
+  /* Estilo global de SweetAlert */
+.swal2-popup {
+  font-size: 1.6rem; /* Cambia el tamaño del texto */
+  border-radius: 10px; /* Cambia el radio de las esquinas */
+}
+
+.swal2-title {
+  color: #4CAF50; /* Cambia el color del título */
+}
+
+.swal2-confirm {
+  background-color: #4CAF50 !important; /* Cambia el color del botón */
+}
+
+.swal2-cancel {
+  background-color: #F44336 !important; /* Cambia el color del botón cancelar */
+}
+
+  

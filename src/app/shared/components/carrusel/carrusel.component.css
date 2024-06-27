@@ -1,22 +1,28 @@
 .carousel-item img {
-    height: 500px;
+    height: 300px; /* Ajusta la altura según tus necesidades */
     width: 100%; /* Asegúrate de que la imagen cubra todo el ancho del carrusel */
     object-fit: cover; /* Ajusta la imagen para que cubra el área del carrusel sin distorsionarse */
     object-position: center; /* Centra la imagen en el carrusel */
     filter: brightness(70%);
-  }
-  
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
 .carousel-caption h5 {
-    font-size: 30px; /* Ajusta el tamaño del título */
+    font-size: 24px; /* Ajusta el tamaño del título */
     color: white; /* Ajusta el color del título */
-    text-align: center;
-    height: 50px;
-  }
-  
+}
+
 .carousel-caption p {
-    font-size: 25px; /* Ajusta el tamaño del subtítulo */
+    font-size: 18px; /* Ajusta el tamaño del subtítulo */
     color: white; /* Ajusta el color del subtítulo */
-    text-align: center;
-    height: 150px;
-  }
+}
+
+
   

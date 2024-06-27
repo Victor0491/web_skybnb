@@ -3,20 +3,24 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
-
+import { ModalComponent } from './shared/components/modal/modal.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
-import { AnfitrionComponent } from './anfitrion/anfitrion.component';
+import { FormsModule } from '@angular/forms';
+import { PreferenciasComponent } from './preferencias/preferencias.component';
+import { ModalProfileComponent } from './shared/components/modal-profile/modal-profile.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule,RouterOutlet,NavbarComponent,FooterComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, ModalProfileComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'web_skybnb';
+  modalVisible = false;
+  preferenciasVisible = true;
 
   constructor(private router: Router) {}
 
@@ -27,6 +31,20 @@ export class AppComponent {
   isRegisterPage(): boolean {
     return this.router.url === '/auth/register';
   }
-  
-}
 
+  openModal() {
+    this.modalVisible = true;
+  }
+
+  closeModal() {
+    this.modalVisible = false;
+  }
+
+  openPreferencias() {
+    this.preferenciasVisible = true;
+  }
+
+  closePreferencias() {
+    this.preferenciasVisible = false;
+  }
+}

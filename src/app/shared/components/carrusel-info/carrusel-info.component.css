@@ -1,11 +1,37 @@
-/* Estilo para el contenedor del carrusel */
-#carrusel-info {
-    float: lef; /* Alinear a la izquierda */
-    margin-right: 20px; /* Espacio entre el carrusel y el texto de la habitación */
-    width: 70%; /* Ancho del carrusel */
+.carousel-container {
+  max-width: 1200px; /* Adjust as needed */
+  margin: auto;
 }
 
-/* Estilo para el contenedor del texto de la habitación */
-#descripcion-habitacion {
-    float: l; /* Alinear a la izquierda */
+#image-carousel {
+  height: 600px; /* Adjust height as needed */
+  margin-top: 20px;
+}
+
+#image-carousel .splide__slide img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+#thumbnail-carousel {
+  margin-top: 10px; /* Adjust spacing as needed */
+}
+
+#thumbnail-carousel .splide__slide img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.splide--thumbnail .splide__slide {
+  width: 150px; /* Increase width for larger thumbnails */
+  height: 100px; /* Increase height for larger thumbnails */
+}
+
+@media (max-width: 600px) {
+  .splide--thumbnail .splide__slide {
+    width: 100px; /* Smaller thumbnails for mobile view */
+    height: 66px;
+  }
 }

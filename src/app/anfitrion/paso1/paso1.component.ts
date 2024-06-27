@@ -14,6 +14,6 @@ export class Paso1Component {
   constructor(private router: Router) {}
   navigateToDescripcion() {
     console.log('Botón Comencemos clickeado');
-    this.router.navigate(['/descripcion']);
+    this.router.navigate(['/anfitrion/descripcion']);
   }
 }

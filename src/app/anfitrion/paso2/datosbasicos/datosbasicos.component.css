@@ -1,0 +1,82 @@
+.container {
+    width: 80%; /* Ancho del contenedor */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+    padding: 20px; /* Espaciado interno */
+    border: 2px solid #ccc; /* Borde */
+    border-radius: 10px; /* Bordes redondeados */
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem; /* 4 unidades de espacio arriba */
+    margin-bottom: 4rem; /* 4 unidades de espacio abajo */
+}
+
+.container h2 {
+    margin-bottom: 20px; /* Espacio inferior para separar el título */
+}
+
+.input-container {
+    margin-bottom: 15px; /* Espacio inferior para separar cada grupo de entrada */
+}
+
+.input-container label {
+    display: inline-block; /* Convertir a bloque para poder aplicar márgenes */
+    width: 150px; /* Ancho del label */
+    margin-right: 10px; /* Espacio derecho para separar el label del input */
+}
+
+.input-control {
+    display: inline-flex; /* Utilizar un contenedor flex para alinear elementos */
+    align-items: center; /* Alinear elementos verticalmente */
+}
+
+.input-control button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 5px; /* Espacio horizontal entre los botones y el input */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.input-control input {
+    width: 50px;
+    text-align: center;
+}
+
+.start-button-avanzar{
+    margin-top: 20px; /* Margen superior para separar el botón */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Relleno interno */
+    font-size: 18px; /* Tamaño de fuente */
+    cursor: pointer; /* Cursor al pasar el mouse */
+    align-self: flex-end; /* Alinear el botón a la derecha */
+    border-radius: 5px; /* Borde redondeado para los botones */
+    width: 150px; /* Ancho fijo para los botones */
+    margin-bottom: 4rem; /* 4 unidades de espacio abajo */
+}
+.start-button-volver {
+    margin-top: 20px; /* Margen superior para separar el botón */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Relleno interno */
+    font-size: 18px; /* Tamaño de fuente */
+    cursor: pointer; /* Cursor al pasar el mouse */
+    align-self: flex-start; /* Alinear el botón a la izquierda */
+    border-radius: 5px; /* Borde redondeado para los botones */
+    width: 150px; /* Ancho fijo para los botones */
+}
+
+.start-button:hover {
+    background-color: #0056b3;
+}
+
+.button-container {
+    display: flex; /* Utiliza el modelo de caja flexible */
+    justify-content: flex-end; /* Alinea el contenido al final del contenedor */
+    justify-content: space-between; /* Espacio entre los botones */
+    margin-top: 20px; /* Margen superior para separar el botón */
+}

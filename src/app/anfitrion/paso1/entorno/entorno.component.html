@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="titulo">
+    <h2>¿Cuál de estas opciones describe mejor tu entorno?</h2>
+  </div>
+  <div class="opciones-container" *ngIf="seccionActual === 'ubicacion'">
+    <div class="opcion-container">
+      <button *ngFor="let ubicacion of ubicaciones; let i = index" class="opcion"
+      [class.selected]="formData.ubicacion === ubicacion.id"
+        [class.intercalado]="i >= 3 && i % 2 === 1"
+        (click)="seleccionarUbicacion(ubicacion.id)">
+        <div class="opcion-content">
+          <img [src]="ubicacion.image" alt="{{ ubicacion.nombre }}">
+          <div>{{ ubicacion.nombre }}</div>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="button-container">
+    <button class="start-button-volver" (click)="navigateToDescripcion()">Volver</button>
+    <button class="start-button-avanzar" (click)="navigateToActividad()">Continuar</button>
+  </div>
+</div>
+

@@ -1,0 +1,85 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.user-profile-menu {
+  width: 10%;
+  padding: 10px;
+  background-color: #00add0;
+}
+
+.user-profile-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.user-profile-menu li {
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.user-profile-menu a {
+  text-decoration: none;
+  color: #333;
+}
+
+.user-profile-content {
+  flex: 1;
+  padding: 10px;
+}
+
+.user-profile-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.user-profile-picture {
+  display: flex; /* Hacer que el contenedor sea un flexbox */
+  justify-content: center; /* Centrar la imagen horizontalmente */
+  align-items: center; /* Centrar la imagen verticalmente */
+  width: 100%; /* Establecer el ancho al 100% del contenedor padre */
+  max-width: 200px; /* Establecer un ancho máximo */
+  aspect-ratio: 1; /* Mantener una relación de aspecto de 1:1 */
+  border-radius: 20%; /* Hacer que las esquinas sean redondeadas (50% es un círculo completo) */
+  overflow: hidden; /* Ocultar cualquier contenido que desborde el contenedor */
+}
+
+.user-profile-picture img {
+  width: 100%; /* Hacer que la imagen llene el contenedor */
+  height: 100%; /* Hacer que la imagen llene el contenedor */
+  object-fit: cover; /* Conservar la relación de aspecto mientras se llena el contenedor */
+}
+
+.accordion-header {
+  background-color: #f5f5f5;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.accordion-content {
+  display: none; /* Escondido por defecto */
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.accordion-content.show {
+  display: block; /* Mostrar cuando la clase 'show' está presente */
+}

@@ -1,0 +1,20 @@
+<div class="container mt-3">
+  <form #reservationForm="ngForm">
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <label for="startDate">Fecha de Inicio</label>
+        <input type="date" id="startDate" class="form-control" name="startDate" [(ngModel)]="reserva.fecha_inicio"  ngModel required (change)="calculateRent()">
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="endDate">Fecha de Fin</label>
+        <input type="date" id="endDate" class="form-control" name="endDate" [(ngModel)]="reserva.fecha_fin" ngModel required (change)="calculateRent()">
+      </div>
+    </div>
+    
+  </form>
+  <div *ngIf="daysCount !== null && rentalValue !== null" class="alert alert-info mt-3">
+    <p>Cantidad de días: {{ daysCount }}</p>
+    <p>El precio es de: {{ rentalValue | currency:'CLP':'symbol':'1.0-0' }}</p>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="enviarReserva()">Reserva aquí</button>
+</div>
