@@ -1,19 +1,19 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { RouterLink } from '@angular/router';
 import { KnnService } from '../core/service/celula/knn.service';
 
 @Component({
   selector: 'app-preferencias',
   standalone: true,
   imports: [
-    RouterLink,
     CommonModule,
     ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './preferencias.component.html',
   styleUrls: ['./preferencias.component.css']
@@ -42,7 +42,6 @@ export class PreferenciasComponent implements OnInit {
   seccionActual = 'tipoAlojamiento';
   historialSecciones: string[] = [];
   resultados: any[] = [];
-  alojamientos: any[] = []; // Variable para almacenar los alojamientos obtenidos
 
   constructor(private fb: FormBuilder, private router: Router, private knnService: KnnService) {
     this.preferenciasForm = this.fb.group({
@@ -162,10 +161,9 @@ export class PreferenciasComponent implements OnInit {
             this.knnService.getAlojamientosByIds(this.resultados).subscribe(
               (alojamientos) => {
                 console.log('Alojamientos obtenidos:', alojamientos);
-                this.alojamientos = alojamientos;  // Guardar los alojamientos obtenidos
                 Swal.fire({
                   title: '¡Éxito!',
-                  text: 'Alojamientos recomendados obtenidos correctamente.',
+                  text: 'Preferencias guardadas correctamente.',
                   icon: 'success',
                   confirmButtonText: 'Aceptar',
                   customClass: {
@@ -173,6 +171,8 @@ export class PreferenciasComponent implements OnInit {
                     title: 'swal2-title',
                     confirmButton: 'swal2-confirm'
                   }
+                }).then(() => {
+                  this.router.navigateByUrl('', { state: { recomendados: alojamientos } });
                 });
               },
               (error) => {

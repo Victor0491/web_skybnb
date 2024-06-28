@@ -56,22 +56,6 @@
         <button *ngIf="seccionActual !== 'actividad'" (click)="continuar()">Continuar</button>
         <button *ngIf="seccionActual === 'actividad'" (click)="submit()">Personalizar</button>
       </div>
-
-      <!-- Sección de Resultados -->
-      <div *ngIf="alojamientos.length > 0">
-        <h2>Resultados:</h2>
-        <ul>
-          <li *ngFor="let alojamiento of alojamientos">
-            <h3>{{ alojamiento.nombre }}</h3>
-            <p>{{ alojamiento.descripcion }}</p>
-            <p>{{ alojamiento.direccion }}</p>
-          </li>
-        </ul>
-      </div>
-
-      <div *ngIf="alojamientos.length === 0">
-        <h2>No se encontraron resultados.</h2>
-      </div>
     </div>
   </div>
 </div>
