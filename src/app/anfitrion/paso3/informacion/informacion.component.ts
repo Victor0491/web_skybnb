@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AlojamientoService } from '../../../core/service/alojamiento/alojamiento.service';
-import { Alojamiento } from '../../../core/models/Alojamiento';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
 import { AuthSesionService } from '../../../core/service/sesion/auth-sesion.service';
-
 
 @Component({
   selector: 'app-informacion',
@@ -19,7 +18,6 @@ export class InformacionComponent implements OnInit {
 
   DatosAlojamiento: any;
 
-  
   formData = {
     nombre: '',
     descripcion: '',
@@ -31,16 +29,13 @@ export class InformacionComponent implements OnInit {
     private router: Router,
     private alojamientoService: AlojamientoService,
     private formalojamiento: FormAlojamientoService,
-    private authsesion : AuthSesionService
-
-
+    private authsesion: AuthSesionService
   ) {
     const savedData = this.formalojamiento.getFormData();
-    this.formData.nombre = savedData.nombre
-    this.formData.descripcion = savedData.descripcion
-    this.formData.precio = savedData.precio
+    this.formData.nombre = savedData.nombre;
+    this.formData.descripcion = savedData.descripcion;
+    this.formData.precio = savedData.precio;
     this.formData.usuario = this.authsesion.obtenerInfoUsuario();
-
   }
 
   ngOnInit() {
@@ -52,23 +47,59 @@ export class InformacionComponent implements OnInit {
   }
 
   guardarAlojamiento() {
+    if (!this.formData.nombre || !this.formData.descripcion || this.formData.precio <= 0) {
+      Swal.fire({
+        title: 'Atención',
+        text: 'Por favor completa todos los campos antes de continuar.',
+        icon: 'warning',
+        confirmButtonText: 'Entendido',
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          confirmButton: 'swal2-confirm'
+        }
+      });
+      return;
+    }
+
     this.formalojamiento.setFormData(this.formData);
     this.DatosAlojamiento = this.formalojamiento.getFormData();
     console.log(this.DatosAlojamiento);
     this.alojamientoService.createAlojamiento(this.DatosAlojamiento)
-    .subscribe(
+      .subscribe(
         response => {
-            console.log('Alojamiento creado exitosamente:', response);
-            const alojamientoId = response.id;
-            console.log('ID del alojamiento:', alojamientoId);
+          console.log('Alojamiento creado exitosamente:', response);
+          const alojamientoId = response.id;
+          console.log('ID del alojamiento:', alojamientoId);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Alojamiento creado exitosamente.',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              confirmButton: 'swal2-confirm'
+            }
+          }).then(() => {
             this.formalojamiento.clearFormData();
             this.router.navigateByUrl('/rooms/' + alojamientoId);
-            this.formalojamiento.clearFormData();
+          });
         },
         error => {
-            console.error('Error al crear alojamiento:', error);
-            // Aquí puedes agregar más lógica para manejar el error, como mostrar un mensaje al usuario
+          console.error('Error al crear alojamiento:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un problema al crear el alojamiento. Por favor, intenta de nuevo.',
+            icon: 'error',
+            confirmButtonText: 'Entendido',
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              confirmButton: 'swal2-confirm'
+            }
+          });
         }
-    );
+      );
   }
 }

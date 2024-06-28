@@ -1,78 +1,122 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Reserva } from '../../../core/models/reserva';
 import { AuthSesionService } from '../../../core/service/sesion/auth-sesion.service';
 import { ReservaService } from '../../../core/service/reserva/reserva.service';
-import { response } from 'express';
-
+import { AlojamientoService } from '../../../core/service/alojamiento/alojamiento.service';
+import { AlojamientoDetails } from '../../../core/models/Alojamiento';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-reserva',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl:'./reserva.component.html',
+  templateUrl: './reserva.component.html',
   styleUrls: ['./reserva.component.css']
 })
 export class ReservaComponent implements OnInit {
 
   @Input() alojamientoId!: number;
   @Input() alojamientoPrecio!: number;
+  @Input() alojamientoNombre!: string;
 
-  reserva : Reserva = {
-    alojamiento : 0,
-    usuario :  0,
+  reserva: Reserva = {
+    alojamiento: 0,
+    usuario: 0,
     fecha_inicio: null,
-    fecha_fin : null,
+    fecha_fin: null,
     total: 0
-  }
+  };
 
   rentalValue: number | null = null;
   daysCount: number | null = null;
-  pricePerNight:number | null = null; // Define el precio por noche aquí
+  pricePerNight: number | null = null;
+  guestCount: number | null = null;
+  hasPet: boolean = false;
+  formData: AlojamientoDetails | null = null;
+  maxHuespedes: number | null = null;
+  permiteMascotas: boolean = false;
+  private modalInstance: bootstrap.Modal | null = null; // Referencia al modal
 
   constructor(
-    private authsesion : AuthSesionService,
-    private reservaservice : ReservaService
+    private authsesion: AuthSesionService,
+    private reservaservice: ReservaService,
+    private alojamientoService: AlojamientoService
   ) { }
-
 
   ngOnInit() {
     this.setMinDate();
-    console.log('Alojamiento ID recibido:', this.alojamientoId);
-    console.log('Alojamiento ID recibido:', this.alojamientoPrecio);
-    console.log(this.reserva.fecha_inicio);
+    this.loadAlojamientoDetails(this.alojamientoId);
   }
 
   setMinDate() {
     const today = new Date().toISOString().split('T')[0];
-    const startDateInput = <HTMLInputElement>document.getElementById('startDate');
-    const endDateInput = <HTMLInputElement>document.getElementById('endDate');
-    
+    const startDateInput = document.getElementById('startDate') as HTMLInputElement;
+    const endDateInput = document.getElementById('endDate') as HTMLInputElement;
+
     startDateInput.min = today;
     endDateInput.min = today;
   }
 
-  calculateRent() {
-    const startDateInput = (<HTMLInputElement>document.getElementById('startDate')).value;
-    const endDateInput = (<HTMLInputElement>document.getElementById('endDate')).value;
+  loadAlojamientoDetails(id: number): void {
+    this.alojamientoService.getAlojamientoDetails(id).subscribe(
+      (details: AlojamientoDetails) => {
+        this.formData = details;
+        this.maxHuespedes = details.huespedes;
+        this.permiteMascotas = details.mascotas;
+        console.log(this.formData);
+      },
+      (error) => {
+        console.error('Error al cargar los detalles del alojamiento', error);
+      }
+    );
+  }
 
-    if (startDateInput && endDateInput) {
+  calculateRent() {
+    const startDateInput = (document.getElementById('startDate') as HTMLInputElement).value;
+    const endDateInput = (document.getElementById('endDate') as HTMLInputElement).value;
+  
+    if (startDateInput && endDateInput && this.formData) {
       const startDate = new Date(startDateInput);
       const endDate = new Date(endDateInput);
       const timeDifference = endDate.getTime() - startDate.getTime();
       const days = timeDifference / (1000 * 3600 * 24);
-
+  
       if (days > 0) {
-        this.pricePerNight = this.alojamientoPrecio
-        this.rentalValue = days * this.pricePerNight; // Calcula el valor del arriendo
+        this.pricePerNight = this.formData.precio;
+        this.rentalValue = days * this.pricePerNight;
         this.daysCount = days;
-        console.log(this.rentalValue)
-        console.log(this.daysCount)
-        console.log(this.pricePerNight)
+  
+        // Validar el número de huéspedes
+        if (this.guestCount && this.maxHuespedes !== null && this.guestCount > this.maxHuespedes) {
+          Swal.fire({
+            title: 'Error',
+            text: `El número máximo de huéspedes permitidos es ${this.maxHuespedes}.`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+          this.guestCount = null; // Reiniciar el número de huéspedes
+        }
+  
+        // Validar el número de mascotas
+        if (this.hasPet && !this.permiteMascotas) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Este alojamiento no permite mascotas.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+          this.hasPet = false; // Reiniciar la selección de mascotas
+        }
       } else {
-        alert('La fecha de fin debe ser posterior a la fecha de inicio.');
+        Swal.fire({
+          title: 'Error',
+          text: 'La fecha de fin debe ser posterior a la fecha de inicio.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
         this.rentalValue = null;
         this.daysCount = null;
       }
@@ -82,33 +126,42 @@ export class ReservaComponent implements OnInit {
     }
   }
 
-  reserveHere() {
-    if (this.daysCount !== null && this.rentalValue !== null) {
-      Swal.fire({
-        title: 'Reserva Confirmada',
-        text: `Has reservado ${this.daysCount} días por un total de ${this.rentalValue.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}`,
-        icon: 'success',
-        confirmButtonText: 'Aceptar'
-      });
-    } else {
-      Swal.fire({
-        title: 'Error',
-        text: 'Por favor, selecciona las fechas correctamente.',
-        icon: 'error',
-        confirmButtonText: 'Volver a intentar'
-      });
+  openModal() {
+    const modalElement = document.getElementById('reservaModal');
+    if (modalElement) {
+      this.modalInstance = new bootstrap.Modal(modalElement);
+      this.modalInstance.show();
     }
   }
-  
-  enviarReserva(){
+
+  confirmarReserva() {
+    if (this.daysCount !== null && this.rentalValue !== null && this.guestCount !== null && this.formData) {
+      this.enviarReserva();
+    }
+  }
+
+  enviarReserva() {
     this.reserva.alojamiento = this.alojamientoId;
     this.reserva.total = this.rentalValue;
-    if (this.authsesion.obtenerInfoUsuario() !== null){
-        this.reserva.usuario = this.authsesion.obtenerInfoUsuario();
+    if (this.authsesion.obtenerInfoUsuario() !== null) {
+      this.reserva.usuario = this.authsesion.obtenerInfoUsuario();
     }
     this.reservaservice.createReserva(this.reserva).subscribe(response => {
-      console.log(response)
+      console.log(response);
       console.log(this.reserva);
-    })
+      this.closeModalAndShowSuccess();
+    });
+  }
+
+  closeModalAndShowSuccess() {
+    if (this.modalInstance) {
+      this.modalInstance.hide();
+    }
+    Swal.fire({
+      title: 'Reserva Confirmada',
+      text: `Disfruta tu estadía`,
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
+    });
   }
 }

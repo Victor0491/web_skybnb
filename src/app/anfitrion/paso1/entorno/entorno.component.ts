@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Alojamiento } from '../../../core/models/Alojamiento';
-import { TipoUbicacionService} from '../../../core/service/alojamiento/tipo-ubicacion.service';
+import { TipoUbicacionService } from '../../../core/service/alojamiento/tipo-ubicacion.service';
 import { TipoUbicacion } from '../../../core/models/TipoUbicacion';
 import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-entorno',
@@ -24,16 +23,16 @@ export class EntornoComponent implements OnInit {
   seccionActual = 'ubicacion';
 
   formData = {
-    ubicacion : 0
+    ubicacion: null
   };
 
   constructor(
     private router: Router,
     private tipoUbicacionService: TipoUbicacionService,
-    private formalojamiento : FormAlojamientoService
+    private formalojamiento: FormAlojamientoService
   ) {
     const savedData = this.formalojamiento.getFormData();
-    this.formData.ubicacion = savedData.ubicacion;
+    this.formData.ubicacion = savedData.ubicacion || null;
   }
 
   ngOnInit(): void {
@@ -48,16 +47,29 @@ export class EntornoComponent implements OnInit {
   }
 
   seleccionarUbicacion(id: any): void {
-    this.formData.ubicacion = id;
-    console.log('ID de la ubicación guardada en sessionStorage:', id);
+    if (this.formData.ubicacion === id) {
+      this.formData.ubicacion = null; // Deseleccionar si ya está seleccionada
+    } else {
+      this.formData.ubicacion = id;
+    }
+    console.log('ID de la ubicación guardada en sessionStorage:', this.formData.ubicacion);
     this.formalojamiento.setFormData(this.formData);
   }
 
-  navigateToActividad() {
-    this.router.navigate(['anfitrion/actividad']);
+  navigateToActividad(): void {
+    if (!this.formData.ubicacion) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Por favor, selecciona una opción para continuar.',
+      });
+    } else {
+      this.formalojamiento.setFormData(this.formData);
+      this.router.navigate(['anfitrion/actividad']);
+    }
   }
 
-  navigateToDescripcion() {
+  navigateToDescripcion(): void {
     this.router.navigate(['anfitrion/descripcion']);
   }
 }
