@@ -5,10 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { TipoActividadService } from '../core/service/alojamiento/tipo-actividades.service';
-import { TipoUbicacionService } from '../core/service/alojamiento/tipo-ubicacion.service';
-import { TipoAlojamientoService } from '../core/service/alojamiento/tipo-alojamiento.service';
-import { AuthSesionService } from '../core/service/sesion/auth-sesion.service';
+import { KnnService } from '../core/service/celula/knn.service';
 
 @Component({
   selector: 'app-preferencias',
@@ -33,7 +30,10 @@ export class PreferenciasComponent implements OnInit {
 
   seccionActual = 'tipoAlojamiento';
   historialSecciones: string[] = [];
+  resultados: any[] = [];
+  alojamientos: any[] = []; // Variable para almacenar los alojamientos obtenidos
 
+<<<<<<< HEAD
   constructor(
     private fb: FormBuilder, 
     private router: Router,
@@ -41,6 +41,9 @@ export class PreferenciasComponent implements OnInit {
     private tipoUbicacionService : TipoUbicacionService,
     private tipoAlojamientoService : TipoAlojamientoService
   ) {
+=======
+  constructor(private fb: FormBuilder, private router: Router, private knnService: KnnService) {
+>>>>>>> 74bdfeaa59cbb50ba3052fe4e699be3b1859ba4b
     this.preferenciasForm = this.fb.group({
       tipoAlojamiento: ['', Validators.required],
       ubicacion: ['', Validators.required],
@@ -99,6 +102,7 @@ export class PreferenciasComponent implements OnInit {
     const actividadesControl = this.preferenciasForm.get('actividad');
     if (actividadesControl && actividadesControl.value) {
       let actividades = actividadesControl.value;
+<<<<<<< HEAD
       console.log(actividad)
       console.log()
       if (actividad === 6) {
@@ -106,12 +110,15 @@ export class PreferenciasComponent implements OnInit {
         if (actividades.includes(6)) {
           // Deseleccionar "Prefiero Omitir"
           actividades = actividades.filter((a: number) => a !== 6);
+=======
+      if (actividad === 'Prefiero Omitir') {
+        if (actividades.includes('Prefiero Omitir')) {
+          actividades = actividades.filter((a: string) => a !== 'Prefiero Omitir');
+>>>>>>> 74bdfeaa59cbb50ba3052fe4e699be3b1859ba4b
         } else {
-          // Seleccionar "Prefiero Omitir" y desmarcar todas las demás
           actividades = ['Prefiero Omitir'];
         }
       } else {
-        // Si "Prefiero Omitir" ya está seleccionado, no se permite seleccionar otras actividades
         if (actividades.includes('Prefiero Omitir')) {
           Swal.fire({
             title: 'Opción excluyente',
@@ -126,12 +133,15 @@ export class PreferenciasComponent implements OnInit {
           });
           return;
         }
-  
+
         if (actividades.includes(actividad)) {
+<<<<<<< HEAD
           // Deseleccionar la actividad si ya está seleccionada
           actividades = actividades.filter((a: number) => a !== actividad);
+=======
+          actividades = actividades.filter((a: string) => a !== actividad);
+>>>>>>> 74bdfeaa59cbb50ba3052fe4e699be3b1859ba4b
         } else if (actividades.length < 3) {
-          // Seleccionar la actividad si el límite no ha sido alcanzado
           actividades.push(actividad);
         } else {
           Swal.fire({
@@ -147,10 +157,18 @@ export class PreferenciasComponent implements OnInit {
           });
         }
       }
+<<<<<<< HEAD
       actividadesControl.setValue(actividades);
     }
   }
   
+=======
+
+      actividadesControl.setValue(actividades);
+    }
+  }
+
+>>>>>>> 74bdfeaa59cbb50ba3052fe4e699be3b1859ba4b
   continuar(): void {
     if (this.seccionActual === 'tipoAlojamiento' && this.preferenciasForm.get('tipoAlojamiento')?.valid) {
       this.historialSecciones.push(this.seccionActual);
@@ -184,25 +202,95 @@ export class PreferenciasComponent implements OnInit {
 
   submit(): void {
     if (this.preferenciasForm.valid) {
-      console.log(this.preferenciasForm.value);
-      // Aquí puedes llamar a tu servicio para enviar las preferencias del usuario
-      Swal.fire({
-        title: '¡Éxito!',
-        text: 'Preferencias guardadas correctamente.',
-        icon: 'success',
-        confirmButtonText: 'Aceptar',
-        customClass: {
-          popup: 'swal2-popup',
-          title: 'swal2-title',
-          confirmButton: 'swal2-confirm'
+      const preferencias = this.preferenciasForm.value;
+
+      // Mapear preferencias a formato esperado por el backend
+      const instance = [
+        this.mapTipoAlojamiento(preferencias.tipoAlojamiento),
+        this.mapUbicacion(preferencias.ubicacion),
+        ...this.mapActividades(preferencias.actividad)
+      ];
+
+      this.knnService.getKnnPrediction(instance).subscribe(
+        (response) => {
+          console.log('Predicción exitosa:', response);
+          const closest_labels = response.closest_labels;  // Extraer los labels más cercanos
+          this.resultados = closest_labels;  // Guardar los resultados
+          if (this.resultados.length > 0) {
+            this.knnService.getAlojamientosByIds(this.resultados).subscribe(
+              (alojamientos) => {
+                console.log('Alojamientos obtenidos:', alojamientos);
+                this.alojamientos = alojamientos;  // Guardar los alojamientos obtenidos
+                Swal.fire({
+                  title: '¡Éxito!',
+                  text: 'Alojamientos recomendados obtenidos correctamente.',
+                  icon: 'success',
+                  confirmButtonText: 'Aceptar',
+                  customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    confirmButton: 'swal2-confirm'
+                  }
+                });
+              },
+              (error) => {
+                console.error('Error al obtener los alojamientos:', error);
+                Swal.fire({
+                  title: 'Error',
+                  text: 'Hubo un problema al obtener los alojamientos. Intenta nuevamente.',
+                  icon: 'error',
+                  confirmButtonText: 'Aceptar',
+                  customClass: {
+                    popup: 'swal2-popup',
+                    title: 'swal2-title',
+                    confirmButton: 'swal2-confirm'
+                  }
+                });
+              }
+            );
+          }
+        },
+        (error) => {
+          console.error('Error en la predicción:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un problema al guardar tus preferencias. Intenta nuevamente.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+            customClass: {
+              popup: 'swal2-popup',
+              title: 'swal2-title',
+              confirmButton: 'swal2-confirm'
+            }
+          });
         }
-      }).then(() => {
-        // Opcional: Puedes realizar alguna acción adicional después de cerrar el mensaje, como redirigir al usuario
-        this.onCloseModal(); // Por ejemplo, cerrar el modal
-      });
+      );
     } else {
       console.log('Formulario no válido');
     }
+  }
+
+  mapTipoAlojamiento(tipo: string): number {
+    const mapping: Record<string, number> = { 'Cabaña': 1, 'Casa': 2, 'Departamento': 3 };
+    return mapping[tipo] || 0;
+  }
+
+  mapUbicacion(ubicacion: string): number {
+    const mapping: Record<string, number> = { 'Bosque': 1, 'Playa': 2, 'Ciudad': 3 };
+    return mapping[ubicacion] || 0;
+  }
+
+  mapActividades(actividades: string[]): number[] {
+    const mapping: Record<string, number> = {
+      'Surf': 2,
+      'Buceo': 3,
+      'Escalada en roca': 4,
+      'Senderismo': 5,
+      'Caminata al aire libre': 6,
+      'Prefiero Omitir': 1
+    };
+    const mapped = actividades.map(act => mapping[act] || 0);
+    return [mapped[0] || 0, mapped[1] || 0, mapped[2] || 0];
   }
 
   onCloseModal(): void {
