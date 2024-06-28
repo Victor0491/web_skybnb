@@ -77,18 +77,18 @@ export class ReservaComponent implements OnInit {
   calculateRent() {
     const startDateInput = (document.getElementById('startDate') as HTMLInputElement).value;
     const endDateInput = (document.getElementById('endDate') as HTMLInputElement).value;
-
+  
     if (startDateInput && endDateInput && this.formData) {
       const startDate = new Date(startDateInput);
       const endDate = new Date(endDateInput);
       const timeDifference = endDate.getTime() - startDate.getTime();
       const days = timeDifference / (1000 * 3600 * 24);
-
+  
       if (days > 0) {
         this.pricePerNight = this.formData.precio;
         this.rentalValue = days * this.pricePerNight;
         this.daysCount = days;
-
+  
         // Validar el número de huéspedes
         if (this.guestCount && this.maxHuespedes !== null && this.guestCount > this.maxHuespedes) {
           Swal.fire({
@@ -99,7 +99,7 @@ export class ReservaComponent implements OnInit {
           });
           this.guestCount = null; // Reiniciar el número de huéspedes
         }
-
+  
         // Validar el número de mascotas
         if (this.hasPet && !this.permiteMascotas) {
           Swal.fire({
@@ -111,7 +111,12 @@ export class ReservaComponent implements OnInit {
           this.hasPet = false; // Reiniciar la selección de mascotas
         }
       } else {
-        alert('La fecha de fin debe ser posterior a la fecha de inicio.');
+        Swal.fire({
+          title: 'Error',
+          text: 'La fecha de fin debe ser posterior a la fecha de inicio.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
         this.rentalValue = null;
         this.daysCount = null;
       }
