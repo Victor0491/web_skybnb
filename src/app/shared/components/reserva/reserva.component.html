@@ -16,13 +16,6 @@
         <label for="guestCount">Cantidad de Huéspedes (Máx: {{ maxHuespedes }})</label>
         <input type="number" id="guestCount" class="form-control" name="guestCount" [(ngModel)]="guestCount" [attr.min]="1" [attr.max]="maxHuespedes" required (change)="calculateRent()">
       </div>
-      <div class="col-md-6 form-group">
-        <label for="hasPet">¿Llevará Mascota?</label>
-        <select id="hasPet" class="form-control" name="hasPet" [(ngModel)]="hasPet" required [disabled]="!permiteMascotas">
-          <option [ngValue]="true">Sí</option>
-          <option [ngValue]="false">No</option>
-        </select>
-      </div>
     </div>
   </form>
   <button type="button" class="btn btn-primary" (click)="openModal()">Reserva aquí</button>

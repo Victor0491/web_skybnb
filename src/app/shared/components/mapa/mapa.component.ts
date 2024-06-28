@@ -24,7 +24,7 @@ export class MapaComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['direccion']) {
+    if (changes['direccion'] && changes['direccion'].currentValue) {
       this.updateMap(this.direccion);
     }
   }
@@ -33,6 +33,7 @@ export class MapaComponent implements OnInit, OnChanges {
     this.geocodeAddress(direccion).subscribe((coordinates: { lat: number; lon: number }) => {
       console.log('Coordenadas obtenidas:', coordinates); // Verificar las coordenadas
       this.map.setView([coordinates.lat, coordinates.lon], 15);
+      this.map.invalidateSize(); // Asegurarse de que el mapa se redimensione correctamente
       // Añadir un círculo semitransparente en lugar de un marcador
       L.circle([coordinates.lat, coordinates.lon], {
         color: '#00add0', // Color del borde del círculo
@@ -57,5 +58,3 @@ export class MapaComponent implements OnInit, OnChanges {
     );
   }
 }
-
-
