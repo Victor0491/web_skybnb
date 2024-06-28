@@ -32,6 +32,10 @@ export class LoginComponent {
   ) { }
 
 
+  hideErrorMessage(): void {
+    this.show_error = false;
+  }
+
   validarForm() {
     if (!this.user.email || !this.user.password) {
       this.show_error = true;
@@ -43,20 +47,28 @@ export class LoginComponent {
   }
 
   login() {
-    this.show_error = false;
-    this.mensaje_error = '';
+  this.show_error = false;
+  this.mensaje_error = '';
 
-    this.authService.login(this.user).subscribe(
-      response => {
-        console.log('Inicio se sesion exitoso', response);
-        this.router.navigateByUrl('')
-        // Maneja la respuesta exitosa aquí
-      },
-      error => {
-        console.error('Error al ingresar a la pagina', error);
-        // Maneja el error aquí
+  this.authService.login(this.user).subscribe(
+    response => {
+      console.log('Inicio de sesión exitoso', response);
+      this.router.navigateByUrl('');
+      // Maneja la respuesta exitosa aquí
+    },
+    error => {
+      console.error('Error al ingresar a la página', error);
+      if (error.status === 400) {
+        // Maneja el error 400 aquí
+        this.show_error = true;
+        this.mensaje_error = 'Solicitud incorrecta. Por favor, verifica los datos e intenta nuevamente.';
+      } else {
+        // Maneja otros errores aquí
+        this.show_error = true;
+        this.mensaje_error = 'Ocurrió un error al intentar iniciar sesión. Por favor, intenta nuevamente más tarde.';
       }
-    );
-  }
+    }
+  );
+}
 }
 

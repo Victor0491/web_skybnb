@@ -7,7 +7,7 @@ import { AuthSesionService } from '../../../core/service/sesion/auth-sesion.serv
 import { ReservaService } from '../../../core/service/reserva/reserva.service';
 import { AlojamientoService } from '../../../core/service/alojamiento/alojamiento.service';
 import { AlojamientoDetails } from '../../../core/models/Alojamiento';
-import * as bootstrap from 'bootstrap';
+
 
 @Component({
   selector: 'app-reserva',
@@ -38,7 +38,7 @@ export class ReservaComponent implements OnInit {
   formData: AlojamientoDetails | null = null;
   maxHuespedes: number | null = null;
   permiteMascotas: boolean = false;
-  private modalInstance: bootstrap.Modal | null = null; // Referencia al modal
+  // private modalInstance: bootstrap.Modal | null = null; // Referencia al modal
 
   constructor(
     private authsesion: AuthSesionService,
@@ -121,42 +121,42 @@ export class ReservaComponent implements OnInit {
     }
   }
 
-  openModal() {
-    const modalElement = document.getElementById('reservaModal');
-    if (modalElement) {
-      this.modalInstance = new bootstrap.Modal(modalElement);
-      this.modalInstance.show();
-    }
-  }
+  // openModal() {
+  //   const modalElement = document.getElementById('reservaModal');
+  //   if (modalElement) {
+  //     this.modalInstance = new bootstrap.Modal(modalElement);
+  //     this.modalInstance.show();
+  //   }
+  // }
 
-  confirmarReserva() {
-    if (this.daysCount !== null && this.rentalValue !== null && this.guestCount !== null && this.formData) {
-      this.enviarReserva();
-    }
-  }
+  // confirmarReserva() {
+  //   if (this.daysCount !== null && this.rentalValue !== null && this.guestCount !== null && this.formData) {
+  //     this.enviarReserva();
+  //   }
+  // }
 
-  enviarReserva() {
-    this.reserva.alojamiento = this.alojamientoId;
-    this.reserva.total = this.rentalValue;
-    if (this.authsesion.obtenerInfoUsuario() !== null) {
-      this.reserva.usuario = this.authsesion.obtenerInfoUsuario();
-    }
-    this.reservaservice.createReserva(this.reserva).subscribe(response => {
-      console.log(response);
-      console.log(this.reserva);
-      this.closeModalAndShowSuccess();
-    });
-  }
+  // enviarReserva() {
+  //   this.reserva.alojamiento = this.alojamientoId;
+  //   this.reserva.total = this.rentalValue;
+  //   if (this.authsesion.obtenerInfoUsuario() !== null) {
+  //     this.reserva.usuario = this.authsesion.obtenerInfoUsuario();
+  //   }
+  //   this.reservaservice.createReserva(this.reserva).subscribe(response => {
+  //     console.log(response);
+  //     console.log(this.reserva);
+  //     this.closeModalAndShowSuccess();
+  //   });
+  // }
 
-  closeModalAndShowSuccess() {
-    if (this.modalInstance) {
-      this.modalInstance.hide();
-    }
-    Swal.fire({
-      title: 'Reserva Confirmada',
-      text: `Disfruta tu estadía`,
-      icon: 'success',
-      confirmButtonText: 'Aceptar'
-    });
-  }
+  // closeModalAndShowSuccess() {
+  //   if (this.modalInstance) {
+  //     this.modalInstance.hide();
+  //   }
+  //   Swal.fire({
+  //     title: 'Reserva Confirmada',
+  //     text: `Disfruta tu estadía`,
+  //     icon: 'success',
+  //     confirmButtonText: 'Aceptar'
+  //   });
+  // }
 }

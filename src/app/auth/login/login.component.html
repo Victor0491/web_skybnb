@@ -14,14 +14,14 @@
                             <div class="mb-4">
                                 <label for="username" class="form-label text-form">Correo electrónico</label>
                                 <input type="text" id="username" name="username" class="form-control"
-                                    [(ngModel)]="user.email">
+                                    [(ngModel)]="user.email" (input)="hideErrorMessage()">
                             </div>
 
                             <div class="mb-4">
                                 <label for="password" class="form-label text-form">Contraseña</label>
                                 <div class="input-group">
                                     <input type="password" id="password" name="password" class="form-control"
-                                        [(ngModel)]="user.password">
+                                        [(ngModel)]="user.password" (input)="hideErrorMessage()">
                                 </div>
                             </div>
 
@@ -35,7 +35,7 @@
                             <p>{{mensaje_error}}</p>
                             }
                         </div>
-                        <div class="text-center">
+                        <div class="text-center space">
                             <a class="text-primary" [routerLink]="['/auth/register']">Cree una cuenta</a>
                             <p class="text-secondary mt-3">¿Olvidó su contraseña?</p>
                         </div>
