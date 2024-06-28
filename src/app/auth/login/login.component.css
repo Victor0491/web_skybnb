@@ -5,14 +5,17 @@
     justify-content: center;
     align-items: center;
 }
-
 .error {
     color: red;
     text-align: center;
     height: 20px;
-    margin-bottom: 10px;
+    margin-top: 1rem;
   }
 
 .text-form{
     font-weight: bold;
+}
+
+.space{
+    margin-top: 3rem;
 }
