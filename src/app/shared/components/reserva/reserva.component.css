@@ -186,7 +186,7 @@ button.btn:hover {
 }
 
 .modal-content {
-  max-height: 80vh; /* Altura máxima del modal en relación a la ventana */
+  max-height: 100vh; /* Altura máxima del modal en relación a la ventana */
   overflow: hidden; /* Ocultar desbordamiento */
 }
 
