@@ -53,6 +53,7 @@
 }
 
 .container {
+    height: 85vh;
     width: 80%; /* Ancho del contenedor */
     margin: 0 auto; /* Centrar el contenedor horizontalmente */
     padding: 20px; /* Espaciado interno */

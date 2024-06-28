@@ -13,7 +13,6 @@ import { AuthSesionService } from '../../core/service/sesion/auth-sesion.service
 export class HomeAlojamientosComponent {
 
 
-
   constructor(
     private authService: AuthSesionService,
   ) { }

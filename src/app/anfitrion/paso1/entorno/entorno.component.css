@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 84vh;
   flex-direction: column;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -12,13 +12,14 @@
 }
 
 .titulo {
-  margin-bottom: 20px;
+  margin-bottom: 10rem;
 }
 
 .opciones-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 15rem;
 }
 
 .opcion-container {
@@ -27,8 +28,12 @@
   gap: 10px;
 }
 
+.opcion-imagen{
+  border-radius: 15px;
+}
+
 .opcion {
-  padding: 10px;
+  padding: 30px; /* Aumenta el tamaño del padding */
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   cursor: pointer;
@@ -36,6 +41,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 250px; /* Ajusta el ancho del botón */
+  height: 250px; /* Ajusta la altura del botón */
+  border-radius: 15px; /* Agrega borde redondeado */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombra */
+  transition: box-shadow 0.3s ease; /* Agrega una transición suave a la sombra */
 }
 
 .opcion.selected {
@@ -74,12 +84,17 @@
 }
 
 .opciones-container button img {
-  width: 150px;
-  height: 100px;
+  width: 220px; /* Aumenta el ancho de la imagen */
+  height: 160px; /* Aumenta la altura de la imagen */
 }
 
 .opcion-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.texto{
+  margin-top: 5px;
+  font-weight: bold;
 }

@@ -1,49 +1,49 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { RouterLink } from '@angular/router';
 import { KnnService } from '../core/service/celula/knn.service';
 
 @Component({
   selector: 'app-preferencias',
   standalone: true,
   imports: [
-    RouterLink,
     CommonModule,
     ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './preferencias.component.html',
   styleUrls: ['./preferencias.component.css']
 })
 export class PreferenciasComponent implements OnInit {
-
   @Output() closeModalClicked = new EventEmitter<void>();
-
   preferenciasForm: FormGroup;
-  
-  tiposAlojamiento :any = [];
-  ubicaciones: any = [];
-  actividades : any= []; 
-
+  tiposAlojamiento: { nombre: string, imagen: string }[] = [
+    { nombre: 'Cabaña', imagen: 'https://www.shutterstock.com/image-photo/wooden-cottage-forest-near-biogradsko-600nw-1963746835.jpg' },
+    { nombre: 'Casa', imagen: 'https://st2.depositphotos.com/1041088/11595/i/450/depositphotos_115954550-stock-photo-home-exterior-with-garage-and.jpg' },
+    { nombre: 'Departamento', imagen: 'https://http2.mlstatic.com/D_NQ_NP_766438-MLC75223256781_032024-O.webp' }
+  ];
+  ubicaciones: { nombre: string, imagen: string }[] = [
+    { nombre: 'Bosque', imagen: 'https://media.traveler.es/photos/62372c7f9999d61fe36db039/16:9/w_2560%2Cc_limit/india.jpg' },
+    { nombre: 'Playa', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvh9hichZBrJWNSFFOKcWwQro8k6OBwm0H8Q&s' },
+    { nombre: 'Ciudad', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOclOve8ohd-x3yTFEZLyeJ2h6P7EOxZ2qmg&s' }
+  ];
+  actividades: { nombre: string, imagen: string }[] = [
+    { nombre: 'Surf', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQt0BnL44w1stL-X2MFG0SjvWJJIUIaSJo0Q&s' },
+    { nombre: 'Buceo', imagen: 'https://s3-us-west-2.amazonaws.com/wp-divingyucatan/wp-content/uploads/2020/04/15110254/tipos-trajes-buceo.jpg' },
+    { nombre: 'Escalada en roca', imagen: 'https://www.culturarecreacionydeporte.gov.co/sites/default/files/styles/870_x_540/public/2023-06/climbing-g42cb58814_640.jpg?itok=19O-jOqD' },
+    { nombre: 'Senderismo', imagen: 'https://www.webconsultas.com/sites/default/files/styles/wc_adaptive_image__medium/public/media/2020/07/15/senderismo_p.jpg' },
+    { nombre: 'Caminata al aire libre', imagen: 'https://www.bupasalud.com/sites/default/files/styles/640_x_400/public/articulos/2020-04/fotos/caminata-salud.jpg?itok=ny1gDa_0' },
+    { nombre: 'Prefiero Omitir', imagen: 'https://media.istockphoto.com/id/540861476/es/foto/relajaci%C3%B3n-total.jpg?s=612x612&w=0&k=20&c=GEoRJR5eCnHUoV62GH52mNnSO_LnzDzG_AMpPLjpNbE=' }
+  ];
   seccionActual = 'tipoAlojamiento';
   historialSecciones: string[] = [];
   resultados: any[] = [];
-  alojamientos: any[] = []; // Variable para almacenar los alojamientos obtenidos
 
-<<<<<<< HEAD
-  constructor(
-    private fb: FormBuilder, 
-    private router: Router,
-    private tipoActividadService : TipoActividadService,
-    private tipoUbicacionService : TipoUbicacionService,
-    private tipoAlojamientoService : TipoAlojamientoService
-  ) {
-=======
   constructor(private fb: FormBuilder, private router: Router, private knnService: KnnService) {
->>>>>>> 74bdfeaa59cbb50ba3052fe4e699be3b1859ba4b
     this.preferenciasForm = this.fb.group({
       tipoAlojamiento: ['', Validators.required],
       ubicacion: ['', Validators.required],
@@ -51,70 +51,23 @@ export class PreferenciasComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.loadInformation()
-  }
+  ngOnInit(): void {}
 
-  loadInformation() {
-    this.tipoActividadService.getActividad().subscribe(
-      actividades => {
-        this.actividades = actividades;
-        console.log(this.actividades);
-      },
-      error => {
-        console.error('Error al obtener actividades', error);
-      }
-    );
-  
-    this.tipoUbicacionService.getUbicaciones().subscribe(
-      ubicaciones => {
-        this.ubicaciones = ubicaciones;
-        console.log(this.ubicaciones);
-      },
-      error => {
-        console.error('Error al obtener ubicaciones', error);
-      }
-    );
-  
-    this.tipoAlojamientoService.getTiposAlojamiento().subscribe(
-      tipos => {
-        this.tiposAlojamiento = tipos;
-        console.log(this.tiposAlojamiento)
-      },
-      error => {
-        console.error('Error al obtener tipos de alojamiento', error);
-      }
-    );
-  }
-
-  seleccionarTipo(tipo: number): void {
+  seleccionarTipo(tipo: string): void {
     this.preferenciasForm.get('tipoAlojamiento')?.setValue(tipo);
-    console.log(tipo)
   }
 
-  seleccionarUbicacion(ubicacion: number): void {
+  seleccionarUbicacion(ubicacion: string): void {
     this.preferenciasForm.get('ubicacion')?.setValue(ubicacion);
-    console.log(ubicacion)
-    
   }
 
-  seleccionarActividad(actividad: number): void {
+  seleccionarActividad(actividad: string): void {
     const actividadesControl = this.preferenciasForm.get('actividad');
     if (actividadesControl && actividadesControl.value) {
       let actividades = actividadesControl.value;
-<<<<<<< HEAD
-      console.log(actividad)
-      console.log()
-      if (actividad === 6) {
-        // Si se selecciona o deselecciona "Prefiero Omitir"
-        if (actividades.includes(6)) {
-          // Deseleccionar "Prefiero Omitir"
-          actividades = actividades.filter((a: number) => a !== 6);
-=======
       if (actividad === 'Prefiero Omitir') {
         if (actividades.includes('Prefiero Omitir')) {
           actividades = actividades.filter((a: string) => a !== 'Prefiero Omitir');
->>>>>>> 74bdfeaa59cbb50ba3052fe4e699be3b1859ba4b
         } else {
           actividades = ['Prefiero Omitir'];
         }
@@ -135,12 +88,7 @@ export class PreferenciasComponent implements OnInit {
         }
 
         if (actividades.includes(actividad)) {
-<<<<<<< HEAD
-          // Deseleccionar la actividad si ya está seleccionada
-          actividades = actividades.filter((a: number) => a !== actividad);
-=======
           actividades = actividades.filter((a: string) => a !== actividad);
->>>>>>> 74bdfeaa59cbb50ba3052fe4e699be3b1859ba4b
         } else if (actividades.length < 3) {
           actividades.push(actividad);
         } else {
@@ -157,18 +105,11 @@ export class PreferenciasComponent implements OnInit {
           });
         }
       }
-<<<<<<< HEAD
-      actividadesControl.setValue(actividades);
-    }
-  }
-  
-=======
 
       actividadesControl.setValue(actividades);
     }
   }
 
->>>>>>> 74bdfeaa59cbb50ba3052fe4e699be3b1859ba4b
   continuar(): void {
     if (this.seccionActual === 'tipoAlojamiento' && this.preferenciasForm.get('tipoAlojamiento')?.valid) {
       this.historialSecciones.push(this.seccionActual);
@@ -220,10 +161,9 @@ export class PreferenciasComponent implements OnInit {
             this.knnService.getAlojamientosByIds(this.resultados).subscribe(
               (alojamientos) => {
                 console.log('Alojamientos obtenidos:', alojamientos);
-                this.alojamientos = alojamientos;  // Guardar los alojamientos obtenidos
                 Swal.fire({
                   title: '¡Éxito!',
-                  text: 'Alojamientos recomendados obtenidos correctamente.',
+                  text: 'Preferencias guardadas correctamente.',
                   icon: 'success',
                   confirmButtonText: 'Aceptar',
                   customClass: {
@@ -231,6 +171,8 @@ export class PreferenciasComponent implements OnInit {
                     title: 'swal2-title',
                     confirmButton: 'swal2-confirm'
                   }
+                }).then(() => {
+                  this.router.navigateByUrl('', { state: { recomendados: alojamientos } });
                 });
               },
               (error) => {
