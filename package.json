@@ -25,6 +25,7 @@
     "@mapbox/mapbox-gl-draw": "^1.4.3",
     "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "@splidejs/splide": "^4.1.4",
+    "@types/bootstrap": "^5.2.10",
     "bootstrap": "^5.3.3",
     "express": "^4.19.2",
     "jquery": "^3.7.1",
