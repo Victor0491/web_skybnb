@@ -4,11 +4,9 @@ import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import Swal from 'sweetalert2'; // Importa SweetAlert2
+import Swal from 'sweetalert2';
 import { Alojamiento } from '../../../core/models/Alojamiento';
 import { FormAlojamientoService } from '../../../core/service/alojamiento/form-alojamiento.service';
-
 
 @Component({
   selector: 'app-ubicacion',
@@ -20,6 +18,7 @@ import { FormAlojamientoService } from '../../../core/service/alojamiento/form-a
 export class UbicacionComponent implements OnInit, AfterViewInit {
   map!: L.Map;
   marker!: L.Marker;
+  searchPerformed = false;  // Variable para rastrear si se realizó una búsqueda
 
   formData = {
     direccion: ''
@@ -64,6 +63,7 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
           }
           this.map.setView([lat, lon], 15);
           this.marker = L.marker([lat, lon]).addTo(this.map).bindPopup(address).openPopup();
+          this.searchPerformed = true;  // Marca la búsqueda como realizada
         } else {
           Swal.fire({
             title: 'Error',
@@ -86,9 +86,16 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
 
   onSubmit(): void {
     const address = this.formData.direccion;
+    if (!address.trim()) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, ingresa una dirección.',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+      });
+      return;
+    }
     this.searchAddress(address);
-
-    // Guardar la dirección en formData y actualizar el servicio
     this.formalojamiento.setFormData({ direccion: address });
   }
 
@@ -101,13 +108,32 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
       this.marker.remove();
     }
     this.initMap();
+    this.searchPerformed = false;  // Marca la búsqueda como no realizada
   }
 
   navigateToDatosbasicos(): void {
+    if (!this.formData.direccion.trim() || !this.searchPerformed) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, ingresa una dirección y presiona "Buscar" antes de continuar.',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+      });
+      return;
+    }
     this.router.navigate(['/anfitrion/datosbasicos']);
   }
 
   navigateToPaso2(): void {
+    if (!this.formData.direccion.trim() || !this.searchPerformed) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, ingresa una dirección y presiona "Buscar" antes de continuar.',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+      });
+      return;
+    }
     this.router.navigate(['/anfitrion/paso2']);
   }
 }

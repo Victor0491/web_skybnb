@@ -1,20 +1,60 @@
 <div class="container mt-3">
+  <h3>Reserva en {{ formData?.nombre }}</h3>
   <form #reservationForm="ngForm">
     <div class="row">
       <div class="col-md-6 form-group">
         <label for="startDate">Fecha de Inicio</label>
-        <input type="date" id="startDate" class="form-control" name="startDate" [(ngModel)]="reserva.fecha_inicio"  ngModel required (change)="calculateRent()">
+        <input type="date" id="startDate" class="form-control" name="startDate" [(ngModel)]="reserva.fecha_inicio" required (change)="calculateRent()">
       </div>
       <div class="col-md-6 form-group">
         <label for="endDate">Fecha de Fin</label>
-        <input type="date" id="endDate" class="form-control" name="endDate" [(ngModel)]="reserva.fecha_fin" ngModel required (change)="calculateRent()">
+        <input type="date" id="endDate" class="form-control" name="endDate" [(ngModel)]="reserva.fecha_fin" required (change)="calculateRent()">
       </div>
     </div>
-    
+    <div class="row mt-3">
+      <div class="col-md-6 form-group">
+        <label for="guestCount">Cantidad de Huéspedes (Máx: {{ maxHuespedes }})</label>
+        <input type="number" id="guestCount" class="form-control" name="guestCount" [(ngModel)]="guestCount" [attr.min]="1" [attr.max]="maxHuespedes" required (change)="calculateRent()">
+      </div>
+      <div class="col-md-6 form-group">
+        <label for="hasPet">¿Llevará Mascota?</label>
+        <select id="hasPet" class="form-control" name="hasPet" [(ngModel)]="hasPet" required [disabled]="!permiteMascotas">
+          <option [ngValue]="true">Sí</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+    </div>
   </form>
-  <div *ngIf="daysCount !== null && rentalValue !== null" class="alert alert-info mt-3">
-    <p>Cantidad de días: {{ daysCount }}</p>
-    <p>El precio es de: {{ rentalValue | currency:'CLP':'symbol':'1.0-0' }}</p>
+  <button type="button" class="btn btn-primary" (click)="openModal()">Reserva aquí</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="reservaModal" tabindex="-1" aria-labelledby="reservaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header custom-modal-header">
+          <h5 class="modal-title" id="reservaModalLabel">Confirmación de Reserva</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body custom-modal-body">
+          <h6 class="fw-bold">Detalles del Alojamiento</h6>
+          <p><strong>Nombre:</strong> {{ formData?.nombre }}</p>
+          <p><strong>Descripción:</strong> {{ formData?.descripcion }}</p>
+          <p><strong>Dormitorios:</strong> {{ formData?.dormitorios }}</p>
+          <p><strong>Baños:</strong> {{ formData?.banos }}</p>
+          <p><strong>Huéspedes:</strong> {{ formData?.huespedes }}</p>
+          <p><strong>¿Acepta mascotas?:</strong> {{ formData?.mascotas ? 'Sí' : 'No' }}</p>
+          <p><strong>Servicios:</strong> {{ formData?.servicios?.join(', ') }}</p>
+          <p><strong>Precio por noche:</strong> {{ formData?.precio | currency:'CLP':'symbol':'1.0-0' }}</p>
+          <p><strong>Ubicación:</strong> {{ formData?.ubicacion?.nombre }}</p>
+          <p><strong>Cantidad de días:</strong> {{ daysCount }}</p>
+          <p><strong>Total a pagar:</strong> {{ rentalValue | currency:'CLP':'symbol':'1.0-0' }}</p>
+          <p><em>Una vez confirmada la reserva, se indicará la dirección exacta</em></p>
+        </div>
+        <div class="modal-footer custom-modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="confirmarReserva()">Confirmar Reserva</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="enviarReserva()">Reserva aquí</button>
 </div>
