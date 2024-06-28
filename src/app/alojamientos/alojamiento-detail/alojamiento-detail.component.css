@@ -98,8 +98,7 @@ input[type="date"],
   border-radius: 15px;
 }
 
-.mapa-container,
-.reserva-container {
+.mapa-container {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -144,3 +143,11 @@ input[type="date"],
   padding: 0; /* Eliminar cualquier padding adicional */
 }
 
+.reserva-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}

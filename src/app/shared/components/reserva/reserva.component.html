@@ -16,18 +16,11 @@
         <label for="guestCount">Cantidad de Huéspedes (Máx: {{ maxHuespedes }})</label>
         <input type="number" id="guestCount" class="form-control" name="guestCount" [(ngModel)]="guestCount" [attr.min]="1" [attr.max]="maxHuespedes" required (change)="calculateRent()">
       </div>
-      <div class="col-md-6 form-group">
-        <label for="hasPet">¿Llevará Mascota?</label>
-        <select id="hasPet" class="form-control" name="hasPet" [(ngModel)]="hasPet" required [disabled]="!permiteMascotas">
-          <option [ngValue]="true">Sí</option>
-          <option [ngValue]="false">No</option>
-        </select>
-      </div>
     </div>
   </form>
-  <button type="button" class="btn btn-primary">Reserva aquí</button>
+  <button type="button" class="btn btn-primary" (click)="openModal()">Reserva aquí</button>
 
-  <!-- Modal
+
   <div class="modal fade" id="reservaModal" tabindex="-1" aria-labelledby="reservaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -42,8 +35,11 @@
           <p><strong>Dormitorios:</strong> {{ formData?.dormitorios }}</p>
           <p><strong>Baños:</strong> {{ formData?.banos }}</p>
           <p><strong>Huéspedes:</strong> {{ formData?.huespedes }}</p>
+          <p><strong>Servicios:</strong></p>
+            <ul>
+              <li *ngFor="let servicio of formData?.servicios">{{ servicio.nombre }}</li>
+            </ul>
           <p><strong>¿Acepta mascotas?:</strong> {{ formData?.mascotas ? 'Sí' : 'No' }}</p>
-          <p><strong>Servicios:</strong> {{ formData?.servicios?.join(', ') }}</p>
           <p><strong>Precio por noche:</strong> {{ formData?.precio | currency:'CLP':'symbol':'1.0-0' }}</p>
           <p><strong>Ubicación:</strong> {{ formData?.ubicacion?.nombre }}</p>
           <p><strong>Cantidad de días:</strong> {{ daysCount }}</p>
@@ -56,5 +52,5 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </div>

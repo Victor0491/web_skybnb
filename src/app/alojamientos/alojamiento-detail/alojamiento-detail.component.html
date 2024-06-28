@@ -40,8 +40,9 @@
     <div class="mapa-container">
       <app-mapa [direccion]="alojamiento.direccion"></app-mapa>
     </div>
-    <div class="reserva-container" *ngIf="alojamiento">
-      <app-reserva [alojamientoId]="alojamiento.id" [alojamientoPrecio]="alojamiento.precio"></app-reserva>
-    </div>
+  </div>
+
+  <div class="reserva-container" *ngIf="alojamiento">
+    <app-reserva [alojamientoId]="alojamiento.id" [alojamientoPrecio]="alojamiento.precio"></app-reserva>
   </div>
 </div>
