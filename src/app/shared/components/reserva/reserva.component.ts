@@ -151,14 +151,14 @@ export class ReservaComponent implements OnInit {
   }
 
   closeModalAndShowSuccess() {
-    if (this.modalInstance) {
-      this.modalInstance.hide();
-    }
-    Swal.fire({
+    $('#reservaModal').modal('hide'); // Cerrar el modal usando jQuery
+    Swal.fire({ // Mostrar el mensaje de éxito usando SweetAlert
       title: 'Reserva Confirmada',
-      text: `Disfruta tu estadía`,
+      text: 'Disfruta tu estadía',
       icon: 'success',
       confirmButtonText: 'Aceptar'
+    }).then(() => {
+      // Aquí podrías realizar alguna acción adicional después de que el usuario hace clic en Aceptar
     });
   }
 }
