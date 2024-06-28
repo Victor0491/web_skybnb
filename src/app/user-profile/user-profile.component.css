@@ -2,6 +2,9 @@ html, body {
   height: 100%;
   margin: 0;
 }
+.space{
+  height: 85vh;
+}
 
 app-root {
   display: flex;
