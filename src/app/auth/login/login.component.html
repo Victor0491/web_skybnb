@@ -5,9 +5,12 @@
             <div class="col-sm-7 col-md-5">
                 <div class="card shadow-lg rounded-lg mt-2">
                     <div class="card-body">
-                        <div class="text-center">
-                            <h2 class="text-2xl font-bold">Skybnb</h2>
-                            <img src="" alt="" class="mx-auto mt-2">
+                        <div class="welcome-message text-2xl font-bold mb-4">
+                            ¡Bienvenido a SkyBNB!
+                        </div>
+                        <div class="text-center mb-4">
+                            <p class="text-lg text-gray-600 mt-2">¡Qué bueno tenerte de vuelta!</p>
+                            <img src="assets/img/Logo.png" alt="Logo SKYBNB" class="mx-auto d-block" style="max-width: 200px;">    
                         </div>
 
                         <form>
@@ -36,8 +39,9 @@
                             }
                         </div>
                         <div class="text-center space">
-                            <a class="text-primary" [routerLink]="['/auth/register']">Cree una cuenta</a>
-                            <p class="text-secondary mt-3">¿Olvidó su contraseña?</p>
+                            <p class="text-secondary">¿Aún no tienes una cuenta?</p>
+                            <a class="btn btn-outline-primary" [routerLink]="['/auth/register']">Regístrate</a>
+                            <p class="text-secondary mt-3">¿Olvidaste tu contraseña?</p>
                         </div>
                     </div>
                 </div>
