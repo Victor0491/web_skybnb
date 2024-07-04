@@ -17,9 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class DescripcionComponent implements OnInit {
 
-  formData = {
-    tipoalojamiento: null
-  };
+  formData: any = {};
 
   tiposAlojamiento: TipoAlojamiento[] = [];
   seccionActual = 'tipoAlojamiento';
@@ -29,16 +27,14 @@ export class DescripcionComponent implements OnInit {
     private router: Router,
     private tipoAlojamientoService: TipoAlojamientoService,
     private formalojamiento: FormAlojamientoService
-  ) {
-    const savedData = this.formalojamiento.getFormData();
-    this.formData.tipoalojamiento = savedData && savedData.tipoalojamiento ? savedData.tipoalojamiento : null;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getTiposAlojamiento();
-    if (!this.formData.tipoalojamiento) {
-      this.formData.tipoalojamiento = null;
-    }
+    this.formalojamiento.getFormState().subscribe(data => {
+      this.formData = data;
+    });
+    
   }
 
   getTiposAlojamiento(): void {
@@ -50,12 +46,11 @@ export class DescripcionComponent implements OnInit {
 
   seleccionarTipo(id: any): void {
     if (this.formData.tipoalojamiento === id) {
-      this.formData.tipoalojamiento = null; // Deseleccionar si ya está seleccionado
+      this.formalojamiento.updateFormState({ tipoalojamiento: null }); // Deseleccionar si ya está seleccionado
     } else {
-      this.formData.tipoalojamiento = id;
+      this.formalojamiento.updateFormState({ tipoalojamiento: id });
+      console.log(this.formData.tipoalojamiento)
     }
-    console.log('ID del tipo de alojamiento guardada en sessionStorage:', this.formData.tipoalojamiento);
-    this.formalojamiento.setFormData(this.formData);
     this.showError = false; // Ocultar mensaje de error al seleccionar una opción
   }
 
@@ -73,7 +68,6 @@ export class DescripcionComponent implements OnInit {
   }
 
   navigateToUbicacion(): void {
-    this.formalojamiento.setFormData(this.formData);
     this.router.navigate(['anfitrion/entorno']);
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import Swal from 'sweetalert2'; // Importa SweetAlert2
 import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { Router } from '@angular/router'; // Importa el servicio de enrutamiento
@@ -15,7 +15,7 @@ interface ImagesData {
   templateUrl: './imagen.component.html',
   styleUrls: ['./imagen.component.css']
 })
-export class ImagenComponent {
+export class ImagenComponent implements OnInit {
   formData = {
     imagenes: [] as string[]
   };
@@ -24,8 +24,10 @@ export class ImagenComponent {
   uploadedImages: { file: File, base64: string }[] = [];
 
   constructor(private router: Router, private formalojamiento: FormAlojamientoService) {
-    const savedData = this.formalojamiento.getFormData();
-    this.formData.imagenes = savedData.imagenes || [];
+  
+  }
+
+  ngOnInit(): void {
     this.uploadedImages = this.formData.imagenes.map(base64 => ({ file: null as any, base64 }));
   }
 
@@ -47,6 +49,7 @@ export class ImagenComponent {
     reader.readAsDataURL(file);
     reader.onload = (): void => {
       this.uploadedImages[index].base64 = reader.result as string;
+      console.log(reader.result); // Aquí puedes ver la imagen en base64
 
       // Crea un objeto con claves específicas para cada imagen
       const imagesData: ImagesData = this.uploadedImages.reduce((acc, image, idx) => {
@@ -56,9 +59,10 @@ export class ImagenComponent {
       }, {} as ImagesData); // Usa la interfaz ImagesData para el objeto acumulador
 
       // Actualiza formData con el objeto de imágenes
-      this.formalojamiento.setFormData({ imagenes: imagesData });
+      this.formalojamiento.updateFormState({ imagenes: imagesData });
     };
   }
+  
 
   navigateToInformacion(): void {
     if (this.uploadedImages.length > 0) {

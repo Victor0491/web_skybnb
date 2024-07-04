@@ -32,8 +32,6 @@ export class ActividadComponent implements OnInit {
     private tipoActividadService: TipoActividadService,
     private formalojamiento: FormAlojamientoService
   ) {
-    const savedData = this.formalojamiento.getFormData();
-    this.formData.actividades = savedData.actividades || [];
   }
 
   ngOnInit(): void {
@@ -45,13 +43,18 @@ export class ActividadComponent implements OnInit {
         console.error('Error al obtener actividades', error);
       }
     );
+    this.formalojamiento.getFormState().subscribe(data => {
+      this.formData = data;
+    });
   }
 
   seleccionarActividad(actividadId: number): void {
     if (this.formData.actividades.includes(actividadId)) {
-      this.formData.actividades = this.formData.actividades.filter(id => id !== actividadId);
+      console.log(`Deseleccionando actividad con ID: ${actividadId}`);
+      this.formalojamiento.updateFormState({ actividades: this.formData.actividades.filter(id => id !== actividadId) });
     } else if (this.formData.actividades.length < 3) {
-      this.formData.actividades.push(actividadId);
+      console.log(`Seleccionando actividad con ID: ${actividadId}`);
+      this.formalojamiento.updateFormState({ actividades: [...this.formData.actividades, actividadId] });
     } else {
       Swal.fire({
         title: 'Atención',
@@ -61,7 +64,7 @@ export class ActividadComponent implements OnInit {
       });
       return;
     }
-    this.formalojamiento.setFormData({ actividades: this.formData.actividades });
+    console.log('Actividades seleccionadas actualmente:', this.formData.actividades);
   }
 
   navigateToPaso2(): void {

@@ -29,16 +29,16 @@ export class DatosbasicosComponent {
     private servicioService: ServicioService,
     private formAlojamientoService: FormAlojamientoService
   ) {
+  }
+
+  ngOnInit(): void {
     this.servicioService.getServicios().subscribe(servicios => {
       this.servicios = servicios;
     });
 
-    const savedData = this.formAlojamientoService.getFormData();
-    this.formData.dormitorios = savedData.dormitorios || 0;
-    this.formData.banos = savedData.banos || 0;
-    this.formData.huespedes = savedData.huespedes || 0;
-    this.formData.mascotas = savedData.mascotas !== undefined ? savedData.mascotas : undefined;
-    this.formData.servicios = savedData.servicios || [];
+    this.formAlojamientoService.getFormState().subscribe(data => {
+      this.formData = { ...this.formData, ...data };
+    });
   }
 
   toggleServicio(id: number): void {
@@ -51,7 +51,7 @@ export class DatosbasicosComponent {
   }
 
   guardarDatosBasicos(): void {
-    this.formAlojamientoService.setFormData(this.formData);
+    this.formAlojamientoService.updateFormState(this.formData);
   }
 
   validateFormData(): boolean {

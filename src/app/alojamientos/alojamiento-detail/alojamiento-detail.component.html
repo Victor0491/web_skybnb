@@ -5,7 +5,7 @@
 
   <hr>
   <h2 *ngIf="alojamiento">{{ alojamiento.nombre }}</h2>
-  <p *ngIf="alojamiento.descripcion !== undefined">{{ alojamiento.descripcion }}</p>
+  <p *ngIf="alojamiento">{{ alojamiento.descripcion }}</p>
 
   <div class="container" *ngIf="alojamiento">
     <p>{{ alojamiento.descripcion_larga }}</p>
@@ -37,8 +37,8 @@
 
   <h3>A dónde irás</h3>
   <div class="container-flex">
-    <div class="mapa-container">
-      <app-mapa [direccion]="alojamiento.direccion"></app-mapa>
+    <div class="mapa-container" *ngIf="alojamiento">
+      <app-mapa  [direccion]="alojamiento.direccion"></app-mapa>
     </div>
   </div>
 

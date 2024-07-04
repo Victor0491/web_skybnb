@@ -19,26 +19,25 @@ import Swal from 'sweetalert2';
 })
 export class EntornoComponent implements OnInit {
 
+  formData: any = {};
   ubicaciones: TipoUbicacion[] = [];
   seccionActual = 'ubicacion';
-
-  formData = {
-    ubicacion: null
-  };
 
   constructor(
     private router: Router,
     private tipoUbicacionService: TipoUbicacionService,
     private formalojamiento: FormAlojamientoService
   ) {
-    const savedData = this.formalojamiento.getFormData();
-    this.formData.ubicacion = savedData.ubicacion || null;
   }
 
   ngOnInit(): void {
     this.getUbicaciones();
-  }
+    
+    this.formalojamiento.getFormState().subscribe(data => {
+      this.formData = data;
+    });
 
+  }
   getUbicaciones(): void {
     this.tipoUbicacionService.getUbicaciones()
       .subscribe(ubicaciones => {
@@ -48,12 +47,13 @@ export class EntornoComponent implements OnInit {
 
   seleccionarUbicacion(id: any): void {
     if (this.formData.ubicacion === id) {
+      this.formalojamiento.updateFormState({ ubicacion: null });
       this.formData.ubicacion = null; // Deseleccionar si ya está seleccionada
     } else {
       this.formData.ubicacion = id;
+      this.formalojamiento.updateFormState({ ubicacion: id });
     }
-    console.log('ID de la ubicación guardada en sessionStorage:', this.formData.ubicacion);
-    this.formalojamiento.setFormData(this.formData);
+    console.log('ID de la ubicación guardada en:', this.formData.ubicacion);
   }
 
   navigateToActividad(): void {
@@ -64,7 +64,6 @@ export class EntornoComponent implements OnInit {
         text: 'Por favor, selecciona una opción para continuar.',
       });
     } else {
-      this.formalojamiento.setFormData(this.formData);
       this.router.navigate(['anfitrion/actividad']);
     }
   }

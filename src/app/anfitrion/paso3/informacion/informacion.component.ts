@@ -15,10 +15,7 @@ import { AuthSesionService } from '../../../core/service/sesion/auth-sesion.serv
   imports: [CommonModule, FormsModule]
 })
 export class InformacionComponent implements OnInit {
-
-  DatosAlojamiento: any;
-
-  formData = {
+  formData: any = {
     nombre: '',
     descripcion: '',
     precio: 0,
@@ -28,49 +25,48 @@ export class InformacionComponent implements OnInit {
   constructor(
     private router: Router,
     private alojamientoService: AlojamientoService,
-    private formalojamiento: FormAlojamientoService,
-    private authsesion: AuthSesionService
-  ) {
-    const savedData = this.formalojamiento.getFormData();
-    this.formData.nombre = savedData.nombre;
-    this.formData.descripcion = savedData.descripcion;
-    this.formData.precio = savedData.precio;
-    this.formData.usuario = this.authsesion.obtenerInfoUsuario();
+    private formAlojamientoService: FormAlojamientoService,
+    private authSesionService: AuthSesionService
+  ) { }
+
+  ngOnInit(): void {
+    // Suscripción al estado del formulario desde el servicio
+    this.formAlojamientoService.getFormState().subscribe(formData => {
+      this.formData = formData;
+    });
+  
+    // Cargar datos guardados del formulario al iniciar el componente
+    const savedDataObservable = this.formAlojamientoService.getFormState();
+    
+    savedDataObservable.subscribe(savedData => {
+      this.formData.nombre = savedData.nombre || '';
+      this.formData.descripcion = savedData.descripcion || '';
+      this.formData.precio = savedData.precio || 0;
+      this.formData.usuario = this.authSesionService.obtenerInfoUsuario();
+    });
   }
 
-  ngOnInit() {
-    console.log(this.DatosAlojamiento);
-  }
-
-  navigateToImagen() {
+  navigateToImagen(): void {
     this.router.navigate(['/anfitrion/imagen']);
   }
 
-  guardarAlojamiento() {
-    if (!this.formData.nombre || !this.formData.descripcion || this.formData.precio <= 0) {
-      Swal.fire({
-        title: 'Atención',
-        text: 'Por favor completa todos los campos antes de continuar.',
-        icon: 'warning',
-        confirmButtonText: 'Entendido',
-        customClass: {
-          popup: 'swal2-popup',
-          title: 'swal2-title',
-          confirmButton: 'swal2-confirm'
-        }
-      });
+  guardarAlojamiento(): void {
+    // Validación básica del formulario
+    if (!this.validarFormulario()) {
       return;
     }
 
-    this.formalojamiento.setFormData(this.formData);
-    this.DatosAlojamiento = this.formalojamiento.getFormData();
-    console.log(this.DatosAlojamiento);
-    this.alojamientoService.createAlojamiento(this.DatosAlojamiento)
+    // Guardar datos del formulario en el servicio
+    this.formAlojamientoService.updateFormState(this.formData);
+
+    // Llamar al servicio para crear el alojamiento
+    this.alojamientoService.createAlojamiento(this.formData)
       .subscribe(
-        response => {
+        (response: any) => {
           console.log('Alojamiento creado exitosamente:', response);
           const alojamientoId = response.id;
-          console.log('ID del alojamiento:', alojamientoId);
+
+          // Mostrar mensaje de éxito y navegar a la página del alojamiento
           Swal.fire({
             title: 'Éxito',
             text: 'Alojamiento creado exitosamente.',
@@ -82,12 +78,14 @@ export class InformacionComponent implements OnInit {
               confirmButton: 'swal2-confirm'
             }
           }).then(() => {
-            this.formalojamiento.clearFormData();
+            // Limpiar formulario después de éxito
+            this.formAlojamientoService.resetFormState();
             this.router.navigateByUrl('/rooms/' + alojamientoId);
           });
         },
-        error => {
+        (error: any) => {
           console.error('Error al crear alojamiento:', error);
+          // Mostrar mensaje de error en caso de falla
           Swal.fire({
             title: 'Error',
             text: 'Hubo un problema al crear el alojamiento. Por favor, intenta de nuevo.',
@@ -101,5 +99,24 @@ export class InformacionComponent implements OnInit {
           });
         }
       );
+  }
+
+  private validarFormulario(): boolean {
+    // Validación básica del formulario
+    if (!this.formData.nombre || !this.formData.descripcion || this.formData.precio <= 0) {
+      Swal.fire({
+        title: 'Atención',
+        text: 'Por favor completa todos los campos antes de continuar.',
+        icon: 'warning',
+        confirmButtonText: 'Entendido',
+        customClass: {
+          popup: 'swal2-popup',
+          title: 'swal2-title',
+          confirmButton: 'swal2-confirm'
+        }
+      });
+      return false;
+    }
+    return true;
   }
 }

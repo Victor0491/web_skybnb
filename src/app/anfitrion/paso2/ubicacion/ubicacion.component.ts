@@ -19,26 +19,25 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
   map!: L.Map;
   marker!: L.Marker;
   searchPerformed = false;  // Variable para rastrear si se realizó una búsqueda
-
-  formData = {
-    direccion: ''
-  };
+  formData: any = {};
 
   constructor(
     private router: Router,
     private formalojamiento: FormAlojamientoService
   ) {
-    const savedData = this.formalojamiento.getFormData();
-    this.formData.direccion = savedData.direccion || '';
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.formalojamiento.getFormState().subscribe(data => {
+      this.formData = data;
+      if (this.formData.direccion) {
+        this.searchAddress(this.formData.direccion);
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
     this.initMap();
-    if (this.formData.direccion) {
-      this.searchAddress(this.formData.direccion);
-    }
   }
 
   private initMap(): void {
@@ -96,7 +95,7 @@ export class UbicacionComponent implements OnInit, AfterViewInit {
       return;
     }
     this.searchAddress(address);
-    this.formalojamiento.setFormData({ direccion: address });
+    this.formalojamiento.updateFormState({ direccion: address });
   }
 
   clearMap(): void {
