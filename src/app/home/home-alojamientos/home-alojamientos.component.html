@@ -1,3 +1,14 @@
 <app-carrusel></app-carrusel>
-<app-card></app-card>
 
+<div class="container-fluid">
+    <section class="row">
+      <!-- Instancia de app-card para los alojamientos recomendados -->
+      <h2>Alojamientos Recomendados:</h2>
+      <app-card [alojamientos]="alojamientosRecomendados" [isLoading]="isLoading" [isLoaded]="isLoaded"></app-card>
+  
+      <!-- Instancia de app-card para todos los alojamientos -->
+      <h2>Todos los Alojamientos:</h2>
+      <app-card [alojamientos]="todosLosAlojamientos" [isLoading]="isLoading" [isLoaded]="isLoaded"></app-card>
+    </section>
+  </div>
+  

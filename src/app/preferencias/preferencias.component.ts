@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { KnnService } from '../core/service/celula/knn.service';
+import { AlojamientoService } from '../core/service/alojamiento/alojamiento.service';
 
 @Component({
   selector: 'app-preferencias',
@@ -19,6 +19,7 @@ import { KnnService } from '../core/service/celula/knn.service';
   styleUrls: ['./preferencias.component.css']
 })
 export class PreferenciasComponent implements OnInit {
+  @Output() preferenciasSeleccionadas = new EventEmitter<any>();
   @Output() closeModalClicked = new EventEmitter<void>();
   preferenciasForm: FormGroup;
   tiposAlojamiento: { nombre: string, imagen: string }[] = [
@@ -43,7 +44,7 @@ export class PreferenciasComponent implements OnInit {
   historialSecciones: string[] = [];
   resultados: any[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router, private knnService: KnnService) {
+  constructor(private fb: FormBuilder, private router: Router, private alojamientoService: AlojamientoService) {
     this.preferenciasForm = this.fb.group({
       tipoAlojamiento: ['', Validators.required],
       ubicacion: ['', Validators.required],
@@ -152,45 +153,14 @@ export class PreferenciasComponent implements OnInit {
         ...this.mapActividades(preferencias.actividad)
       ];
 
-      this.knnService.getKnnPrediction(instance).subscribe(
+      this.alojamientoService.getKnnPrediction(instance).subscribe(
         (response) => {
           console.log('Predicción exitosa:', response);
-          const closest_labels = response.closest_labels;  // Extraer los labels más cercanos
-          this.resultados = closest_labels;  // Guardar los resultados
-          if (this.resultados.length > 0) {
-            this.knnService.getAlojamientosByIds(this.resultados).subscribe(
-              (alojamientos) => {
-                console.log('Alojamientos obtenidos:', alojamientos);
-                Swal.fire({
-                  title: '¡Éxito!',
-                  text: 'Preferencias guardadas correctamente.',
-                  icon: 'success',
-                  confirmButtonText: 'Aceptar',
-                  customClass: {
-                    popup: 'swal2-popup',
-                    title: 'swal2-title',
-                    confirmButton: 'swal2-confirm'
-                  }
-                }).then(() => {
-                  this.router.navigateByUrl('', { state: { recomendados: alojamientos } });
-                });
-              },
-              (error) => {
-                console.error('Error al obtener los alojamientos:', error);
-                Swal.fire({
-                  title: 'Error',
-                  text: 'Hubo un problema al obtener los alojamientos. Intenta nuevamente.',
-                  icon: 'error',
-                  confirmButtonText: 'Aceptar',
-                  customClass: {
-                    popup: 'swal2-popup',
-                    title: 'swal2-title',
-                    confirmButton: 'swal2-confirm'
-                  }
-                });
-              }
-            );
-          }
+          const alojamientos = response.alojamientos;  // Obtener los alojamientos recomendados directamente de la respuesta
+          this.resultados = alojamientos;  // Guardar los resultados
+          console.log('Alojamientos emitidos:', alojamientos);
+          this.preferenciasSeleccionadas.emit(alojamientos);  // Emitir los alojamientos recomendados
+          this.onCloseModal();  // Cerrar el modal
         },
         (error) => {
           console.error('Error en la predicción:', error);

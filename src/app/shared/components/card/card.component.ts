@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ListAlojamiento } from '../../../core/models/Alojamiento';
 import { AlojamientoService } from '../../../core/service/alojamiento/alojamiento.service';
 import { ObjectToArrayPipe } from '../../../core/pipe/object-to-array.pipe';
 import { TruncatePipe } from '../../../core/pipe/truncate.pipe';
@@ -16,25 +15,13 @@ import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.comp
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-  @Input() recomendados: any[] = [];
-  alojamientos: any[] = [];
-  isLoading = true;
-  isLoaded = false;
+  @Input() alojamientos: any[] = [];
+  @Input() isLoading = true;
+  @Input() isLoaded = false;
 
-  constructor(private alojamientoService: AlojamientoService, private cd: ChangeDetectorRef) { }
+  constructor(private alojamientoService: AlojamientoService, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.CargarAlojamiento();
-  }
-
-  CargarAlojamiento() {
-    this.alojamientoService.getAlojamientos().subscribe(data => {
-      this.alojamientos = data;
-      this.isLoading = false;
-      setTimeout(() => {
-        this.isLoaded = true;
-        this.cd.detectChanges();
-      }, 0);
-    });
+    this.cd.detectChanges();
   }
 }
