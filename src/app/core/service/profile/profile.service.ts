@@ -33,4 +33,13 @@ export class ProfileService {
 
   }
 
+  guardarPreferencias(preferencias: any): void {
+    localStorage.setItem('preferencias', JSON.stringify(preferencias));
+    console.log('Preferencias guardadas en localStorage', preferencias);
+  }
+
+  obtenerPreferencias(): any {
+    const preferencias = localStorage.getItem('preferencias');
+    return preferencias ? JSON.parse(preferencias) : null;
+  }
 }
