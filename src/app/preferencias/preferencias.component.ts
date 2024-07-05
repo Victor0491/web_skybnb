@@ -27,7 +27,6 @@ import { ProfileService } from '../core/service/profile/profile.service';
   styleUrls: ['./preferencias.component.css']
 })
 export class PreferenciasComponent implements OnInit {
-  @Output() preferenciasSeleccionadas = new EventEmitter<any>();
   @Output() closeModalClicked = new EventEmitter<void>();
   preferenciasForm: FormGroup;
   

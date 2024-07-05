@@ -11,7 +11,7 @@ export class AlojamientoService {
   private apiUrl = 'http://127.0.0.1:8000/api/skybnb/create-alojamiento';
   private apiListAlojamiento = 'http://127.0.0.1:8000/api/skybnb/list-alojamiento';
   private apiDetailsAlojamiento = 'http://127.0.0.1:8000/api/skybnb/list-alojamiento-details/';
-  private apiListAlojamientoCelula = 'http://127.0.0.1:8000/api/skybnb/list-alojamiento-celula';
+
 
   constructor(private http: HttpClient) {}
 
@@ -28,7 +28,4 @@ export class AlojamientoService {
     return this.http.get<AlojamientoDetails>(url);
   }
 
-  getKnnPrediction(instance: number[]): Observable<any> {
-    return this.http.post<any>(this.apiListAlojamientoCelula, { instance });
-  }
 }

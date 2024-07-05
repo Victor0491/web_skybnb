@@ -42,4 +42,23 @@ export class ProfileService {
     const preferencias = localStorage.getItem('preferencias');
     return preferencias ? JSON.parse(preferencias) : null;
   }
+
+  IsDataPref(): boolean{
+    const pref = localStorage.getItem('preferencias')
+    return !!pref
+  }
+
+  obtenerPreferenciasNumericas(): number[] {
+    const preferencias = this.obtenerPreferencias();
+    if (!preferencias) {
+      return [];
+    }
+    
+    const tipoAlojamiento = +preferencias.tipoAlojamiento || 0;
+    const ubicacion = +preferencias.ubicacion || 0;
+    const actividades = preferencias.actividad.map((actividad: any) => +actividad || 0);
+    const instance = [tipoAlojamiento, ubicacion, ...actividades];
+    return instance
+    
+  }
 }
