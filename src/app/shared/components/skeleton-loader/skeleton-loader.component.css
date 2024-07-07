@@ -1,4 +1,4 @@
-/* Estilos existentes para las tarjetas */
+/* Estilos card */
 .skeleton-card {
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
   }
 }
 
-/* Estilos adicionales para la vista de detalle del alojamiento */
+/* Estilos alojamiento-detail */
 .skeleton-detail {
   padding: 16px;
   background: #fff;

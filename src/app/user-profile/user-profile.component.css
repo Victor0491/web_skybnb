@@ -3,14 +3,16 @@ html, body {
   margin: 0;
 }
 
-.space {
-  height: 85vh;
-}
-
 app-root {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 85vh;
+}
+
+.space {
+  min-height: 85vh; /* Comienza con una altura mínima de 100vh */
+  display: flex;
+  flex-direction: column;
 }
 
 .user-profile {
@@ -23,7 +25,6 @@ app-root {
   width: 10%;
   padding: 10px;
   background-color: #00add0;
-  height: 85vh; /* Añadir esto para que la barra azul ocupe toda la altura */
 }
 
 .user-profile-menu ul {
@@ -45,6 +46,7 @@ app-root {
 .user-profile-content {
   flex: 1;
   padding: 10px;
+  overflow: auto; /* Permite el desplazamiento si el contenido es demasiado alto */
 }
 
 .user-profile-card {

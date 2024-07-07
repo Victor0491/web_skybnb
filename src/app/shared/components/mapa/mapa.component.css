@@ -1,7 +1,8 @@
 #map {
-    width: 100%;
+    width: 50%;
     height: 500px; /* Ajusta la altura según tus necesidades */
     border: 1px solid black; /* Opcional: para añadir un borde */
-    margin: 20px auto; /* Opcional: para centrar el mapa */
+    margin: 20px 0; /* Opcional: para centrar el mapa verticalmente */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Opcional: para una sombra */
+    float: left; /* Alinea el mapa a la izquierda */
 }
