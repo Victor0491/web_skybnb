@@ -9,11 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
 import { ModalProfileComponent } from './shared/components/modal-profile/modal-profile.component';
 import { ProfileService } from './core/service/profile/profile.service';
+import { SkeletonLoaderComponent } from './shared/components/skeleton-loader/skeleton-loader.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, ModalProfileComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, ModalProfileComponent, SkeletonLoaderComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

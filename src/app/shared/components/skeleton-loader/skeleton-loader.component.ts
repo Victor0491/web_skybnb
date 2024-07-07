@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-skeleton-loader',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './skeleton-loader.component.html',
-  styleUrl: './skeleton-loader.component.css'
+  styleUrls: ['./skeleton-loader.component.css']
 })
 export class SkeletonLoaderComponent {
-
+  @Input() isCard: boolean = false;
+  @Input() isDetail: boolean = false;
 }

@@ -8,6 +8,7 @@ import { ReservaComponent } from '../../shared/components/reserva/reserva.compon
 import { AlojamientoService } from '../../core/service/alojamiento/alojamiento.service';
 import { ObjectToArrayPipe } from '../../core/pipe/object-to-array.pipe'; 
 import { SeparadorMilesPipe } from '../../core/pipe/separador-miles.pipe';
+import { SkeletonLoaderComponent } from '../../shared/components/skeleton-loader/skeleton-loader.component';
 
 @Component({
   selector: 'app-alojamiento-detail',
@@ -19,7 +20,8 @@ import { SeparadorMilesPipe } from '../../core/pipe/separador-miles.pipe';
     MapaComponent,
     ReservaComponent,
     ObjectToArrayPipe,
-    SeparadorMilesPipe
+    SeparadorMilesPipe,
+    SkeletonLoaderComponent
   ],
   templateUrl: './alojamiento-detail.component.html',
   styleUrls: ['./alojamiento-detail.component.css']
