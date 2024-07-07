@@ -2,7 +2,8 @@ html, body {
   height: 100%;
   margin: 0;
 }
-.space{
+
+.space {
   height: 85vh;
 }
 
@@ -22,6 +23,7 @@ app-root {
   width: 10%;
   padding: 10px;
   background-color: #00add0;
+  height: 85vh; /* Añadir esto para que la barra azul ocupe toda la altura */
 }
 
 .user-profile-menu ul {
