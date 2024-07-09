@@ -53,7 +53,7 @@
 }
 
 .container {
-    height: 85vh;
+    min-height: 85vh; /* Comienza con una altura mínima de 85vh */
     width: 80%; /* Ancho del contenedor */
     margin: 0 auto; /* Centrar el contenedor horizontalmente */
     padding: 20px; /* Espaciado interno */

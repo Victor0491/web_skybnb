@@ -1,5 +1,5 @@
 .super-container{
-  height: 80vh;
+  min-height: 85vh; /* Comienza con una altura mínima de 85vh */
 }
 
 .container {

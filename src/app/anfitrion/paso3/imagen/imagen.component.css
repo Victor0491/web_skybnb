@@ -1,5 +1,5 @@
 .container {
-  height: 84vh;
+  min-height: 85vh; /* Comienza con una altura mínima de 85vh */
   display: flex;
   justify-content: center;
   align-items: center;

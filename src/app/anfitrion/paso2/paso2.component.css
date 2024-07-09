@@ -2,7 +2,7 @@
 .space{
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    min-height: 85vh; /* Comienza con una altura mínima de 85vh */
 }
 
 

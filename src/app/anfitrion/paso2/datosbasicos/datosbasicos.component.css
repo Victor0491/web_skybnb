@@ -11,6 +11,7 @@
     flex-direction: column;
     margin-top: 4rem;
     margin-bottom: 4rem;
+    min-height: 85vh; /* Comienza con una altura mínima de 85vh */
 }
 
 /* Estilo del título */
