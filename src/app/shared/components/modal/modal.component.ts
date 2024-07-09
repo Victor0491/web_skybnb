@@ -19,16 +19,17 @@ export class ModalComponent {
 
   onCloseModal() {
     this.closeModalClicked.emit();
+
   }
 
   irAlojamientos() {
-    if (!this.authsesion.isLoggin){
-    this.router.navigate(['/anfitrion/subetuespacio']);
-    this.closeModalClicked.emit();
-    }
-    else {
+    console.log('isLoggin:', this.authsesion.isLoggin()); // Verifica el valor de isLoggin
+    if (!this.authsesion.isLoggin()) {
       this.closeModalClicked.emit();
       this.router.navigate(['/auth/login']);
+    } else {
+      this.router.navigate(['/anfitrion/subetuespacio']);
+      this.closeModalClicked.emit();
     }
   }
 
