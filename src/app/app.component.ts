@@ -14,7 +14,7 @@ import { NavBarAuthComponent } from './shared/components/nav-bar-auth/nav-bar-au
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, SkeletonLoaderComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, SkeletonLoaderComponent,NavBarAuthComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

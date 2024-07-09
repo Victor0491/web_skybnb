@@ -1,7 +1,7 @@
 <div id="image-carousel" class="splide">
   <div class="splide__track">
     <ul class="splide__list">
-      <li class="splide__slide" *ngFor="let imagen of imagenes">
+      <li class="splide__slide" *ngFor="let imagen of imagenes" style="border-radius: 20px;">
         <img [src]="imagen" alt="Image" />
       </li>
     </ul>
@@ -9,9 +9,9 @@
 </div>
 
 <div id="thumbnail-carousel" class="splide">
-  <div class="splide__track">
-    <ul class="splide__list">
-      <li class="splide__slide" *ngFor="let imagen of imagenes; let i = index" (click)="changeMainImage(i)">
+  <div class="splide__track" style="margin-top: 4rem;">
+    <ul class="splide__list" >
+      <li class="splide__slide" *ngFor="let imagen of imagenes; let i = index" (click)="changeMainImage(i)" style="border-radius: 20px;">
         <img [src]="imagen" alt="Thumbnail" />
       </li>
     </ul>

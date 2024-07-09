@@ -58,6 +58,7 @@ export class HomeAlojamientosComponent implements OnInit {
       )
     };
   }
+  
 
 
   getRandomAlojamientos(alojamientos: any[], count: number): any[] {

@@ -27,6 +27,7 @@
 .splide--thumbnail .splide__slide {
   width: 150px; /* Increase width for larger thumbnails */
   height: 100px; /* Increase height for larger thumbnails */
+
 }
 
 @media (max-width: 600px) {
@@ -34,4 +35,8 @@
     width: 100px; /* Smaller thumbnails for mobile view */
     height: 66px;
   }
+}
+
+.splide__track--nav > .splide__list > .splide__slide.is-active {
+  border: 5px solid #00add0;
 }
