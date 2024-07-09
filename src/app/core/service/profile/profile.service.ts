@@ -12,6 +12,8 @@ export class ProfileService {
 
     ApiProfile = 'http://127.0.0.1:8000/api/skybnb/perfilusuario/'
 
+    ApiUpdateProfile = 'http://127.0.0.1:8000/api/skybnb/perfilusuario/update-profile/'
+
   constructor(
     private http: HttpClient,
     private authsesion : AuthSesionService
@@ -30,12 +32,41 @@ export class ProfileService {
   }
 
   UpdateProfileUser(){
+    const id_user = this.authsesion.obtenerIdUsuario()
+    const token = this.authsesion.obtenerToken() || '';
 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const preferencias = this.ObtenerDatosParaActualizar();
+    if (!preferencias) {
+      throw new Error('No se encontraron preferencias en localStorage');
+    }
+
+    const body = {
+      ...preferencias,
+      usuario: id_user
+
+    };
+    return this.http.put<UserProfile>(this.ApiUpdateProfile,body,{ headers })
   }
 
   guardarPreferencias(preferencias: any): void {
     localStorage.setItem('preferencias', JSON.stringify(preferencias));
     console.log('Preferencias guardadas en localStorage', preferencias);
+    if (this.authsesion.isLoggin()) {
+      console.log('hola')
+      this.UpdateProfileUser().subscribe(
+        response => {
+          console.log('Perfil actualizado exitosamente:', response);
+        },
+        error => {
+          console.error('Error al actualizar el perfil:', error);
+        }
+      );
+    }
   }
 
   obtenerPreferencias(): any {
@@ -54,11 +85,25 @@ export class ProfileService {
       return [];
     }
     
-    const tipoAlojamiento = +preferencias.tipoAlojamiento || 0;
+    const tipoalojamiento = +preferencias.tipoalojamiento || 0;
     const ubicacion = +preferencias.ubicacion || 0;
     const actividades = preferencias.actividad.map((actividad: any) => +actividad || 0);
-    const instance = [tipoAlojamiento, ubicacion, ...actividades];
+    const instance = [tipoalojamiento, ubicacion, ...actividades];
     return instance
+  }
+
+
+  ObtenerDatosParaActualizar(){
+    const preferencias = this.obtenerPreferencias();
+    if (!preferencias) {
+      return null;
+    }
     
+    const tipoalojamiento = [preferencias.tipoalojamiento] || [];
+    const ubicacion = [preferencias.ubicacion] || [];
+    const actividades = preferencias.actividad.map((actividad: any) => actividad || 0);
+    
+    return { tipoalojamiento, ubicacion, actividades };
   }
 }
+  

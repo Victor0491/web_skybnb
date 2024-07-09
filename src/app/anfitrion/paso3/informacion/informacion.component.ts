@@ -42,7 +42,7 @@ export class InformacionComponent implements OnInit {
       this.formData.nombre = savedData.nombre || '';
       this.formData.descripcion = savedData.descripcion || '';
       this.formData.precio = savedData.precio || 0;
-      this.formData.usuario = this.authSesionService.obtenerInfoUsuario();
+      this.formData.usuario = this.authSesionService.obtenerIdUsuario();
     });
   }
 

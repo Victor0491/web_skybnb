@@ -48,7 +48,7 @@ export class PreferenciasComponent implements OnInit {
     private profileservice : ProfileService
   ) {
     this.preferenciasForm = this.fb.group({
-      tipoAlojamiento: ['', Validators.required],
+      tipoalojamiento: ['', Validators.required],
       ubicacion: ['', Validators.required],
       actividad: [[], [Validators.required, Validators.minLength(1), Validators.maxLength(3)]]
     });
@@ -77,7 +77,7 @@ export class PreferenciasComponent implements OnInit {
   }
 
   seleccionarTipo(tipo: number): void {
-    this.preferenciasForm.get('tipoAlojamiento')?.setValue(tipo);
+    this.preferenciasForm.get('tipoalojamiento')?.setValue(tipo);
     console.log(tipo)
   }
 
@@ -137,7 +137,7 @@ export class PreferenciasComponent implements OnInit {
   }
 
   continuar(): void {
-    if (this.seccionActual === 'tipoAlojamiento' && this.preferenciasForm.get('tipoAlojamiento')?.valid) {
+    if (this.seccionActual === 'tipoAlojamiento' && this.preferenciasForm.get('tipoalojamiento')?.valid) {
       this.historialSecciones.push(this.seccionActual);
       this.seccionActual = 'ubicacion';
     } else if (this.seccionActual === 'ubicacion' && this.preferenciasForm.get('ubicacion')?.valid) {
@@ -158,6 +158,8 @@ export class PreferenciasComponent implements OnInit {
       });
     }
   }
+
+  
 
   volver(): void {
     const ultimaSeccion = this.historialSecciones.pop();

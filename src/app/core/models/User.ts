@@ -16,3 +16,15 @@ export interface UserProfile{
     tipoalojamiento: []
     
 }
+
+export interface PartialUserProfile {
+    nombreCompleto: string;
+    fecha_nacimiento: null;
+    usuario: number | null;
+    telefono: string;
+  }
+
+  export interface RegisterResponse {
+    message: string;
+    id_user: number;  // Asegúrate de que esto coincida con el nombre de la propiedad devuelta por el backend
+  }

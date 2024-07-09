@@ -7,14 +7,14 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
-import { ModalProfileComponent } from './shared/components/modal-profile/modal-profile.component';
 import { ProfileService } from './core/service/profile/profile.service';
 import { SkeletonLoaderComponent } from './shared/components/skeleton-loader/skeleton-loader.component';
+import { NavBarAuthComponent } from './shared/components/nav-bar-auth/nav-bar-auth.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, ModalProfileComponent, SkeletonLoaderComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, SkeletonLoaderComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -24,12 +24,12 @@ export class AppComponent {
   preferenciasVisible = false;
 
 
+
   constructor(private router: Router,private profileservice : ProfileService) {}
 
   ngOnInit() {
     this.CheckPref();
     console.log(this.profileservice.IsDataPref())
-    console.log(this.profileservice.obtenerPreferenciasNumericas())
   }
 
   isLoginPage(): boolean {
@@ -40,6 +40,9 @@ export class AppComponent {
     return this.router.url === '/auth/register';
   }
 
+  isNoLloginPage(){
+
+  }
 
   openModal() {
     this.modalVisible = true;

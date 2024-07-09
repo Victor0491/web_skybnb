@@ -10,7 +10,7 @@
         <h3>Tipo de alojamiento</h3>
         <div class="opcion-container">
           <button *ngFor="let tipo of tiposAlojamiento; let i = index" class="opcion" 
-            [class.selected]="preferenciasForm.get('tipoAlojamiento')?.value === tipo.id"
+            [class.selected]="preferenciasForm.get('tipoalojamiento')?.value === tipo.id"
             [class.intercalado]="i >= 3 && i % 2 === 1"
             (click)="seleccionarTipo(tipo.id)">
             <div class="opcion-content">

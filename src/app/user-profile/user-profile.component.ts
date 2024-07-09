@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getProfile(){
-    const id_user = this.authsesion.obtenerInfoUsuario()
+    const id_user = this.authsesion.obtenerIdUsuario()
     this.profileService.getProfileUser(id_user).subscribe(data => {
     this.user_profile = data;
     console.log(this.user_profile);

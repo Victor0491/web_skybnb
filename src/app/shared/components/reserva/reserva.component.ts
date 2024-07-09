@@ -128,7 +128,19 @@ export class ReservaComponent implements OnInit {
   }
 
   openModal() {
-    $('#reservaModal').modal('show');
+    if (!this.authsesion.isLoggin){
+      $('#reservaModal').modal('show');
+    }
+    else {
+      Swal.fire({ // Mostrar el mensaje de éxito usando SweetAlert
+        title: 'Login',
+        text: 'Por favor ingresa a la aplicación',
+        icon: 'info',
+        confirmButtonText: 'Aceptar'
+      }).then(() => {
+        // Aquí podrías realizar alguna acción adicional después de que el usuario hace clic en Aceptar
+      });
+    }
   }
 
   confirmarReserva() {
@@ -140,8 +152,8 @@ export class ReservaComponent implements OnInit {
   enviarReserva() {
     this.reserva.alojamiento = this.alojamientoId;
     this.reserva.total = this.rentalValue;
-    if (this.authsesion.obtenerInfoUsuario() !== null) {
-      this.reserva.usuario = this.authsesion.obtenerInfoUsuario();
+    if (this.authsesion.obtenerIdUsuario() !== null) {
+      this.reserva.usuario = this.authsesion.obtenerIdUsuario();
     }
     this.reservaservice.createReserva(this.reserva).subscribe(response => {
       console.log(response);

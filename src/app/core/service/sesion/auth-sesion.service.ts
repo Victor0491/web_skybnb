@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../../models/User';
+import { RegisterResponse, User, PartialUserProfile } from '../../models/User';
 import { LoginResponse } from '../../models/LoginResponse';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable,throwError  } from 'rxjs';
@@ -18,11 +18,15 @@ export class AuthSesionService {
 
   apiLogin = 'http://127.0.0.1:8000/api/skybnb/login/'
 
+  apiCrearPerfil = 'http://127.0.0.1:8000/api/skybnb/create-perfil-usuario'
 
-  register(user: User): Observable<User> {
-    return this.http.post<User>(this.apiRegistro, user)
-    .pipe(
-    );
+
+  register(user: User): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(this.apiRegistro, user);
+  }
+
+  CrearPerfil(profile: PartialUserProfile): Observable <PartialUserProfile>{
+    return this.http.post<PartialUserProfile>(this.apiCrearPerfil, profile)
   }
 
   login(user: User): Observable<LoginResponse> {
@@ -34,15 +38,13 @@ export class AuthSesionService {
     );
   }
 
-  
-  
 
   obtenerToken(){
     const token = localStorage.getItem('token')
     return token
   }
 
-  obtenerInfoUsuario(){
+  obtenerIdUsuario(){
     const info = localStorage.getItem('token')
     if (info){
       const decodeInfo: any = jwtDecode(info);

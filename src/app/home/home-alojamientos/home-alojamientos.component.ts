@@ -25,21 +25,18 @@ export class HomeAlojamientosComponent implements OnInit {
     private authService: AuthSesionService,
     private alojamientoService: AlojamientoService,
     private router: Router,
-    private alojamientocelula : KnnService,
-    private profilesesion : ProfileService
+    private alojamientocelula: KnnService,
+    private profilesesion: ProfileService
   ) { }
 
   ngOnInit() {
-    console.log(this.authService.obtenerInfoUsuario());
-    console.log(this.authService.ObtenerInfoRoles());
-
-    this.CargarAlojamientos();
     this.CargarAlojamientosCelula()
+    this.CargarAlojamientos();
   }
 
   CargarAlojamientos() {
     this.alojamientoService.getAlojamientos().subscribe(data => {
-      this.todosLosAlojamientos = data;
+      this.todosLosAlojamientos = this.getRandomAlojamientos(data, 12)
       this.isLoading = false;
       setTimeout(() => {
         this.isLoaded = true;
@@ -47,14 +44,24 @@ export class HomeAlojamientosComponent implements OnInit {
     });
   }
 
-  CargarAlojamientosCelula(){
-    const instance = this.profilesesion.obtenerPreferenciasNumericas()
-    this.alojamientocelula.getKnnPrediction(instance).subscribe(
-      (response) => {
-        console.log('Predicción exitosa:', response);
-        const alojamientos = response.alojamientos;
-        this.alojamientosRecomendados = alojamientos
+  CargarAlojamientosCelula() {
+    if (this.profilesesion.IsDataPref()) {
+      const instance = this.profilesesion.obtenerPreferenciasNumericas()
+      console.log(instance)
+      this.alojamientocelula.getKnnPrediction(instance).subscribe(
+        (response) => {
+          console.log('Predicción exitosa:', response);
+          const alojamientos = response.alojamientos;
+          this.alojamientosRecomendados = alojamientos
           // Obtener los alojamientos recomendados directamente de la respuesta
-      },
-    )};
+        },
+      )
+    };
+  }
+
+
+  getRandomAlojamientos(alojamientos: any[], count: number): any[] {
+    const shuffled = alojamientos.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  }
 }
