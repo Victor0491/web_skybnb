@@ -9,6 +9,7 @@ import { KnnService } from '../../core/service/celula/knn.service';
 import { ProfileService } from '../../core/service/profile/profile.service';
 import { PreferenciasComponent } from '../../preferencias/preferencias.component';
 import { NavbarButtonsComponent } from '../../shared/components/navbar-buttons/navbar-buttons.component';
+import { AppComponent } from '../../app.component';
 
 
 @Component({
@@ -24,12 +25,15 @@ export class HomeAlojamientosComponent implements OnInit {
   isLoading = true;
   isLoaded = false;
 
+  
+
   constructor(
     private authService: AuthSesionService,
     private alojamientoService: AlojamientoService,
     private router: Router,
     private alojamientocelula: KnnService,
-    private profilesesion: ProfileService
+    private profilesesion: ProfileService,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
@@ -48,17 +52,14 @@ export class HomeAlojamientosComponent implements OnInit {
   }
 
   CargarAlojamientosCelula() {
-    if (this.profilesesion.IsDataPref()) {
-      const instance = this.profilesesion.obtenerPreferenciasNumericas()
-      this.alojamientocelula.getKnnPrediction(instance).subscribe(
-        (response) => {
-          console.log('Predicción exitosa:', response);
-          const alojamientos = response.alojamientos;
-          this.alojamientosRecomendados = this.getRandomAlojamientos(alojamientos,6)
-          // Obtener los alojamientos recomendados directamente de la respuesta
-        },
-      )
-    };
+    this.alojamientocelula.CargarAlojamientosCelula().subscribe(
+      (alojamientosRecomendados) => {
+        this.alojamientosRecomendados = alojamientosRecomendados;
+      },
+      (error) => {
+        console.error('Error al cargar alojamientos:', error);
+      }
+    );
   }
   
   getRandomAlojamientos(alojamientos: any[], count: number): any[] {
@@ -66,4 +67,7 @@ export class HomeAlojamientosComponent implements OnInit {
     return shuffled.slice(0, count);
   }
 
+  abrirPreferencias() {
+    this.appComponent.openPreferencias();
+  }
 }

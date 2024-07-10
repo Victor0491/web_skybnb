@@ -57,14 +57,16 @@ export class AppComponent {
     this.preferenciasVisible = true;
   }
   
+  closePreferencias() {
+    this.preferenciasVisible = false;
+  }
+  
   CheckPref(){
     if (!this.profileservice.IsDataPref()){
       this.preferenciasVisible = true;
     }
   }
 
-  closePreferencias() {
-    this.preferenciasVisible = false;
-  }
+  
 
 }

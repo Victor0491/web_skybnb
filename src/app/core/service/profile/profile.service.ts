@@ -105,5 +105,7 @@ export class ProfileService {
     
     return { tipoalojamiento, ubicacion, actividades };
   }
+
+  
 }
   

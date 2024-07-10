@@ -45,7 +45,9 @@ export class PreferenciasComponent implements OnInit {
     private tipoActividadService:  TipoActividadService,
     private tipoUbicacionService: TipoUbicacionService,
     private tipoAlojamientoService : TipoAlojamientoService,
-    private profileservice : ProfileService
+    private profileservice : ProfileService,
+    private alojamientocelula: KnnService,
+  
   ) {
     this.preferenciasForm = this.fb.group({
       tipoalojamiento: ['', Validators.required],
@@ -178,8 +180,9 @@ export class PreferenciasComponent implements OnInit {
     }
   }
 
-
   onCloseModal(): void {
     this.closeModalClicked.emit();
   }
+
+
 }
