@@ -1,23 +1,23 @@
-<div class="super-container">
-<div class="container">
-  <h2>Ingresa los detalles del alojamiento</h2>
-  <form>
-    <div class="form-group">
-      <label for="titulo">Título</label>
-      <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Ingresa el título" required [(ngModel)]="formData.nombre">
-    </div>
-    <div class="form-group">
-      <label for="descripcion">Descripción</label>
-      <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Ingresa la descripción" required [(ngModel)]="formData.descripcion"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="precio">Precio</label>
-      <input type="number" id="precio" name="precio" class="form-control" placeholder="Ingresa el precio" required [(ngModel)]="formData.precio">
-    </div>
-    <div class="button-container">
-      <button class="start-button-volver" (click)="navigateToImagen()">Volver</button>
-      <button class="btn btn-primary"   (click)="guardarAlojamiento()">Guardar Alojamiento</button>
-    </div>
-  </form>
-</div>
+<div class="container min-vh-85 d-flex justify-content-center align-items-center">
+  <div class="card p-4" style="max-width: 500px; width: 100%;">
+    <h2 class="mb-4 text-center">Ingresa los detalles del alojamiento</h2>
+    <form>
+      <div class="mb-3">
+        <label for="titulo" class="form-label"><strong>Título</strong></label>
+        <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Ingresa el título" required [(ngModel)]="formData.nombre">
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label"><strong>Descripción</strong></label>
+        <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Ingresa la descripción" required [(ngModel)]="formData.descripcion"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="precio" class="form-label"><strong>Precio</strong></label>
+        <input type="number" id="precio" name="precio" class="form-control" placeholder="Ingresa el precio" required [(ngModel)]="formData.precio">
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+        <button class="btn btn-primary mb-3 mb-md-0" (click)="navigateToImagen()">Volver</button>
+        <button class="btn btn-primary" (click)="guardarAlojamiento()">Guardar Alojamiento</button>
+      </div>
+    </form>
+  </div>
 </div>

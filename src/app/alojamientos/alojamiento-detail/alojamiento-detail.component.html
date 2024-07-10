@@ -22,6 +22,13 @@
       <p class="basic-service-item" *ngIf="alojamiento.banos !== undefined">Cantidad Baños: {{ alojamiento.banos }}</p>
       <p class="basic-service-item" *ngIf="alojamiento.dormitorios !== undefined">Cantidad dormitorios: {{
         alojamiento.dormitorios }}</p>
+
+      <hr>
+        <div>
+          <h4>Actividades que ofrece</h4>
+          <div *ngFor="let actividad of alojamiento.actividades | objectToArray" class="service-item"> {{ actividad.nombre }}</div>
+        </div>
+
       <hr>
       <h4>Servicios Adicionales</h4>
       <div *ngIf="alojamiento.mascotas !== undefined">

@@ -39,7 +39,7 @@ export class HomeAlojamientosComponent implements OnInit {
 
   CargarAlojamientos() {
     this.alojamientoService.getAlojamientos().subscribe(data => {
-      this.todosLosAlojamientos = this.getRandomAlojamientos(data, 12)
+      this.todosLosAlojamientos = this.getRandomAlojamientos(data, 18)
       this.isLoading = false;
       setTimeout(() => {
         this.isLoaded = true;
@@ -50,12 +50,11 @@ export class HomeAlojamientosComponent implements OnInit {
   CargarAlojamientosCelula() {
     if (this.profilesesion.IsDataPref()) {
       const instance = this.profilesesion.obtenerPreferenciasNumericas()
-      console.log(instance)
       this.alojamientocelula.getKnnPrediction(instance).subscribe(
         (response) => {
           console.log('Predicción exitosa:', response);
           const alojamientos = response.alojamientos;
-          this.alojamientosRecomendados = alojamientos
+          this.alojamientosRecomendados = this.getRandomAlojamientos(alojamientos,6)
           // Obtener los alojamientos recomendados directamente de la respuesta
         },
       )
@@ -67,5 +66,4 @@ export class HomeAlojamientosComponent implements OnInit {
     return shuffled.slice(0, count);
   }
 
-  
 }
