@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ModalInformationComponent } from '../../shared/components/modal-information/modal-information.component';
 import { CarruselInfoComponent } from '../../shared/components/carrusel-info/carrusel-info.component';
 import { MapaComponent } from '../../shared/components/mapa/mapa.component';
 import { ReservaComponent } from '../../shared/components/reserva/reserva.component';
@@ -15,7 +14,6 @@ import { SkeletonLoaderComponent } from '../../shared/components/skeleton-loader
   standalone: true,
   imports: [
     CommonModule,
-    ModalInformationComponent,
     CarruselInfoComponent,
     MapaComponent,
     ReservaComponent,

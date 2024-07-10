@@ -6,3 +6,10 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Opcional: para una sombra */
     float: left; /* Alinea el mapa a la izquierda */
 }
+  
+  @media (max-width: 768px) {
+    #map {
+      height: 300px; /* Ajusta la altura para pantallas más pequeñas */
+    }
+  }
+  
