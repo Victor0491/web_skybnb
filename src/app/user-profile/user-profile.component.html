@@ -20,14 +20,21 @@
     <div class="user-profile-card">
       <h2 class="accordion-header" (click)="toggleAccordion('reservas')">Mis Alojamientos</h2>
       <div [ngClass]="{'show': activeAccordion === 'reservas'}" class="accordion-content">
+      <div class="row" *ngFor="let alojamiento of user_profile?.alojamientos">
+        <div class="col-6">
         <ul>
-          <li *ngFor="let alojamiento of user_profile?.alojamientos">
+          <li>
             <h3>{{ alojamiento.nombre }}</h3>
             <p>Dirección: {{ alojamiento.direccion }}</p>
             <p>Cantidad dormitorios: {{ alojamiento.dormitorios }}</p>
           </li>
         </ul>
+        </div>
+        <div class="col-6">  
+          <img src="{{ alojamiento.imagenes.image1 }}" alt="Descripción de la imagen 1" style="width: 200px;">
+        </div>
       </div>
+    </div>
     </div>
 
     <div class="user-profile-card">
