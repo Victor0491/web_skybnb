@@ -48,20 +48,57 @@ export class ImagenComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (): void => {
-      this.uploadedImages[index].base64 = reader.result as string;
-      console.log(reader.result); // Aquí puedes ver la imagen en base64
-
-      // Crea un objeto con claves específicas para cada imagen
-      const imagesData: ImagesData = this.uploadedImages.reduce((acc, image, idx) => {
-        const key = `image${idx + 1}`; // Esto creará claves como 'image1', 'image2', etc.
-        acc[key] = image.base64;
-        return acc;
-      }, {} as ImagesData); // Usa la interfaz ImagesData para el objeto acumulador
-
-      // Actualiza formData con el objeto de imágenes
-      this.formalojamiento.updateFormState({ imagenes: imagesData });
+      const img = new Image();
+      img.src = reader.result as string;
+      img.onload = (): void => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+  
+        // Define el tamaño al que quieres redimensionar la imagen
+        const maxWidth = 800; // Ancho máximo
+        const maxHeight = 800; // Alto máximo
+  
+        let width = img.width;
+        let height = img.height;
+  
+        // Calcular las nuevas dimensiones
+        if (width > height) {
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+        }
+  
+        canvas.width = width;
+        canvas.height = height;
+  
+        ctx!.drawImage(img, 0, 0, width, height);
+  
+        // Aquí puedes ajustar la calidad de la imagen
+        const quality = 0.6; // Calidad del 0 al 1
+        const base64String = canvas.toDataURL('image/jpeg', quality);
+  
+        this.uploadedImages[index].base64 = base64String;
+        console.log(base64String); // Aquí puedes ver la imagen en base64
+  
+        // Crea un objeto con claves específicas para cada imagen
+        const imagesData: ImagesData = this.uploadedImages.reduce((acc, image, idx) => {
+          const key = `image${idx + 1}`; // Esto creará claves como 'image1', 'image2', etc.
+          acc[key] = image.base64;
+          return acc;
+        }, {} as ImagesData); // Usa la interfaz ImagesData para el objeto acumulador
+  
+        // Actualiza formData con el objeto de imágenes
+        this.formalojamiento.updateFormState({ imagenes: imagesData });
+      };
     };
   }
+  
   
 
   navigateToInformacion(): void {
