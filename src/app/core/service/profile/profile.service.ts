@@ -59,11 +59,12 @@ export class ProfileService {
   guardarPreferencias(preferencias: any): void {
     localStorage.setItem('preferencias', JSON.stringify(preferencias));
     console.log('Preferencias guardadas en localStorage', preferencias);
+    this.preferenciasSubject.next(preferencias);
     if (this.authsesion.isLoggin()) {
       this.UpdateProfileUser().subscribe(
         response => {
           console.log('Perfil actualizado exitosamente:', response);
-          this.preferenciasSubject.next(preferencias);
+          
         },
         error => {
           console.error('Error al actualizar el perfil:', error);
