@@ -98,3 +98,32 @@
   margin-top: 20px; /* Margen superior para separar el botón */
 }
 
+.responsive-img {
+  max-height: 500px;
+  width: 100%; /* Asegura que la imagen ocupe el 100% del contenedor */
+}
+
+@media (max-width: 1200px) {
+  .responsive-img {
+      max-height: 400px;
+  }
+}
+
+@media (max-width: 992px) {
+  .responsive-img {
+      max-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .responsive-img {
+      max-height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .responsive-img {
+      max-height: 150px;
+  }
+}
+

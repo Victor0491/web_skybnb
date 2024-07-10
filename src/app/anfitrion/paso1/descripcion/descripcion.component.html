@@ -1,25 +1,26 @@
-<div class="container">
-  <div class="titulo">
+<div class="container heightmin d-flex flex-column justify-content-center align-items-center border rounded">
+  <div class="row mb-5 py-4">
     <h2>¿Cuál de estas opciones describe mejor tu espacio?</h2>
   </div>
-  <div class="opciones-container" *ngIf="seccionActual === 'tipoAlojamiento'">
-    <div class="opcion-container">
-      <button *ngFor="let tipo of tiposAlojamiento; let i = index" class="opcion"
+  <div class="row w-100" *ngIf="seccionActual === 'tipoAlojamiento'">
+    <div class="col-12 d-flex flex-wrap justify-content-center gap-3">
+      <button *ngFor="let tipo of tiposAlojamiento; let i = index" class="btn btn-light border rounded shadow-sm p-4"
         [class.selected]="formData.tipoalojamiento === tipo.id"
-        [class.intercalado]="i >= 3 && i % 2 === 1"
         (click)="seleccionarTipo(tipo.id)">
-        <div class="opcion-content">
-          <img class="opcion-imagen" [src]="tipo.image" alt="{{ tipo.nombre }}">
+        <div class="d-flex flex-column align-items-center">
+          <img [src]="tipo.image" alt="{{ tipo.nombre }}" class="img-fluid rounded mb-2" style="height: 12rem; width: 13rem;">
+          <div class="fw-bold">{{ tipo.nombre }}</div>
         </div>
-        <div class="texto">{{ tipo.nombre }}</div>
       </button>
     </div>
-    <div *ngIf="showError" class="error-message">
+    <div *ngIf="showError" class="text-danger mt-3">
       Por favor, selecciona una opción para continuar.
     </div>
   </div>
-  <div class="button-container">
-    <button class="start-button-volver" (click)="navigateToPaso1()">Volver</button>
-    <button class="start-button-avanzar" (click)="validateAndNavigate()">Continuar</button>
+  <div class="row w-100 py-4">
+    <div class="col d-flex justify-content-between">
+      <button class="btn btn-primary" (click)="navigateToPaso1()">Volver</button>
+      <button class="btn btn-primary" (click)="validateAndNavigate()">Continuar</button>
+    </div>
   </div>
 </div>

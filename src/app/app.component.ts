@@ -11,10 +11,12 @@ import { ProfileService } from './core/service/profile/profile.service';
 import { SkeletonLoaderComponent } from './shared/components/skeleton-loader/skeleton-loader.component';
 import { NavBarAuthComponent } from './shared/components/nav-bar-auth/nav-bar-auth.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, SkeletonLoaderComponent,NavBarAuthComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, FooterComponent, ModalComponent, FormsModule, PreferenciasComponent, SkeletonLoaderComponent,NavBarAuthComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -22,7 +24,6 @@ export class AppComponent {
   title = 'web_skybnb';
   modalVisible = false;
   preferenciasVisible = false;
-
 
 
   constructor(private router: Router,private profileservice : ProfileService) {}

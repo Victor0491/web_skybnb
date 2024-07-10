@@ -1,24 +1,20 @@
-
-<div class="space">
-<div class="step">
-    <div style="display: flex; align-items: center;">
-        <div style="flex: 1;">
+<div class="container">
+    <div class="row step">
+        <div class="col-xl-6 col-md-12 col-12 mb-4">
             <h3>Paso 2</h3>
             <p>Haz que destaque</p>
-            <p>En este paso, te preguntaremos qué tipo de propiedad tienes y si los huéspedes reservarán el alojamiento
+            <p>En este paso, te preguntaremos qué tipo de propiedad tienes y si los huéspedes reservarán el
+                alojamiento
                 entero o solo una habitación. A continuación, indícanos la ubicación y cuántos huéspedes pueden
                 quedarse.</p>
         </div>
-        <div style="flex: 1;">
+        <div class="col-xl-6 col-md-12 col-12 mb-4">
             <img src="https://estudibasic.es/wp-content/uploads/2016/01/estudibasic-planos-de-casas-en-3d-render.jpg"
-                alt="Imagen grande" style="max-width: 80%; height: auto;">
+                alt="Imagen grande" class="img-fluid" style="max-height: 500px;">
         </div>
     </div>
-</div>
-<div class="button-container">
-    <button class="start-button-volver"
-        (click)="navigateToActividad()">Volver</button><!-- Botón al final de right-div -->
-    <button class="start-button-avanzar"
-        (click)="navigateToDescripcion()">Continuar</button><!-- Botón al final de right-div -->
-</div>
+    <div class="button-container text-center">
+        <button class="start-button-volver" (click)="navigateToActividad()">Volver</button>
+        <button class="start-button-avanzar" (click)="navigateToDescripcion()">Continuar</button>
+    </div>
 </div>

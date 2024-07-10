@@ -32,6 +32,4 @@ export class ModalComponent {
       this.closeModalClicked.emit();
     }
   }
-
-
 }

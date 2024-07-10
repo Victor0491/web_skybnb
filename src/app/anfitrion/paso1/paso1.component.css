@@ -1,14 +1,13 @@
 
 .container{
-    display: flex;
+    min-height: 90vh;
+    padding-top: 3rem;
     justify-content: center;
     align-items: center;
-    min-height: 85vh; /* Comienza con una altura mínima de 85vh */
 }
 
 
 .step {
-    display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;

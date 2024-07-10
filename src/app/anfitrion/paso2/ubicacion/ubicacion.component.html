@@ -1,19 +1,19 @@
-<div class="container">
-  <h1>Ingrese la ubicacion del alojamiento</h1>
+<div class="container mt-4">
+  <h1 class="mb-4">Ingrese la ubicación del alojamiento</h1>
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="address">Dirección:</label>
       <input type="text" class="form-control" id="address" [(ngModel)]="formData.direccion" name="address" placeholder="Ingrese la dirección">
     </div>
-    <button type="submit" class="btn btn-primary">Buscar</button>
-    <button type="button" class="btn btn-danger ml-2" (click)="clearMap()">Limpiar Mapa</button>
+    <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+    <button type="button" class="btn btn-danger mt-2 ml-2" (click)="clearMap()">Limpiar Mapa</button>
   </form>
-  <div class="container-fluid">
-    <div id="map" style="height: 400px;"></div>
+  <div class="container-fluid mt-4">
+    <div id="map" class="w-100" style="height: 400px;"></div>
   </div>
 
-  <div class="datos-basicos-button-container">
-    <button class="start-button-volver" (click)="navigateToPaso2()">Volver</button>
-    <button class="start-button-avanzar" (click)="navigateToDatosbasicos()">Continuar</button>
+  <div class="d-flex justify-content-between mt-4">
+    <button class="btn btn-secondary" (click)="navigateToPaso2()">Volver</button>
+    <button class="btn btn-primary" (click)="navigateToDatosbasicos()">Continuar</button>
   </div>
 </div>

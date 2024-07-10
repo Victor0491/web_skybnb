@@ -1,69 +1,64 @@
-<div class="container">
-  <h2>Ingrese los datos básicos</h2>
+<div class="container minheight mt-4 mb-4 p-4 shadow-sm bg-light rounded">
+  <h2 class="mb-4">Ingrese los datos básicos</h2>
 
   <!-- Dormitorios -->
-  <div class="input-container">
-    <label for="dormitorios">Dormitorios:</label>
-    <div class="input-control">
-      <button (click)="formData.dormitorios = formData.dormitorios > 0 ? formData.dormitorios - 1 : 0">-</button>
-      <input type="text" id="dormitorios" [(ngModel)]="formData.dormitorios" readonly>
-      <button (click)="formData.dormitorios = formData.dormitorios + 1">+</button>
+  <div class="form-group row align-items-center mb-3">
+    <label for="dormitorios" class="col-sm-2 col-form-label">Dormitorios:</label>
+    <div class="col-sm-10 d-flex align-items-center">
+      <button class="btn btn-primary mr-2 mx-1" (click)="formData.dormitorios = formData.dormitorios > 0 ? formData.dormitorios - 1 : 0">-</button>
+      <input type="text" class="form-control mx-1 text-center" id="dormitorios" [(ngModel)]="formData.dormitorios" readonly style="width: 50px;">
+      <button class="btn btn-primary ml-2 mx-1" (click)="formData.dormitorios = formData.dormitorios + 1">+</button>
     </div>
   </div>
 
   <!-- Baños -->
-  <div class="input-container">
-    <label for="banos">Baños:</label>
-    <div class="input-control">
-      <button (click)="formData.banos = formData.banos > 0 ? formData.banos - 1 : 0">-</button>
-      <input type="text" id="banos" [(ngModel)]="formData.banos" readonly>
-      <button (click)="formData.banos = formData.banos + 1">+</button>
+  <div class="form-group row align-items-center mb-3">
+    <label for="banos" class="col-sm-2 col-form-label">Baños:</label>
+    <div class="col-sm-10 d-flex align-items-center">
+      <button class="btn btn-primary mr-2 mx-1" (click)="formData.banos = formData.banos > 0 ? formData.banos - 1 : 0">-</button>
+      <input type="text" class="form-control mx-1 text-center" id="banos" [(ngModel)]="formData.banos" readonly style="width: 50px;">
+      <button class="btn btn-primary ml-2 mx-1" (click)="formData.banos = formData.banos + 1">+</button>
     </div>
   </div>
 
   <!-- Huéspedes -->
-  <div class="input-container">
-    <label for="cantidadHuespedes">Cantidad de huéspedes:</label>
-    <div class="input-control">
-      <button (click)="formData.huespedes = formData.huespedes > 0 ? formData.huespedes - 1 : 0">-</button>
-      <input type="text" id="cantidadHuespedes" [(ngModel)]="formData.huespedes" readonly>
-      <button (click)="formData.huespedes = formData.huespedes + 1">+</button>
+  <div class="form-group row align-items-center mb-3">
+    <label for="cantidadHuespedes" class="col-sm-2 col-form-label">Cantidad de huéspedes:</label>
+    <div class="col-sm-10 d-flex align-items-center">
+      <button class="btn btn-primary mr-2 mx-1" (click)="formData.huespedes = formData.huespedes > 0 ? formData.huespedes - 1 : 0">-</button>
+      <input type="text" class="form-control mx-1 text-center" id="cantidadHuespedes" [(ngModel)]="formData.huespedes" readonly style="width: 50px;">
+      <button class="btn btn-primary ml-2 mx-1" (click)="formData.huespedes = formData.huespedes + 1">+</button>
     </div>
   </div>
 
   <!-- Mascotas -->
-  <div class="input-container">
-    <label>Mascotas:</label>
-    <div style="display: flex; gap: 10px;">
-      <div class="form-check">
+  <div class="form-group row align-items-center mb-3">
+    <label class="col-sm-2 col-form-label">Mascotas:</label>
+    <div class="col-sm-10 d-flex">
+      <div class="form-check mr-3">
         <input class="form-check-input" type="radio" name="mascotas" id="mascotasSi" [value]="true" [(ngModel)]="formData.mascotas">
-        <label class="form-check-label" for="mascotasSi">
-          Sí
-        </label>
+        <label class="form-check-label" for="mascotasSi">Sí</label>
       </div>
-      <div class="form-check">
+      <div class="form-check mx-4">
         <input class="form-check-input" type="radio" name="mascotas" id="mascotasNo" [value]="false" [(ngModel)]="formData.mascotas">
-        <label class="form-check-label" for="mascotasNo">
-          No
-        </label>
+        <label class="form-check-label" for="mascotasNo">No</label>
       </div>
     </div>
   </div>
+
   <hr>
-  
-  <h3>Servicios</h3>
-  <div class="services-container">
+
+  <h3 class="mb-3">Servicios</h3>
+  <div class="form-group services-container">
     <div class="form-check" *ngFor="let servicio of servicios">
-      <input class="form-check-input" type="checkbox" [id]="'servicio-' + servicio.id" 
-        [checked]="formData.servicios.includes(servicio.id)" 
-        (change)="toggleServicio(servicio.id)">
-      <label class="form-check-label" [for]="'servicio-' + servicio.id">
-        {{ servicio.nombre }}
-      </label>
+      <input class="form-check-input" type="checkbox" [id]="'servicio-' + servicio.id" [checked]="formData.servicios.includes(servicio.id)" (change)="toggleServicio(servicio.id)">
+      <label class="form-check-label" [for]="'servicio-' + servicio.id">{{ servicio.nombre }}</label>
     </div>
   </div>
+
   <!-- Botones -->
-  <div class="button-container">
-    <button class="start-button-volver" (click)="navigateToUbicacion()">Volver</button>
-    <button class="start-button-avanzar" (click)="navigateToPaso3()">Paso 3</button>
+  <div class="d-flex justify-content-between space-botones mt-4">
+    <button class="btn btn-primary" (click)="navigateToUbicacion()" style="margin-left: 4rem;">Volver</button>
+    <button class="btn btn-primary" (click)="navigateToPaso3()" style="margin-right: 4rem;">Paso 3</button>
   </div>
+</div>

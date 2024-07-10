@@ -1,22 +1,24 @@
-<div class="container">
-  <div class="titulo">
+<div class="container heightmin d-flex flex-column justify-content-center align-items-center border rounded">
+  <div class="row mb-5 py-4">
     <h2>Seleccione máximo 3 actividades que se realicen en su entorno</h2>
   </div>
-  <div class="opciones-container" *ngIf="seccionActual === 'actividad'">
-    <div class="opcion-container">
-      <button *ngFor="let actividad of actividades; let i = index" class="opcion"
+  <div class="row w-100" *ngIf="seccionActual === 'actividad'">
+    <div class="col-12 d-flex flex-wrap justify-content-center gap-3">
+      <button *ngFor="let actividad of actividades; let i = index" class="btn btn-light border rounded shadow-sm p-4"
         [class.selected]="formData.actividades.includes(actividad.id)"
-        [class.intercalado]="i >= 3 && i % 2 === 1"
+        [class.intercalado]="i >= 2 && (i + 1) % 3 === 0"
         (click)="seleccionarActividad(actividad.id)">
-        <div class="opcion-content">
-          <img [src]="actividad.image" alt="{{ actividad.nombre }}">
-          <div>{{ actividad.nombre }}</div>
+        <div class="d-flex flex-column align-items-center">
+          <img [src]="actividad.image" alt="{{ actividad.nombre }}" class="img-fluid mb-2" style="height: 12rem; width: 13rem;">
+          <div class="fw-bold">{{ actividad.nombre }}</div>
         </div>
       </button>
     </div>
   </div>
-  <div class="button-container">
-    <button class="start-button-volver" (click)="navigateToEntorno()">Volver</button>
-    <button class="start-button-avanzar" (click)="navigateToPaso2()" [disabled]="formData.actividades.length === 0">Paso 2</button>
+  <div class="row w-100 py-4">
+    <div class="col d-flex justify-content-between">
+      <button class="btn btn-primary" (click)="navigateToEntorno()">Volver</button>
+      <button class="btn btn-primary" (click)="navigateToPaso2()" [disabled]="formData.actividades.length === 0">Paso 2</button>
+    </div>
   </div>
 </div>

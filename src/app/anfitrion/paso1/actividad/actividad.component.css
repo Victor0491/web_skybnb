@@ -1,100 +1,17 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 85vh; /* Comienza con una altura mínima de 85vh */
-  flex-direction: column;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  position: relative;
+.heightmin {
+  min-height: 85vh;
 }
 
-.titulo {
-  margin-bottom: 10rem;
-}
-
-.opciones-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 15rem;
-}
-
-.opcion-container {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-
-.opcion-imagen{
-  border-radius: 15px;
-}
-
-.opcion {
-  padding: 30px; /* Aumenta el tamaño del padding */
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 190px; /* Ajusta el ancho del botón */
-  height: 190px; /* Ajusta la altura del botón */
-  border-radius: 15px; /* Agrega borde redondeado */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombra */
-  transition: box-shadow 0.3s ease; /* Agrega una transición suave a la sombra */
-}
-
-.opcion.selected {
+.selected {
   background-color: #007bff;
   color: #fff;
   border: 2px solid #007bff;
 }
 
-.icono {
-  margin-right: 10px;
+.intercalado {
+  background-color: #f8f9fa; /* Color de fondo alternativo */
 }
 
-.start-button-avanzar, .start-button-volver {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 5px;
-  width: 150px;
-}
-
-.start-button-avanzar:hover, .start-button-volver:hover {
-  background-color: #0056b3;
-}
-
-.button-container {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
-}
-
-.opciones-container button img {
-  width: 160px; /* Aumenta el ancho de la imagen */
-  height: 100px; /* Aumenta la altura de la imagen */
-}
-
-.opcion-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.texto{
-  margin-top: 5px;
-  font-weight: bold;
+.bottom-0 {
+  bottom: 0;
 }

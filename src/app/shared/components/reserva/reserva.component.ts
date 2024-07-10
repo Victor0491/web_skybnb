@@ -129,9 +129,6 @@ export class ReservaComponent implements OnInit {
 
   openModal() {
     if (!this.authsesion.isLoggin){
-      $('#reservaModal').modal('show');
-    }
-    else {
       Swal.fire({ // Mostrar el mensaje de éxito usando SweetAlert
         title: 'Login',
         text: 'Por favor ingresa a la aplicación',
@@ -141,7 +138,10 @@ export class ReservaComponent implements OnInit {
         // Aquí podrías realizar alguna acción adicional después de que el usuario hace clic en Aceptar
       });
     }
+    else {
+      $('#reservaModal').modal('show');
   }
+}
 
   confirmarReserva() {
     if (this.daysCount !== null && this.rentalValue !== null && this.guestCount !== null && this.formData) {

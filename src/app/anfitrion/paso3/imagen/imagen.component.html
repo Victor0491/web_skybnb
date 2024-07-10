@@ -1,11 +1,13 @@
-<div class="container">
-  <div class="titulo">
+<div class="container py-5">
+  <div class="titulo text-center mb-4">
     <h2>Suba las imágenes de su alojamiento</h2>
   </div>
-  <input type="file" (change)="onFileSelected($event)" multiple accept="image/*">
+  <div class="mb-4">
+    <input type="file" (change)="onFileSelected($event)" multiple accept="image/*" class="form-control">
+  </div>
 
-  <div *ngIf="uploadedImages.length === 0" class="placeholder">
-    <img src="path/to/default-image.jpg" alt="Placeholder image">
+  <div *ngIf="uploadedImages.length === 0" class="placeholder text-center mb-4">
+    <img src="path/to/default-image.jpg" alt="Placeholder image" class="img-fluid">
   </div>
 
   <!-- Carrusel de Bootstrap -->
@@ -13,7 +15,7 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item" *ngFor="let image of uploadedImages; let i = index" [class.active]="i === 0">
-          <img [src]="image.base64" class="d-block w-100" alt="Image">
+          <img [src]="image.base64" alt="Image" class="img-fluid responsive-img">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -27,8 +29,8 @@
     </div>
   </div>
 
-  <div class="button-container">
-    <button class="start-button-volver" (click)="navigateToPaso3()">Volver</button>
-    <button class="start-button-avanzar" (click)="navigateToInformacion()">Continuar</button>
+  <div class="button-container text-center mt-4">
+    <button class="btn btn-primary mx-2" (click)="navigateToPaso3()">Volver</button>
+    <button class="btn btn-primary mx-2" (click)="navigateToInformacion()">Continuar</button>
   </div>
 </div>
