@@ -37,8 +37,16 @@ export class HomeAlojamientosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    
     this.CargarAlojamientosCelula();
     this.CargarAlojamientos();
+
+    this.profilesesion.preferencias$.subscribe(preferencias => {
+      if (preferencias) {
+        this.CargarAlojamientosCelula();
+      }
+    });
   }
 
   CargarAlojamientos() {

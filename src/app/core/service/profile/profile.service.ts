@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserProfile } from '../../models/User';
 import { AuthSesionService } from '../sesion/auth-sesion.service';
-
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,9 @@ export class ProfileService {
     ApiProfile = 'http://127.0.0.1:8000/api/skybnb/perfilusuario/'
 
     ApiUpdateProfile = 'http://127.0.0.1:8000/api/skybnb/perfilusuario/update-profile/'
+
+    private preferenciasSubject = new BehaviorSubject<any>(null);
+    preferencias$ = this.preferenciasSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -57,16 +60,17 @@ export class ProfileService {
     localStorage.setItem('preferencias', JSON.stringify(preferencias));
     console.log('Preferencias guardadas en localStorage', preferencias);
     if (this.authsesion.isLoggin()) {
-      console.log('hola')
       this.UpdateProfileUser().subscribe(
         response => {
           console.log('Perfil actualizado exitosamente:', response);
+          this.preferenciasSubject.next(preferencias);
         },
         error => {
           console.error('Error al actualizar el perfil:', error);
         }
       );
     }
+    
   }
 
   obtenerPreferencias(): any {
