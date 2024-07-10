@@ -38,12 +38,11 @@
     <h3>A dónde irás</h3>
     <div class="container-flex">
       <div class="mapa-container" *ngIf="alojamiento">
-        <app-mapa  [direccion]="alojamiento.direccion"></app-mapa>
+        <app-mapa [direccion]="alojamiento.direccion"></app-mapa>
       </div>
-    </div>
-
-    <div class="reserva-container" *ngIf="alojamiento">
-      <app-reserva [alojamientoId]="alojamiento.id" [alojamientoPrecio]="alojamiento.precio"></app-reserva>
+      <div class="reserva-container" *ngIf="alojamiento">
+        <app-reserva [alojamientoId]="alojamiento.id" [alojamientoPrecio]="alojamiento.precio"></app-reserva>
+      </div>
     </div>
   </ng-container>
   <ng-template #loading>
