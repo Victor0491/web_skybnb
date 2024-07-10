@@ -1,6 +1,7 @@
 #map {
     height: 400px;
     border: 1px solid #ccc;
+    border-radius: 10px;
 }
 
 .mt-4 {
@@ -13,4 +14,8 @@
 
 .ml-2 {
     margin-left: 0.5rem !important;
+}
+
+.minheight{
+    min-height: 85vh;
 }
